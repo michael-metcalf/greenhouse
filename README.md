@@ -5,3 +5,5 @@
 - Alix
 - Michael
 - David
+- Russell
+- Julie
