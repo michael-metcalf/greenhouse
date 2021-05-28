@@ -6,6 +6,7 @@
     <div class="main-panel">
       <Login/>
       <EnvironmentalFact/>
+      <BudgetVisualization/>
     </div>
     <div class="nav-bar"></div>
   </div>
@@ -14,13 +15,14 @@
 <script>
 import Login from "./components/Login.vue";
 import EnvironmentalFact from "./components/EnvironmentalFact.vue";
-
+import BudgetVisualization from "./components/BudgetVisualization.vue";
 
 export default {
   name: "App",
   components: {
     Login,
     EnvironmentalFact,
+    BudgetVisualization,
   },
 };
 </script>
