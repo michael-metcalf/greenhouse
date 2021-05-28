@@ -1,7 +1,11 @@
 <template>
-<div class="login-container">
-    <input type="text" id="comment" name="comment" value="I'm a text field">
-</div>
+  <div class="login-container">
+    <input type="text" id="username-input" name="username-input" placeholder="Enter your username">
+    <br>
+    <input type="text" id="password-input" name="password-input" placeholder="Enter your password">
+    <br>
+    <button>Login</button>
+  </div>
 </template>
 
 <script>
