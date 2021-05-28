@@ -45,7 +45,7 @@ export default {
         this.customerMessage = 'PERFECT!!!';
         break;
       default:
-        this.customerMessage = 'On track';
+        this.customerMessage = 'You\'re on track!';
     }
   }
 }
