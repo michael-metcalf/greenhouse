@@ -2,7 +2,7 @@
   <div class="env-fact-container">
     <p>
       <span class="did-you-know-header">Did you know?</span>
-      <br>
+      <br />
       <span class="env-fact">An env fact from the array</span>
     </p>
   </div>
@@ -21,14 +21,18 @@
   ];
 
 export default {
-  name: "Environmental Fact",
+  name: "EnvironmentalFact",
   props: {
     msg: String,
   },
   methods: {
   },
+  mounted() {
+    console.log(environmentalFactArray[0]);
+  }
+  
 };
-</script>
+</script>  
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
