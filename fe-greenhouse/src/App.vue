@@ -9,7 +9,9 @@
       <BudgetVisualization/>
       <EcoGoalProgress v-bind:ecoScore="45"/>
     </div>
-    <div class="nav-bar"></div>
+    <div class="nav-bar">
+      <FooterNav/>
+    </div>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ import Login from "./components/Login.vue";
 import EnvironmentalFact from "./components/EnvironmentalFact.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
+import FooterNav from "./components/FooterNav.vue";
 
 export default {
   name: "App",
@@ -25,7 +28,8 @@ export default {
     Login,
     EnvironmentalFact,
     BudgetVisualization,
-    EcoGoalProgress
+    EcoGoalProgress,
+    FooterNav
   },
 };
 </script>
@@ -68,6 +72,9 @@ export default {
 }
 
 .nav-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: fixed;
   bottom: 0;
   width: 100%;
