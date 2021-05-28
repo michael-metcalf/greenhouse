@@ -7,6 +7,7 @@
       <Login/>
       <EnvironmentalFact/>
       <BudgetVisualization/>
+      <EcoGoalProgress v-bind:ecoScore="45"/>
     </div>
     <div class="nav-bar"></div>
   </div>
@@ -16,6 +17,7 @@
 import Login from "./components/Login.vue";
 import EnvironmentalFact from "./components/EnvironmentalFact.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
+import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 
 export default {
   name: "App",
@@ -23,6 +25,7 @@ export default {
     Login,
     EnvironmentalFact,
     BudgetVisualization,
+    EcoGoalProgress
   },
 };
 </script>
