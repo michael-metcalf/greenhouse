@@ -41,6 +41,13 @@ export default {
   background: linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.main-panel > * {
+  border: 1pt solid red;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
 .header {
   position: fixed;
   top: 0;
