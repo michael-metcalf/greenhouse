@@ -5,6 +5,7 @@
     </div>
     <div class="main-panel">
       <Login/>
+      <EnvironmentalFact/>
     </div>
     <div class="nav-bar"></div>
   </div>
@@ -12,11 +13,14 @@
 
 <script>
 import Login from "./components/Login.vue";
+import EnvironmentalFact from "./components/EnvironmentalFact.vue";
+
 
 export default {
   name: "App",
   components: {
     Login,
+    EnvironmentalFact,
   },
 };
 </script>
@@ -46,6 +50,7 @@ export default {
 
 .main-panel {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
