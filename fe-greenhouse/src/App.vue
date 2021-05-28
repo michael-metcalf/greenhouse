@@ -34,4 +34,28 @@ export default {
   background: -webkit-linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-height: 10vh;
+  background: #ade3f6;
+  border: 2px solid red;
+}
+
+.main-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 10vh;
+  background: #ade3f6;
+  border: 2px solid red;
+}
 </style>
