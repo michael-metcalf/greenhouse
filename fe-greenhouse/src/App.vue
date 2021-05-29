@@ -9,6 +9,7 @@
       <BudgetVisualization/>
       <EcoGoalProgress v-bind:ecoScore="45"/>
       <Settings/>
+      <ExpenseInput/>
     </div>
     <div class="nav-bar">
       <FooterNav/>
@@ -23,6 +24,7 @@ import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import FooterNav from "./components/FooterNav.vue";
 import Settings from "./components/Settings.vue";
+import ExpenseInput from "./components/ExpenseInput.vue";
 
 
 export default {
@@ -33,7 +35,8 @@ export default {
     BudgetVisualization,
     EcoGoalProgress,
     FooterNav,
-    Settings
+    Settings,
+    ExpenseInput
   },
 };
 </script>
@@ -73,6 +76,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10vh;
 }
 
 .nav-bar {
