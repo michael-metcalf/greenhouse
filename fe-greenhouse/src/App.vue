@@ -10,6 +10,7 @@
       <EcoGoalProgress v-bind:ecoScore="45"/>
       <Settings/>
       <ExpenseInput/>
+      <BudgetInput/>
     </div>
     <div class="nav-bar">
       <FooterNav/>
@@ -25,6 +26,7 @@ import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import FooterNav from "./components/FooterNav.vue";
 import Settings from "./components/Settings.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
+import BudgetInput from "./components/BudgetInput.vue";
 
 
 export default {
@@ -36,7 +38,8 @@ export default {
     EcoGoalProgress,
     FooterNav,
     Settings,
-    ExpenseInput
+    ExpenseInput,
+    BudgetInput
   },
 };
 </script>

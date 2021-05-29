@@ -10,7 +10,11 @@
 
 <script>
 export default {
-  
+  name: "FooterNav",
+  props: {
+  },
+  methods: {
+  },  
 }
 </script>
 

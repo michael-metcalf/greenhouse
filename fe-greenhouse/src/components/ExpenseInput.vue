@@ -35,7 +35,11 @@
 
 <script>
 export default {
-  
+  name: "ExpenseInput",
+  props: {
+  },
+  methods: {    
+  },
 }
 </script>
 

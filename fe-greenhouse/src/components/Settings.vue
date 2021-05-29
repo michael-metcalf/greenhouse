@@ -12,11 +12,9 @@
 export default {
   name: "Settings",
   props: {
-
   },
   methods: {
-
-  }  
+  } , 
 }
 </script>
 
