@@ -8,6 +8,7 @@
       <EnvironmentalFact/>
       <BudgetVisualization/>
       <EcoGoalProgress v-bind:ecoScore="45"/>
+      <Settings/>
     </div>
     <div class="nav-bar">
       <FooterNav/>
@@ -21,6 +22,8 @@ import EnvironmentalFact from "./components/EnvironmentalFact.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import FooterNav from "./components/FooterNav.vue";
+import Settings from "./components/Settings.vue";
+
 
 export default {
   name: "App",
@@ -29,7 +32,8 @@ export default {
     EnvironmentalFact,
     BudgetVisualization,
     EcoGoalProgress,
-    FooterNav
+    FooterNav,
+    Settings
   },
 };
 </script>
