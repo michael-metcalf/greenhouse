@@ -1,6 +1,6 @@
 <template>
   <div id="budget-input-container">
-    <p>Monthly Budget: {{ monthlyBudget }}</p>
+    <p>Monthly Budget: {{monthlyBudget}}</p>
     <table id="budget-input-table">
       <thead>
         <th></th>
