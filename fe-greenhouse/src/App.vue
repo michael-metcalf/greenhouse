@@ -79,7 +79,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 13vh;
+  margin-bottom: 11.5vh;
 }
 
 .nav-bar {
