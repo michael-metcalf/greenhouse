@@ -4,16 +4,21 @@
       <h1>GreenHouse</h1>
     </div>
     <div class="main-panel">
-      <Login/>
+      <component :is="component"></component>
+      <!-- <Login/>
       <EnvironmentalFact/>
       <BudgetVisualization/>
       <EcoGoalProgress v-bind:ecoScore="45"/>
-      <Settings/>
-      <ExpenseInput/>
-      <BudgetInput/>
+      <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-      <FooterNav/>
+    <div id="footer-button-container">
+    <button v-on:click="component = 'Settings'" class="footer-button" name="profile" value="profile">😀</button>
+    <button v-on:click="component = 'ExpenseInput'" class="footer-button" name="expense-input" value="expense-input">💲</button>
+    <button v-on:click="component = 'BudgetInput'" class="footer-button" name="monthly-budget" value="monthly-budget">📆</button>
+    <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button>
+    <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
+  </div> 
     </div>
   </div>
 </template>
@@ -23,7 +28,6 @@ import Login from "./components/Login.vue";
 import EnvironmentalFact from "./components/EnvironmentalFact.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
-import FooterNav from "./components/FooterNav.vue";
 import Settings from "./components/Settings.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
@@ -36,11 +40,16 @@ export default {
     EnvironmentalFact,
     BudgetVisualization,
     EcoGoalProgress,
-    FooterNav,
     Settings,
     ExpenseInput,
     BudgetInput
   },
+  data () {
+    return {
+      component:
+        "Login",
+    }
+  }
 };
 </script>
 
@@ -60,7 +69,7 @@ export default {
 
 .main-panel > * {
   border: 1pt solid red;
-  margin-top: 5px;
+  margin-top: 11vh;
   margin-bottom: 5px;
   padding: 5px;
 }
@@ -91,6 +100,24 @@ export default {
   width: 100%;
   min-height: 10vh;
   background: #ade3f6;
+  border: 2px solid red;
+}
+
+#footer-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.footer-button {
+  font-size: 2em;
+  min-width: 60px;
+  min-height: 60px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 12%;
   border: 2px solid red;
 }
 </style>
