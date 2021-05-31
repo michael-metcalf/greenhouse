@@ -44,10 +44,10 @@ class Users(db.Model):
     username = db.Column(db.String(65), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), unique=True, nullable=False)
-    eco_goals = db.relationship("Eco_Goal", backref="users", lazy=True, cascade="all, delete", nullable=True)
-    eco_actions = db.relationship("Eco_Action", backref="users", lazy=True, cascade="all, delete", nullable=True)
-    categories = db.relationship("Category", backref="users", lazy=True, cascade="all, delete", nullable=False)
-    expenses = db.relationship("Expense", backref="users", lazy=True, cascade="all, delete", nullable=True)
+    eco_goals = db.relationship("Eco_Goal", backref="users", lazy=True, cascade="all, delete")
+    eco_actions = db.relationship("Eco_Action", backref="users", lazy=True, cascade="all, delete")
+    categories = db.relationship("Category", backref="users", lazy=True, cascade="all, delete")
+    expenses = db.relationship("Expense", backref="users", lazy=True, cascade="all, delete")
     created_at = db.Column(db.DateTime, default=db.func.now())
     last_modified = db.Column(db.DateTime, default=db.func.now())
 
@@ -57,38 +57,45 @@ class Users(db.Model):
 class Eco_Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     goal_name = db.Column(db.Text, nullable=False)
-    eco_actions = db.relationship("Eco_Action", backref="eco_goal", lazy=True, cascade="all, delete", nullable=True)
+    eco_actions = db.relationship("Eco_Action", backref="eco_goal", lazy=True, cascade="all, delete")
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    users = db.relationship("User", backref="eco_goals", lazy=True, cascade="all, delete")
     
     def __repr__(self):
         return '<Eco Goal %r>' % self.goal_name
 
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    category_name = db.Column(db.String(60), nullable=False)
-    category_description = db.Column(db.Text, nullable=True)
-    expenses = db.relationship("Expense", backref="category", lazy=True, cascade="all, delete", nullable=True)
-
-    def __repr__(self):
-        return '<Category %r>' % self.category_name
-
 class Eco_Action(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    users = db.relationship("Users", backref="eco_actions", lazy=True, cascade="all, delete")
     eco_goal_id = db.Column(db.Integer, db.ForeignKey("eco_goal.id"), nullable=False)
+    eco_goal = db.relationship("Eco_Goal", backref="eco_actions", lazy=True, cascade="all, delete")
     expense_id = db.Column(db.Integer, db.ForeignKey("expense.id"), nullable=True)
+    expense = db.relationship("Expense", backref="eco_actions", lazy=True, cascade="all, delete")
     created_at = db.Column(db.DateTime, default=db.func.now())
 
     def __repr__(self):
         return '<Eco Action %r>' % self.id
 
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    users = db.relationship("Users", backref="categories", lazy=True, cascade="all, delete")
+    category_name = db.Column(db.String(60), nullable=False)
+    category_description = db.Column(db.Text, nullable=True)
+    expenses = db.relationship("Expense", backref="category", lazy=True, cascade="all, delete")
+
+    def __repr__(self):
+        return '<Category %r>' % self.category_name
+
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    users = db.relationship("Users", backref="expenses", lazy=True, cascade="all, delete")
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
+    category = db.relationship("Category", backref="expenses", lazy=True, cascade="all, delete")
     expense_description = db.Column(db.Text, nullable=True)
-    eco_actions = db.relationship("Eco_Action", backref="expense", lazy=True, cascade="all, delete", nullable=True)
+    eco_actions = db.relationship("Eco_Action", backref="expense", lazy=True, cascade="all, delete")
     amount = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.now())
     last_modified = db.Column(db.DateTime, default=db.func.now())
