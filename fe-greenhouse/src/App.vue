@@ -97,7 +97,7 @@ export default {
           user_id: 1,
           category_id: 2,
           expense_description: "transport",
-          amount: 1.0,
+          amount: 1.5,
           created_at: Date.now(),
         },
       ],
