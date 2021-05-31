@@ -12,13 +12,34 @@
       <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-    <div id="footer-button-container">
-    <button v-on:click="component = 'BudgetVisualization'" class="footer-button" name="profile" value="profile">🏠</button>
-    <button v-on:click="component = 'ExpenseInput'" class="footer-button" name="expense-input" value="expense-input">💲</button>
-    <button v-on:click="component = 'BudgetInput'" class="footer-button" name="monthly-budget" value="monthly-budget">📆</button>
-    <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
-    <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
-  </div> 
+      <div id="footer-button-container">
+        <button
+          v-on:click="component = 'BudgetVisualization'"
+          class="footer-button"
+          name="profile"
+          value="profile"
+        >
+          🏠
+        </button>
+        <button
+          v-on:click="component = 'ExpenseInput'"
+          class="footer-button"
+          name="expense-input"
+          value="expense-input"
+        >
+          💲
+        </button>
+        <button
+          v-on:click="component = 'BudgetInput'"
+          class="footer-button"
+          name="monthly-budget"
+          value="monthly-budget"
+        >
+          📆
+        </button>
+        <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
+        <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +51,6 @@ import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 
-
 export default {
   name: "App",
   components: {
@@ -38,14 +58,72 @@ export default {
     BudgetVisualization,
     EcoGoalProgress,
     ExpenseInput,
-    BudgetInput
+    BudgetInput,
   },
-  data () {
+  data() {
     return {
-      component:
-        "Login",
-    }
-  }
+      component: "Login",
+    };
+  },
+  mounted() {
+    this.$store.commit("setExpensesList", {
+      expensesList: [
+        {
+          id: 1,
+          user_id: 1,
+          category_id: 1,
+          expense_description: "food",
+          amount: 1.0,
+          created_at: Date.now(),
+        },
+        {
+          id: 2,
+          user_id: 1,
+          category_id: 1,
+          expense_description: "food",
+          amount: 1.0,
+          created_at: Date.now(),
+        },
+        {
+          id: 3,
+          user_id: 1,
+          category_id: 1,
+          expense_description: "food",
+          amount: 1.0,
+          created_at: Date.now(),
+        },
+        {
+          id: 4,
+          user_id: 1,
+          category_id: 2,
+          expense_description: "transport",
+          amount: 1.0,
+          created_at: Date.now(),
+        },
+      ],
+    });
+    this.$store.commit("setEcoActionsList", {
+      ecoActionsList: [
+        { id: 1, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
+        { id: 2, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
+        { id: 3, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
+        { id: 4, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
+      ],
+    });
+    this.$store.commit("setMonthlyBudget", {
+      monthlyBudget: {
+        id: 1,
+        user_id: 1,
+        monthly_budget: 500.0,
+        groceries_alloc: 250.0,
+        bills_alloc: 40.0,
+        transport_alloc: 100.0,
+        misc_alloc: 110.0,
+        savings_target: 50.0,
+        monthly_income: 600.0,
+      },
+    });
+  },
 };
 </script>
 
@@ -58,9 +136,19 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   min-height: 100vh;
-  background: #2980B9;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #2980b9; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ffffff,
+    #ade3f6,
+    #6dd5fa
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #ade3f6,
+    #6dd5fa
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .main-panel > * {
