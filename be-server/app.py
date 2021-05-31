@@ -19,7 +19,7 @@ DB_USER = os.environ.get("DB_USER")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/test'
+app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse'
 db = SQLAlchemy(app)
 
 
@@ -29,7 +29,7 @@ db = SQLAlchemy(app)
 #
 ###
 
-engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/test")
+engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse")
 if not database_exists(engine.url):
     create_database(engine.url)
 
@@ -45,17 +45,16 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(65), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(200), unique=True, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.now())
     last_modified = db.Column(db.DateTime, default=db.func.now()) 
 
 
     eco_goals = db.relationship("Eco_Goal", back_populates="user", lazy=True, cascade="all, delete")
     eco_actions = db.relationship("Eco_Action", back_populates="user", lazy=True, cascade="all, delete")
-
     categories = db.relationship("Category", back_populates="user", lazy=True, cascade="all, delete")
     expenses = db.relationship("Expense", back_populates="user", lazy=True, cascade="all, delete")
-
+    budget = db.relationship("Budget", back_populates="user", lazy=True, cascade="all, delete")
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -64,11 +63,10 @@ class Eco_Goal(db.Model):
     __tablename__ = "eco_goal"
     id = db.Column(db.Integer, primary_key=True)
     goal_name = db.Column(db.Text, nullable=False)
-
-    eco_actions = db.relationship("Eco_Action", back_populates="eco_goal", lazy=True, cascade="all, delete")
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship("Users", back_populates="eco_goals", lazy=True, cascade="all, delete")
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    eco_actions = db.relationship("Eco_Action", back_populates="eco_goal", lazy=True, cascade="all, delete")
     
     def __repr__(self):
         return '<Eco Goal %r>' % self.goal_name
@@ -76,16 +74,14 @@ class Eco_Goal(db.Model):
 class Eco_Action(db.Model):
     __tablename__ = "eco_action"
     id = db.Column(db.Integer, primary_key=True)
-    user = db.relationship("Users", back_populates="eco_actions", lazy=True, cascade="all, delete")
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-
-    eco_goal = db.relationship("Eco_Goal", back_populates="eco_actions", lazy=True, cascade="all, delete")
     eco_goal_id = db.Column(db.Integer, db.ForeignKey("eco_goal.id"), nullable=False)
-
-    expense = db.relationship("Expense", back_populates="eco_action", lazy=True, cascade="all, delete")
     expense_id = db.Column(db.Integer, db.ForeignKey("expense.id"), nullable=True)
-
     created_at = db.Column(db.DateTime, default=db.func.now())
+
+    user = db.relationship("Users", back_populates="eco_actions", lazy=True, cascade="all, delete")
+    eco_goal = db.relationship("Eco_Goal", back_populates="eco_actions", lazy=True, cascade="all, delete")
+    expense = db.relationship("Expense", back_populates="eco_action", lazy=True, cascade="all, delete")
 
     def __repr__(self):
         return '<Eco Action %r>' % self.id
@@ -94,10 +90,11 @@ class Category(db.Model):
     __tablename__ = "category"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    user = db.relationship("Users", back_populates="categories", lazy=True, cascade="all, delete")
     category_name = db.Column(db.String(60), nullable=False)
     category_description = db.Column(db.Text, nullable=True)
+
     expenses = db.relationship("Expense", back_populates="category", lazy=True, cascade="all, delete")
+    user = db.relationship("Users", back_populates="categories", lazy=True, cascade="all, delete")
 
     def __repr__(self):
         return '<Category %r>' % self.category_name
@@ -106,17 +103,33 @@ class Expense(db.Model):
     __tablename__ = "expense"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    user = db.relationship("Users", back_populates="expenses", lazy=True, cascade="all, delete")
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
-    category = db.relationship("Category", back_populates="expenses", lazy=True, cascade="all, delete")
     expense_description = db.Column(db.Text, nullable=True)
-    eco_action = db.relationship("Eco_Action", back_populates="expense", lazy=True, cascade="all, delete")
     amount = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.now())
     last_modified = db.Column(db.DateTime, default=db.func.now())
+   
+    user = db.relationship("Users", back_populates="expenses", lazy=True, cascade="all, delete")
+    category = db.relationship("Category", back_populates="expenses", lazy=True, cascade="all, delete")
+    eco_action = db.relationship("Eco_Action", back_populates="expense", lazy=True, cascade="all, delete")
 
     def __repr__(self):
         return '<Expense %r>' % self.id
+
+class Budget(db.Model):
+    __tablename__ = "budget"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    monthly_budget = db.Column(db.Float, nullable=False)
+    groceries_alloc = db.Column(db.Float, nullable=False)
+    bills_alloc = db.Column(db.Float, nullable=False)
+    transport_alloc = db.Column(db.Float, nullable=False)
+    misc_alloc = db.Column(db.Float, nullable=False)
+    savings_target = db.Column(db.Float, nullable=False)
+    monthly_income = db.Column(db.Float, nullable=False)
+    created_at = db.Column(db.DateTime, default=db.func.now())
+
+    user = db.relationship("Users", back_populates="budget", lazy=True, cascade="all, delete")
 
 
 ###
@@ -126,7 +139,7 @@ class Expense(db.Model):
 ###
 
 table_check = sqlalchemy.inspect(engine)
-if table_check.has_table("users") and table_check.has_table("eco_goal") and table_check.has_table("category") and table_check.has_table("eco_action") and table_check.has_table("expense"):
+if table_check.has_table("users") and table_check.has_table("eco_goal") and table_check.has_table("category") and table_check.has_table("eco_action") and table_check.has_table("expense") and table_check.has_table("budget"):
     pass
 else:
     db.create_all()
@@ -142,17 +155,36 @@ def index():
     return "<p>Hello World</p>"
 
 @app.route("/api/user/create", methods=["POST"])
-async def createuser():
-    data = await controller_create_user(Users, request.json)
+def createuser():
+    data = controller_create_user(db, Users, request.json)
     return data
 
+@app.route("/api/user/<id>")
+def getuser(id):
+    data = controller_get_user(Users, id)
+    return data
 
-    
-# russell = Users(username="Russell", password="123", email="123")
+@app.route("/api/user/<id>/user_budget")
+def get_budget(id):
+    data = controller_get_budget(Users, Budget, id)
+    return data
 
-# query = Users.query.filter_by(username="Russell")
+@app.route("/api/user/<id>/expenses")
+def get_expenses(id):
+    data = controller_get_expenses(Users, Expense, id)
+    return data
 
-# username = query.username
+@app.route("/api/user/<id>/eco_goals")
+def get_eco_goals(id):
+    data = controller_get_eco_goals(Users, Eco_Goal, id)
+    return data
 
-# print(f"THE USERNAME IS:{username}")
+@app.route("/api/user/<id>/expenses/<expense_id>")
+def get_expense(id, expense_id):
+    data = controller_get_expense(Users, Expense, id, expense_id)
+    return data
 
+@app.route("/api/user/<id>/user_budget", methods=["PATCH"])
+def update_user_budget(id):
+    data = controller_update_user_budget(db, Users, Budget, id, request.json)
+    return data

@@ -49,3 +49,27 @@
     pip install -r requirements.txt
 
     `
+
+1. Ensure that your IDE's Python Interpretor is set to the interpretor located in your virtual environment folder. This 
+would be either in the `Scripts` folder if you are a Windows user, or in the `bin` folder for Linux and Mac users. The interpretor
+would be the `python.exe` file. Have this set with your IDE. 
+
+
+1. Start the flask development server
+Set the Flask Environment global variable to be development
+
+`
+$env:FLASK_ENV:"development"
+`
+
+Set the location of the app.py file
+
+`
+$env:FLASK_APP:"be-server.app:app"
+`
+
+Then:
+
+`
+flask run
+`
