@@ -34,7 +34,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  /* position: relative; */
 }
 
 .chart-align-container {
