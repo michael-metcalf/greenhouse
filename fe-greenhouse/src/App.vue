@@ -13,10 +13,10 @@
     </div>
     <div class="nav-bar">
     <div id="footer-button-container">
-    <button v-on:click="component = 'Settings'" class="footer-button" name="profile" value="profile">😀</button>
+    <button v-on:click="component = 'BudgetVisualization'" class="footer-button" name="profile" value="profile">🏠</button>
     <button v-on:click="component = 'ExpenseInput'" class="footer-button" name="expense-input" value="expense-input">💲</button>
     <button v-on:click="component = 'BudgetInput'" class="footer-button" name="monthly-budget" value="monthly-budget">📆</button>
-    <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button>
+    <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
     <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
   </div> 
     </div>
@@ -25,10 +25,8 @@
 
 <script>
 import Login from "./components/Login.vue";
-import EnvironmentalFact from "./components/EnvironmentalFact.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
-import Settings from "./components/Settings.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 
@@ -37,10 +35,8 @@ export default {
   name: "App",
   components: {
     Login,
-    EnvironmentalFact,
     BudgetVisualization,
     EcoGoalProgress,
-    Settings,
     ExpenseInput,
     BudgetInput
   },
@@ -69,7 +65,7 @@ export default {
 
 .main-panel > * {
   border: 1pt solid red;
-  margin-top: 11vh;
+  margin-top: 8vh;
   margin-bottom: 5px;
   padding: 5px;
 }

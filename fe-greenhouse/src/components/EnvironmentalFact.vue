@@ -61,5 +61,8 @@ export default {
 .env-fact {
   font-size: smaller;
 }
+.env-fact-container {
+  border: 2px solid red;
+}
 
 </style>

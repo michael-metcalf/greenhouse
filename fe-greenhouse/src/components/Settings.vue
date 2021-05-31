@@ -14,10 +14,12 @@ export default {
   props: {
   },
   methods: {
-  } , 
+  }, 
 }
 </script>
 
 <style scoped>
-
+#settings-button-container {
+  border: 2px solid red;
+}
 </style>
