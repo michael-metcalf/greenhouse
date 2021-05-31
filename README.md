@@ -25,10 +25,27 @@
 
     For Windows Users
 
+    Navigate to where your virtual environment folder is, and within that folder you should find another folder called Scripts, and within that a number of files. To start the virtual environment, you would need to run either the `activate.bat` or `activate.ps1`. To run, just type one of these files in your terminal, and press enter. If the start of the VM was successful, you should see `(<FOLDER NAME>)` printed in your terminal. This would be written before the PATH. 
+
+    Run one of the following based on the following requirements:
+
+    if using command prompt:
+
     `
-    Run /<VENV FOLDER>/Scripts/activate.bat
+    \<VENV FOLDER>\Scripts\activate.bat
     `
+
     or 
+
+    if using powershell:
+
     `
-    Run /<VENV FOLDER>/Scripts/Activate.ps1
+    Run \<VENV FOLDER>\Scripts\Activate.ps1
+    `
+
+1. Install all dependecies
+
+    `
+    pip install -r requirements.txt
+
     `
