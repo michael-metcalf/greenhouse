@@ -1,34 +1,67 @@
 <template>
-  
-  <div>
-    <p class="budget-progress">80%</p>
-
-    <h2> Potential savings: {{income-expenses}} </h2>
-    <h3> Income: {{income}} </h3>
-    <h3> Expenses: {{expenses}}</h3>
-
+  <div class="budget-viz-container">
+    <div class="chart-align-container">
+      <div class="budget-progress"><p>80%</p></div>
+      <progress-chart :savingsScore="0.8" :css-classes="'chartContainer'" />
+    </div>
+    <h2>Potential savings: {{ income - expenses }}</h2>
+    <ul class="no-bullets">
+      <li>Income: {{ income }}</li>
+      <li>Expenses: {{ expenses }}</li>
+    </ul>
   </div>
-
 </template>
 
 <script>
+import ProgressChart from "./progressChart.vue";
+
 export default {
   name: "BudgetVisualization",
+  components: {
+    ProgressChart,
+  },
   data: () => {
-    return ({
-    income: 3,
-    expenses: 1,
-  });
+    return {
+      income: 3,
+      expenses: 1,
+    };
   },
-  methods: {
-  },
-  mounted() {
-  }
-  
 };
-
 </script>
 
 <style>
+.budget-viz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
 
+.chart-align-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.budget-progress {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+}
+
+.budget-progress p {
+  font-size: larger;
+  font-weight: bold;
+}
+
+ul.no-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 </style>
