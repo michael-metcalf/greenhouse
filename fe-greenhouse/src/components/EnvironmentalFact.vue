@@ -27,7 +27,7 @@
     {source: "https://www.conservation.org/stories/11-climate-change-facts-you-need-to-know", fact: "Roughly 3.2 billion people are impacted by land degradation worldwide."},
     {source: "https://www.conservation.org/stories/11-climate-change-facts-you-need-to-know", fact: "For every $1 spent in land restoration, an average of 10 times that amount in benefits is returned."},
     {source: "https://www.wwf.org.uk/learn/fascinating-facts/bees#:~:text=Busy%20bees,than%20those%20that%20do%20not.", fact: "Almost 75% of leading global crops depend on animal pollinators like bees."},
-    {source: "https://www.wwf.org.uk/learn/fascinating-facts/bees#:~:text=Busy%20bees,than%20those%20that%20do%20not.", fact: "Almost 90% of wild plants depend on animal pollinators like bees. However, bees are on the decline due to the use of neonicotinoid pesticides."},
+    {source: "https://www.wwf.org.uk/learn/fascinating-facts/bees#:~:text=Busy%20bees,than%20those%20that%20do%20not.", fact: "Almost 90% of wild plants depend on animal pollinators like bees."},
     {source: "https://www.wwf.org.uk/learn/fascinating-facts/bees#:~:text=Busy%20bees,than%20those%20that%20do%20not.", fact: "Numbers of bees have declined by 60% in the US, which is commonly attribted to the use of neonicotinoid pesticides."},
     {source: "https://www.theworldcounts.com/", fact: "1.3 billion tonnes of food is wasted globally every year."},
     {source: "https://www.theworldcounts.com/", fact: "300 million tonnes of plastic waste is produced every year."},
