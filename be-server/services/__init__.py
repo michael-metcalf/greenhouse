@@ -1,4 +1,4 @@
-from ..dao import *
+from dao import *
 import hashlib, os, binascii
 
 
@@ -86,11 +86,11 @@ def service_get_expenses(user_object, expense_object, id):
             "expense_description": expense.expense_description,
             "amount": expense.amount,
             "created_at": expense.created_at,
-            "modified_at": expense.modified_at
+            "last_modified": expense.last_modified
         }
         expenses.append(json_object)
 
-    return expenses
+    return {"expenses": expenses}
 
 def service_get_expense(user_object, expense_object, id, expense_id):
     username = id.lower()
@@ -108,7 +108,7 @@ def service_get_expense(user_object, expense_object, id, expense_id):
         "expense_description": data.expense_description,
         "amount": data.amount,
         "created_at": data.created_at,
-        "modified_at": data.modified_at
+        "last_modified": data.last_modified
     }
 
     return json_object
