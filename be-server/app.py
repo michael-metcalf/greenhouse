@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 from sqlalchemy.engine import create_engine
@@ -19,11 +20,11 @@ DB_USER = os.environ.get("DB_USER")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_CONNECTION = os.environ.get("DB_CONNECTION")
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
+CORS(app, origins=["http://localhost:8080", "http://localhost:5000"])
 # app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse'
 app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_CONNECTION}'
 db = SQLAlchemy(app)
-
 
 ###
 #
@@ -152,6 +153,14 @@ else:
 # Defining the endpoints
 #
 ###
+
+@app.route("/greeting")
+def greeting():
+  return {"greeting": "Hello from Flask!"}
+
+@app.route('/app')
+def root():
+    return send_from_directory('static', 'index.html')
 
 @app.route("/")
 def index():
