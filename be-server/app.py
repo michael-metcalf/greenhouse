@@ -162,9 +162,9 @@ def greeting():
 def root():
     return send_from_directory('static', 'index.html')
 
-@app.route("/")
-def index():
-    return "<p>Hello World</p>"
+# @app.route("/")
+# def index():
+#     return "<p>Hello World</p>"
 
 @app.route("/api/user/create", methods=["POST"])
 def createuser():

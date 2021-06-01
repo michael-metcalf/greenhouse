@@ -6,7 +6,10 @@
     <div class="main-panel">
     <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
     <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
-      <component :is="component"></component>
+      <!-- we display the LOGIN component if no user is currently active -->
+      <Login v-if="this.$store.state.userName === ''"  />
+      
+      <component v-else :is="component"></component>
       <!-- <Login/>
       <EnvironmentalFact/>
       <BudgetVisualization/>
@@ -14,7 +17,7 @@
       <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-      <div id="footer-button-container">
+      <div v-if="this.$store.state.userName !== ''"  id="footer-button-container">
         <button
           v-on:click="component = 'BudgetVisualization'"
           class="footer-button"
@@ -39,8 +42,17 @@
         >
           📆
         </button>
+        <button
+          v-on:click="$store.commit('clearUserName')"
+          class="footer-button"
+          name="logout"
+          value="logout"
+        >
+          👋
+        </button>
         <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
         <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
+      </div>
     </div>
   </div>
 </template>
@@ -51,6 +63,9 @@ import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
+
+// other libraries
+// import axios from "axios";
 
 export default {
   name: "App",
@@ -63,7 +78,7 @@ export default {
   },
   data() {
     return {
-      component: "Login",
+      component: "BudgetVisualization",
     };
   },
   mounted() {

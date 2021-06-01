@@ -7,11 +7,18 @@ export default new Vuex.Store({
   state: {
     // DO NOT MODIFY THOSE!!!
     myTextColor: "blue",
+    userName: "",
     expensesList: [],
     ecoActionsList: [],
     monthlyBudget: {},
   },
   mutations: {
+    setUserName(state, payload) {
+      state.userName = payload.userName;
+    },
+    clearUserName(state) {
+      state.userName = "";
+    },
     setMyTextColor(state, payload) {
       state.myTextColor = payload;
     },
