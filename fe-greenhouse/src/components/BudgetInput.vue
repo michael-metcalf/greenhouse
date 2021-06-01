@@ -1,6 +1,9 @@
 <template>
   <div id="budget-input-container">
-    <p>Monthly Budget: {{monthlyBudget}}</p>
+    <p>Monthly Income: 
+      <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
+      <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">
+    </p>
     <table id="budget-input-table">
       <thead>
         <th></th>
@@ -61,15 +64,14 @@ export default {
   },
   data() {
     return {
-      monthlyBudget: '',
       runningGroceries: '',
       runningBills: '',
       runningTransport: '',
       runningMisc: '',
-      savingsTarget: '',
       savingsLeeway: '',
       editField: '',
       form: {
+        monthlyIncome: '',
         allocatedGroceries: '',
         allocatedBills: '',
         allocatedTransport: '',
@@ -79,7 +81,7 @@ export default {
     }
   },
   mounted() {
-    this.monthlyBudget = 200000;
+    this.monthlyIncome = 200000;
     this.runningGroceries = 20000;
     this.allocatedGroceries = 0;
     this.runningBills = 20000;
