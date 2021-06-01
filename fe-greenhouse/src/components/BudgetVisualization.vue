@@ -47,15 +47,15 @@ export default {
     getSumOfExpenses() {
       this.expenses = this.$store.state.expensesList
         .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue);
+        .reduce((currentSum, currentValue) => currentSum + currentValue,0);
     },
     getMonthlyBudget() {
       this.income = this.$store.state.monthlyBudget.monthly_income;
     }
   },
   beforeMount() {
-    this.getSumOfExpenses();
     this.getMonthlyBudget();
+    this.getSumOfExpenses();
   },
 };
 </script>

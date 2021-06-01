@@ -22,6 +22,7 @@ export default {
   methods: {
     validateUserInput() {
       this.$store.commit("setUserName", { userName: this.userName });
+      this.$emit("login-success");
     },
   },
 };
