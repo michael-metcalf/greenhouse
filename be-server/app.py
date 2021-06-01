@@ -17,9 +17,11 @@ load_dotenv()
 
 DB_USER = os.environ.get("DB_USER")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
+DB_CONNECTION = os.environ.get("DB_CONNECTION")
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse'
+# app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse'
+app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_CONNECTION}'
 db = SQLAlchemy(app)
 
 
@@ -29,7 +31,8 @@ db = SQLAlchemy(app)
 #
 ###
 
-engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse")
+# engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@localhost:5432/greenhouse")
+engine = create_engine(f"postgresql://{DB_CONNECTION}")
 if not database_exists(engine.url):
     create_database(engine.url)
 

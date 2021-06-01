@@ -12,13 +12,13 @@
       <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-    <div id="footer-button-container">
-    <button v-on:click="component = 'BudgetVisualization'" class="footer-button" name="profile" value="profile">🏠</button>
-    <button v-on:click="component = 'ExpenseInput'" class="footer-button" name="expense-input" value="expense-input">💲</button>
-    <button v-on:click="component = 'BudgetInput'" class="footer-button" name="monthly-budget" value="monthly-budget">📆</button>
-    <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
-    <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
-  </div> 
+      <div id="footer-button-container">
+        <button v-on:click="component = 'BudgetVisualization'" class="footer-button" name="profile" value="profile">🏠</button>
+        <button v-on:click="component = 'ExpenseInput'" class="footer-button" name="expense-input" value="expense-input">💲</button>
+        <button v-on:click="component = 'BudgetInput'" class="footer-button" name="monthly-budget" value="monthly-budget">📆</button>
+        <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
+        <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
+      </div> 
     </div>
   </div>
 </template>
