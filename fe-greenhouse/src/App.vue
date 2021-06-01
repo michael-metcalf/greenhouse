@@ -4,6 +4,8 @@
       <h1>GreenHouse</h1>
     </div>
     <div class="main-panel">
+    <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
+    <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
       <component :is="component"></component>
       <!-- <Login/>
       <EnvironmentalFact/>
@@ -39,7 +41,6 @@
         </button>
         <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
         <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
-      </div>
     </div>
   </div>
 </template>
