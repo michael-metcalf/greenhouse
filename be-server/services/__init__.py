@@ -1,12 +1,6 @@
 from ..dao import *
 import hashlib, os, binascii
 
-def details_existance_check(details_to_check):
-    username_check = dao_get_username(details_to_check.username)
-
-    if username_check: # RUSSELL REDO THIS!!!
-        pass   # RUSSELL REDO THIS!!!!
-
 
 def service_create_user(db, user_object, new_user): 
     data = service_get_user(user_object, new_user["username"])
@@ -107,7 +101,6 @@ def service_get_expense(user_object, expense_object, id, expense_id):
 
     if data == None:
         return "Expense doesn't exist"
-
     
     json_object = {
         "user_id": data.user_id,

@@ -62,7 +62,9 @@ Set the Flask Environment global variable to be development
 $env:FLASK_ENV:"development"
 `
 
-Set the location of the app.py file
+Set the location of the app.py file. 
+Make sure you are in the parent directory!!! 
+This is the greenhouse folder.
 
 `
 $env:FLASK_APP:"be-server.app:app"
