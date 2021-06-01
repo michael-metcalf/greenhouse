@@ -191,6 +191,11 @@ def get_eco_goals(id):
     data = controller_get_eco_goals(Users, Eco_Goal, id)
     return data
 
+@app.route("/api/user/<id>/eco_actions")
+def get_eco_actions(id):
+    data = controller_get_eco_actions(Users, Eco_Action, id)
+    return data
+
 @app.route("/api/user/<id>/expenses/<expense_id>")
 def get_expense(id, expense_id):
     data = controller_get_expense(Users, Expense, id, expense_id)

@@ -26,6 +26,10 @@ def dao_get_eco_goals(eco_goal_object, user_id):
     result = eco_goal_object.query.filter_by(user_id=user_id).all()
     return result
 
+def dao_get_eco_actions(eco_action_object, user_id):
+    result = eco_action_object.query.filter_by(user_id=user_id).all()
+    return result
+
 def dao_update_budget(db, budget_object, user_id, monthly_budget, groceries_alloc, bills_alloc, transport_alloc, misc_alloc, savings_target, monthly_income):
     result = budget_object.query.filter_by(user_id=user_id).update(dict(monthly_budget=monthly_budget, groceries_alloc=groceries_alloc, bills_alloc=bills_alloc, transport_alloc=transport_alloc, misc_alloc=misc_alloc, savings_target=savings_target, monthly_income=monthly_income))
     db.session.commit()
