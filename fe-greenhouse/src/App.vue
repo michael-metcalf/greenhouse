@@ -4,6 +4,8 @@
       <h1>GreenHouse</h1>
     </div>
     <div class="main-panel">
+    <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
+    <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
       <component :is="component"></component>
       <!-- <Login/>
       <EnvironmentalFact/>
@@ -44,8 +46,15 @@ export default {
     return {
       component:
         "Login",
+      // greeting: "Hello Vue!",
+      // flaskGreeting: '',
     }
-  }
+  },
+  // created: async function() {
+  //   const gResponse = await fetch("http://localhost:5000/greeting");
+  //   const gObject = await gResponse.json();
+  //   this.flaskGreeting = gObject.greeting;
+  // }
 };
 </script>
 

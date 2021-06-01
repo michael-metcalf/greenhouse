@@ -43,7 +43,7 @@
     Run \<VENV FOLDER>\Scripts\Activate.ps1
     `
 
-1. Install all dependecies
+1. Install all dependencies
 
     `
     pip install -r requirements.txt
