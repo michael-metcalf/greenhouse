@@ -1,5 +1,5 @@
 from flask import json
-from ..services import *
+from services import *
 
 def controller_create_user(db, user_object, json_data):
     try:

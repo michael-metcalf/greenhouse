@@ -1,4 +1,4 @@
-from ..dao import *
+from dao import *
 import hashlib, os, binascii
 
 
