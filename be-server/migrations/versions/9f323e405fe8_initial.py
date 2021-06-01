@@ -31,7 +31,7 @@ def upgrade():
     sa.UniqueConstraint('username')
     )
 
-    op.create_table('budget',
+    budget = op.create_table('budget',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('monthly_budget', sa.Float(), nullable=False),
@@ -45,7 +45,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('category',
+
+    category = op.create_table('category',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('category_name', sa.String(length=60), nullable=False),
@@ -53,14 +54,16 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('eco_goal',
+
+    eco_goal = op.create_table('eco_goal',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('goal_name', sa.Text(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('expense',
+
+    expense = op.create_table('expense',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=False),
@@ -72,7 +75,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('eco_action',
+
+    eco_action = op.create_table('eco_action',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('eco_goal_id', sa.Integer(), nullable=False),
@@ -83,6 +87,288 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    op.bulk_insert(users, [{"username": "roberto",	"email":"roberto@gmail.com", "password":"password"}])
+    op.bulk_insert(category, [
+        {
+            "user_id": 1,
+            "category_name": "Groceries",
+            "category_description": "Food"
+        },
+        {
+            "user_id": 1,
+            "category_name": "Transport",
+            "category_description": "Transport"
+        },
+        {
+            "user_id": 1,
+            "category_name": "Misc",
+            "category_description": "Whatever"
+        },
+        {
+            "user_id": 1,
+            "category_name": "Bills",
+            "category_description": "Bills"
+        }
+    ])
+    op.bulk_insert(expense, [
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Grocery Store",
+            "amount": 3000
+        },
+        {
+            "user_id": 1,
+            "category_id": 2,
+            "expense_description": "Monthly subway expense",
+            "amount": 10000
+        },
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Convenience bento",
+            "amount": 500
+        },
+        {
+            "user_id": 1,
+            "category_id": 4,
+            "expense_description": "Electricity bill May",
+            "amount": 5000
+        },
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Restaurant dinner",
+            "amount": 2500
+        },
+        {
+            "user_id": 1,
+            "category_id": 3,
+            "expense_description": "Haircut",
+            "amount": 5000
+        },
+        {
+            "user_id": 1,
+            "category_id": 3,
+            "expense_description": "Beer",
+            "amount": 2000
+        },
+        {
+            "user_id": 1,
+            "category_id": 4,
+            "expense_description": "Water bill May",
+            "amount": 3000
+        },
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Grocery Store",
+            "amount": 2000
+        },
+        {
+            "user_id": 1,
+            "category_id": 2,
+            "expense_description": "Bus",
+            "amount": 500
+        },
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Grocery Store",
+            "amount": 4000
+        },
+        {
+            "user_id": 1,
+            "category_id": 2,
+            "expense_description": "Subway",
+            "amount": 600
+        },
+        {
+            "user_id": 1,
+            "category_id": 3,
+            "expense_description": "Chair",
+            "amount": 7000
+        },
+        {
+            "user_id": 1,
+            "category_id": 3,
+            "expense_description": "Cushion",
+            "amount": 3000
+        },
+        {
+            "user_id": 1,
+            "category_id": 2,
+            "expense_description": "Subway",
+            "amount": 600
+        }, 
+        {
+            "user_id": 1,
+            "category_id": 4,
+            "expense_description": "Gas bill May",
+            "amount": 2000
+        }, 
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Grocery Store",
+            "amount": 1500
+        }, 
+        {
+            "user_id": 1,
+            "category_id": 1,
+            "expense_description": "Grocery Store",
+            "amount": 1800
+        }, 
+        {
+            "user_id": 1,
+            "category_id": 3,
+            "expense_description": "Manicure",
+            "amount": 4000
+        }, 
+        {
+            "user_id": 1,
+            "category_id": 2,
+            "expense_description": "Subway",
+            "amount": 600
+        }, 
+        {
+            "user_id": 1,
+            "category_id": 4,
+            "expense_description": "Rent",
+            "amount": 70000
+        }, 
+    ])
+    op.bulk_insert(eco_goal, [
+        {
+            "user_id": 1,
+            "goal_name":"Eco bag/no bag"
+        }, 
+        {
+            "user_id": 1,
+            "goal_name":"No impulse purchase"
+        }, 
+        {
+            "user_id": 1,
+            "goal_name":"Eco conscious tranport"
+        }, 
+        {
+            "user_id": 1,
+            "goal_name":"No action"
+        }, 
+    ])
+    op.bulk_insert(eco_action, [
+        {
+            "user_id": 1,
+            "eco_goal_id": 4,
+            "expense_id": 1            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 2            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 3            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 3            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 2,
+            "expense_id": 5            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 6            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 7            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 2,
+            "expense_id": 9            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 9            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 10            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 11            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 12            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 13            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 14            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 15            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 17            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 2,
+            "expense_id": 17            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 1,
+            "expense_id": 18            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 19            
+        },
+        {
+            "user_id": 1,
+            "eco_goal_id": 3,
+            "expense_id": 20            
+        },
+    ])
+    op.bulk_insert(budget, [{
+        "user_id": 1,
+        "monthly_budget": 87000,
+        "groceries_alloc": 40000,
+        "bills_alloc": 12000,
+        "transport_alloc": 15000,
+        "misc_alloc": 20000,
+        "savings_target": 60000,
+        "monthly_income": 250000
+    }])
     # ### end Alembic commands ###
 
 
