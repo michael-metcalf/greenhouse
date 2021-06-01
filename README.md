@@ -59,7 +59,7 @@ would be the `python.exe` file. Have this set with your IDE.
 Set the Flask Environment global variable to be development
 
 `
-$env:FLASK_ENV:"development"
+$env:FLASK_ENV="development"
 `
 
 Set the location of the app.py file. 
@@ -67,7 +67,7 @@ Make sure you are in the parent directory!!!
 This is the greenhouse folder.
 
 `
-$env:FLASK_APP:"be-server.app:app"
+$env:FLASK_APP="be-server.app:app"
 `
 
 Then:
