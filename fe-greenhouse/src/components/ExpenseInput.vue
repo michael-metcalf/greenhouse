@@ -1,6 +1,7 @@
 <template>
   <div id="expense-input-container">
     <form id="expense-input-form" action="">
+      <div>
       <label for="expense-input">
         <input class="expense-input-button" type="date" name="date-input">
         <br>
@@ -8,14 +9,21 @@
         <br>
         <input class="expense-input-button" type="text" name="description-input" placeholder="Description">
       </label>
+      </div>
       <div id="category-button-container">
-        <input id="groceries" class="category-button" type="radio" name="groceries" value="groceries">
+        <input type="radio" id="none" name="category" value="none" checked>
+        <label for="misc">None</label>
+
+        <input type="radio" id="groceries" name="category" value="groceries">
         <label for="groceries">Groceries</label>
-        <input id="bills" class="category-button" type="radio" name="bills" value="bills">
+
+        <input type="radio" id="bills" name="category" value="bills">
         <label for="bills">Bills</label>
-        <input id="transport" class="category-button" type="radio" name="transport" value="transport">
+
+        <input type="radio" id="transport" name="category" value="transport">
         <label for="transport">Transport</label>
-        <input id="misc" class="category-button" type="radio" name="misc" value="misc">
+
+        <input type="radio" id="misc" name="category" value="misc">
         <label for="misc">Misc</label>
       </div>
       <div id="eco-action-container">
