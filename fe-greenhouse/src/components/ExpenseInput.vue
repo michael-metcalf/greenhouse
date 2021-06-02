@@ -11,9 +11,6 @@
       </label>
       </div>
       <div id="category-button-container">
-        <input type="radio" id="none" name="category" value="none" checked>
-        <label for="misc">None</label>
-
         <input type="radio" id="groceries" name="category" value="groceries">
         <label for="groceries">Groceries</label>
 
@@ -27,6 +24,9 @@
         <label for="misc">Misc</label>
       </div>
       <div id="eco-action-container">
+        <input id="failed-eco-warrior" class="eco-action-checkbox" type="checkbox" name="failed-eco-warrior" value="failed-eco-warrior">
+        <label for="failed-eco-warrior">No eco action taken</label>
+        <br>
         <input id="eco-bag-no-bag" class="eco-action-checkbox" type="checkbox" name="eco-bag-no-bag" value="eco-bag-no-bag">
         <label for="eco-bag-no-bag">Eco bag/no bag</label>
         <br>
