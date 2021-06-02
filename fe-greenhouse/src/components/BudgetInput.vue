@@ -1,5 +1,6 @@
 <template>
   <div id="budget-input-container">
+    <h1>Monthly Budget</h1>
     <p>Monthly Income: 
       <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
       <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">

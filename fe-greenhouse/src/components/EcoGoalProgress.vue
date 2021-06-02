@@ -1,6 +1,6 @@
 <template>
   <div class="eco-goals-container">
-    <p>Eco Goals:  {{ecoScoreString}} </p>
+    <p id="eco-goals">Eco Goals:  {{ecoScoreString}} </p>
     <p> {{ customerMessage}} </p>
   </div>
 
@@ -55,6 +55,10 @@ export default {
 
 .eco-goals-container {
   border: 2px solid red;
+}
+
+#eco-goals {
+  font-weight: bold;
 }
 
 </style>
