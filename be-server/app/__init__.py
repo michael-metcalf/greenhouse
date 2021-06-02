@@ -5,6 +5,7 @@ from flask.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import create_engine
 from sqlalchemy_utils import database_exists, create_database
+from flask_cors import CORS
 
 load_dotenv()
 
@@ -14,6 +15,7 @@ DB_CONNECTION = os.environ.get("DB_CONNECTION")
 SQLALCHEMY_DATABASE = f'postgresql://{DB_CONNECTION}'
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:8080", "http://localhost:5000"])
 app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_CONNECTION}'
 db = SQLAlchemy(app)
 
