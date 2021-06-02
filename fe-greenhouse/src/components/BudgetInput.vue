@@ -103,6 +103,17 @@ export default {
     blurField() {
       this.editField = '';
     },
+    getUserBudgetInput() {
+      userBudget = {
+        monthly_budget: this.form.monthlyBudget,
+        groceries_alloc: this.form.allocatedGroceries,
+        bills_alloc: this.form.allocatedBills,
+        transport_alloc: this.form.allocatedTransport,
+        misc_alloc: this.form.allocatedMisc,
+        savings_target: this.form.savingsTarget,
+        monthly_income: this.form.monthlyIncome
+      }
+    }
   }
 }
 </script>

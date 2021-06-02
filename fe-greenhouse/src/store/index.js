@@ -45,7 +45,15 @@ export default new Vuex.Store({
       state.monthlyBudget = payload.monthlyBudget;
     },
   }, // Use mutations to modify the state variables synchronously
-  actions: {}, // For asynchronous functions, called with this.$store.dispatch()
+  actions: {
+    // updateBudget(state, payload) {
+    //   try {
+    //     axios.
+    //   } catch (error) {
+        
+    //   }  
+    }
+  }, // For asynchronous functions, called with this.$store.dispatch()
   // Actions cannot modify state variables. They need to call the mutations
   modules: {},
 });
