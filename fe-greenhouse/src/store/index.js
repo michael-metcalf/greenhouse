@@ -7,11 +7,28 @@ export default new Vuex.Store({
   state: {
     // DO NOT MODIFY THOSE!!!
     myTextColor: "blue",
+    userName: "",
+    isLoading: true,
     expensesList: [],
     ecoActionsList: [],
+    ecoGoalsList: [],
     monthlyBudget: {},
   },
   mutations: {
+    setUserName(state, payload) {
+      state.userName = payload.userName;
+    },
+    clearUserName(state) {
+      state.userName = "";
+      state.isLoading = true;
+    },
+    setLoadingStatus(state, payload) {
+      if (typeof payload === "boolean") {
+        state.isLoading = payload;
+      } else {
+        state.isLoading = payload.isLoading;
+      }
+    },
     setMyTextColor(state, payload) {
       state.myTextColor = payload;
     },
@@ -20,6 +37,9 @@ export default new Vuex.Store({
     },
     setEcoActionsList(state, payload) {
       state.ecoActionsList = payload.ecoActionsList;
+    },
+    setEcoGoalsList(state, payload) {
+      state.ecoGoalsList = payload.ecoGoalsList;
     },
     setMonthlyBudget(state, payload) {
       state.monthlyBudget = payload.monthlyBudget;

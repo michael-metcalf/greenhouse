@@ -4,7 +4,12 @@
       <h1>GreenHouse</h1>
     </div>
     <div class="main-panel">
-      <component :is="component"></component>
+    <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
+    <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
+      <!-- we display the LOGIN component if no user is currently active -->
+      <Login v-if="this.$store.state.userName === ''" v-on:login-success="receiveLoginSignal" />
+      <loading-message v-if="this.$store.state.userName !== ''  &&  this.$store.state.isLoading" />
+      <component v-if="this.$store.state.userName !== ''  &&  !this.$store.state.isLoading" :is="component"></component>
       <!-- <Login/>
       <EnvironmentalFact/>
       <BudgetVisualization/>
@@ -12,7 +17,7 @@
       <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-      <div id="footer-button-container">
+      <div v-if="this.$store.state.userName !== ''"  id="footer-button-container">
         <button
           v-on:click="component = 'BudgetVisualization'"
           class="footer-button"
@@ -37,6 +42,14 @@
         >
           📆
         </button>
+        <button
+          v-on:click="$store.commit('clearUserName')"
+          class="footer-button"
+          name="logout"
+          value="logout"
+        >
+          👋
+        </button>
         <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
         <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
       </div>
@@ -50,6 +63,10 @@ import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
+import LoadingMessage from "./components/LoadingMessage.vue";
+
+// other libraries
+import axios from "axios";
 
 export default {
   name: "App",
@@ -59,76 +76,49 @@ export default {
     EcoGoalProgress,
     ExpenseInput,
     BudgetInput,
+    LoadingMessage,
   },
   data() {
     return {
-      component: "Login",
+      component: "BudgetVisualization",
     };
   },
-  mounted() {
-    this.$store.commit("setExpensesList", {
-      expensesList: [
-        {
-          id: 1,
-          user_id: 1,
-          category_id: 1,
-          expense_description: "food",
-          amount: 1.0,
-          created_at: Date.now(),
-        },
-        {
-          id: 2,
-          user_id: 1,
-          category_id: 1,
-          expense_description: "food",
-          amount: 1.0,
-          created_at: Date.now(),
-        },
-        {
-          id: 3,
-          user_id: 1,
-          category_id: 1,
-          expense_description: "food",
-          amount: 1.0,
-          created_at: Date.now(),
-        },
-        {
-          id: 4,
-          user_id: 1,
-          category_id: 2,
-          expense_description: "transport",
-          amount: 1.0,
-          created_at: Date.now(),
-        },
-      ],
-    });
-    this.$store.commit("setEcoActionsList", {
-      ecoActionsList: [
-        { id: 1, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
-        { id: 2, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
-        { id: 3, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
-        { id: 4, user_id: 1, eco_goal_id: 1, created_at: Date.now() },
-      ],
-    });
-    this.$store.commit("setMonthlyBudget", {
-      monthlyBudget: {
-        id: 1,
-        user_id: 1,
-        monthly_budget: 500.0,
-        groceries_alloc: 250.0,
-        bills_alloc: 40.0,
-        transport_alloc: 100.0,
-        misc_alloc: 110.0,
-        savings_target: 50.0,
-        monthly_income: 600.0,
-      },
-    });
+  methods: {
+    async receiveLoginSignal() {
+      // Need to download the data related to the current user
+      console.log(`Received login signal...${this.$store.state.userName}`);
+      this.$store.commit("setLoadingStatus", true);
+      try {
+        const api_address = "http://localhost:5000/api/";
+        const budget_response = await axios.get(`${api_address}user/${this.$store.state.userName}/user_budget`);
+        console.log(`Monthly budget : ${JSON.stringify(budget_response.data)}`);
+        this.$store.commit("setMonthlyBudget", { monthlyBudget: budget_response.data });
+        const expenses_response = await axios.get(`${api_address}user/${this.$store.state.userName}/expenses`);
+        console.log(`Expenses list: ${JSON.stringify(expenses_response.data)}`);
+        this.$store.commit("setExpensesList", { expensesList: expenses_response.data.expenses  });
+        const eco_goals_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_goals`);
+        console.log(`Eco Goals list: ${JSON.stringify(eco_goals_response.data)}`);
+        if (eco_goals_response.data.eco_goals) {
+          this.$store.commit("setEcoGoalsList", { ecoGoalsList: eco_goals_response.data.eco_goals });
+        }
+        const eco_actions_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_actions`);
+        if (eco_actions_response.data.eco_actions) {
+          this.$store.commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
+        }
+        this.$store.commit("setLoadingStatus", false);
+      } catch(err) {
+        console.error(`ERROR in the back-end API download! ${err}`);
+      }
+
+    },
   },
 };
 </script>
 
 <style>
 #app {
+  --app-max-width: 500px;
+  max-width: var(--app-max-width);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -162,6 +152,7 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
+  max-width: var(--app-max-width);
   min-height: 10vh;
   background: #ade3f6;
   border: 2px solid red;
@@ -182,6 +173,7 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: var(--app-max-width);
   min-height: 10vh;
   background: #ade3f6;
   border: 2px solid red;
