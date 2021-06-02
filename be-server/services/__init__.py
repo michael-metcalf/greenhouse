@@ -1,5 +1,6 @@
-from ..dao import *
+from dao import *
 import hashlib, os, binascii
+from datetime import date
 
 
 def service_create_user(db, user_object, new_user): 
@@ -86,11 +87,11 @@ def service_get_expenses(user_object, expense_object, id):
             "expense_description": expense.expense_description,
             "amount": expense.amount,
             "created_at": expense.created_at,
-            "modified_at": expense.last_modified
+            "last_modified": expense.last_modified
         }
         expenses.append(json_object)
 
-    return { "expenses" : expenses }
+    return {"expenses": expenses}
 
 def service_get_expense(user_object, expense_object, id, expense_id):
     username = id.lower()
@@ -108,7 +109,7 @@ def service_get_expense(user_object, expense_object, id, expense_id):
         "expense_description": data.expense_description,
         "amount": data.amount,
         "created_at": data.created_at,
-        "modified_at": data.modified_at
+        "last_modified": data.last_modified
     }
 
     return json_object
@@ -180,6 +181,28 @@ def service_update_user_budget(db, user_object, budget_object, id, json_body):
         "savings_target": data.savings_target or None,
         "monthly_income": data.monthly_income or None,
         "created_at": data.created_at or None
+    }
+
+    return json_data
+
+
+def service_update_expense(db, user_object, expense_object, id, json_body):
+    username = id.lower()
+
+    result = service_get_user(user_object, username)
+
+    user_id = result["id"]
+
+    dao_update_expense(db, expense_object, user_id, json_body["category_id"], json_body["expense_description"], json_body["amount"], date.today())
+    
+    data = dao_get_expense(expense_object, user_id)
+
+    json_data = {
+        "user_id": data.user_id,
+        "category_id": data.category_id,
+        "expense_description": data.expense_description,
+        "amount": data.amount,
+        "modified_at": data.modified_at
     }
 
     return json_data

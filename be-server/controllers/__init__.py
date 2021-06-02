@@ -1,5 +1,5 @@
 from flask import json
-from ..services import *
+from services import *
 
 def controller_create_user(db, user_object, json_data):
     try:
@@ -55,6 +55,13 @@ def controller_get_eco_actions(user_object, eco_action_object, id):
 def controller_update_user_budget(db, user_object, budget_object, id, json_body):
     try:
         data = service_update_user_budget(db, user_object, budget_object, id, json_body)
+        return data
+    except Exception as e:
+        return str(e)
+
+def controller_update_expense(db, user_object, expense_object, id, json_body):
+    try:
+        data = service_update_expense(db, user_object, expense_object, id, json_body)
         return data
     except Exception as e:
         return str(e)
