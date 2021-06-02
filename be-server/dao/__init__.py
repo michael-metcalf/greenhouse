@@ -11,12 +11,21 @@ def dao_get_budget(budget_object, user_id):
     result = budget_object.query.filter_by(user_id=user_id).first()
     return result
 
+def dao_create_expense(db, expense_object, user_id, category_id, expense_description, amount):
+    new_expense = expense_object(user_id=user_id, category_id=category_id, expense_description=expense_description, amount=amount)
+    db.session.add(new_expense)
+    db.session.commit()
+
 def dao_get_expenses(expense_object, user_id):
     result = expense_object.query.filter_by(user_id=user_id).all()
     return result
 
 def dao_get_expense(expense_object, expense_id):
     result = expense_object.query.filter_by(id=expense_id).first()
+    return result
+
+def dao_get_expense_by_expense_description(expense_object, expense_description):
+    result = expense_object.query.filter_by(expense_description=expense_description).first()
     return result
 
 def dao_get_eco_goals(eco_goal_object, user_id):

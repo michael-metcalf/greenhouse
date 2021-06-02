@@ -23,6 +23,13 @@ def controller_get_budget(user_object, budget_object, id):
     except Exception as e:
         return str(e)
 
+def controller_create_expense(db, user_object, expense_object, id, json_data):
+    try:
+        data = service_create_expense(db, user_object, expense_object, id, json_data)
+        return data
+    except Exception as e:
+        return str(e)
+
 def controller_get_expenses(user_object, expense_object, id):
     try:
         data = service_get_expenses(user_object, expense_object, id)

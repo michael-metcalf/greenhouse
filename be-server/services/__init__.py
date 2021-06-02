@@ -65,6 +65,26 @@ def service_get_budget(user_object, budget_object, id):
 
     return json_data
 
+def service_create_expense(db, user_object, expense_object, id, new_expense):
+    result = service_get_user(user_object, id)
+
+    user_id = result["id"]
+
+    dao_create_expense(db, expense_object, user_id, new_expense["category_id"], new_expense["expense_description"], new_expense["amount"])
+
+    result = dao_get_expense_by_expense_description(expense_object, new_expense["expense_description"])
+    
+    json_data = {
+        "id": result.id,
+        "user_id": result.user_id,
+        "category_id": result.category_id,
+        "expense_description": result.expense_description,
+        "amount": result.amount,
+        "created_at": result.created_at
+    }
+
+    return json_data
+
 def service_get_expenses(user_object, expense_object, id):
     expenses = []
 
