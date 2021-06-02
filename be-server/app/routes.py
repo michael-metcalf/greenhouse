@@ -48,9 +48,14 @@ def update_user_budget(id):
     data = controller_update_user_budget(db, Users, Budget, id, request.json)
     return data
 
-@app.route("/api/user/<id>/user_budget", methods=["PATCH"])
+@app.route("/api/user/<id>/expense", methods=["PATCH"])
 def update_expense(id):
     data = controller_update_expense(db, Users, Expense, id, request.json)
+    return data
+
+@app.route("/api/user/<id>/expense", methods=["POST"])
+def create_expense(id):
+    data = controller_create_expense(db, Users, Expense, id, request.json)
     return data
 
 @app.route("/api/user/<id>/eco_actions")
