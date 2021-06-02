@@ -5,6 +5,7 @@ node_modules
 *env
 *env3.7
 *env3.8
+be-server/static
 
 # local env files
 .env.local
