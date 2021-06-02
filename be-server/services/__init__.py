@@ -135,7 +135,30 @@ def service_get_eco_goals(user_object, eco_goal_object, id):
         }
         eco_goals.append(json_object)
 
-    return eco_goals
+    return { "eco_goals": eco_goals}
+
+def service_get_eco_actions(user_object, eco_action_object, id):
+    eco_actions = []
+
+    username = id.lower()
+    result = service_get_user(user_object, username)
+
+    user_id = result["id"]
+    data = dao_get_eco_actions(eco_action_object, user_id)
+
+    if len(data) == 0:
+        return "Eco Actions don't exist"
+    
+    for eco_action in data:
+        json_object = {
+            "user_id": eco_action.user_id,
+            "id": eco_action.id,
+            "eco_goal_id": eco_action.eco_goal_id,
+            "expense_id": eco_action.expense_id
+        }
+        eco_actions.append(json_object)
+
+    return { "eco_actions": eco_actions}
 
 def service_update_user_budget(db, user_object, budget_object, id, json_body):
     username = id.lower()
