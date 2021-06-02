@@ -28,13 +28,13 @@
         <label for="failed-eco-warrior">No eco action taken</label>
         <br>
         <input id="eco-bag-no-bag" class="eco-action-checkbox" type="checkbox" name="eco-bag-no-bag" value="eco-bag-no-bag">
-        <label for="eco-bag-no-bag">Eco bag/no bag</label>
+        <label for="eco-bag-no-bag">Eco bag/no bag used</label>
         <br>
         <input id="no-impulse-buy" class="eco-action-checkbox" type="checkbox" name="no-impulse-buy" value="no-impulse-buy">
         <label for="no-impulse-buy">No impulse purchase made</label>
         <br>
         <input id="eco-conscious-transport" class="eco-action-checkbox" type="checkbox" name="eco-conscious-transport" value="eco-conscious-transport">
-        <label for="eco-conscious-transport">Eco-conscious transport</label>
+        <label for="eco-conscious-transport">Eco-conscious transport used</label>
       </div>
       <button form="expense-input-form" type="submit" name="submit" value="submit">Submit</button>
     </form>
