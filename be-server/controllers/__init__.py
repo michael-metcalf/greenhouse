@@ -51,3 +51,10 @@ def controller_update_user_budget(db, user_object, budget_object, id, json_body)
         return data
     except Exception as e:
         return str(e)
+
+def controller_update_expense(db, user_object, expense_object, id, json_body):
+    try:
+        data = service_update_expense(db, user_object, expense_object, id, json_body)
+        return data
+    except Exception as e:
+        return str(e)
