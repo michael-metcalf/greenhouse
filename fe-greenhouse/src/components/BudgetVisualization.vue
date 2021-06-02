@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="env-fact-container">
-    <EnvironmentalFact/>
+    <EnvironmentalFact />
     </span>
     <div class="budget-viz-container">
       <h1>Current Situation</h1>
@@ -16,7 +16,7 @@
       </ul>
     </div>
     <span>
-      <EcoGoalProgress/>
+      <EcoGoalProgress :ecoScore="70" />
     </span>
   </div>
 </template>
@@ -31,13 +31,27 @@ export default {
   components: {
     ProgressChart,
     EnvironmentalFact,
-    EcoGoalProgress
+    EcoGoalProgress,
   },
   data: () => {
     return {
       income: 3,
       expenses: 1,
     };
+  },
+  methods: {
+    getSumOfExpenses() {
+      this.expenses = this.$store.state.expensesList
+        .map((x) => x.amount)
+        .reduce((currentSum, currentValue) => currentSum + currentValue,0);
+    },
+    getMonthlyBudget() {
+      this.income = this.$store.state.monthlyBudget.monthly_income;
+    }
+  },
+  beforeMount() {
+    this.getMonthlyBudget();
+    this.getSumOfExpenses();
   },
 };
 </script>

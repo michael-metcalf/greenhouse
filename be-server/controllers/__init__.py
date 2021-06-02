@@ -37,10 +37,16 @@ def controller_get_expense(user_object, expense_object, id, expense_id):
     except Exception as e:
         return str(e)
 
-
 def controller_get_eco_goals(user_object, eco_goal_object, id):
     try:
         data = service_get_eco_goals(user_object, eco_goal_object, id)
+        return data
+    except Exception as e:
+        return str(e)
+
+def controller_get_eco_actions(user_object, eco_action_object, id):
+    try:
+        data = service_get_eco_actions(user_object, eco_action_object, id)
         return data
     except Exception as e:
         return str(e)
@@ -55,6 +61,13 @@ def controller_update_user_budget(db, user_object, budget_object, id, json_body)
 def controller_update_expense(db, user_object, expense_object, id, json_body):
     try:
         data = service_update_expense(db, user_object, expense_object, id, json_body)
+        return data
+    except Exception as e:
+        return str(e)
+
+def controller_get_eco_actions(user_object, eco_action_object, id):
+    try:
+        data = service_get_eco_actions(user_object, eco_action_object, id)
         return data
     except Exception as e:
         return str(e)

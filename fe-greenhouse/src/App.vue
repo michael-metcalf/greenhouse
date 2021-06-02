@@ -6,7 +6,10 @@
     <div class="main-panel">
     <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
     <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
-      <component :is="component"></component>
+      <!-- we display the LOGIN component if no user is currently active -->
+      <Login v-if="this.$store.state.userName === ''" v-on:login-success="receiveLoginSignal" />
+      <loading-message v-if="this.$store.state.userName !== ''  &&  this.$store.state.isLoading" />
+      <component v-if="this.$store.state.userName !== ''  &&  !this.$store.state.isLoading" :is="component"></component>
       <!-- <Login/>
       <EnvironmentalFact/>
       <BudgetVisualization/>
@@ -14,13 +17,42 @@
       <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-      <div id="footer-button-container">
-        <button v-on:click="component = 'BudgetVisualization'" class="footer-button" name="profile" value="profile">🏠</button>
-        <button v-on:click="component = 'ExpenseInput'" class="footer-button" name="expense-input" value="expense-input">💲</button>
-        <button v-on:click="component = 'BudgetInput'" class="footer-button" name="monthly-budget" value="monthly-budget">📆</button>
+      <div v-if="this.$store.state.userName !== ''"  id="footer-button-container">
+        <button
+          v-on:click="component = 'BudgetVisualization'"
+          class="footer-button"
+          name="profile"
+          value="profile"
+        >
+          🏠
+        </button>
+        <button
+          v-on:click="component = 'ExpenseInput'"
+          class="footer-button"
+          name="expense-input"
+          value="expense-input"
+        >
+          💲
+        </button>
+        <button
+          v-on:click="component = 'BudgetInput'"
+          class="footer-button"
+          name="monthly-budget"
+          value="monthly-budget"
+        >
+          📆
+        </button>
+        <button
+          v-on:click="$store.commit('clearUserName')"
+          class="footer-button"
+          name="logout"
+          value="logout"
+        >
+          👋
+        </button>
         <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
         <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
-      </div> 
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +63,10 @@ import BudgetVisualization from "./components/BudgetVisualization.vue";
 import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
+import LoadingMessage from "./components/LoadingMessage.vue";
 
+// other libraries
+import axios from "axios";
 
 export default {
   name: "App",
@@ -40,26 +75,50 @@ export default {
     BudgetVisualization,
     EcoGoalProgress,
     ExpenseInput,
-    BudgetInput
+    BudgetInput,
+    LoadingMessage,
   },
-  data () {
+  data() {
     return {
-      component:
-        "Login",
-      // greeting: "Hello Vue!",
-      // flaskGreeting: '',
-    }
+      component: "BudgetVisualization",
+    };
   },
-  // created: async function() {
-  //   const gResponse = await fetch("http://localhost:5000/greeting");
-  //   const gObject = await gResponse.json();
-  //   this.flaskGreeting = gObject.greeting;
-  // }
+  methods: {
+    async receiveLoginSignal() {
+      // Need to download the data related to the current user
+      console.log(`Received login signal...${this.$store.state.userName}`);
+      this.$store.commit("setLoadingStatus", true);
+      try {
+        const api_address = "http://localhost:5000/api/";
+        const budget_response = await axios.get(`${api_address}user/${this.$store.state.userName}/user_budget`);
+        console.log(`Monthly budget : ${JSON.stringify(budget_response.data)}`);
+        this.$store.commit("setMonthlyBudget", { monthlyBudget: budget_response.data });
+        const expenses_response = await axios.get(`${api_address}user/${this.$store.state.userName}/expenses`);
+        console.log(`Expenses list: ${JSON.stringify(expenses_response.data)}`);
+        this.$store.commit("setExpensesList", { expensesList: expenses_response.data.expenses  });
+        const eco_goals_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_goals`);
+        console.log(`Eco Goals list: ${JSON.stringify(eco_goals_response.data)}`);
+        if (eco_goals_response.data.eco_goals) {
+          this.$store.commit("setEcoGoalsList", { ecoGoalsList: eco_goals_response.data.eco_goals });
+        }
+        const eco_actions_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_actions`);
+        if (eco_actions_response.data.eco_actions) {
+          this.$store.commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
+        }
+        this.$store.commit("setLoadingStatus", false);
+      } catch(err) {
+        console.error(`ERROR in the back-end API download! ${err}`);
+      }
+
+    },
+  },
 };
 </script>
 
 <style>
 #app {
+  --app-max-width: 500px;
+  max-width: var(--app-max-width);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -67,9 +126,19 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   min-height: 100vh;
-  background: #2980B9;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #FFFFFF, #ade3f6, #6DD5FA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #2980b9; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ffffff,
+    #ade3f6,
+    #6dd5fa
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #ade3f6,
+    #6dd5fa
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .main-panel > * {
@@ -83,6 +152,7 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
+  max-width: var(--app-max-width);
   min-height: 10vh;
   background: #ade3f6;
   border: 2px solid red;
@@ -103,6 +173,7 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: var(--app-max-width);
   min-height: 10vh;
   background: #ade3f6;
   border: 2px solid red;
