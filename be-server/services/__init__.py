@@ -3,8 +3,14 @@ import hashlib, os, binascii
 from datetime import date
 
 
+#########
+#
+# Users
+#
+#########
+
 def service_create_user(db, user_object, new_user): 
-    user_exist = service_get_user(user_object, new_user["username"])
+    user_exist = dao_get_username(user_object, new_user["username"])
 
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
     hashed_pwd = hashlib.pbkdf2_hmac("sha256", new_user["password"].encode("utf-8"), salt, 100000)
@@ -12,18 +18,16 @@ def service_create_user(db, user_object, new_user):
 
     print((salt + hashed_pwd).decode("ascii"))
 
-    if user_exist == "User doesn't exist":
+    if user_exist == None:
         dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=hashed_pwd)
         data = service_get_user(user_object, new_user["username"])
         return data
     else:
-        return user_exist
+        return "User Exists"
 
 def service_get_user(user_object, id):
 
-    username = id.lower()
-
-    data = dao_get_username(user_object, username)
+    data = dao_get_user(user_object, id)
 
     if data == None:
         return "User doesn't exist"
@@ -39,13 +43,13 @@ def service_get_user(user_object, id):
 
     return json_data
 
-def service_get_budget(user_object, budget_object, id):
-    username = id.lower()
+#########
+#
+# Budget
+#
+#########
 
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
-
+def service_get_budget(budget_object, user_id):
     data = dao_get_budget(budget_object, user_id)
 
     if data == None:
@@ -65,11 +69,32 @@ def service_get_budget(user_object, budget_object, id):
 
     return json_data
 
-def service_create_expense(db, user_object, expense_object, id, new_expense):
-    result = service_get_user(user_object, id)
+def service_update_user_budget(db, budget_object, user_id, json_body):
+    dao_update_budget(db, budget_object, user_id, json_body["monthly_budget"], json_body["groceries_alloc"], json_body["bills_alloc"], json_body["transport_alloc"], json_body["misc_alloc"], json_body["savings_target"], json_body["monthly_income"])
+    
+    data = dao_get_budget(budget_object, user_id)
 
-    user_id = result["id"]
+    json_data = {
+        "user_id": data.user_id,
+        "monthly_budget": data.monthly_budget or None,
+        "groceries_alloc": data.groceries_alloc or None,
+        "bills_alloc": data.bills_alloc or None,
+        "transport_alloc": data.transport_alloc or None,
+        "misc_alloc": data.misc_alloc or None,
+        "savings_target": data.savings_target or None,
+        "monthly_income": data.monthly_income or None,
+        "created_at": data.created_at or None
+    }
 
+    return json_data
+
+#########
+#
+# Expenses
+#
+#########
+
+def service_create_expense(db, expense_object, user_id, new_expense):
     dao_create_expense(db, expense_object, user_id, new_expense["category_id"], new_expense["expense_description"], new_expense["amount"])
 
     result = dao_get_expense_by_expense_description(expense_object, new_expense["expense_description"])
@@ -85,14 +110,8 @@ def service_create_expense(db, user_object, expense_object, id, new_expense):
 
     return json_data
 
-def service_get_expenses(user_object, expense_object, id):
+def service_get_expenses(expense_object, user_id):
     expenses = []
-
-    username = id.lower()
-
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
 
     data = dao_get_expenses(expense_object, user_id)
 
@@ -113,11 +132,7 @@ def service_get_expenses(user_object, expense_object, id):
 
     return {"expenses": expenses}
 
-def service_get_expense(user_object, expense_object, id, expense_id):
-    username = id.lower()
-    result = service_get_user(user_object, username)
-    user_id = result["id"]
-
+def service_get_expense(expense_object, expense_id):
     data = dao_get_expense(expense_object, expense_id)
 
     if data == None:
@@ -134,14 +149,29 @@ def service_get_expense(user_object, expense_object, id, expense_id):
 
     return json_object
 
-def service_get_eco_goals(user_object, eco_goal_object, id):
+def service_update_expense(db, expense_object, user_id, json_body):
+    dao_update_expense(db, expense_object, user_id, json_body["category_id"], json_body["expense_description"], json_body["amount"], date.today())
+    
+    data = dao_get_expense(expense_object, user_id)
+
+    json_data = {
+        "user_id": data.user_id,
+        "category_id": data.category_id,
+        "expense_description": data.expense_description,
+        "amount": data.amount,
+        "modified_at": data.modified_at
+    }
+
+    return json_data
+
+#########
+#
+# Eco Goals / Actions
+#
+#########
+
+def service_get_eco_goals(eco_goal_object, user_id):
     eco_goals = []
-
-    username = id.lower()
-
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
 
     data = dao_get_eco_goals(eco_goal_object, user_id)
 
@@ -157,13 +187,9 @@ def service_get_eco_goals(user_object, eco_goal_object, id):
 
     return { "eco_goals": eco_goals}
 
-def service_get_eco_actions(user_object, eco_action_object, id):
+def service_get_eco_actions(eco_action_object, user_id):
     eco_actions = []
 
-    username = id.lower()
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
     data = dao_get_eco_actions(eco_action_object, user_id)
 
     if len(data) == 0:
@@ -180,62 +206,8 @@ def service_get_eco_actions(user_object, eco_action_object, id):
 
     return { "eco_actions": eco_actions}
 
-def service_update_user_budget(db, user_object, budget_object, id, json_body):
-    username = id.lower()
-
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
-
-    dao_update_budget(db, budget_object, user_id, json_body["monthly_budget"], json_body["groceries_alloc"], json_body["bills_alloc"], json_body["transport_alloc"], json_body["misc_alloc"], json_body["savings_target"], json_body["monthly_income"])
-    
-    data = dao_get_budget(budget_object, user_id)
-
-    json_data = {
-        "user_id": data.user_id,
-        "monthly_budget": data.monthly_budget or None,
-        "groceries_alloc": data.groceries_alloc or None,
-        "bills_alloc": data.bills_alloc or None,
-        "transport_alloc": data.transport_alloc or None,
-        "misc_alloc": data.misc_alloc or None,
-        "savings_target": data.savings_target or None,
-        "monthly_income": data.monthly_income or None,
-        "created_at": data.created_at or None
-    }
-
-    return json_data
-
-
-def service_update_expense(db, user_object, expense_object, id, json_body):
-    username = id.lower()
-
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
-
-    dao_update_expense(db, expense_object, user_id, json_body["category_id"], json_body["expense_description"], json_body["amount"], date.today())
-    
-    data = dao_get_expense(expense_object, user_id)
-
-    json_data = {
-        "user_id": data.user_id,
-        "category_id": data.category_id,
-        "expense_description": data.expense_description,
-        "amount": data.amount,
-        "modified_at": data.modified_at
-    }
-
-    return json_data
-
-
-def service_get_eco_actions(user_object, eco_action_object, id):
+def service_get_eco_actions(eco_action_object, user_id):
     eco_actions = []
-
-    username = id.lower()
-
-    result = service_get_user(user_object, username)
-
-    user_id = result["id"]
 
     data = dao_get_eco_actions(eco_action_object, user_id)
 
