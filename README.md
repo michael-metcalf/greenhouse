@@ -55,24 +55,19 @@ would be either in the `Scripts` folder if you are a Windows user, or in the `bi
 would be the `python.exe` file. Have this set with your IDE. 
 
 
-1. Start the flask development server
-Set the Flask Environment global variable to be development
+1. Create config for the flask development server
+Create a '.flaskenv' file in the be-server folder and set it's environment variables. 
 
 `
-$env:FLASK_ENV="development"
-`
-
-Set the location of the app.py file. 
-Make sure you are in the parent directory!!! 
-This is the greenhouse folder.
+FLASK_APP=main.py
+FLASK_ENV=development
 
 `
-$env:FLASK_APP="be-server.app:app"
-`
 
-Then:
+1. Start Flask
+Make sure you are in the be-server directory!!! 
 
 `
 flask run
+
 `
-For chart commit
