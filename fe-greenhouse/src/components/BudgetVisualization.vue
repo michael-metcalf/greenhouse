@@ -17,16 +17,12 @@
     <span>
       <EcoGoalProgress/>
     </span>
-    <span class="settings-container">
-    <Settings/>
-    </span>
   </div>
 </template>
 
 <script>
 import ProgressChart from "./progressChart.vue";
 import EnvironmentalFact from './EnvironmentalFact.vue';
-import Settings from './Settings.vue';
 import EcoGoalProgress from './EcoGoalProgress';
 
 export default {
@@ -34,7 +30,6 @@ export default {
   components: {
     ProgressChart,
     EnvironmentalFact,
-    Settings,
     EcoGoalProgress
   },
   data: () => {
