@@ -1,7 +1,9 @@
 <template>
   <div id="expense-input-container">
+    <h1>Expense Input</h1>
     <form id="expense-input-form" action="">
       <div>
+        <p>Let's input an expense!</p>
       <label for="expense-input">
         <input class="expense-input-button" type="date" name="date-input">
         <br>
@@ -24,6 +26,7 @@
         <label for="misc">Misc</label>
       </div>
       <div id="eco-action-container">
+        <p>Did you take an eco action?</p>
         <input id="failed-eco-warrior" class="eco-action-checkbox" type="checkbox" name="failed-eco-warrior" value="failed-eco-warrior">
         <label for="failed-eco-warrior">No eco action taken</label>
         <br>
@@ -36,6 +39,7 @@
         <input id="eco-conscious-transport" class="eco-action-checkbox" type="checkbox" name="eco-conscious-transport" value="eco-conscious-transport">
         <label for="eco-conscious-transport">Eco-conscious transport used</label>
       </div>
+      <br>
       <button form="expense-input-form" type="submit" name="submit" value="submit">Submit</button>
     </form>
   </div>  
@@ -52,5 +56,8 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+  font-weight: bold;
+  color: green;
+}
 </style>
