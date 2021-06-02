@@ -2,12 +2,16 @@ from app import app
 from controllers import *
 from app import db
 from app.models import Users, Budget, Expense, Eco_Goal
-from flask import request
+from flask import request, send_from_directory
 
 
 @app.route("/")
 def index():
     return "<p>Hello World</p>"
+
+@app.route('/app')
+def root():
+    return send_from_directory('static', 'index.html')
 
 @app.route("/api/user/create", methods=["POST"])
 def createuser():
