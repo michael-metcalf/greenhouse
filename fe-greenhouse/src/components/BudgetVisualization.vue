@@ -5,8 +5,8 @@
     </span>
     <div class="budget-viz-container">
       <div class="chart-align-container">
-        <div class="budget-progress"><p>80%</p></div>
-        <progress-chart :savingsScore="0.8" :css-classes="'chartContainer'" />
+        <div class="budget-progress"><p>{{ Math.floor(targetPercent*100) + "%" }}</p></div>
+        <progress-chart :savingsScore="targetPercent" :css-classes="'chartContainer'" />
       </div>
       <h2>Potential savings: {{ income - expenses }}</h2>
       <ul class="no-bullets">
@@ -15,7 +15,7 @@
       </ul>
     </div>
     <span>
-      <EcoGoalProgress :ecoScore="70" />
+      <EcoGoalProgress :ecoScore="Math.max(0,10-this.missedEcoActions)" />
     </span>
   </div>
 </template>
@@ -36,6 +36,8 @@ export default {
     return {
       income: 3,
       expenses: 1,
+      targetPercent: 0.8,
+      missedEcoActions: 0,
     };
   },
   methods: {
@@ -46,11 +48,17 @@ export default {
     },
     getMonthlyBudget() {
       this.income = this.$store.state.monthlyBudget.monthly_income;
+    },
+    getNumberOfMissedEcoActions() {
+      // TO DO -> remove the hard coded value
+      this.missedEcoActions = this.$store.state.ecoActionsList.filter(action => action.eco_goal_id === 4).length;
     }
   },
   beforeMount() {
     this.getMonthlyBudget();
     this.getSumOfExpenses();
+    this.getNumberOfMissedEcoActions();
+    this.targetPercent = Math.floor(this.expenses/this.income*100)/100
   },
 };
 </script>
