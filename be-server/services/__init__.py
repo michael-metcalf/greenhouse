@@ -4,7 +4,7 @@ from datetime import date
 
 
 def service_create_user(db, user_object, new_user): 
-    data = service_get_user(user_object, new_user["username"])
+    user_exist = service_get_user(user_object, new_user["username"])
 
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
     hashed_pwd = hashlib.pbkdf2_hmac("sha256", new_user["password"].encode("utf-8"), salt, 100000)
@@ -12,12 +12,12 @@ def service_create_user(db, user_object, new_user):
 
     print((salt + hashed_pwd).decode("ascii"))
 
-    if data == "User doesn't exist":
+    if user_exist == "User doesn't exist":
         dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=hashed_pwd)
         data = service_get_user(user_object, new_user["username"])
         return data
     else:
-        return data
+        return user_exist
 
 def service_get_user(user_object, id):
 
@@ -183,3 +183,30 @@ def service_update_expense(db, user_object, expense_object, id, json_body):
     }
 
     return json_data
+
+
+def service_get_eco_actions(user_object, eco_action_object, id):
+    eco_actions = []
+
+    username = id.lower()
+
+    result = service_get_user(user_object, username)
+
+    user_id = result["id"]
+
+    data = dao_get_eco_actions(eco_action_object, user_id)
+
+    if len(data) == 0:
+        return "Eco Actions don't exist"
+    
+    for eco_action in data:
+        json_object = {
+            "id": eco_action.id,
+            "user_id": eco_action.user_id,            
+            "eco_goal_id": eco_action.eco_goal_id,
+            "expense_id": eco_action.expense_id,
+            "created_at": eco_action.created_at
+        }
+        eco_actions.append(json_object)
+
+    return {"eco_actions": eco_actions}
