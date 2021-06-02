@@ -1,7 +1,7 @@
 from app import app
 from controllers import *
 from app import db
-from app.models import Users, Budget, Expense, Eco_Goal
+from app.models import Users, Budget, Expense, Eco_Goal, Eco_Action
 from flask import request, send_from_directory
 
 
@@ -53,3 +53,7 @@ def update_expense(id):
     data = controller_update_expense(db, Users, Expense, id, request.json)
     return data
 
+@app.route("/api/user/<id>/eco_actions")
+def get_eco_actions(id):
+    data = controller_get_eco_actions(Users, Eco_Action, id)
+    return data
