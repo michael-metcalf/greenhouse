@@ -82,7 +82,8 @@ export default {
   },
   mounted() {
     this.monthlyIncome = 200000;
-    this.runningGroceries = 20000;
+    this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id = 1)
+                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount);
     this.allocatedGroceries = 0;
     this.runningBills = 20000;
     this.allocatedBills = 0;
