@@ -15,6 +15,7 @@ export default new Vuex.Store({
     expensesList: [],
     ecoActionsList: [],
     ecoGoalsList: [],
+    categoriesList: [],
     monthlyBudget: {},
     userMessage: { message: "", msgType: ""},
   },
@@ -56,6 +57,9 @@ export default new Vuex.Store({
     },
     setAuthenticated(state, payload) {
       state.isAuthenticated = payload
+    },
+    setCategoriesList(state, payload) {
+      state.categoriesList = payload
     }
   }, // Use mutations to modify the state variables synchronously
   actions: {
@@ -96,12 +100,15 @@ export default new Vuex.Store({
         if (eco_actions_response.data.eco_actions) {
           commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
         }
+        const categories_response = await axios.get(`${api_address}user/${state.user.user_id}/categories`);
+        if (categories_response.data.categories) {
+          commit("setCategoriesList", { categoriesList: categories_response.data.categories})
+        }
         commit("setLoadingStatus", false);
         commit("setAuthenticated", true)              
       } catch(err) {
         console.error(`ERROR in the back-end API download! ${err}`);
       }
-    }, // For asynchronous functions, called with this.$store.dispatch()
-  // Actions cannot modify state variables. They need to call the mutations
+    },
   }
 });
