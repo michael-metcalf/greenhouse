@@ -248,3 +248,28 @@ def service_get_eco_actions(eco_action_object, user_id):
         eco_actions.append(json_object)
 
     return {"eco_actions": eco_actions}
+
+#########
+#
+# Category
+#
+#########
+
+def service_get_categories(category_object, user_id):
+    categories = []
+
+    data = dao_get_categories(category_object, user_id)
+
+    if len(data) == 0:
+        return "Categories don't exist"
+    
+    for category in data:
+        json_object = {
+            "id": category.id,
+            "user_id": category.user_id,            
+            "category_name": category.category_name,
+            "category_description": category.category_description
+        }
+        categories.append(json_object)
+
+    return {"categories": categories}
