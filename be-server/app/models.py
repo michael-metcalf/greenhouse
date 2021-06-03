@@ -3,7 +3,6 @@ from sqlalchemy.dialects.postgresql import UUID
 
 class Users(db.Model):
     __tablename__ = "users"
-    # id = db.Column(db.Integer, primary_key=True)
     id = db.Column(UUID(as_uuid=True), primary_key=True)
     username = db.Column(db.String(65), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
