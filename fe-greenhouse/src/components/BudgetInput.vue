@@ -115,6 +115,7 @@ export default {
         monthly_income: this.form.monthlyIncome
       }
     }
+
   }
 }
 </script>
