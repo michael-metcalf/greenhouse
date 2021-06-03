@@ -16,9 +16,9 @@ def controller_create_user(db, user_object, json_data):
     except Exception as e:
         return str(e)
 
-def controller_login_user(db, user_object, json_data):
+def controller_login_user(user_object, json_data):
     try:
-        data = service_login_user(db, user_object, json_data)
+        data = service_login_user(user_object, json_data)
         return data
     except Exception as e:
         return str(e)

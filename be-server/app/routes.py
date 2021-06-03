@@ -25,9 +25,9 @@ def createuser():
     data = controller_create_user(db, Users, request.json)
     return data
 
-@app.route("/api/login", methods=["POST"])
+@app.route("/api/user/login", methods=["POST"])
 def loginuser():
-    data = controller_login_user(db, User, request.json)
+    data = controller_login_user(Users, request.json)
     return data
 
 @app.route("/api/user/<id>")

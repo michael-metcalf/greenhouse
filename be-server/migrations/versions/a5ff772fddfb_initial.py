@@ -10,6 +10,13 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 from uuid import uuid4
 from datetime import datetime
+import hashlib, os, binascii
+
+# Generate hashed password
+salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
+hashed_pwd = hashlib.pbkdf2_hmac("sha512", "password".encode("utf-8"), salt, 100000)
+hashed_pwd = binascii.hexlify(hashed_pwd)
+salt_hashedpwd = (salt + hashed_pwd).decode("ascii")
 
 # Generate current timestamp
 TIMESTAMP = datetime.now()
@@ -91,7 +98,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-    op.bulk_insert(users, [{"id":UUID, "username": "roberto",	"email":"roberto@gmail.com", "password":"password", "created_at": TIMESTAMP}])
+    op.bulk_insert(users, [{"id":UUID, "username": "roberto",	"email":"roberto@gmail.com", "password":salt_hashedpwd, "created_at": TIMESTAMP}])
     op.bulk_insert(category, [
         {
             "user_id": UUID,
