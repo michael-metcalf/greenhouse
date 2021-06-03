@@ -1,7 +1,7 @@
 from app import app
 from controllers import *
 from app import db
-from app.models import Users, Budget, Expense, Eco_Goal, Eco_Action
+from app.models import Users, Budget, Expense, Eco_Goal, Eco_Action, Category
 from flask import request, send_from_directory
 
 
@@ -91,4 +91,15 @@ def get_eco_goals(id):
 @app.route("/api/user/<id>/eco_actions")
 def get_eco_actions(id):
     data = controller_get_eco_actions(Eco_Action, id)
+    return data
+
+#########
+#
+# Categories
+#
+#########
+
+@app.route("/api/user/<id>/categories")
+def get_categories(id):
+    data = controller_get_categories(Category, id)
     return data

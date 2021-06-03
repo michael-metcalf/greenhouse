@@ -73,3 +73,13 @@ def dao_get_eco_goals(eco_goal_object, user_id):
 def dao_get_eco_actions(eco_action_object, user_id):
     result = eco_action_object.query.filter_by(user_id=user_id).all()
     return result
+
+#########
+#
+# Eco Goals / Actions
+#
+#########
+
+def dao_get_categories(category_object, user_id):
+    result = category_object.query.filter_by(user_id=user_id).all()
+    return result
