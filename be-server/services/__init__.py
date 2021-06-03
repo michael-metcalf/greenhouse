@@ -25,23 +25,24 @@ def service_create_user(db, user_object, new_user):
     else:
         return "User Exists"
 
-def service_login_user(db, user_object, login_details):
-    user_exist = dao_get_username(user_object, new_user["username"])
+def service_login_user(user_object, login_details):
+    user_exist = dao_get_username(user_object, login_details["username"].lower())
 
     failed_login = {"error": -1}
 
     if user_exist == None:
         return failed_login
 
-    salt = user_exist["password"][:64]
-    stored_password = user_exist["password"][64:]
+    salt = user_exist.password[:64]
+    stored_password = user_exist.password[64:]
     pwdhash = hashlib.pbkdf2_hmac("sha512", login_details["password"].encode("utf-8"), salt.encode("ascii"), 100000)
     pwdhash = binascii.hexlify(pwdhash).decode("ascii")
 
-    if pwdhash == login_details["password"]:
+    if pwdhash == stored_password:
         json_data = {
             "error": "",
-            "user_id": user_exist.id
+            "user_id": user_exist.id,
+            "username": user_exist.username
         }
         return json_data
     else:
