@@ -13,17 +13,39 @@ def service_create_user(db, user_object, new_user):
     user_exist = dao_get_username(user_object, new_user["username"])
 
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
-    hashed_pwd = hashlib.pbkdf2_hmac("sha256", new_user["password"].encode("utf-8"), salt, 100000)
+    hashed_pwd = hashlib.pbkdf2_hmac("sha512", new_user["password"].encode("utf-8"), salt, 100000)
     hashed_pwd = binascii.hexlify(hashed_pwd)
 
-    print((salt + hashed_pwd).decode("ascii"))
+    salt_hashedpwd = (salt + hashed_pwd).decode("ascii")
 
     if user_exist == None:
-        dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=hashed_pwd)
+        dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=salt_hashedpwd)
         data = service_get_user(user_object, new_user["username"])
         return data
     else:
         return "User Exists"
+
+def service_login_user(db, user_object, login_details):
+    user_exist = dao_get_username(user_object, new_user["username"])
+
+    failed_login = {"error": -1}
+
+    if user_exist == None:
+        return failed_login
+
+    salt = user_exist["password"][:64]
+    stored_password = user_exist["password"][64:]
+    pwdhash = hashlib.pbkdf2_hmac("sha512", login_details["password"].encode("utf-8"), salt.encode("ascii"), 100000)
+    pwdhash = binascii.hexlify(pwdhash).decode("ascii")
+
+    if pwdhash == login_details["password"]:
+        json_data = {
+            "error": "",
+            "user_id": user_exist.id
+        }
+        return json_data
+    else:
+        return failed_login
 
 def service_get_user(user_object, id):
 

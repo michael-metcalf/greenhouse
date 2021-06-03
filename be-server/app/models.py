@@ -1,8 +1,10 @@
 from app import db
+from sqlalchemy.dialects.postgresql import UUID
 
 class Users(db.Model):
     __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True)
     username = db.Column(db.String(65), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=True, nullable=False)
@@ -23,7 +25,7 @@ class Eco_Goal(db.Model):
     __tablename__ = "eco_goal"
     id = db.Column(db.Integer, primary_key=True)
     goal_name = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship("Users", back_populates="eco_goals", lazy=True, cascade="all, delete")
     eco_actions = db.relationship("Eco_Action", back_populates="eco_goal", lazy=True, cascade="all, delete")
@@ -34,7 +36,7 @@ class Eco_Goal(db.Model):
 class Eco_Action(db.Model):
     __tablename__ = "eco_action"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.id"), nullable=False)
     eco_goal_id = db.Column(db.Integer, db.ForeignKey("eco_goal.id"), nullable=False)
     expense_id = db.Column(db.Integer, db.ForeignKey("expense.id"), nullable=True)
     created_at = db.Column(db.DateTime, default=db.func.now())
@@ -49,7 +51,7 @@ class Eco_Action(db.Model):
 class Category(db.Model):
     __tablename__ = "category"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.id"), nullable=False)
     category_name = db.Column(db.String(60), nullable=False)
     category_description = db.Column(db.Text, nullable=True)
 
@@ -62,7 +64,7 @@ class Category(db.Model):
 class Expense(db.Model):
     __tablename__ = "expense"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.id"), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
     expense_description = db.Column(db.Text, nullable=True)
     amount = db.Column(db.Float, nullable=False)
@@ -79,7 +81,7 @@ class Expense(db.Model):
 class Budget(db.Model):
     __tablename__ = "budget"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.id"), nullable=False)
     monthly_budget = db.Column(db.Float, nullable=False)
     groceries_alloc = db.Column(db.Float, nullable=False)
     bills_alloc = db.Column(db.Float, nullable=False)
