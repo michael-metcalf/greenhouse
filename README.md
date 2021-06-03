@@ -71,3 +71,16 @@ Make sure you are in the be-server directory!!!
 flask run
 
 `
+
+
+Create Initial Migration File
+
+`
+alembic revision --autogenerate -m "initial"
+`
+
+Seed
+
+`
+alembic upgrade head
+`
