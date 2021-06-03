@@ -83,18 +83,22 @@ export default {
     }
   },
   mounted() {
+    const groceries_id = 1;
+    const transport_id = 2;
+    const misc_id = 3;
+    const bills_id = 4;
     this.monthlyIncome = 200000;
-    this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id = 1)
-                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount);
+    this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id = groceries_id)
+                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedGroceries = 0;
-    this.runningBills = this.$store.state.expensesList.filter(element => element.category_id = 4)
-                                                      .reduce((accumulator, currentElement) => accumulator + currentElement.amount);;
+    this.runningBills = this.$store.state.expensesList.filter(element => element.category_id = bills_id)
+                                                      .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedBills = 0;
-    this.runningTransport = this.$store.state.expensesList.filter(element => element.category_id = 2)
-                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount);;
+    this.runningTransport = this.$store.state.expensesList.filter(element => element.category_id = transport_id)
+                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedTransport = 0;
-    this.runningMisc = this.$store.state.expensesList.filter(element => element.category_id = 3)
-                                                     .reduce((accumulator, currentElement) => accumulator + currentElement.amount);;
+    this.runningMisc = this.$store.state.expensesList.filter(element => element.category_id = misc_id)
+                                                     .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedMisc = 0;
     this.savingsTarget = 10000;
     this.savingsLeeway = 110000;
