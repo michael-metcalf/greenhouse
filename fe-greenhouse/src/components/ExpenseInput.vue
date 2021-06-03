@@ -50,7 +50,7 @@ export default {
   name: "ExpenseInput",
   props: {
   },
-  methods: {    
+  methods: {
   },
 }
 </script>

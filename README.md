@@ -22,6 +22,7 @@
     `
     source /<VENV FOLDER>/bin/activate
     `
+    If you are using the M1 chip, you may need to use python 3.7 to be able to run the environment.
 
     For Windows Users
 
