@@ -88,17 +88,18 @@ export default {
     const transport_id = 2;
     const misc_id = 3;
     const bills_id = 4;
+    // this.expensesList = this.$store.state.expensesList.filter(element => element.category_id = groceries_id);
     this.monthlyIncome = 200000;
-    this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id = groceries_id)
+    this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id == groceries_id)
                                                           .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedGroceries = 0;
-    this.runningBills = this.$store.state.expensesList.filter(element => element.category_id = bills_id)
+    this.runningBills = this.$store.state.expensesList.filter(element => element.category_id == bills_id)
                                                       .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedBills = 0;
-    this.runningTransport = this.$store.state.expensesList.filter(element => element.category_id = transport_id)
+    this.runningTransport = this.$store.state.expensesList.filter(element => element.category_id == transport_id)
                                                           .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedTransport = 0;
-    this.runningMisc = this.$store.state.expensesList.filter(element => element.category_id = misc_id)
+    this.runningMisc = this.$store.state.expensesList.filter(element => element.category_id == misc_id)
                                                      .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedMisc = 0;
     this.savingsTarget = 10000;
@@ -114,15 +115,15 @@ export default {
     blurField() {
       this.editField = '';
     },
-    getUserBudgetInput() {
-      axios.patch('/api/users/:id/budget', this.form)
-           .then((res) => {
+    // getUserBudgetInput() {
+    //   axios.patch('/api/users/:id/budget', this.form)
+    //        .then((res) => {
 
-           })
-           .catch((error) => {
-             console.alert(error);
-           })
-    }
+    //        })
+    //        .catch((error) => {
+    //          console.alert(error);
+    //        })
+    // }
   }
 }
 </script>
