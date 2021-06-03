@@ -66,6 +66,7 @@ export default {
   },
   data() {
     return {
+      userBudget : {},
       runningGroceries: '',
       runningBills: '',
       runningTransport: '',

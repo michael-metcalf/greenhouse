@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <div class="header">
-      <h1>GreenHouse</h1>
+      <h1>MoneySprouts</h1>
     </div>
     <div class="main-panel">
     <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
     <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
       <!-- we display the LOGIN component if no user is currently active -->
-      <Login v-if="this.$store.state.userName === ''" v-on:login-success="receiveLoginSignal" />
+      <user-message-display />
+      <Login v-if="this.$store.state.userName === ''" />
       <loading-message v-if="this.$store.state.userName !== ''  &&  this.$store.state.isLoading" />
       <component v-if="this.$store.state.userName !== ''  &&  !this.$store.state.isLoading" :is="component"></component>
       <!-- <Login/>
@@ -64,9 +65,7 @@ import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
-
-// other libraries
-import axios from "axios";
+import UserMessageDisplay from "./components/UserMessageDisplay";
 
 export default {
   name: "App",
@@ -77,6 +76,7 @@ export default {
     ExpenseInput,
     BudgetInput,
     LoadingMessage,
+    UserMessageDisplay,
   },
   data() {
     return {
@@ -84,33 +84,31 @@ export default {
     };
   },
   methods: {
-    async receiveLoginSignal() {
-      // Need to download the data related to the current user
-      console.log(`Received login signal...${this.$store.state.userName}`);
-      this.$store.commit("setLoadingStatus", true);
-      try {
-        const api_address = "http://localhost:5000/api/";
-        const budget_response = await axios.get(`${api_address}user/${this.$store.state.userName}/user_budget`);
-        console.log(`Monthly budget : ${JSON.stringify(budget_response.data)}`);
-        this.$store.commit("setMonthlyBudget", { monthlyBudget: budget_response.data });
-        const expenses_response = await axios.get(`${api_address}user/${this.$store.state.userName}/expenses`);
-        console.log(`Expenses list: ${JSON.stringify(expenses_response.data)}`);
-        this.$store.commit("setExpensesList", { expensesList: expenses_response.data.expenses  });
-        const eco_goals_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_goals`);
-        console.log(`Eco Goals list: ${JSON.stringify(eco_goals_response.data)}`);
-        if (eco_goals_response.data.eco_goals) {
-          this.$store.commit("setEcoGoalsList", { ecoGoalsList: eco_goals_response.data.eco_goals });
-        }
-        const eco_actions_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_actions`);
-        if (eco_actions_response.data.eco_actions) {
-          this.$store.commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
-        }
-        this.$store.commit("setLoadingStatus", false);
-      } catch(err) {
-        console.error(`ERROR in the back-end API download! ${err}`);
-      }
-
-    },
+    // async receiveLoginSignal() {
+    //   // Need to download the data related to the current user
+    //   console.log(`Received login signal...${this.$store.state.userName}`);
+    //   this.$store.commit("setLoadingStatus", true);
+    //   try {
+    //     const api_address = "http://localhost:5000/api/";
+    //     const budget_response = await axios.get(`${api_address}user/${this.$store.state.userName}/user_budget`);
+    //     console.log(`Monthly budget : ${JSON.stringify(budget_response.data)}`);
+    //     this.$store.commit("setMonthlyBudget", { monthlyBudget: budget_response.data });
+    //     const expenses_response = await axios.get(`${api_address}user/${this.$store.state.userName}/expenses`);
+    //     console.log(`Expenses list: ${JSON.stringify(expenses_response.data)}`);
+    //     this.$store.commit("setExpensesList", { expensesList: expenses_response.data.expenses  });
+    //     const eco_goals_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_goals`);
+    //     console.log(`Eco Goals list: ${JSON.stringify(eco_goals_response.data)}`);
+    //     if (eco_goals_response.data.eco_goals) {
+    //       this.$store.commit("setEcoGoalsList", { ecoGoalsList: eco_goals_response.data.eco_goals });
+    //     }
+    //     const eco_actions_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_actions`);
+    //     if (eco_actions_response.data.eco_actions) {
+    //       this.$store.commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
+    //     }
+    //     this.$store.commit("setLoadingStatus", false);
+    //   } catch(err) {
+    //     console.error(`ERROR in the back-end API download! ${err}`);
+    //   }
   },
 };
 </script>
