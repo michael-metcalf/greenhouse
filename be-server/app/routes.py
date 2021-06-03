@@ -25,6 +25,11 @@ def createuser():
     data = controller_create_user(db, Users, request.json)
     return data
 
+@app.route("/api/login", methods=["POST"])
+def loginuser():
+    data = controller_login_user(db, User, request.json)
+    return data
+
 @app.route("/api/user/<id>")
 def getuser(id):
     data = controller_get_user(Users, id)
@@ -54,7 +59,7 @@ def update_user_budget(id):
 
 @app.route("/api/user/<id>/expenses")
 def get_expenses(id):
-    data = controller_get_expenses(Users, Expense, id)
+    data = controller_get_expenses(Expense, id)
     return data
 
 @app.route("/api/user/<id>/expenses/<expense_id>")
@@ -62,12 +67,12 @@ def get_expense(id, expense_id):
     data = controller_get_expense(Expense, expense_id)
     return data
 
-@app.route("/api/user/<id>/expense", methods=["PATCH"])
+@app.route("/api/user/<id>/expenses", methods=["PATCH"])
 def update_expense(id):
     data = controller_update_expense(db, Expense, id, request.json)
     return data
 
-@app.route("/api/user/<id>/expense", methods=["POST"])
+@app.route("/api/user/<id>/expenses", methods=["POST"])
 def create_expense(id):
     data = controller_create_expense(db, Expense, id, request.json)
     return data

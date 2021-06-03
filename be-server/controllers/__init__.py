@@ -16,6 +16,13 @@ def controller_create_user(db, user_object, json_data):
     except Exception as e:
         return str(e)
 
+def controller_login_user(db, user_object, json_data):
+    try:
+        data = service_login_user(db, user_object, json_data)
+        return data
+    except Exception as e:
+        return str(e)
+
 def controller_get_user(user_object, id):
     try:
         data = service_get_user(user_object, id)
@@ -56,9 +63,9 @@ def controller_create_expense(db, expense_object, id, json_data):
     except Exception as e:
         return str(e)
 
-def controller_get_expenses(user_object, expense_object, id):
+def controller_get_expenses(expense_object, id):
     try:
-        data = service_get_expenses(user_object, expense_object, id)
+        data = service_get_expenses(expense_object, id)
         return data
     except Exception as e:
         return str(e)
