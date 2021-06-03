@@ -110,3 +110,16 @@ def controller_get_eco_actions(eco_action_object, id):
         return data
     except Exception as e:
         return str(e)
+
+#########
+#
+# Categories
+#
+#########
+
+def controller_get_categories(category_object, id):
+    try:
+        data = service_get_categories(category_object, id)
+        return data
+    except Exception as e:
+        return str(e)
