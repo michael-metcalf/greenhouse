@@ -64,6 +64,7 @@ export default {
   },
   data() {
     return {
+      userBudget : {},
       runningGroceries: '',
       runningBills: '',
       runningTransport: '',
@@ -104,7 +105,7 @@ export default {
       this.editField = '';
     },
     getUserBudgetInput() {
-      userBudget = {
+      this.userBudget = {
         monthly_budget: this.form.monthlyBudget,
         groceries_alloc: this.form.allocatedGroceries,
         bills_alloc: this.form.allocatedBills,
