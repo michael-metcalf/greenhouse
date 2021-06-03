@@ -50,8 +50,7 @@ export default new Vuex.Store({
     //   try {
     //     axios.
     //   } catch (error) {
-        
-    //   }  
+    //   }
     // }
   }, // For asynchronous functions, called with this.$store.dispatch()
   // Actions cannot modify state variables. They need to call the mutations

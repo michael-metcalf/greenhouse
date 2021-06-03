@@ -1,5 +1,5 @@
 // vue.config.js
 
 module.exports = {
-  outputDir: '../be-server/static/',
-}
+  outputDir: "../be-server/static/",
+};
