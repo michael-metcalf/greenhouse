@@ -74,12 +74,13 @@ export default {
       savingsLeeway: '',
       editField: '',
       form: {
-        groceries_alloc: '',
-        bills_alloc: '',
-        transport_alloc: '',
-        misc_alloc: '',
-        savings_target: '',
-        monthly_income: ''
+        monthlyBudget: '',
+        allocatedGroceries: '',
+        allocatedBills: '',
+        allocatedTransport: '',
+        allocatedMisc: '',
+        savingsTarget: '',
+        monthlyIncome: ''
       }
     }
   },
@@ -88,8 +89,7 @@ export default {
     const transport_id = 2;
     const misc_id = 3;
     const bills_id = 4;
-    // this.expensesList = this.$store.state.expensesList.filter(element => element.category_id = groceries_id);
-    this.monthlyIncome = 200000;
+    this.monthlyIncome = 0;
     this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id == groceries_id)
                                                           .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedGroceries = 0;
@@ -102,8 +102,12 @@ export default {
     this.runningMisc = this.$store.state.expensesList.filter(element => element.category_id == misc_id)
                                                      .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedMisc = 0;
-    this.savingsTarget = 10000;
-    this.savingsLeeway = 110000;
+    this.monthlyBudget = this.allocatedGroceries + 
+                         this.allocatedBills + 
+                         this.allocatedTransport + 
+                         this.allocatedMisc;
+    this.savingsTarget = 0;
+    this.savingsLeeway = this.monthlyIncome - this.monthlyBudget;
   },
   methods: {
     focusField(name) {
@@ -115,15 +119,19 @@ export default {
     blurField() {
       this.editField = '';
     },
-    // getUserBudgetInput() {
-    //   axios.patch('/api/users/:id/budget', this.form)
-    //        .then((res) => {
-
-    //        })
-    //        .catch((error) => {
-    //          console.alert(error);
-    //        })
-    // }
+    getUserBudgetInput() {
+      const userBudget = {
+        user_id: this.$state.store.user.user_id,
+        monthly_budget: this.form.monthlyBudget,
+        groceries_alloc: this.form.allocatedGroceries,
+        bills_alloc: this.form.allocatedBills,
+        transport_alloc: this.form.allocatedTransport,
+        misc_alloc: this.form.allocatedMisc,
+        savings_target: this.form.savingsTarget,
+        monthly_income: this.form.monthlyIncome
+      }
+      this.$store.dispatch("createBudget", userBudget);
+    }
   }
 }
 </script>
