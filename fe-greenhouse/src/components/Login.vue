@@ -3,7 +3,7 @@
   <h2>Let's go <span class="green-emphasis">green</span>!</h2>
     <input type="text" v-model="userName" id="username-input" name="username-input" placeholder="Enter your username">
     <br>
-    <input type="text" v-model="password" id="password-input" name="password-input" placeholder="Enter your password">
+    <input type="password" v-model="password" id="password-input" name="password-input" placeholder="Enter your password">
     <br>
     <button @click="validateUserInput">Login</button>
   </div>
@@ -21,8 +21,9 @@ export default {
   }),
   methods: {
     validateUserInput() {
-      this.$store.commit("setUserName", { userName: this.userName });
-      this.$emit("login-success");
+      this.$store.dispatch("verifyLogin", {"username": this.userName, "password": this.password})
+      // this.$store.commit("setUserName", { userName: this.userName });
+      // this.$emit("login-success");
     },
   },
 };

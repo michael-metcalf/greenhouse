@@ -1,29 +1,29 @@
 <template>
   <div id="expense-input-container">
     <h1>Expense Input</h1>
-    <form id="expense-input-form" action="">
+    <form id="expense-input-form" @submit="postExpenseData" method="post">
       <div>
         <p>Let's input an expense!</p>
       <label for="expense-input">
-        <input class="expense-input-button" type="date" name="date-input">
+        <input class="expense-input-button" type="date" name="date-input" v-model="posts.date">
         <br>
-        <input class="expense-input-button" type="text" name="amount-input" placeholder="Amount">
+        <input class="expense-input-button" type="text" name="amount-input" placeholder="Amount" v-model="posts.amount">
         <br>
-        <input class="expense-input-button" type="text" name="description-input" placeholder="Description">
+        <input class="expense-input-button" type="text" name="description-input" placeholder="Description" v-model="posts.description">
       </label>
       </div>
       <div id="category-button-container">
-        <input type="radio" id="groceries" name="category" value="groceries">
-        <label for="groceries">Groceries</label>
+        <input @change="getCategory('groceries')" type="radio" id="groceries" name="category" value="groceries">
+        <label class="category" for="groceries">Groceries</label>
 
         <input type="radio" id="bills" name="category" value="bills">
-        <label for="bills">Bills</label>
+        <label  class="category" for="bills">Bills</label>
 
         <input type="radio" id="transport" name="category" value="transport">
-        <label for="transport">Transport</label>
+        <label  class="category" for="transport">Transport</label>
 
         <input type="radio" id="misc" name="category" value="misc">
-        <label for="misc">Misc</label>
+        <label class="category" for="misc">Misc</label>
       </div>
       <div id="eco-action-container">
         <p>Did you take an eco action?</p>
@@ -31,33 +31,137 @@
         <label for="failed-eco-warrior">No eco action taken</label>
         <br>
         <input id="eco-bag-no-bag" class="eco-action-checkbox" type="checkbox" name="eco-bag-no-bag" value="eco-bag-no-bag">
-        <label for="eco-bag-no-bag">Eco bag/no bag used</label>
+        <label for="eco-bag-no-bag">Eco bag used/ No bag</label>
         <br>
         <input id="no-impulse-buy" class="eco-action-checkbox" type="checkbox" name="no-impulse-buy" value="no-impulse-buy">
         <label for="no-impulse-buy">No impulse purchase made</label>
         <br>
         <input id="eco-conscious-transport" class="eco-action-checkbox" type="checkbox" name="eco-conscious-transport" value="eco-conscious-transport">
-        <label for="eco-conscious-transport">Eco-conscious transport used</label>
+        <label for="eco-conscious-transport">Eco conscious transport used</label>
       </div>
       <br>
       <button form="expense-input-form" type="submit" name="submit" value="submit">Submit</button>
-    </form>
-  </div>  
+    </form> 
+    </div>
 </template>
 
 <script>
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import { faBicycle } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   name: "ExpenseInput",
+  // components: {FontAwesomeIcon},
   props: {
   },
+  mounted() {
+    let externalScript = document.createElement("script");
+    externalScript.setAttribute(
+      "src",
+      "https://kit.fontawesome.com/e3cbc00358.js"
+    )
+    externalScript.setAttribute("crossorigin", "anonymous")
+  },
+  data(){
+    return {
+      posts:{
+        date:null,
+        amount:null,
+        description:null,
+        category:null,
+      },
+      // bicycle: faBicycle,
+      // bag: faShoppingBag,
+      // tag: faTags,
+    }
+  },
   methods: {
+    postExpenseData(e){
+      // const categoryFilter = this.$store.state.categoriesList.filter(category => category.category_id === posts.category)
+      // const expenseData = {
+      //   user_id: this.$store.state.user.user_id,
+      //   category_id: categoryFilter,
+      // };
+
+
+      // const api_address = "http://localhost:5000/api/";
+      console.warn(this.posts)
+      // this.axios.post(`${api_address}`, this.posts)
+      e.preventDefault();
+    },
+    getCategory(category) {
+      this.posts.category = category;
+    }
   },
 }
 </script>
+
 
 <style scoped>
 p {
   font-weight: bold;
   color: green;
+}
+input[type=radio] {
+  display: none;
+}
+input[type=radio]:not(:disabled) ~ label {
+  cursor: pointer;
+}
+input[type=radio]:disabled ~ label {
+  color: #bcc2bf;
+  border-color: #bcc2bf;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.category {
+  height: 100%;
+  display: inline-grid;
+  width: 50px;
+  background: white;
+  border: 2px solid #9bd3b6;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1px;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 0px 3px 10px -2px rgba(161, 170, 166, 0.5);
+  position: relative;
+  z-index: 0;
+}
+
+input[type=radio]:checked + label {
+  background: #9bd3b6;
+  color: white;
+  box-shadow: 0px 0px 20px rgba(0, 255, 128, 0.311);
+}
+input[type=radio]:checked + label::after {
+  color: #3d3f43;
+  font-family: FontAwesome;
+  border: 2px solid #126a3e;
+  /* content: ""; */
+  font-size: 22px;
+  position: relative;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20px;
+  width: 0px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 20%;
+  background: white;
+  box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* input[type=checkbox] {
+  display: none;
+} */
+
+@media only screen and (max-width: 700px) {
+  section {
+    flex-direction: column;
+  }
 }
 </style>

@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     console.log(`Props - eco score ${this.ecoScore}`)
-    const numberOfSprouts = Math.floor( this.ecoScore / 20);
+    const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = '';
     for (let i=0; i<numberOfSprouts; i++) {
       this.ecoScoreString += '🌱';
