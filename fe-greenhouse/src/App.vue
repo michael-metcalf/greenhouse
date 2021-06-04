@@ -44,6 +44,14 @@
           📆
         </button>
         <button
+          v-on:click="component = 'BarChart'"
+          class="footer-button"
+          name="eco-action-chart"
+          value="eco-action-chart"
+        >
+          📊
+        </button>
+        <button
           v-on:click="$store.commit('clearUserName')"
           class="footer-button"
           name="logout"
@@ -66,6 +74,7 @@ import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
+import BarChart from "./components/BarChart";
 
 export default {
   name: "App",
@@ -77,6 +86,7 @@ export default {
     BudgetInput,
     LoadingMessage,
     UserMessageDisplay,
+    BarChart,
   },
   data() {
     return {
