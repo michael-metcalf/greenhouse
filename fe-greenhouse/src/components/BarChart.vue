@@ -9,47 +9,23 @@ export default {
     chartOptions: {},
   }),
   methods: {
-    // getEcoBagActionTotal() {
-    //   let bagActionTotal = 0;
-    //   let bagActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id = 1)
-    //   for (let i = 0; i < bagActionArray.length; i++) {
-    //     bagActionTotal++;
-    //   }
-    //   return bagActionTotal;
-    // },
-    // getNoImpulseBuyActionTotal() {
-    //   let noImpulseBuyActionTotal = 0;
-    //   let noImpulseBuyActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id = 2)
-    //   for (let i = 0; i < noImpulseBuyActionArray.length; i++) {
-    //     noImpulseBuyActionTotal++;
-    //   }
-    //   return noImpulseBuyActionTotal;
-    // },
-    // getTransportActionTotal() {
-    //   let transportActionTotal = 0;
-    //   let transportActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id = 3)
-    //   for (let i = 0; i < transportActionArray.length; i++) {
-    //     transportActionTotal++;
-    //   }
-    //   return transportActionTotal;
-    // },
     setChartData() {
       this.setChartData = {
         labels: ["Eco-bag/No bag", "No impulse purchase", "Eco-conscious transport"],
         datasets: [
           {
-            label: "Current Month's Eco Goal Progress",
+            label: "My Eco Goal Progress",
             barPercentage: 1,
-            barThickness: 6,
+            barThickness: 50,
             data: [
               this.getEcoBagActionTotal(),
               this.getNoImpulseBuyActionTotal(),
               this.getTransportActionTotal(),
             ],
             backgroundColor: [
-              "rgb(0, 255, 0)",
-              "rgb(0, 72, 186)",
-              "rgb(255, 255, 0)",
+              "rgb(25,25,255)",
+              "rgb(25,25,255)",
+              "rgb(25,25,255)",
             ],
             borderColor: [
               "rgb(255, 99, 132)",
@@ -62,7 +38,7 @@ export default {
   mounted() {
     this.getEcoBagActionTotal = () => {
       let bagActionTotal = 0;
-      let bagActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id = 1)
+      let bagActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id == 1)
       for (let i = 0; i < bagActionArray.length; i++) {
         bagActionTotal++;
       }
@@ -70,7 +46,7 @@ export default {
     },
     this.getNoImpulseBuyActionTotal = () => {
       let noImpulseBuyActionTotal = 0;
-      let noImpulseBuyActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id = 2)
+      let noImpulseBuyActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id == 2)
       for (let i = 0; i < noImpulseBuyActionArray.length; i++) {
         noImpulseBuyActionTotal++;
       }
@@ -78,7 +54,7 @@ export default {
     },
     this.getTransportActionTotal = () => {
       let transportActionTotal = 0;
-      let transportActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id = 3)
+      let transportActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id == 3)
       for (let i = 0; i < transportActionArray.length; i++) {
         transportActionTotal++;
       }
@@ -90,12 +66,14 @@ export default {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            min: 0,
+            max: 100,
+            beginAtZero: true,
           },
         },
       },
     },
-    this.renderChart(this.data, this.chartOptions)
+    this.renderChart(this.setChartData, this.chartOptions)
   },
   watch: {
     savingsScore: function (newVal, oldVal) {
@@ -104,7 +82,7 @@ export default {
       if (this.$data._chart) {
         this.$data._chart.destroy();
       }
-      this.renderChart(this.data, this.chartOptions);
+      this.renderChart(this.setChartData, this.chartOptions);
     },
   },
 }
