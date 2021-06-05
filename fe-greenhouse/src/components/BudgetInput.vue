@@ -120,7 +120,7 @@ export default {
       this.editField = '';
     },
     getUserBudgetInput() {
-      const userBudget = {
+      this.$store.dispatch("createBudget", {
         user_id: this.$state.store.user.user_id,
         monthly_budget: this.form.monthlyBudget,
         groceries_alloc: this.form.allocatedGroceries,
@@ -129,8 +129,7 @@ export default {
         misc_alloc: this.form.allocatedMisc,
         savings_target: this.form.savingsTarget,
         monthly_income: this.form.monthlyIncome
-      }
-      this.$store.dispatch("createBudget", userBudget);
+      });
     }
   }
 }
