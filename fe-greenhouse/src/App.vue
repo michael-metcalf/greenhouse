@@ -4,8 +4,6 @@
       <h1>MoneySprouts</h1>
     </div>
     <div class="main-panel">
-    <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
-    <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
@@ -44,6 +42,14 @@
           📆
         </button>
         <button
+          v-on:click="component = 'BarChart'"
+          class="footer-button"
+          name="eco-action-chart"
+          value="eco-action-chart"
+        >
+          📊
+        </button>
+        <button
           v-on:click="$store.commit('clearUserName')"
           class="footer-button"
           name="logout"
@@ -51,8 +57,6 @@
         >
           👋
         </button>
-        <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
-        <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
       </div>
     </div>
   </div>
@@ -66,6 +70,7 @@ import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
+import BarChart from "./components/BarChart";
 
 export default {
   name: "App",
@@ -77,6 +82,7 @@ export default {
     BudgetInput,
     LoadingMessage,
     UserMessageDisplay,
+    BarChart,
   },
   data() {
     return {
