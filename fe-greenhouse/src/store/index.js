@@ -100,7 +100,7 @@ export default new Vuex.Store({
 
     async createExpense({ dispatch, state }, payload) {
       try {
-        res = await axios.post(`/api/user/${state.user.user_id}/expense`, payload)
+        const res = await axios.post(`/api/user/${state.user.user_id}/expense`, payload)
         console.log(res.data)
         dispatch("getExpenses")        
       } catch (err) {
