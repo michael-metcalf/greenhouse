@@ -1,8 +1,7 @@
 <template>
   <div class="env-fact-container">
+    <h2 class="did-you-know-header">Did you know?</h2>
     <p>
-      <span class="did-you-know-header">Did you know?</span>
-      <br />
       <span class="env-fact">{{ displayFact() }}</span>
     </p>
   </div>

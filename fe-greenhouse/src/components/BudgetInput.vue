@@ -1,6 +1,7 @@
 <template>
   <div id="budget-input-container">
-    <p>Monthly Income: 
+    <h1>Monthly Budget</h1>
+    <p id="monthly-income">Monthly Income: 
       <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
       <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">
     </p>
@@ -39,7 +40,7 @@
             <input v-model="form.allocatedMisc" v-show="showField('allocatedMisc')" id="allocated-misc" type="text" class="field-value form-control" @focus="focusField('allocatedMisc')" @blur="blurField">
           </td>
         </tr>
-        <tr>Savings Target
+        <tr id="savings-target">Savings Target
           <td>
             <span class="field-value" v-show="!showField('savingsTarget')" @click="focusField('savingsTarget')">{{form.savingsTarget}}</span>
             <input v-model="form.savingsTarget" v-show="showField('savingsTarget')" id="savings-target" type="text" class="field-value form-control" @focus="focusField('savingsTarget')" @blur="blurField">
@@ -50,8 +51,8 @@
     <p>Savings Leeway: {{savingsLeeway}}</p>
     <div id="button-container">
       <!-- <button class="budget-button" name="back" value="back">Back</button> -->
-      <button class="budget-button" name="edit" value="edit">Edit</button>
-      <button class="budget-button" name="ok" value="ok">OK</button>
+      <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
+      <button class="budget-button" name="submit" value="submit">Submit</button>
     </div>
   </div>
 </template>
@@ -121,5 +122,11 @@ export default {
 </script>
 
 <style scoped>
-
+#monthly-income {
+  font-weight: bold;
+}
+#savings-target {
+  color: green;
+  font-weight: bold;
+}
 </style>
