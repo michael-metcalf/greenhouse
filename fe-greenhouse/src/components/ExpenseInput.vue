@@ -27,19 +27,24 @@
       </div>
       <div id="eco-action-container">
         <p>Did you take an eco action?</p>
-        <input id="failed-eco-warrior" class="eco-action-checkbox" type="checkbox" name="failed-eco-warrior" value="failed-eco-warrior">
-        <label for="failed-eco-warrior">No eco action taken</label>
-        <br>
-        <input id="eco-bag-no-bag" class="eco-action-checkbox" type="checkbox" name="eco-bag-no-bag" value="eco-bag-no-bag">
-        <label for="eco-bag-no-bag">Eco bag used/ No bag</label>
-        <br>
-        <input id="no-impulse-buy" class="eco-action-checkbox" type="checkbox" name="no-impulse-buy" value="no-impulse-buy">
-        <label for="no-impulse-buy">No impulse purchase made</label>
-        <br>
-        <input id="eco-conscious-transport" class="eco-action-checkbox" type="checkbox" name="eco-conscious-transport" value="eco-conscious-transport">
-        <label for="eco-conscious-transport">Eco conscious transport used</label>
+        <div class="icon-box">
+          <input id="eco-bag-no-bag" class="eco-action-checkbox" type="checkbox" name="eco-bag-no-bag" value="eco-bag-no-bag">
+          <label for="eco-bag-no-bag"><span class="eco-watch"></span><i class="fas fa-shopping-bag" title="Eco bag/ No bag used"></i></label>
+        </div>
+        <div class="icon-box">
+          <input id="no-impulse-buy" class="eco-action-checkbox" type="checkbox" name="no-impulse-buy" value="no-impulse-buy">
+          <label for="no-impulse-buy"><span class="eco-watch"></span><i class="fas fa-tags" title="No impulse purchase made"></i></label>
+        </div>
+        <div class="icon-box">
+          <input title="Eco conscious transport" id="eco-conscious-transport" class="eco-action-checkbox" type="checkbox" name="eco-conscious-transport" value="eco-conscious-transport">
+          <label for="eco-conscious-transport"><span class="eco-watch"></span><i class="fas fa-biking" title="Eco conscious transport"></i></label>
+        </div>
+        <div class="icon-box">
+          <p>I didn't take an eco action...</p>
+          <input id="failed-eco-warrior" class="eco-action-checkbox" type="checkbox" name="failed-eco-warrior" value="failed-eco-warrior">
+          <label for="failed-eco-warrior"><span class="eco-watch"></span><i class="far fa-frown" title="No action taken"></i></label>
+        </div>
       </div>
-      <br>
       <button form="expense-input-form" type="submit" name="submit" value="submit">Submit</button>
     </form> 
     </div>
@@ -61,6 +66,7 @@ export default {
       "https://kit.fontawesome.com/e3cbc00358.js"
     )
     externalScript.setAttribute("crossorigin", "anonymous")
+    document.head.appendChild(externalScript);
   },
   data(){
     return {
@@ -104,6 +110,7 @@ p {
 }
 input[type=radio] {
   display: none;
+  margin-top: 10px;
 }
 input[type=radio]:not(:disabled) ~ label {
   cursor: pointer;
@@ -155,13 +162,33 @@ input[type=radio]:checked + label::after {
   box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.25);
 }
 
-/* input[type=checkbox] {
-  display: none;
-} */
+input[type=checkbox] + label {
+  position: relative;
+  padding-left: 24px;
+}
+
+input[type=checkbox] + label .eco-watch {
+  position: absolute;
+  padding-left: 24px;
+}
+
+.fas, .far {
+  height: 50px;
+  width: 50px;
+  margin: 2px;
+  font-size: 40px;
+  display: inline-flex;
+}
+
+button {
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
 
 @media only screen and (max-width: 700px) {
   section {
     flex-direction: column;
   }
 }
+
 </style>
