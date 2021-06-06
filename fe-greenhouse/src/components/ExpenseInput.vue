@@ -13,16 +13,16 @@
       </label>
       </div>
       <div id="category-button-container">
-        <input @change="getCategory('groceries')" type="radio" id="groceries" name="category" value="groceries">
+        <input @change="getCategory('Groceries')" type="radio" id="groceries" name="category" value="groceries">
         <label class="category" for="groceries">Groceries</label>
 
-        <input type="radio" id="bills" name="category" value="bills">
+        <input @change="getCategory('Bills')" type="radio" id="bills" name="category" value="bills">
         <label  class="category" for="bills">Bills</label>
 
-        <input type="radio" id="transport" name="category" value="transport">
+        <input @change="getCategory('Transport')" type="radio" id="transport" name="category" value="transport">
         <label  class="category" for="transport">Transport</label>
 
-        <input type="radio" id="misc" name="category" value="misc">
+        <input @change="getCategory('Misc')" type="radio" id="misc" name="category" value="misc">
         <label class="category" for="misc">Misc</label>
       </div>
       <div id="eco-action-container">
@@ -51,8 +51,6 @@
 </template>
 
 <script>
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { faBicycle } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   name: "ExpenseInput",
@@ -76,23 +74,21 @@ export default {
         description:null,
         category:null,
       },
-      // bicycle: faBicycle,
-      // bag: faShoppingBag,
-      // tag: faTags,
     }
   },
   methods: {
     postExpenseData(e){
-      // const categoryFilter = this.$store.state.categoriesList.filter(category => category.category_id === posts.category)
-      // const expenseData = {
-      //   user_id: this.$store.state.user.user_id,
-      //   category_id: categoryFilter,
-      // };
+      const categoryFilter = this.$store.state.categoriesList.filter(category => category.category_id === posts.category)
+      const expenseData = {
+        user_id: this.$store.state.user.user_id,
+        category_id: categoryFilter,
+        expense_description: this.posts.description,
+        amount: this.posts.amount,
+      };
 
+      this.$store.dispatch('createExpense', expenseData)
 
-      // const api_address = "http://localhost:5000/api/";
       console.warn(this.posts)
-      // this.axios.post(`${api_address}`, this.posts)
       e.preventDefault();
     },
     getCategory(category) {
