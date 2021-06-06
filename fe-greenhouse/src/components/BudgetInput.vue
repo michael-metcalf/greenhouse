@@ -136,5 +136,11 @@ export default {
 </script>
 
 <style scoped>
-
+#monthly-income {
+  font-weight: bold;
+}
+#savings-target {
+  color: green;
+  font-weight: bold;
+}
 </style>
