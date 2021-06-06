@@ -4,6 +4,7 @@
     <EnvironmentalFact />
     </span>
     <div class="budget-viz-container">
+      <h1>Current Situation</h1>
       <div class="chart-align-container">
         <div class="budget-progress"><p>{{ Math.floor(targetPercent*100) + "%" }}</p></div>
         <progress-chart :savingsScore="targetPercent" :css-classes="'chartContainer'" />
