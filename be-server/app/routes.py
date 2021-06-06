@@ -22,7 +22,7 @@ def root():
 
 @app.route("/api/user/create", methods=["POST"])
 def createuser():
-    data = controller_create_user(db, Users, request.json)
+    data = controller_create_user(db, Users, Budget, request.json)
     return data
 
 @app.route("/api/user/login", methods=["POST"])
@@ -49,6 +49,11 @@ def get_budget(id):
 @app.route("/api/user/<id>/user_budget", methods=["PATCH"])
 def update_user_budget(id):
     data = controller_update_user_budget(db, Budget, id, request.json)
+    return data
+
+@app.route("/api/user/<id>/user_budget", methods=["POST"])
+def create_user_budget(id):
+    data = controller_create_user_budget(db, Budget, id, request.json)
     return data
 
 #########
