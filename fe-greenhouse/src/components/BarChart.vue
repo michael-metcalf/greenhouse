@@ -57,6 +57,9 @@ export default {
             min: 0,
             max: 100,
             beginAtZero: true,
+            callback: function(value) {
+              return (value/100 * 100).toFixed(0) + "%";
+            }
           } 
         }]
       },
