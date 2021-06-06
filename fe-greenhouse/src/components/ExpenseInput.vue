@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     postExpenseData(e){
-      const categoryFilter = this.$store.state.categoriesList.filter(category => category.category_id === posts.category)
+      const categoryFilter = this.$store.state.categoriesList.filter(category => category.category_id === this.posts.category)
       const expenseData = {
         user_id: this.$store.state.user.user_id,
         category_id: categoryFilter,
