@@ -24,12 +24,13 @@ export default {
             ],
             backgroundColor: [
               "rgb(25,25,255)",
-              "rgb(25,25,255)",
-              "rgb(25,25,255)",
+              "rgb(255,0,0)",
+              "rgb(0,150,0)",
             ],
             borderColor: [
-              "rgb(255, 99, 132)",
-            ]
+              "rgb(0, 0, 0)",
+            ],
+            
           },
         ]
       }
