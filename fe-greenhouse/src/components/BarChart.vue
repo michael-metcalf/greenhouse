@@ -14,7 +14,7 @@ export default {
         labels: ["Eco-bag/No bag", "No impulse purchase", "Eco-conscious transport"],
         datasets: [
           {
-            label: "My Eco Goal Progress",
+            label: "My Eco Goal Progress (as a percentage of total expenses)",
             barPercentage: 1,
             barThickness: 50,
             data: [
@@ -36,44 +36,32 @@ export default {
     }
   },
   mounted() {
+    this.ecoActionsList = this.$store.state.ecoActionsList;
     this.getEcoBagActionTotal = () => {
-      let bagActionTotal = 0;
-      let bagActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id == 1)
-      for (let i = 0; i < bagActionArray.length; i++) {
-        bagActionTotal++;
-      }
-      return bagActionTotal;
+      let bagActionArray = this.ecoActionsList.filter(element => element.eco_goal_id == 1);
+      return (bagActionArray.length/this.ecoActionsList.length) * 100;
     },
     this.getNoImpulseBuyActionTotal = () => {
-      let noImpulseBuyActionTotal = 0;
-      let noImpulseBuyActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id == 2)
-      for (let i = 0; i < noImpulseBuyActionArray.length; i++) {
-        noImpulseBuyActionTotal++;
-      }
-      return noImpulseBuyActionTotal;
+      let noImpulseBuyActionArray = this.ecoActionsList.filter(element => element.eco_goal_id == 2);
+      return (noImpulseBuyActionArray.length/this.ecoActionsList.length) * 100;
     },
     this.getTransportActionTotal = () => {
-      let transportActionTotal = 0;
-      let transportActionArray = this.$store.state.ecoActionsList.filter(element => element.eco_goal_id == 3)
-      for (let i = 0; i < transportActionArray.length; i++) {
-        transportActionTotal++;
-      }
-      return transportActionTotal;
+      let transportActionArray = this.ecoActionsList.filter(element => element.eco_goal_id == 3);
+      return (transportActionArray.length/this.ecoActionsList.length) * 100;
     },
     this.setChartData();
     this.chartOptions = {
-      type: "bar",
-      options: {
-        scales: {
-          y: {
+      scales: {
+        yAxes: [{
+          ticks: {
             min: 0,
             max: 100,
             beginAtZero: true,
-          },
-        },
+          } 
+        }]
       },
-    },
-    this.renderChart(this.setChartData, this.chartOptions)
+    };
+    this.renderChart(this.setChartData, this.chartOptions);
   },
   watch: {
     savingsScore: function (newVal, oldVal) {
