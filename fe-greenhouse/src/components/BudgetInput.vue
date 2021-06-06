@@ -1,6 +1,6 @@
 <template>
   <div id="budget-input-container">
-    <form id="budget-input-form" action="" @submit.prevent="getUserBudgetInput">
+    <form id="budget-input-form" @submit.prevent="patchUserBudgetInput" method="patch">
       <p>Monthly Income: 
         <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
         <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">
@@ -48,7 +48,7 @@
           </tr>
         </tbody>
       </table>
-      <p>Savings Leeway: {{savingsLeeway}}</p>
+      <p>Savings Leeway: {{savingsLeeway == null ? 0 : this.savingsLeeway}}</p>
       <div id="button-container">
         <!-- <button class="budget-button" name="back" value="back">Back</button> -->
         <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
@@ -73,15 +73,16 @@ export default {
       runningMisc: '',
       savingsLeeway: '',
       editField: '',
+      allocatedTotal: '',
+      monthlyBudget: '',
       form: {
-        monthlyBudget: '',
         allocatedGroceries: '',
         allocatedBills: '',
         allocatedTransport: '',
         allocatedMisc: '',
         savingsTarget: '',
-        monthlyIncome: ''
-      }
+        monthlyIncome: '',
+      },
     }
   },
   mounted() {
@@ -90,24 +91,28 @@ export default {
     const misc_id = 3;
     const bills_id = 4;
     this.monthlyIncome = 0;
-    this.runningGroceries = this.$store.state.expensesList.filter(element => element.category_id == groceries_id)
-                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
+    this.runningGroceries = this.$store.state.expensesList
+                            .filter(element => element.category_id == groceries_id)
+                            .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedGroceries = 0;
-    this.runningBills = this.$store.state.expensesList.filter(element => element.category_id == bills_id)
-                                                      .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
+    this.runningBills = this.$store.state.expensesList
+                        .filter(element => element.category_id == bills_id)
+                        .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedBills = 0;
-    this.runningTransport = this.$store.state.expensesList.filter(element => element.category_id == transport_id)
-                                                          .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
+    this.runningTransport = this.$store.state.expensesList
+                            .filter(element => element.category_id == transport_id)
+                            .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedTransport = 0;
-    this.runningMisc = this.$store.state.expensesList.filter(element => element.category_id == misc_id)
-                                                     .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
+    this.runningMisc = this.$store.state.expensesList
+                       .filter(element => element.category_id == misc_id)
+                       .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0);
     this.allocatedMisc = 0;
-    this.monthlyBudget = this.allocatedGroceries + 
-                         this.allocatedBills + 
-                         this.allocatedTransport + 
-                         this.allocatedMisc;
+    this.allocatedTotal = this.form.allocatedGroceries +
+                          this.form.allocatedBills +
+                          this.form.allocatedTransport +
+                          this.form.allocatedMisc;
     this.savingsTarget = 0;
-    this.savingsLeeway = this.monthlyIncome - this.monthlyBudget;
+    this.savingsLeeway = this.getSavingsLeeway;                        
   },
   methods: {
     focusField(name) {
@@ -119,8 +124,11 @@ export default {
     blurField() {
       this.editField = '';
     },
-    getUserBudgetInput() {
-      this.$store.dispatch("createBudget", {
+    getSavingsLeeway() {
+      return this.form.monthlyIncome - this.allocatedTotal;            
+    },
+    patchUserBudgetInput() {
+      this.$store.dispatch("updateBudget", {
         user_id: this.$state.store.user.user_id,
         monthly_budget: this.form.monthlyBudget,
         groceries_alloc: this.form.allocatedGroceries,
