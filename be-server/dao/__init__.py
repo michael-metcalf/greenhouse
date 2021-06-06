@@ -32,6 +32,11 @@ def dao_update_budget(db, budget_object, user_id, monthly_budget, groceries_allo
     db.session.commit()
     return result
 
+def dao_create_user_budget(db, budget_object, user_id, monthly_budget, groceries_alloc, bills_alloc, transport_alloc, misc_alloc, savings_target, monthly_income):
+    new_budget = budget_object(user_id=user_id, monthly_budget=monthly_budget, groceries_alloc=groceries_alloc, bills_alloc=bills_alloc, transport_alloc=transport_alloc, misc_alloc=misc_alloc, savings_target=savings_target, monthly_income=monthly_income)
+    db.session.add(new_budget)
+    db.session.commit()
+
 #########
 #
 # Expense

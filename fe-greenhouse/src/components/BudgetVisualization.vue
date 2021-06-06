@@ -47,7 +47,9 @@ export default {
         .reduce((currentSum, currentValue) => currentSum + currentValue,0);
     },
     getMonthlyBudget() {
+      console.log("I AM SETTING THE MONTHLY BUDGET NOW")
       this.income = this.$store.state.monthlyBudget.monthly_income;
+      console.log("THIS IS INCOME", this.income)
     },
     getNumberOfMissedEcoActions() {
       // TO DO -> remove the hard coded value
@@ -55,11 +57,16 @@ export default {
     }
   },
   beforeMount() {
+    console.log("THIS IS BEFORE MOUNTED")
     this.getMonthlyBudget();
     this.getSumOfExpenses();
     this.getNumberOfMissedEcoActions();
     this.targetPercent = Math.floor(this.expenses/this.income*100)/100
   },
+
+  mounted() {
+    console.log("I AM MOUNTED")
+  }
 };
 </script>
 
