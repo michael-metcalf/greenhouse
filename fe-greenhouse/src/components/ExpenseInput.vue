@@ -58,7 +58,7 @@ export default {
   props: {
   },
   mounted() {
-    let externalScript = document.createElement("script");
+    const externalScript = document.createElement("script");
     externalScript.setAttribute(
       "src",
       "https://kit.fontawesome.com/e3cbc00358.js"
