@@ -9,7 +9,7 @@ from datetime import date
 #
 #########
 
-def service_create_user(db, user_object, new_user): 
+def service_create_user(db, user_object, budget_object, new_user): 
     user_exist = dao_get_username(user_object, new_user["username"])
 
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
@@ -20,7 +20,20 @@ def service_create_user(db, user_object, new_user):
 
     if user_exist == None:
         dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=salt_hashedpwd)
-        data = service_get_user(user_object, new_user["username"])
+        data = service_get_user(user_object, new_user["username"])        
+        
+        json_body = {
+            "monthly_budget": 0,
+            "groceries_alloc": 0,
+            "bills_alloc": 0,
+            "transport_alloc": 0,
+            "misc_alloc": 0,
+            "savings_target": 0,
+            "monthly_income": 0,
+            "created_at": 0
+        }
+        
+        service_create_user_budget(db, budget_object, data.id, json_body)
         return data
     else:
         return "User Exists"
@@ -80,14 +93,14 @@ def service_get_budget(budget_object, user_id):
    
     json_data = {
         "user_id": data.user_id,
-        "monthly_budget": data.monthly_budget or None,
-        "groceries_alloc": data.groceries_alloc or None,
-        "bills_alloc": data.bills_alloc or None,
-        "transport_alloc": data.transport_alloc or None,
-        "misc_alloc": data.misc_alloc or None,
-        "savings_target": data.savings_target or None,
-        "monthly_income": data.monthly_income or None,
-        "created_at": data.created_at or None
+        "monthly_budget": data.monthly_budget,
+        "groceries_alloc": data.groceries_alloc,
+        "bills_alloc": data.bills_alloc,
+        "transport_alloc": data.transport_alloc,
+        "misc_alloc": data.misc_alloc,
+        "savings_target": data.savings_target,
+        "monthly_income": data.monthly_income,
+        "created_at": data.created_at
     }
 
     return json_data
@@ -107,6 +120,25 @@ def service_update_user_budget(db, budget_object, user_id, json_body):
         "savings_target": data.savings_target or None,
         "monthly_income": data.monthly_income or None,
         "created_at": data.created_at or None
+    }
+
+    return json_data
+
+def service_create_user_budget(db, budget_object, user_id, json_body):
+    dao_create_user_budget(db, budget_object, user_id, json_body["monthly_budget"], json_body["groceries_alloc"], json_body["bills_alloc"], json_body["transport_alloc"], json_body["misc_alloc"], json_body["savings_target"], json_body["monthly_income"])
+
+    data = dao_get_budget(budget_object, user_id)
+
+    json_data = {
+        "user_id": data.user_id,
+        "monthly_budget": data.monthly_budget,
+        "groceries_alloc": data.groceries_alloc,
+        "bills_alloc": data.bills_alloc,
+        "transport_alloc": data.transport_alloc,
+        "misc_alloc": data.misc_alloc,
+        "savings_target": data.savings_target,
+        "monthly_income": data.monthly_income,
+        "created_at": data.created_at
     }
 
     return json_data
@@ -228,26 +260,6 @@ def service_get_eco_actions(eco_action_object, user_id):
         eco_actions.append(json_object)
 
     return { "eco_actions": eco_actions}
-
-def service_get_eco_actions(eco_action_object, user_id):
-    eco_actions = []
-
-    data = dao_get_eco_actions(eco_action_object, user_id)
-
-    if len(data) == 0:
-        return "Eco Actions don't exist"
-    
-    for eco_action in data:
-        json_object = {
-            "id": eco_action.id,
-            "user_id": eco_action.user_id,            
-            "eco_goal_id": eco_action.eco_goal_id,
-            "expense_id": eco_action.expense_id,
-            "created_at": eco_action.created_at
-        }
-        eco_actions.append(json_object)
-
-    return {"eco_actions": eco_actions}
 
 #########
 #

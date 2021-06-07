@@ -24,7 +24,7 @@ export default new Vuex.Store({
       state.user = payload;
     },
     setUserName(state, payload) {
-      state.userName = payload.userName;
+      state.userName = payload;
     },
     clearUserName(state) {
       state.userName = "";
@@ -77,12 +77,21 @@ export default new Vuex.Store({
           commit("setUser", res.data);
           dispatch("receiveLoginSignal");
         }
+          const res = await axios.post("/api/user/login", payload)
+          if (res.data.error === -1) { 
+            commit("setUserMessage", {message: "Could not login", msgType: "error" })                    
+          } else {
+            commit("setUserName", res.data.username)
+            commit("setUser", res.data)
+            dispatch("receiveLoginSignal")
+          }
       } catch (err) {
         console.error(err);
       }
     },
 
     async receiveLoginSignal({ commit, state }) {
+    async receiveLoginSignal({commit, dispatch, state}) {
       // Need to download the data related to the current user
       console.log(`Received login signal...${state.userName}`);
       commit("setLoadingStatus", true);
@@ -134,4 +143,100 @@ export default new Vuex.Store({
       }
     },
   },
+       
+        await dispatch("getBudgets")
+        await dispatch("getExpenses")
+        await dispatch("getEcoGoals")
+        await dispatch("getEcoActions")
+        await dispatch("getCategories")
+
+        commit("setLoadingStatus", false);
+        commit("setAuthenticated", true)   
+        console.log("setLoading and setAuthenticated is done")           
+      } catch(err) {
+        console.error(`ERROR in the back-end API download! ${err}`);
+      }
+    },
+
+    async createExpense({ dispatch, state }, payload) {
+      try {
+        const res = await axios.post(`/api/user/${state.user.user_id}/expense`, payload)
+        console.log(res.data)
+        dispatch("getExpenses")        
+      } catch (err) {
+        console.error(`ERROR in createExpense! ${err}`); 
+      }
+    },
+
+    async updateExpense({ dispatch, state }, payload) {
+      try {
+        await axios.patch(`/api/user/${state.user.user_id}/expenses`, payload)
+        dispatch("getExpenses")                
+      } catch (err) {
+        console.error(`ERROR in updateExpense ${err}`)
+      }
+    },
+
+    async getExpenses({ commit, state }) {
+      try {
+        const res = await axios.get(`/api/user/${state.user.user_id}/expenses`)
+        commit("setExpensesList", { expensesList: res.data.expenses });        
+      } catch (err) {
+        console.error(`ERROR in getExpenses ${err}`)
+      }
+    },
+
+    async updateBudget({dispatch, state}, payload) {
+      try {
+        await axios.patch(`/api/user/${state.user.user_id}/user_budget`, payload)
+        dispatch("getBudgets")
+      } catch (err) {
+        console.error(`ERROR in updateBudget ${err}`)
+      }
+    },
+
+    async getBudgets({commit, state}) {
+      try {
+        const res = await axios.get(`/api/user/${state.user.user_id}/user_budget`);
+        commit("setMonthlyBudget", { monthlyBudget: res.data });
+        console.log("THIS IS WHEN THE API CALL IS SETTING MONTHLY INCOME", state.monthlyBudget.monthly_income)
+      } catch (err) {
+        console.error(`ERROR in the getBudgets ${err}`)
+      }
+    },
+
+    async getEcoGoals({ commit, state }) {
+      try {
+        const res = await axios.get(`/api/user/${state.user.user_id}/eco_goals`)
+        if(res.data.eco_goals) {
+          commit("setEcoGoalsList", { ecoGoalsList: res.data.eco_goals });
+        }
+      } catch (err) {
+        console.error(`ERROR in the getEcoGoals ${err}`)
+      }
+    },
+
+    async getEcoActions({ commit, state }) {
+      try {
+        const res = await axios.get(`/api/user/${state.user.user_id}/eco_actions`)
+        if(res.data.eco_actions) {
+          commit("setEcoActionsList", { ecoActionsList: res.data.eco_actions });
+        }
+      } catch (err) {
+        console.error(`ERROR in the getEcoGoals ${err}`)
+      }
+    },
+  
+    async getCategories({ commit, state }) {
+      try {
+        const res = await axios.get(`/api/user/${state.user.user_id}/categories`);
+        if (res.data.categories) {
+          commit("setCategoriesList", { categoriesList: res.data.categories})
+        }        
+      } catch (err) {
+        console.error(`ERROR in the getCategories ${err}`)
+      }
+    }
+
+  }
 });

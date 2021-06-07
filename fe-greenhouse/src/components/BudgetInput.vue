@@ -17,6 +17,10 @@
         @focus="focusField('monthlyIncome')"
         @blur="blurField"
       />
+    <h1>Monthly Budget</h1>
+    <p id="monthly-income">Monthly Income: 
+      <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
+      <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">
     </p>
     <table id="budget-input-table">
       <thead>
@@ -111,6 +115,7 @@
         </tr>
         <tr>
           Savings Target
+        <tr id="savings-target">Savings Target
           <td>
             <span
               class="field-value"
@@ -134,8 +139,8 @@
     <p>Savings Leeway: {{ savingsLeeway }}</p>
     <div id="button-container">
       <!-- <button class="budget-button" name="back" value="back">Back</button> -->
-      <button class="budget-button" name="edit" value="edit">Edit</button>
-      <button class="budget-button" name="ok" value="ok">OK</button>
+      <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
+      <button class="budget-button" name="submit" value="submit">Submit</button>
     </div>
   </div>
 </template>
@@ -202,3 +207,12 @@ export default {
 </script>
 
 <style scoped></style>
+<style scoped>
+#monthly-income {
+  font-weight: bold;
+}
+#savings-target {
+  color: green;
+  font-weight: bold;
+}
+</style>

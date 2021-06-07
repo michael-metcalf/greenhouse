@@ -4,8 +4,11 @@
       <h1 id="moneySproutsLogo">MoneySprouts</h1>
     </div>
     <div class="main-panel">
+<<<<<<< HEAD
       <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
       <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
+=======
+>>>>>>> 6c5ecc2d8d2700d2b77bb10d84a9e22e2a1d83c6
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
@@ -33,7 +36,7 @@
           name="profile"
           value="profile"
         >
-          🏠
+        <i id="home-icon" class="fas fa-home"></i>
         </button>
         <button
           v-on:click="component = 'ExpenseInput'"
@@ -41,7 +44,7 @@
           name="expense-input"
           value="expense-input"
         >
-          💲
+        <i id="dollar-icon" class="fas fa-dollar-sign"></i>
         </button>
         <button
           v-on:click="component = 'BudgetInput'"
@@ -49,7 +52,15 @@
           name="monthly-budget"
           value="monthly-budget"
         >
-          📆
+        <i id="calendar-icon" class="far fa-calendar-alt"></i>
+        </button>
+        <button
+          v-on:click="component = 'BarChart'"
+          class="footer-button"
+          name="eco-action-chart"
+          value="eco-action-chart"
+        >
+        <i id="chart-icon" class="fas fa-chart-bar"></i>
         </button>
         <button
           v-on:click="$store.commit('clearUserName')"
@@ -57,10 +68,8 @@
           name="logout"
           value="logout"
         >
-          👋
+        <i id="signout-icon" class="fas fa-sign-out-alt"></i>
         </button>
-        <!-- <button v-on:click="component = 'EcoGoalProgress'" class="footer-button" name="eco-goals" value="eco-goals">🌍</button> -->
-        <!-- <button v-on:click="component = 'Login'" class="footer-button" name="logout" value="logout">👋</button> -->
       </div>
     </div>
   </div>
@@ -74,6 +83,7 @@ import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
+import BarChart from "./components/BarChart";
 
 export default {
   name: "App",
@@ -85,6 +95,7 @@ export default {
     BudgetInput,
     LoadingMessage,
     UserMessageDisplay,
+    BarChart,
   },
   data() {
     return {
@@ -118,6 +129,15 @@ export default {
     //     console.error(`ERROR in the back-end API download! ${err}`);
     //   }
   },
+  mounted() {
+    const externalScript = document.createElement("script");
+    externalScript.setAttribute(
+      "src",
+      "https://kit.fontawesome.com/e3cbc00358.js"
+    )
+    externalScript.setAttribute("crossorigin", "anonymous")
+    document.head.appendChild(externalScript);
+  }
 };
 </script>
 
@@ -205,4 +225,9 @@ export default {
   border-radius: 12%;
   border: 2px solid black;
 }
+
+#home-icon, #dollar-icon, #calendar-icon, #signout-icon, #chart-icon {
+  color: teal;
+}
+
 </style>
