@@ -1,12 +1,17 @@
 <template>
   <div>
     <span class="env-fact-container">
-    <EnvironmentalFact />
+      <EnvironmentalFact />
     </span>
     <div class="budget-viz-container">
       <div class="chart-align-container">
-        <div class="budget-progress"><p>{{ Math.floor(targetPercent*100) + "%" }}</p></div>
-        <progress-chart :savingsScore="targetPercent" :css-classes="'chartContainer'" />
+        <div class="budget-progress">
+          <p>{{ Math.floor(targetPercent * 100) + "%" }}</p>
+        </div>
+        <progress-chart
+          :savingsScore="targetPercent"
+          :css-classes="'chartContainer'"
+        />
       </div>
       <h2>Potential savings: {{ income - expenses }}</h2>
       <ul class="no-bullets">
@@ -15,15 +20,15 @@
       </ul>
     </div>
     <span>
-      <EcoGoalProgress :ecoScore="Math.max(0,10-this.missedEcoActions)" />
+      <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
     </span>
   </div>
 </template>
 
 <script>
 import ProgressChart from "./progressChart.vue";
-import EnvironmentalFact from './EnvironmentalFact.vue';
-import EcoGoalProgress from './EcoGoalProgress';
+import EnvironmentalFact from "./EnvironmentalFact.vue";
+import EcoGoalProgress from "./EcoGoalProgress";
 
 export default {
   name: "BudgetVisualization",
@@ -44,21 +49,23 @@ export default {
     getSumOfExpenses() {
       this.expenses = this.$store.state.expensesList
         .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue,0);
+        .reduce((currentSum, currentValue) => currentSum + currentValue, 0);
     },
     getMonthlyBudget() {
       this.income = this.$store.state.monthlyBudget.monthly_income;
     },
     getNumberOfMissedEcoActions() {
       // TO DO -> remove the hard coded value
-      this.missedEcoActions = this.$store.state.ecoActionsList.filter(action => action.eco_goal_id === 4).length;
-    }
+      this.missedEcoActions = this.$store.state.ecoActionsList.filter(
+        (action) => action.eco_goal_id === 4
+      ).length;
+    },
   },
   beforeMount() {
     this.getMonthlyBudget();
     this.getSumOfExpenses();
     this.getNumberOfMissedEcoActions();
-    this.targetPercent = Math.floor(this.expenses/this.income*100)/100
+    this.targetPercent = Math.floor((this.expenses / this.income) * 100) / 100;
   },
 };
 </script>

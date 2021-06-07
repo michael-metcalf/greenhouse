@@ -1,8 +1,22 @@
 <template>
   <div id="budget-input-container">
-    <p>Monthly Income: 
-      <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
-      <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">
+    <p>
+      Monthly Income:
+      <span
+        class="field-value"
+        v-show="!showField('monthlyIncome')"
+        @click="focusField('monthlyIncome')"
+        >{{ form.monthlyIncome }}</span
+      >
+      <input
+        v-model="form.monthlyIncome"
+        v-show="showField('monthlyIncome')"
+        id="monthly-income"
+        type="text"
+        class="field-value form-control"
+        @focus="focusField('monthlyIncome')"
+        @blur="blurField"
+      />
     </p>
     <table id="budget-input-table">
       <thead>
@@ -11,43 +25,113 @@
         <th>Amount Allocated</th>
       </thead>
       <tbody>
-        <tr>Groceries
-          <td>{{runningGroceries}}</td>
+        <tr>
+          Groceries
+          <td>{{ runningGroceries }}</td>
           <td>
-            <span class="field-value" v-show="!showField('allocatedGroceries')" @click="focusField('allocatedGroceries')">{{form.allocatedGroceries}}</span>
-            <input v-model="form.allocatedGroceries" v-show="showField('allocatedGroceries')" id="allocated-groceries" type="text" class="field-value form-control" @focus="focusField('allocatedGroceries')" @blur="blurField">
+            <span
+              class="field-value"
+              v-show="!showField('allocatedGroceries')"
+              @click="focusField('allocatedGroceries')"
+              >{{ form.allocatedGroceries }}</span
+            >
+            <input
+              v-model="form.allocatedGroceries"
+              v-show="showField('allocatedGroceries')"
+              id="allocated-groceries"
+              type="text"
+              class="field-value form-control"
+              @focus="focusField('allocatedGroceries')"
+              @blur="blurField"
+            />
           </td>
         </tr>
-        <tr>Bills
-          <td>{{runningBills}}</td>
+        <tr>
+          Bills
+          <td>{{ runningBills }}</td>
           <td>
-            <span class="field-value" v-show="!showField('allocatedBills')" @click="focusField('allocatedBills')">{{form.allocatedBills}}</span>
-            <input v-model="form.allocatedBills" v-show="showField('allocatedBills')" id="allocated-bills" type="text" class="field-value form-control" @focus="focusField('allocatedBills')" @blur="blurField">
+            <span
+              class="field-value"
+              v-show="!showField('allocatedBills')"
+              @click="focusField('allocatedBills')"
+              >{{ form.allocatedBills }}</span
+            >
+            <input
+              v-model="form.allocatedBills"
+              v-show="showField('allocatedBills')"
+              id="allocated-bills"
+              type="text"
+              class="field-value form-control"
+              @focus="focusField('allocatedBills')"
+              @blur="blurField"
+            />
           </td>
         </tr>
-        <tr>Transport
-          <td>{{runningTransport}}</td>
+        <tr>
+          Transport
+          <td>{{ runningTransport }}</td>
           <td>
-            <span class="field-value" v-show="!showField('allocatedTransport')" @click="focusField('allocatedTransport')">{{form.allocatedTransport}}</span>
-            <input v-model="form.allocatedTransport" v-show="showField('allocatedTransport')" id="allocated-transport" type="text" class="field-value form-control" @focus="focusField('allocatedTransport')" @blur="blurField">
+            <span
+              class="field-value"
+              v-show="!showField('allocatedTransport')"
+              @click="focusField('allocatedTransport')"
+              >{{ form.allocatedTransport }}</span
+            >
+            <input
+              v-model="form.allocatedTransport"
+              v-show="showField('allocatedTransport')"
+              id="allocated-transport"
+              type="text"
+              class="field-value form-control"
+              @focus="focusField('allocatedTransport')"
+              @blur="blurField"
+            />
           </td>
         </tr>
-        <tr>Misc
-          <td>{{runningMisc}}</td>
+        <tr>
+          Misc
+          <td>{{ runningMisc }}</td>
           <td>
-            <span class="field-value" v-show="!showField('allocatedMisc')" @click="focusField('allocatedMisc')">{{form.allocatedMisc}}</span>
-            <input v-model="form.allocatedMisc" v-show="showField('allocatedMisc')" id="allocated-misc" type="text" class="field-value form-control" @focus="focusField('allocatedMisc')" @blur="blurField">
+            <span
+              class="field-value"
+              v-show="!showField('allocatedMisc')"
+              @click="focusField('allocatedMisc')"
+              >{{ form.allocatedMisc }}</span
+            >
+            <input
+              v-model="form.allocatedMisc"
+              v-show="showField('allocatedMisc')"
+              id="allocated-misc"
+              type="text"
+              class="field-value form-control"
+              @focus="focusField('allocatedMisc')"
+              @blur="blurField"
+            />
           </td>
         </tr>
-        <tr>Savings Target
+        <tr>
+          Savings Target
           <td>
-            <span class="field-value" v-show="!showField('savingsTarget')" @click="focusField('savingsTarget')">{{form.savingsTarget}}</span>
-            <input v-model="form.savingsTarget" v-show="showField('savingsTarget')" id="savings-target" type="text" class="field-value form-control" @focus="focusField('savingsTarget')" @blur="blurField">
+            <span
+              class="field-value"
+              v-show="!showField('savingsTarget')"
+              @click="focusField('savingsTarget')"
+              >{{ form.savingsTarget }}</span
+            >
+            <input
+              v-model="form.savingsTarget"
+              v-show="showField('savingsTarget')"
+              id="savings-target"
+              type="text"
+              class="field-value form-control"
+              @focus="focusField('savingsTarget')"
+              @blur="blurField"
+            />
           </td>
         </tr>
       </tbody>
     </table>
-    <p>Savings Leeway: {{savingsLeeway}}</p>
+    <p>Savings Leeway: {{ savingsLeeway }}</p>
     <div id="button-container">
       <!-- <button class="budget-button" name="back" value="back">Back</button> -->
       <button class="budget-button" name="edit" value="edit">Edit</button>
@@ -57,29 +141,27 @@
 </template>
 
 <script>
-
 export default {
   name: "BudgetInput",
-  props: {
-  },
+  props: {},
   data() {
     return {
-      userBudget : {},
-      runningGroceries: '',
-      runningBills: '',
-      runningTransport: '',
-      runningMisc: '',
-      savingsLeeway: '',
-      editField: '',
+      userBudget: {},
+      runningGroceries: "",
+      runningBills: "",
+      runningTransport: "",
+      runningMisc: "",
+      savingsLeeway: "",
+      editField: "",
       form: {
-        monthlyIncome: '',
-        allocatedGroceries: '',
-        allocatedBills: '',
-        allocatedTransport: '',
-        allocatedMisc: '',
-        savingsTarget: '',
-      }
-    }
+        monthlyIncome: "",
+        allocatedGroceries: "",
+        allocatedBills: "",
+        allocatedTransport: "",
+        allocatedMisc: "",
+        savingsTarget: "",
+      },
+    };
   },
   mounted() {
     this.monthlyIncome = 200000;
@@ -99,10 +181,10 @@ export default {
       this.editField = name;
     },
     showField(name) {
-      return (this.form[name] == '' || this.editField == name)
+      return this.form[name] == "" || this.editField == name;
     },
     blurField() {
-      this.editField = '';
+      this.editField = "";
     },
     getUserBudgetInput() {
       this.userBudget = {
@@ -112,14 +194,11 @@ export default {
         transport_alloc: this.form.allocatedTransport,
         misc_alloc: this.form.allocatedMisc,
         savings_target: this.form.savingsTarget,
-        monthly_income: this.form.monthlyIncome
-      }
-    }
-
-  }
-}
+        monthly_income: this.form.monthlyIncome,
+      };
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

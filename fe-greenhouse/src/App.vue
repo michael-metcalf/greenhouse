@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <div class="header">
-      <h1>MoneySprouts</h1>
+      <h1 id="moneySproutsLogo">MoneySprouts</h1>
     </div>
     <div class="main-panel">
-    <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
-    <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
+      <!-- <p>{{ greeting }}</p> for testing Vue-flask connection -->
+      <!-- <p>{{ flaskGreeting }}</p> for testing Vue-flask connection -->
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
-      <loading-message v-if="this.$store.state.userName !== ''  &&  this.$store.state.isLoading" />
-      <component v-if="this.$store.state.userName !== ''  &&  !this.$store.state.isLoading" :is="component"></component>
+      <loading-message
+        v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
+      />
+      <component
+        v-if="this.$store.state.userName !== '' && !this.$store.state.isLoading"
+        :is="component"
+      ></component>
       <!-- <Login/>
       <EnvironmentalFact/>
       <BudgetVisualization/>
@@ -18,7 +23,10 @@
       <BudgetInput/> -->
     </div>
     <div class="nav-bar">
-      <div v-if="this.$store.state.userName !== ''"  id="footer-button-container">
+      <div
+        v-if="this.$store.state.userName !== ''"
+        id="footer-button-container"
+      >
         <button
           v-on:click="component = 'BudgetVisualization'"
           class="footer-button"
@@ -124,23 +132,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   min-height: 100vh;
-  background: #2980b9; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #ffffff,
-    #ade3f6,
-    #6dd5fa
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #ffffff,
-    #ade3f6,
-    #6dd5fa
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #B5B7BB;
 }
 
 .main-panel > * {
-  border: 1pt solid red;
   margin-top: 8vh;
   margin-bottom: 5px;
   padding: 5px;
@@ -152,16 +147,31 @@ export default {
   width: 100%;
   max-width: var(--app-max-width);
   min-height: 10vh;
-  background: #ade3f6;
-  border: 2px solid red;
+  background-image: url("../public/img/background/grass-header.jpg");
+
+  border: 2px solid black;
 }
 
+#moneySproutsLogo {
+  float: left;
+  margin-left: 10px;
+  font-weight: bolder;
+  color: white;
+  text-shadow: 2px 2px black;
+
+}
 .main-panel {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 11.5vh;
+  margin-bottom: 5.5vh;
+  background-color: rgb(228, 225, 225);
+  width: 450px;
+  height: 800px;
+  border: 1pt solid black;
+  margin-left: 23px;
+  border-radius: 5px;
 }
 
 .nav-bar {
@@ -173,8 +183,9 @@ export default {
   width: 100%;
   max-width: var(--app-max-width);
   min-height: 10vh;
-  background: #ade3f6;
-  border: 2px solid red;
+  background-color: black;
+  background-image: url("../public/img/background/grass-header.jpg");
+  border: 2px solid black;
 }
 
 #footer-button-container {
@@ -192,6 +203,6 @@ export default {
   padding: 5px;
   text-align: center;
   border-radius: 12%;
-  border: 2px solid red;
+  border: 2px solid black;
 }
 </style>

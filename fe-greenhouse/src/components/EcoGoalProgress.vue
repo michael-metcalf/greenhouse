@@ -1,9 +1,8 @@
 <template>
   <div class="eco-goals-container">
-    <p>Eco Goals:  {{ecoScoreString}} </p>
-    <p> {{ customerMessage}} </p>
+    <p>Eco Goals: {{ ecoScoreString }}</p>
+    <p>{{ customerMessage }}</p>
   </div>
-
 </template>
 
 <script>
@@ -14,47 +13,45 @@ export default {
   },
   data: () => {
     return {
-      ecoScoreString: '',
-      customerMessage: '',
-    }
+      ecoScoreString: "",
+      customerMessage: "",
+    };
   },
   mounted() {
-    console.log(`Props - eco score ${this.ecoScore}`)
+    console.log(`Props - eco score ${this.ecoScore}`);
     const numberOfSprouts = this.ecoScore;
-    this.ecoScoreString = '';
-    for (let i=0; i<numberOfSprouts; i++) {
-      this.ecoScoreString += '🌱';
+    this.ecoScoreString = "";
+    for (let i = 0; i < numberOfSprouts; i++) {
+      this.ecoScoreString += "🌱";
     }
-    switch(numberOfSprouts) {
+    switch (numberOfSprouts) {
       case 0:
-        this.customerMessage = 'Could do better?';
+        this.customerMessage = "Could do better?";
         break;
       case 1:
-        this.customerMessage = 'Just one!';
+        this.customerMessage = "Just one!";
         break;
       case 2:
-        this.customerMessage = 'Just a little bit more';
+        this.customerMessage = "Just a little bit more";
         break;
       case 3:
-        this.customerMessage = 'On track!';
+        this.customerMessage = "On track!";
         break;
       case 4:
-        this.customerMessage = 'Thanks for the earth!';
+        this.customerMessage = "Thanks for the earth!";
         break;
       case 5:
-        this.customerMessage = 'PERFECT!!!';
+        this.customerMessage = "PERFECT!!!";
         break;
       default:
-        this.customerMessage = 'You\'re on track!';
+        this.customerMessage = "You're on track!";
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 .eco-goals-container {
   border: 2px solid red;
 }
-
 </style>
