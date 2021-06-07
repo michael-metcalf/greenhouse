@@ -40,4 +40,11 @@ export default {
     color: lightgreen;
   }
 
+  #username-input, #password-input {
+    width: 230px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 5px;
+    font-weight: 200;
+  }
 </style>
