@@ -44,6 +44,7 @@
         <button
           v-on:click="component = 'BarChart'"
           class="footer-button"
+          id="bar-chart"
           name="eco-action-chart"
           value="eco-action-chart"
         >
@@ -175,7 +176,7 @@ export default {
   align-items: center;
   margin-bottom: 5.5vh;
   background-color: rgb(228, 225, 225);
-  width: 300px;
+  width: 100%;
   height: 800px;
   border: 1pt solid black;
   border-radius: 5px;
@@ -214,6 +215,10 @@ export default {
 
 #home-icon, #dollar-icon, #calendar-icon, #signout-icon, #chart-icon {
   color: teal;
+}
+
+#bar-chart {
+  width: auto;
 }
 
 </style>

@@ -42,7 +42,7 @@
         </tr>
         <tr id="savings-target">Savings Target
           <td>
-            <span class="field-value" v-show="!showField('savingsTarget')" @click="focusField('savingsTarget')">{{form.savingsTarget}}</span>
+            <span class="savings-field" v-show="!showField('savingsTarget')" @click="focusField('savingsTarget')">{{form.savingsTarget}}</span>
             <input v-model="form.savingsTarget" v-show="showField('savingsTarget')" id="savings-target" type="text" class="field-value form-control" @focus="focusField('savingsTarget')" @blur="blurField">
           </td>
         </tr>
@@ -129,4 +129,26 @@ export default {
   color: green;
   font-weight: bold;
 }
+
+h1 {
+  text-align: center;
+}
+
+#budget-input-container {
+  width: 100%;
+  justify-content: center;
+}
+#budget-input-table {
+  width: 400px;
+}
+.field-value {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  border-radius: 5px;
+}
+.savings-field{
+  margin-left: 30px;
+}
+
 </style>
