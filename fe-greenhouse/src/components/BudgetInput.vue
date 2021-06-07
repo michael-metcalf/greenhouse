@@ -52,7 +52,7 @@
       <div id="button-container">
         <!-- <button class="budget-button" name="back" value="back">Back</button> -->
         <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
-        <button class="budget-submit-button" form="budget-input-form" type="submit" name="submit" value="submit">Submit</button>
+        <button class="budget-submit-button" form="budget-input-form" type="submit" name="submit">Submit</button>
       </div>
     </form>
   </div>
