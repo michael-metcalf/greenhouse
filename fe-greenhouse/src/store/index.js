@@ -65,18 +65,6 @@ export default new Vuex.Store({
   actions: {
     async verifyLogin({ commit, dispatch }, payload) {
       try {
-        const res = await axios.post("/api/user/login", payload);
-        console.log(res);
-        if (res.data.error === -1) {
-          commit("setUserMessage", {
-            message: "Could not login",
-            msgType: "error",
-          });
-        } else {
-          commit("setUserName", res.data.username);
-          commit("setUser", res.data);
-          dispatch("receiveLoginSignal");
-        }
           const res = await axios.post("/api/user/login", payload)
           if (res.data.error === -1) { 
             commit("setUserMessage", {message: "Could not login", msgType: "error" })                    
