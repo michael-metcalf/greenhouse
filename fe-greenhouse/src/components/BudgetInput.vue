@@ -1,6 +1,6 @@
 <template>
   <div id="budget-input-container">
-    <form id="budget-input-form" @submit.prevent="patchUserBudgetInput" method="patch">
+    <form id="budget-input-form" @submit.prevent="patchUserBudgetInput"  >
       <p>Monthly Income: 
         <span class="field-value" v-show="!showField('monthlyIncome')" @click="focusField('monthlyIncome')">{{form.monthlyIncome}}</span>
         <input v-model="form.monthlyIncome" v-show="showField('monthlyIncome')" id="monthly-income" type="text" class="field-value form-control" @focus="focusField('monthlyIncome')" @blur="blurField">
@@ -52,7 +52,7 @@
       <div id="button-container">
         <!-- <button class="budget-button" name="back" value="back">Back</button> -->
         <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
-        <button class="budget-submit-button" form="budget-input-form" type="submit" name="submit">Submit</button>
+        <button @click="patchUserBudgetInput" class="budget-submit-button" form="budget-input-form">Submit</button>
       </div>
     </form>
   </div>
@@ -112,7 +112,7 @@ export default {
                           this.form.allocatedTransport +
                           this.form.allocatedMisc;
     this.savingsTarget = 0;
-    this.savingsLeeway = this.getSavingsLeeway;                        
+    this.savingsLeeway = this.monthlyIncome - this.allocatedTotal;                        
   },
   methods: {
     focusField(name) {
@@ -129,14 +129,14 @@ export default {
     },
     patchUserBudgetInput() {
       this.$store.dispatch("updateBudget", {
-        user_id: this.$state.store.user.user_id,
-        monthly_budget: this.form.monthlyBudget,
-        groceries_alloc: this.form.allocatedGroceries,
-        bills_alloc: this.form.allocatedBills,
-        transport_alloc: this.form.allocatedTransport,
-        misc_alloc: this.form.allocatedMisc,
-        savings_target: this.form.savingsTarget,
-        monthly_income: this.form.monthlyIncome
+        "user_id": this.$store.state.user.user_id,
+        "monthly_budget": this.form.monthlyBudget,
+        "groceries_alloc": this.form.allocatedGroceries,
+        "bills_alloc": this.form.allocatedBills,
+        "transport_alloc": this.form.allocatedTransport,
+        "misc_alloc": this.form.allocatedMisc,
+        "savings_target": this.form.savingsTarget,
+        "monthly_income": this.form.monthlyIncome
       });
     }
   }
