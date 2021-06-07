@@ -121,10 +121,10 @@ export default {
       this.editField = '';
     },
     getSavingsLeeway() {
-      return this.form.monthlyIncome - this.form.savingsTarget - (this.form.allocatedGroceries + 
-                                                                  this.form.allocatedBills + 
-                                                                  this.form.allocatedTransport + 
-                                                                  this.form.allocatedMisc);            
+      return Number(this.form.monthlyIncome) - Number(this.form.savingsTarget) - (Number(this.form.allocatedGroceries) + 
+                                                                                  Number(this.form.allocatedBills) + 
+                                                                                  Number(this.form.allocatedTransport) + 
+                                                                                  Number(this.form.allocatedMisc));            
     },
     patchUserBudgetInput() {
       this.savingsLeeway = this.getSavingsLeeway();
