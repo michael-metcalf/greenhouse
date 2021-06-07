@@ -1,6 +1,6 @@
 <template>
   <div class="eco-goals-container">
-    <p id="eco-goals">Eco Goals:  {{ecoScoreString}} </p>
+    <p id="eco-goals">Eco Goals: <i id="sprout" class="fas fa-seedling"></i> {{ecoScoreString}} </p>
     <p> {{ customerMessage}} </p>
   </div>
 
@@ -14,16 +14,23 @@ export default {
   },
   data: () => {
     return {
-      ecoScoreString: '',
+      ecoScoreString: 0,
       customerMessage: '',
     }
   },
   mounted() {
+        const externalScript = document.createElement("script");
+    externalScript.setAttribute(
+      "src",
+      "https://kit.fontawesome.com/e3cbc00358.js"
+    )
+    externalScript.setAttribute("crossorigin", "anonymous")
+    document.head.appendChild(externalScript);
     console.log(`Props - eco score ${this.ecoScore}`)
     const numberOfSprouts = this.ecoScore;
-    this.ecoScoreString = '';
+    this.ecoScoreString = 0;
     for (let i=0; i<numberOfSprouts; i++) {
-      this.ecoScoreString += '🌱';
+      this.ecoScoreString += 1;
     }
     switch(numberOfSprouts) {
       case 0:
@@ -60,6 +67,10 @@ export default {
 
 #eco-goals {
   font-weight: bold;
+}
+
+#sprout {
+  color: green;
 }
 
 </style>
