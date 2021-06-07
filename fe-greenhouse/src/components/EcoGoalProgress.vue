@@ -62,6 +62,8 @@ export default {
 
 .eco-goals-container {
   border: 2px solid red;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
   margin-bottom: 10px;
 }
 
