@@ -136,7 +136,6 @@ h1 {
 
 #budget-input-container {
   width: 100%;
-  justify-content: center;
 }
 #budget-input-table {
   width: 400px;
@@ -147,8 +146,15 @@ h1 {
   height: 30px;
   border-radius: 5px;
 }
-.savings-field{
-  margin-left: 30px;
+
+.budget-button {
+  margin-top: 20px;
+  margin-bottom: 100px;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(77, 77, 77);
 }
 
 </style>

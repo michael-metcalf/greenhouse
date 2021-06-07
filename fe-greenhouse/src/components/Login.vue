@@ -5,7 +5,7 @@
     <br>
     <input type="password" v-model="password" id="password-input" name="password-input" placeholder="Enter your password">
     <br>
-    <button @click="validateUserInput">Login</button>
+    <button id="login-button" @click="validateUserInput">Login</button>
   </div>
 </template>
 
@@ -31,13 +31,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  h2 {
+    font-size: 60px;
+    font-family: 'Lato', sans-serif;
+  }
+
   input {
     margin-top: 5px;
     margin-bottom: 5px;
   }
 
   .green-emphasis {
-    color: lightgreen;
+    color: rgb(26, 146, 26);
+    font-size: 70px;
   }
 
   #username-input, #password-input {
@@ -46,5 +52,23 @@ export default {
     font-size: 20px;
     border-radius: 5px;
     font-weight: 200;
+  }
+  #username-input:hover, #password-input:hover {
+    border: 2px solid black;
+  }
+
+  #login-button {
+    background-color:rgb(26, 146, 26);
+    color: white;
+    width: 200px;
+    height: 50px;
+    margin-top: 40px;
+    border-radius: 5px;
+    font-weight: 200;
+    font-size: 30px;
+    font-family: 'Lato', sans-serif;
+  }
+  #login-button:hover {
+    background-color:rgb(15, 87, 15);
   }
 </style>
