@@ -23,7 +23,7 @@
           name="profile"
           value="profile"
         >
-          🏠
+        <i id="home-icon" class="fas fa-home"></i>
         </button>
         <button
           v-on:click="component = 'ExpenseInput'"
@@ -31,7 +31,7 @@
           name="expense-input"
           value="expense-input"
         >
-          💲
+        <i id="dollar-icon" class="fas fa-dollar-sign"></i>
         </button>
         <button
           v-on:click="component = 'BudgetInput'"
@@ -39,7 +39,7 @@
           name="monthly-budget"
           value="monthly-budget"
         >
-          📆
+        <i id="calendar-icon" class="far fa-calendar-alt"></i>
         </button>
         <button
           v-on:click="component = 'BarChart'"
@@ -47,7 +47,7 @@
           name="eco-action-chart"
           value="eco-action-chart"
         >
-          📊
+        <i id="chart-icon" class="fas fa-chart-bar"></i>
         </button>
         <button
           v-on:click="$store.commit('clearUserName')"
@@ -55,7 +55,7 @@
           name="logout"
           value="logout"
         >
-          👋
+        <i id="signout-icon" class="fas fa-sign-out-alt"></i>
         </button>
       </div>
     </div>
@@ -116,6 +116,15 @@ export default {
     //     console.error(`ERROR in the back-end API download! ${err}`);
     //   }
   },
+  mounted() {
+    const externalScript = document.createElement("script");
+    externalScript.setAttribute(
+      "src",
+      "https://kit.fontawesome.com/e3cbc00358.js"
+    )
+    externalScript.setAttribute("crossorigin", "anonymous")
+    document.head.appendChild(externalScript);
+  }
 };
 </script>
 
@@ -200,4 +209,9 @@ export default {
   border-radius: 12%;
   border: 2px solid red;
 }
+
+#home-icon, #dollar-icon, #calendar-icon, #signout-icon, #chart-icon {
+  color: teal;
+}
+
 </style>
