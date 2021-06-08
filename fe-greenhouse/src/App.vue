@@ -74,6 +74,7 @@ import BudgetInput from "./components/BudgetInput.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
 import BarChart from "./components/BarChart";
+import SignUp from "./components/BarChart.vue";
 
 export default {
   name: "App",
@@ -86,10 +87,11 @@ export default {
     LoadingMessage,
     UserMessageDisplay,
     BarChart,
+    SignUp,
   },
   data() {
     return {
-      component: "BudgetVisualization",
+      component: "BugetVisualization",
     };
   },
   methods: {

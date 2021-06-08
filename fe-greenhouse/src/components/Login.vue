@@ -16,6 +16,30 @@
       placeholder="password..."
     />
     <button @click="validateUserInput">Login</button>
+    <div class="signup-container">
+    <input
+      type="text"
+      v-model="newUserName"
+      id="new-username-input"
+      name="username-input"
+      placeholder="New username..."
+    />
+    <input
+      type="password"
+      v-model="newUserPassword"
+      id="new-password-input"
+      name="password-input"
+      placeholder="New password..."
+    />
+    <input
+      type="email"
+      v-model="newUserEmail"
+      id="new-email-input"
+      name="email-input"
+      placeholder="Enter Email..."
+    />
+    <button id="sign-up" @click="createUser">Sign Me Up!</button>
+    </div>
   </div>
 </template>
 
@@ -35,10 +59,16 @@ export default {
         username: this.userName,
         password: this.password,
       });
-      // this.$store.commit("setUserName", { userName: this.userName });
-      // this.$emit("login-success");
     },
-  },
+    createUser() {
+      this.$store.dispatch("createUser", {
+        username: this.userName,
+      });
+      this.$store.dispatch("createUserPassword", {
+        password: this.password,
+      });
+    },
+  }
 };
 </script>
 
@@ -55,6 +85,20 @@ export default {
   height: 280px;
 }
 
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#new-username-input, #new-password-input, #new-email-input {
+  margin-top: 5px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 input {
   margin-bottom: 1.5em;
   height: 1.2em;
@@ -67,5 +111,10 @@ input {
 button {
   height: 2em;
   font-size: large;
+}
+
+#sign-up {
+  font-size: smaller;
+  background-color: lightcyan;
 }
 </style>
