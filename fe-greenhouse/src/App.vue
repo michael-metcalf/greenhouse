@@ -7,23 +7,26 @@
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
-      <loading-message v-if="this.$store.state.userName !== ''  &&  this.$store.state.isLoading" />
-      <component v-if="this.$store.state.userName !== ''  &&  !this.$store.state.isLoading" :is="component"></component>
-      <!-- <Login/>
-      <EnvironmentalFact/>
-      <BudgetVisualization/>
-      <EcoGoalProgress v-bind:ecoScore="45"/>
-      <BudgetInput/> -->
+      <loading-message
+        v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
+      />
+      <component
+        v-if="this.$store.state.userName !== '' && !this.$store.state.isLoading"
+        :is="component"
+      ></component>
     </div>
     <div class="nav-bar">
-      <div v-if="this.$store.state.userName !== ''"  id="footer-button-container">
+      <div
+        v-if="this.$store.state.userName !== ''"
+        id="footer-button-container"
+      >
         <button
           v-on:click="component = 'BudgetVisualization'"
           class="footer-button"
           name="profile"
           value="profile"
         >
-        <i id="home-icon" class="fas fa-home"></i>
+          <i id="home-icon" class="fas fa-home"></i>
         </button>
         <button
           v-on:click="component = 'ExpenseInput'"
@@ -31,7 +34,7 @@
           name="expense-input"
           value="expense-input"
         >
-        <i id="dollar-icon" class="fas fa-dollar-sign"></i>
+          <i id="dollar-icon" class="fas fa-dollar-sign"></i>
         </button>
         <button
           v-on:click="component = 'BudgetInput'"
@@ -39,7 +42,7 @@
           name="monthly-budget"
           value="monthly-budget"
         >
-        <i id="calendar-icon" class="far fa-calendar-alt"></i>
+          <i id="calendar-icon" class="far fa-calendar-alt"></i>
         </button>
         <button
           v-on:click="component = 'BarChart'"
@@ -47,7 +50,7 @@
           name="eco-action-chart"
           value="eco-action-chart"
         >
-        <i id="chart-icon" class="fas fa-chart-bar"></i>
+          <i id="chart-icon" class="fas fa-chart-bar"></i>
         </button>
         <button
           v-on:click="$store.commit('clearUserName')"
@@ -55,7 +58,7 @@
           name="logout"
           value="logout"
         >
-        <i id="signout-icon" class="fas fa-sign-out-alt"></i>
+          <i id="signout-icon" class="fas fa-sign-out-alt"></i>
         </button>
       </div>
     </div>
@@ -121,75 +124,80 @@ export default {
     externalScript.setAttribute(
       "src",
       "https://kit.fontawesome.com/e3cbc00358.js"
-    )
-    externalScript.setAttribute("crossorigin", "anonymous")
+    );
+    externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
-  }
+  },
 };
 </script>
 
 <style>
 #app {
   --app-max-width: 500px;
+
+  /* Variable calculation for positioning */
+  --header-footer-height: max(10vh, 60px);
+
   max-width: var(--app-max-width);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   min-height: 100vh;
-  background: #2980b9; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #ffffff,
-    #ade3f6,
-    #6dd5fa
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #ffffff,
-    #ade3f6,
-    #6dd5fa
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
 
-.main-panel > * {
-  border: 1pt solid red;
-  margin-top: 8vh;
-  margin-bottom: 5px;
-  padding: 5px;
-}
-
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: var(--app-max-width);
-  min-height: 10vh;
-  background: #ade3f6;
-  border: 2px solid red;
+  /* Background features */
+  /* 
+  background: url("assets/blurred-bg-green.jpg") top repeat-y;
+  background: url("assets/green-palmtree.jpg") top repeat-y;
+  background: url("assets/green-surfer.jpg") top no-repeat;
+  background: url("assets/grass-background.jpg") top repeat-y; */
+  background: url("assets/green-palmtree.jpg") top repeat-y;
+  background-size: auto 100%;
 }
 
 .main-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin-bottom: 11.5vh;
+  /* Height of the panel is the whole size - footer height */
+  height: calc(100vh - 2 * var(--header-footer-height));
+  /* The main panel has to be displayed from the bottom of the header, i.e
+     header-content-height + 2* padding */
+  margin-top: var(--header-footer-height);
+}
+
+.main-panel > * {
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.header {
+  /* Header position: ABSOLUTE (to always stay on top) */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: var(--app-max-width);
+  box-sizing: border-box;
+  height: var(--header-footer-height);
+  background-color: rgba(197, 231, 226, 1);
+  display: flex; /* header has a flex display in order to center the title vertically */
+  flex-direction: column;
 }
 
 .nav-bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
   position: fixed;
   bottom: 0;
   width: 100%;
   max-width: var(--app-max-width);
-  min-height: 10vh;
-  background: #ade3f6;
-  border: 2px solid red;
+  height: var(--header-footer-height);
+  background: rgba(255, 255, 255, 1);
 }
 
 #footer-button-container {
@@ -210,8 +218,11 @@ export default {
   border: 2px solid red;
 }
 
-#home-icon, #dollar-icon, #calendar-icon, #signout-icon, #chart-icon {
+#home-icon,
+#dollar-icon,
+#calendar-icon,
+#signout-icon,
+#chart-icon {
   color: teal;
 }
-
 </style>

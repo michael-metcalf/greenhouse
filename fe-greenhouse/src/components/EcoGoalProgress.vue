@@ -1,9 +1,11 @@
 <template>
   <div class="eco-goals-container">
-    <p id="eco-goals">Eco Goals: <i id="sprout" class="fas fa-seedling"></i> {{ecoScoreString}} </p>
-    <p> {{ customerMessage}} </p>
+    <p id="eco-goals">
+      Eco Goals: <i id="sprout" class="fas fa-seedling"></i>
+      {{ ecoScoreString }}
+    </p>
+    <p>{{ customerMessage }}</p>
   </div>
-
 </template>
 
 <script>
@@ -15,54 +17,57 @@ export default {
   data: () => {
     return {
       ecoScoreString: 0,
-      customerMessage: '',
-    }
+      customerMessage: "",
+    };
   },
   mounted() {
-        const externalScript = document.createElement("script");
+    const externalScript = document.createElement("script");
     externalScript.setAttribute(
       "src",
       "https://kit.fontawesome.com/e3cbc00358.js"
-    )
-    externalScript.setAttribute("crossorigin", "anonymous")
+    );
+    externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
-    console.log(`Props - eco score ${this.ecoScore}`)
+    console.log(`Props - eco score ${this.ecoScore}`);
     const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
-    for (let i=0; i<numberOfSprouts; i++) {
+    for (let i = 0; i < numberOfSprouts; i++) {
       this.ecoScoreString += 1;
     }
-    switch(numberOfSprouts) {
+    switch (numberOfSprouts) {
       case 0:
-        this.customerMessage = 'Could do better?';
+        this.customerMessage = "Could do better?";
         break;
       case 1:
-        this.customerMessage = 'Just one!';
+        this.customerMessage = "Just one!";
         break;
       case 2:
-        this.customerMessage = 'Just a little bit more';
+        this.customerMessage = "Just a little bit more";
         break;
       case 3:
-        this.customerMessage = 'On track!';
+        this.customerMessage = "On track!";
         break;
       case 4:
-        this.customerMessage = 'Thanks for the earth!';
+        this.customerMessage = "Thanks for the earth!";
         break;
       case 5:
-        this.customerMessage = 'PERFECT!!!';
+        this.customerMessage = "PERFECT!!!";
         break;
       default:
-        this.customerMessage = 'You\'re on track!';
+        this.customerMessage = "You're on track!";
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 .eco-goals-container {
-  border: 2px solid red;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
 }
 
 #eco-goals {
@@ -72,5 +77,4 @@ export default {
 #sprout {
   color: green;
 }
-
 </style>

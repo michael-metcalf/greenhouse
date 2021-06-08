@@ -17,7 +17,7 @@ export default {
         datasets: [
           {
             label: "First Dataset",
-            backgroundColor: ["red", "green"],
+            backgroundColor: ["rgb(245,133,63)", "rgb(111,176,42)"],
             borderColor: ["rgba(255,255,255,0)", "rgba(255,255,255,0)"],
             data: [Number(savingsScore), Number(1 - savingsScore)],
           },
