@@ -124,7 +124,7 @@ export default new Vuex.Store({
 
     async getExpenses({ commit, state }) {
       try {
-        const res = await axios.get(`/api/user/${state.user.user_id}/expenses`);
+        const res = await axios.get(`/api/user/${state.user.user_id}/expenses/${Date.getFullYear}/${(Date.getMonth) + 1}`);
         commit("setExpensesList", { expensesList: res.data.expenses });
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);

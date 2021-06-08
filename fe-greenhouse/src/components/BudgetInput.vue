@@ -133,11 +133,9 @@
         </tbody>
       </table>
       <p>
-        Savings Leeway: {{ savingsLeeway == null ? 0 : this.savingsLeeway }}
+        Savings Leeway: {{ this.savingsLeeway }}
       </p>
       <div id="button-container">
-        <!-- <button class="budget-button" name="back" value="back">Back</button> -->
-        <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
         <button
           @click="patchUserBudgetInput"
           class="budget-submit-button"
@@ -227,6 +225,38 @@ export default {
     blurField() {
       this.editField = "";
     },
+    // getRunningGroceries() {
+    //   return this.runningGroceries = this.$store.state.expensesList
+    //         .filter((element) => element.category_id == this.groceries_id)
+    //         .reduce(
+    //           (accumulator, currentElement) => accumulator + currentElement.amount,
+    //           0
+    //         );
+    // },
+    // getRunningBills() {
+    //   return this.runningBills = this.$store.state.expensesList
+    //         .filter((element) => element.category_id == this.bills_id)
+    //         .reduce(
+    //           (accumulator, currentElement) => accumulator + currentElement.amount,
+    //           0
+    //         );
+    // },
+    // getRunningTransport() {
+    //   return this.runningTransport = this.$store.state.expensesList
+    //         .filter((element) => element.category_id == this.transport_id)
+    //         .reduce(
+    //           (accumulator, currentElement) => accumulator + currentElement.amount,
+    //           0
+    //         );
+    // },
+    // getRunningMisc() {
+    //   return this.runningMisc = this.$store.state.expensesList
+    //         .filter((element) => element.category_id == this.misc_id)
+    //         .reduce(
+    //           (accumulator, currentElement) => accumulator + currentElement.amount,
+    //           0
+    //         );
+    // },
     getSavingsLeeway() {
       return (
         Number(this.form.monthlyIncome) -
