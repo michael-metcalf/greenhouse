@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <div class="header">
+      <button id="create-account" v-on:click="showSignUp">Create Account</button>
       <h1>MoneySprouts</h1>
     </div>
     <div class="main-panel">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.showLogin" />
-      <loading-message
+      <!-- <loading-message
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
-      />
+      /> -->
       <BudgetVisualization v-if="this.$store.state.showBudgetVisualization" />
       <BarChart v-if="this.$store.state.showBarChart" />
       <ExpenseInput v-if="this.$store.state.showExpenseInput" />
@@ -72,10 +73,10 @@ import BudgetVisualization from "./components/BudgetVisualization.vue";
 // import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
-import LoadingMessage from "./components/LoadingMessage.vue";
+// import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
 import BarChart from "./components/BarChart";
-import SignUp from "./components/BarChart.vue";
+import SignUp from "./components/SignUp.vue";
 
 export default {
   name: "App",
@@ -84,7 +85,7 @@ export default {
     BudgetVisualization,
     ExpenseInput,
     BudgetInput,
-    LoadingMessage,
+    // LoadingMessage,
     UserMessageDisplay,
     BarChart,
     SignUp,
@@ -114,6 +115,11 @@ export default {
       this.$store.commit("setShowsToFalse")
       this.$store.commit("showBarChart")
     },
+
+    showSignUp() {
+      this.$store.commit("setShowsToFalse")
+      this.$store.commit("showSignUp")
+    }
 
     // async receiveLoginSignal() {
     //   // Need to download the data related to the current user
@@ -247,4 +253,10 @@ export default {
 #chart-icon {
   color: teal;
 }
+
+#create-account {
+  width: 150px;
+  font-size: smaller;
+}
+
 </style>
