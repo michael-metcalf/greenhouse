@@ -26,7 +26,11 @@ export default {
               this.getNoImpulseBuyActionTotal(),
               this.getTransportActionTotal(),
             ],
-            backgroundColor: ["rgb(25,25,255)", "rgb(255,0,0)", "rgb(0,150,0)"],
+            backgroundColor: [
+              "rgb(111,176,42)",
+              "rgb(111,176,42)",
+              "rgb(111,176,42)",
+            ],
             borderColor: ["rgb(0, 0, 0)"],
           },
         ],

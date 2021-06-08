@@ -1,14 +1,15 @@
 <template>
   <div id="budget-input-container">
-    <form id="budget-input-form" @submit.prevent="patchUserBudgetInput">
+    <div id="budget-input-form">
       <p>
         Monthly Income:
         <span
           class="field-value"
           v-show="!showField('monthlyIncome')"
           @click="focusField('monthlyIncome')"
-          >{{ form.monthlyIncome }}</span
         >
+          {{ form.monthlyIncome }}
+        </span>
         <input
           v-model="form.monthlyIncome"
           v-show="showField('monthlyIncome')"
@@ -19,119 +20,111 @@
           @blur="blurField"
         />
       </p>
-      <table id="budget-input-table">
-        <thead>
-          <th></th>
-          <th>Running Total</th>
-          <th>Amount Allocated</th>
-        </thead>
-        <tbody>
-          <tr>
-            Groceries
-            <td>{{ runningGroceries }}</td>
-            <td>
-              <span
-                class="field-value"
-                v-show="!showField('allocatedGroceries')"
-                @click="focusField('allocatedGroceries')"
-                >{{ form.allocatedGroceries }}</span
-              >
-              <input
-                v-model="form.allocatedGroceries"
-                v-show="showField('allocatedGroceries')"
-                id="allocated-groceries"
-                type="text"
-                class="field-value form-control"
-                @focus="focusField('allocatedGroceries')"
-                @blur="blurField"
-              />
-            </td>
-          </tr>
-          <tr>
-            Bills
-            <td>{{ runningBills }}</td>
-            <td>
-              <span
-                class="field-value"
-                v-show="!showField('allocatedBills')"
-                @click="focusField('allocatedBills')"
-                >{{ form.allocatedBills }}</span
-              >
-              <input
-                v-model="form.allocatedBills"
-                v-show="showField('allocatedBills')"
-                id="allocated-bills"
-                type="text"
-                class="field-value form-control"
-                @focus="focusField('allocatedBills')"
-                @blur="blurField"
-              />
-            </td>
-          </tr>
-          <tr>
-            Transport
-            <td>{{ runningTransport }}</td>
-            <td>
-              <span
-                class="field-value"
-                v-show="!showField('allocatedTransport')"
-                @click="focusField('allocatedTransport')"
-                >{{ form.allocatedTransport }}</span
-              >
-              <input
-                v-model="form.allocatedTransport"
-                v-show="showField('allocatedTransport')"
-                id="allocated-transport"
-                type="text"
-                class="field-value form-control"
-                @focus="focusField('allocatedTransport')"
-                @blur="blurField"
-              />
-            </td>
-          </tr>
-          <tr>
-            Misc
-            <td>{{ runningMisc }}</td>
-            <td>
-              <span
-                class="field-value"
-                v-show="!showField('allocatedMisc')"
-                @click="focusField('allocatedMisc')"
-                >{{ form.allocatedMisc }}</span
-              >
-              <input
-                v-model="form.allocatedMisc"
-                v-show="showField('allocatedMisc')"
-                id="allocated-misc"
-                type="text"
-                class="field-value form-control"
-                @focus="focusField('allocatedMisc')"
-                @blur="blurField"
-              />
-            </td>
-          </tr>
-          <tr>
-            Savings Target
-            <td>
-              <span
-                class="field-value"
-                v-show="!showField('savingsTarget')"
-                @click="focusField('savingsTarget')"
-                >{{ form.savingsTarget }}</span
-              >
-              <input
-                v-model="form.savingsTarget"
-                v-show="showField('savingsTarget')"
-                id="savings-target"
-                type="text"
-                class="field-value form-control"
-                @focus="focusField('savingsTarget')"
-                @blur="blurField"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="budget-input-grid">
+        <div></div>
+        <div class="grid-col-header">Running Total</div>
+        <div class="grid-col-header">Amount Allocated</div>
+        <div class="grid-row-header">Groceries</div>
+        <div class="grid-content">{{ runningGroceries }}</div>
+        <div class="grid-content">
+          <span
+            class="field-value"
+            v-show="!showField('allocatedGroceries')"
+            @click="focusField('allocatedGroceries')"
+            >{{ form.allocatedGroceries }}</span
+          >
+          <input
+            v-model="form.allocatedGroceries"
+            v-show="showField('allocatedGroceries')"
+            id="allocated-groceries"
+            type="text"
+            class="field-value form-control"
+            @focus="focusField('allocatedGroceries')"
+            @blur="blurField"
+            maxlength="15"
+          />
+        </div>
+        <div class="row-header">Bills</div>
+        <div class="grid-content">{{ runningBills }}</div>
+        <div class="grid-content">
+          <span
+            class="field-value"
+            v-show="!showField('allocatedBills')"
+            @click="focusField('allocatedBills')"
+            >{{ form.allocatedBills }}</span
+          >
+          <input
+            v-model="form.allocatedBills"
+            v-show="showField('allocatedBills')"
+            id="allocated-bills"
+            type="text"
+            class="field-value form-control"
+            @focus="focusField('allocatedBills')"
+            @blur="blurField"
+            maxlength="15"
+          />
+        </div>
+        <div class="row-header">Transport</div>
+        <div class="grid-content">{{ runningTransport }}</div>
+        <div class="grid-content">
+          <span
+            class="field-value"
+            v-show="!showField('allocatedTransport')"
+            @click="focusField('allocatedTransport')"
+            >{{ form.allocatedTransport }}</span
+          >
+          <input
+            v-model="form.allocatedTransport"
+            v-show="showField('allocatedTransport')"
+            id="allocated-transport"
+            type="text"
+            class="field-value form-control"
+            @focus="focusField('allocatedTransport')"
+            @blur="blurField"
+            maxlength="15"
+          />
+        </div>
+        <div class="row-header">Misc</div>
+        <div class="grid-content">{{ runningMisc }}</div>
+        <div class="grid-content">
+          <span
+            class="field-value"
+            v-show="!showField('allocatedMisc')"
+            @click="focusField('allocatedMisc')"
+            >{{ form.allocatedMisc }}</span
+          >
+          <input
+            v-model="form.allocatedMisc"
+            v-show="showField('allocatedMisc')"
+            id="allocated-misc"
+            type="text"
+            class="field-value form-control"
+            @focus="focusField('allocatedMisc')"
+            @blur="blurField"
+            maxlength="15"
+          />
+        </div>
+        <div class="row-header big-row two-columns">Savings Target</div>
+        <div class="grid-content big-row">
+          <span
+            class="field-value"
+            v-show="!showField('savingsTarget')"
+            @click="focusField('savingsTarget')"
+            >{{ form.savingsTarget }}</span
+          >
+          <input
+            v-model="form.savingsTarget"
+            v-show="showField('savingsTarget')"
+            id="savings-target"
+            type="text"
+            class="field-value form-control"
+            @focus="focusField('savingsTarget')"
+            @blur="blurField"
+            maxlength="15"
+          />
+        </div>
+      </div>
+
       <p>
         Savings Leeway: {{ this.savingsLeeway }}
       </p>
@@ -144,7 +137,7 @@
           Update Budget
         </button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -220,43 +213,14 @@ export default {
       this.editField = name;
     },
     showField(name) {
+      // showField returns TRUE if UI has to show the field whose name is passed in parameter
+      // Function used in conjunction with vue directive v-show
+      // https://vuejs.org/v2/api/#v-show
       return this.form[name] == "" || this.editField == name;
     },
     blurField() {
       this.editField = "";
     },
-    // getRunningGroceries() {
-    //   return this.runningGroceries = this.$store.state.expensesList
-    //         .filter((element) => element.category_id == this.groceries_id)
-    //         .reduce(
-    //           (accumulator, currentElement) => accumulator + currentElement.amount,
-    //           0
-    //         );
-    // },
-    // getRunningBills() {
-    //   return this.runningBills = this.$store.state.expensesList
-    //         .filter((element) => element.category_id == this.bills_id)
-    //         .reduce(
-    //           (accumulator, currentElement) => accumulator + currentElement.amount,
-    //           0
-    //         );
-    // },
-    // getRunningTransport() {
-    //   return this.runningTransport = this.$store.state.expensesList
-    //         .filter((element) => element.category_id == this.transport_id)
-    //         .reduce(
-    //           (accumulator, currentElement) => accumulator + currentElement.amount,
-    //           0
-    //         );
-    // },
-    // getRunningMisc() {
-    //   return this.runningMisc = this.$store.state.expensesList
-    //         .filter((element) => element.category_id == this.misc_id)
-    //         .reduce(
-    //           (accumulator, currentElement) => accumulator + currentElement.amount,
-    //           0
-    //         );
-    // },
     getSavingsLeeway() {
       return (
         Number(this.form.monthlyIncome) -
@@ -292,5 +256,33 @@ export default {
 #savings-target {
   color: green;
   font-weight: bold;
+}
+
+#budget-input-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  gap: 10px 0;
+}
+
+.big-row {
+  margin-top: 1.3em;
+}
+
+.two-columns {
+  grid-column: span 2 / auto;
+}
+
+#budget-input-grid > input {
+  max-width: 40px;
+  color: red;
+}
+
+.budget-submit-button {
+  height: 2em;
+  font-size: large;
+  border-radius: 5px;
+  background-color: #403d58;
+  color: white;
+  width: 100px;
 }
 </style>

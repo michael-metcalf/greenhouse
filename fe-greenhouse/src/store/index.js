@@ -59,7 +59,7 @@ export default new Vuex.Store({
       state.isAuthenticated = payload;
     },
     setCategoriesList(state, payload) {
-      state.categoriesList = payload;
+      state.categoriesList = payload.categoriesList;
     },
   }, // Use mutations to modify the state variables synchronously
   actions: {
@@ -124,7 +124,9 @@ export default new Vuex.Store({
 
     async getExpenses({ commit, state }) {
       try {
-        const res = await axios.get(`/api/user/${state.user.user_id}/expenses/${Date.getFullYear}/${(Date.getMonth) + 1}`);
+        // Default -> Calling the get expenses for the current month
+        const currentDate = new Date();
+        const res = await axios.get(`/api/user/${state.user.user_id}/expenses/${currentDate.getFullYear()}/${currentDate.getMonth()+1}`);
         commit("setExpensesList", { expensesList: res.data.expenses });
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);
@@ -190,6 +192,8 @@ export default new Vuex.Store({
           `/api/user/${state.user.user_id}/categories`
         );
         if (res.data.categories) {
+          console.log(`Received categories...`);
+          console.log(res.data.categories);
           commit("setCategoriesList", { categoriesList: res.data.categories });
         }
       } catch (err) {
