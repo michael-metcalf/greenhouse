@@ -53,7 +53,6 @@ export default {
   padding: 40px;
   width: 280px;
   height: 280px;
-  margin-top: auto;
 }
 
 input {
