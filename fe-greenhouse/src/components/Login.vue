@@ -49,6 +49,7 @@ export default {
   border: none;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 40px;
   width: 280px;
@@ -57,7 +58,8 @@ export default {
 
 input {
   margin-bottom: 1.5em;
-  height: 1.2em;
+  height: 2em;
+  font-size: large;
 }
 
 .green-emphasis {
@@ -67,5 +69,13 @@ input {
 button {
   height: 2em;
   font-size: large;
+  border-radius: 5px;
+  background-color: #403d58;
+  color: white;
+  width: 75%;
+}
+
+h2 {
+  margin-top: 0;
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="header">
       <h1>MoneySprouts</h1>
     </div>
-    <div v-bind:class="mainPanelClass" >
+    <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
@@ -94,24 +94,24 @@ export default {
     };
   },
   computed: {
-    mainPanelClass: function() {
+    mainPanelClass: function () {
       // Computed function to return the main Panel class dynamically
       // https://vuejs.org/v2/guide/class-and-style.html
-      
+
       // Checking if the current component is included into the list of components
       // requiring the main Panel to be centered vertically
-      let isCentered = [ 'BudgetInput', 'BarChart' ].includes(this.$data.component);
-      isCentered = isCentered || (this.$store.state.userName === '');
+      let isCentered = ["BudgetInput", "BarChart"].includes(
+        this.$data.component
+      );
+      isCentered = isCentered || this.$store.state.userName === "";
 
       return {
-        'main-panel': true,
-        'contentCentered': isCentered,
+        "main-panel": true,
+        contentCentered: isCentered,
       };
     },
   },
-  methods: {
-   
-  },
+  methods: {},
   mounted() {
     const externalScript = document.createElement("script");
     externalScript.setAttribute(
@@ -125,19 +125,18 @@ export default {
 </script>
 
 <style>
-
-
-
+@import url("https://fonts.googleapis.com/css2?family=Carme&family=Lato&display=swap");
 
 #app {
   --app-max-width: 500px;
-  --header-color: #D7EFBD;
+  --header-color: #d7efbd;
 
   /* Variable calculation for positioning */
   --header-footer-height: max(10vh, 60px);
 
   max-width: var(--app-max-width);
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Lato", sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -152,6 +151,10 @@ export default {
   background: url("assets/grass-background.jpg") top repeat-y; */
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
+}
+
+h1 h2 {
+  font-family: "Carme", sans-serif;
 }
 
 .main-panel {
@@ -191,7 +194,7 @@ export default {
 }
 
 .header i {
-  color:green;
+  color: green;
 }
 
 .nav-bar {
@@ -223,7 +226,8 @@ export default {
   padding: 5px;
   text-align: center;
   border-radius: 12%;
-  border: 2px solid red;
+  border: 3px solid #403d58;
+  background-color: #403d58;
 }
 
 #home-icon,
@@ -231,6 +235,6 @@ export default {
 #calendar-icon,
 #signout-icon,
 #chart-icon {
-  color: teal;
+  color: white;
 }
 </style>

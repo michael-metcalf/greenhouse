@@ -9,7 +9,7 @@
           <p>{{ Math.floor(targetPercent * 100) + "%" }}</p>
         </div>
         <progress-chart
-          :savingsScore="Math.min(targetPercent,1)"
+          :savingsScore="Math.min(targetPercent, 1)"
           :css-classes="'chartContainer'"
         />
       </div>
@@ -79,7 +79,7 @@ export default {
 #homePanel {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .budget-viz-container {

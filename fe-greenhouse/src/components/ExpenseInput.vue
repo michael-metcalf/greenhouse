@@ -1,17 +1,17 @@
 <template>
   <div id="expense-input-container">
-    <h1>Expense Input</h1>
-    <form id="expense-input-form" @submit="postExpenseData" method="post">
-      <div>
+    <div id="expense-input-form">
+      <div class="verticalContainer">
         <p>Let's input an expense!</p>
-        <label for="expense-input">
+        <div class="inputDiv">
           <input
             class="expense-input-button"
             type="date"
             name="date-input"
             v-model="posts.date"
           />
-          <br />
+        </div>
+        <div class="inputDiv">
           <input
             class="expense-input-button"
             type="text"
@@ -19,7 +19,8 @@
             placeholder="Amount"
             v-model="posts.amount"
           />
-          <br />
+        </div>
+        <div class="inputDiv">
           <input
             class="expense-input-button"
             type="text"
@@ -27,44 +28,44 @@
             placeholder="Description"
             v-model="posts.description"
           />
-        </label>
-      </div>
-      <div id="category-button-container">
-        <input
-          @change="getCategory('Groceries')"
-          type="radio"
-          id="groceries"
-          name="category"
-          value="groceries"
-        />
-        <label class="category" for="groceries">Groceries</label>
+        </div>
+        <div id="category-button-container">
+          <input
+            @change="getCategory('Groceries')"
+            type="radio"
+            id="groceries"
+            name="category"
+            value="groceries"
+          />
+          <label class="category" for="groceries">Groceries</label>
 
-        <input
-          @change="getCategory('Bills')"
-          type="radio"
-          id="bills"
-          name="category"
-          value="bills"
-        />
-        <label class="category" for="bills">Bills</label>
+          <input
+            @change="getCategory('Bills')"
+            type="radio"
+            id="bills"
+            name="category"
+            value="bills"
+          />
+          <label class="category" for="bills">Bills</label>
 
-        <input
-          @change="getCategory('Transport')"
-          type="radio"
-          id="transport"
-          name="category"
-          value="transport"
-        />
-        <label class="category" for="transport">Transport</label>
+          <input
+            @change="getCategory('Transport')"
+            type="radio"
+            id="transport"
+            name="category"
+            value="transport"
+          />
+          <label class="category" for="transport">Transport</label>
 
-        <input
-          @change="getCategory('Misc')"
-          type="radio"
-          id="misc"
-          name="category"
-          value="misc"
-        />
-        <label class="category" for="misc">Misc</label>
+          <input
+            @change="getCategory('Misc')"
+            type="radio"
+            id="misc"
+            name="category"
+            value="misc"
+          />
+          <label class="category" for="misc">Misc</label>
+        </div>
       </div>
       <div id="eco-action-container">
         <p>Did you take an eco action?</p>
@@ -76,10 +77,10 @@
             name="eco-bag-no-bag"
             value="eco-bag-no-bag"
           />
-          <label for="eco-bag-no-bag"
-            ><span class="eco-watch"></span
-            ><i class="fas fa-shopping-bag" title="Eco bag/ No bag used"></i
-          ></label>
+          <label for="eco-bag-no-bag">
+            <span class="eco-watch"></span>
+            <i class="fas fa-shopping-bag" title="Eco bag/ No bag used"></i>
+          </label>
         </div>
         <div class="icon-box">
           <input
@@ -89,10 +90,10 @@
             name="no-impulse-buy"
             value="no-impulse-buy"
           />
-          <label for="no-impulse-buy"
-            ><span class="eco-watch"></span
-            ><i class="fas fa-tags" title="No impulse purchase made"></i
-          ></label>
+          <label for="no-impulse-buy">
+            <span class="eco-watch"></span>
+            <i class="fas fa-tags" title="No impulse purchase made"></i>
+          </label>
         </div>
         <div class="icon-box">
           <input
@@ -123,15 +124,10 @@
           ></label>
         </div>
       </div>
-      <button
-        form="expense-input-form"
-        type="submit"
-        name="submit"
-        value="submit"
-      >
+      <button form="expense-input-form" type="submit" @click="postExpenseData">
         Submit
       </button>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -184,10 +180,28 @@ export default {
 </script>
 
 <style scoped>
+#expense-input-container {
+  --second-color: #368f8b;
+}
+
 p {
   font-weight: bold;
-  color: green;
+  color: var(--second-color);
 }
+
+.verticalContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputDiv {
+  margin-bottom: 10px;
+}
+
+.inputDiv input {
+  font-size: large;
+}
+
 input[type="radio"] {
   display: none;
   margin-top: 10px;
@@ -207,7 +221,7 @@ input[type="radio"]:disabled ~ label {
   display: inline-grid;
   width: 50px;
   background: white;
-  border: 2px solid #9bd3b6;
+  border: 2px solid var(--second-color);
   border-radius: 20px;
   padding: 1rem;
   margin: 1px;
@@ -221,12 +235,12 @@ input[type="radio"]:disabled ~ label {
 input[type="radio"]:checked + label {
   background: #9bd3b6;
   color: white;
-  box-shadow: 0px 0px 20px rgba(0, 255, 128, 0.311);
+  box-shadow: 0px 0px 20px var(--second-color);
 }
 input[type="radio"]:checked + label::after {
   color: #3d3f43;
   font-family: FontAwesome;
-  border: 2px solid #126a3e;
+  border: 2px solid var(--second-color);
   /* content: ""; */
   font-size: 22px;
   position: relative;
@@ -264,6 +278,13 @@ input[type="checkbox"] + label .eco-watch {
 button {
   margin-top: 20px;
   margin-bottom: 100px;
+  height: 2em;
+  font-size: large;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #403d58;
+  color: white;
+  width: 100px;
 }
 
 @media only screen and (max-width: 700px) {
