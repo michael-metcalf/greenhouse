@@ -132,6 +132,15 @@
 </template>
 
 <script>
+// helper function for date padding
+function display2Digits(number) {
+  if (number < 10) {
+    return "0" + number;
+  } else {
+    return number;
+  }
+}
+
 export default {
   name: "ExpenseInput",
   // components: {FontAwesomeIcon},
@@ -144,6 +153,13 @@ export default {
     );
     externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
+
+    // setup the default date
+    const currentDate = new Date();
+    this.$data.posts.date = `${currentDate.getFullYear()}-${display2Digits(
+      currentDate.getMonth() + 1
+    )}-${display2Digits(currentDate.getDay())}`;
+    console.log(this.$data.posts.date);
   },
   data() {
     return {
@@ -182,6 +198,7 @@ export default {
 <style scoped>
 #expense-input-container {
   --second-color: #368f8b;
+  --button-color: #403d58;
 }
 
 p {
@@ -233,14 +250,15 @@ input[type="radio"]:disabled ~ label {
 }
 
 input[type="radio"]:checked + label {
-  background: #9bd3b6;
+  background: var(--button-color);
+  border: 1px solid var(--second-color);
   color: white;
-  box-shadow: 0px 0px 20px var(--second-color);
+  border: 0px;
 }
 input[type="radio"]:checked + label::after {
   color: #3d3f43;
   font-family: FontAwesome;
-  border: 2px solid var(--second-color);
+  border: 1px solid var(--second-color);
   /* content: ""; */
   font-size: 22px;
   position: relative;
