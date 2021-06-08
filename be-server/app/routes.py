@@ -62,9 +62,9 @@ def create_user_budget(id):
 #
 #########
 
-@app.route("/api/user/<id>/expenses")
-def get_expenses(id):
-    data = controller_get_expenses(Expense, id)
+@app.route("/api/user/<id>/expenses/<year>/<month>")
+def get_expenses(id, year, month):
+    data = controller_get_expenses(Expense, id, year, month)
     return data
 
 @app.route("/api/user/<id>/expenses/<expense_id>")

@@ -70,9 +70,9 @@ def controller_create_expense(db, expense_object, id, json_data):
     except Exception as e:
         return str(e)
 
-def controller_get_expenses(expense_object, id):
+def controller_get_expenses(expense_object, id, year, month):
     try:
-        data = service_get_expenses(expense_object, id)
+        data = service_get_expenses(expense_object, id, year, month)
         return data
     except Exception as e:
         return str(e)
