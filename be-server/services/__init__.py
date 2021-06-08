@@ -20,7 +20,7 @@ def service_create_user(db, user_object, budget_object, new_user):
 
     if user_exist == None:
         dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=salt_hashedpwd)
-        data = service_get_user(user_object, new_user["username"])        
+        data = service_get_username(user_object, new_user["username"])        
         
         json_body = {
             "monthly_budget": 0,

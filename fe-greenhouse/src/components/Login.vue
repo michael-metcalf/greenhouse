@@ -3,14 +3,14 @@
     <h2>Let's go <span class="green-emphasis">green</span>!</h2>
     <input
       type="text"
-      v-model="userName"
+      v-model="currentUser.userName"
       id="username-input"
       name="username-input"
       placeholder="username..."
     />
     <input
       type="password"
-      v-model="password"
+      v-model="currentUser.password"
       id="password-input"
       name="password-input"
       placeholder="password..."
@@ -19,21 +19,21 @@
     <div class="signup-container">
     <input
       type="text"
-      v-model="newUserName"
+      v-model="newUser.username"
       id="new-username-input"
       name="username-input"
       placeholder="New username..."
     />
     <input
       type="password"
-      v-model="newUserPassword"
+      v-model="newUser.password"
       id="new-password-input"
       name="password-input"
       placeholder="New password..."
     />
     <input
       type="email"
-      v-model="newUserEmail"
+      v-model="newUser.email"
       id="new-email-input"
       name="email-input"
       placeholder="Enter Email..."
@@ -49,24 +49,33 @@ export default {
   props: {
     msg: String,
   },
-  data: () => ({
-    userName: "",
-    password: "",
-  }),
+  data() {
+    return {
+      currentUser: {
+        userName: "",
+        password: "",
+      },
+      newUser: {
+        userName: "",
+        password: "",
+        email: "",
+      },
+    };  
+  },
   methods: {
     validateUserInput() {
       this.$store.dispatch("verifyLogin", {
-        username: this.userName,
-        password: this.password,
+        username: this.currentUser.userName,
+        password: this.currentUser.password,
       });
     },
     createUser() {
-      this.$store.dispatch("createUser", {
-        username: this.userName,
-      });
-      this.$store.dispatch("createUserPassword", {
-        password: this.password,
-      });
+      const newUser = {
+        username: this.newUser.userName,
+        password: this.newUser.password,
+        email: this.newUser.email,
+      }
+      this.$store.dispatch("createUser", newUser);
     },
   }
 };

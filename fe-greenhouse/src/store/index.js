@@ -100,29 +100,15 @@ export default new Vuex.Store({
       }
     },
 
-    async createUser({ dispatch, state }, payload) {
+    async createUser(store, payload) {
       try {
-        const res = await axios.post(
-          `/api/user/${state.user.user_id}/user_name`,
+        await axios.post(
+          "/api/user/create",
           payload
         );
-        console.log(res.data);
-        dispatch("getUser");
+        console.log(store);
       } catch (err) {
         console.error(`ERROR in createUser! ${err}`);
-      }
-    },
-
-    async createUserPassword({ dispatch, state }, payload) {
-      try {
-        const res = await axios.post(
-          `/api/user/${state.user.user_id}/password`,
-          payload
-        );
-        console.log(res.data);
-        dispatch("getUserPassword");
-      } catch (err) {
-        console.error(`ERROR in createUserPassword! ${err}`);
       }
     },
 
