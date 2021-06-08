@@ -3,7 +3,7 @@
     <div class="header">
       <h1>MoneySprouts</h1>
     </div>
-    <div class="main-panel">
+    <div class="main-panel" >
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
@@ -132,8 +132,13 @@ export default {
 </script>
 
 <style>
+
+
+
+
 #app {
   --app-max-width: 500px;
+  --header-color: #D7EFBD;
 
   /* Variable calculation for positioning */
   --header-footer-height: max(10vh, 60px);
@@ -162,10 +167,11 @@ export default {
   justify-content: flex-start;
   align-items: center;
   /* Height of the panel is the whole size - footer height */
-  height: calc(100vh - 2 * var(--header-footer-height));
+  min-height: calc(100vh - 2 * var(--header-footer-height));
   /* The main panel has to be displayed from the bottom of the header, i.e
      header-content-height + 2* padding */
   margin-top: var(--header-footer-height);
+  margin-bottom: var(--header-footer-height);
 }
 
 .main-panel > * {
@@ -181,9 +187,14 @@ export default {
   max-width: var(--app-max-width);
   box-sizing: border-box;
   height: var(--header-footer-height);
-  background-color: rgba(197, 231, 226, 1);
+  background-color: var(--header-color);
   display: flex; /* header has a flex display in order to center the title vertically */
   flex-direction: column;
+  z-index: 5;
+}
+
+.header i {
+  color:green;
 }
 
 .nav-bar {
@@ -197,7 +208,7 @@ export default {
   width: 100%;
   max-width: var(--app-max-width);
   height: var(--header-footer-height);
-  background: rgba(255, 255, 255, 1);
+  background: var(--header-color);
 }
 
 #footer-button-container {
