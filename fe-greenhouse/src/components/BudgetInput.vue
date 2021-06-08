@@ -152,4 +152,32 @@ export default {
   color: green;
   font-weight: bold;
 }
+
+h1 {
+  text-align: center;
+}
+
+#budget-input-container {
+  width: 100%;
+}
+#budget-input-table {
+  width: 400px;
+}
+.field-value {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.budget-button {
+  margin-top: 20px;
+  margin-bottom: 100px;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(77, 77, 77);
+}
+
 </style>

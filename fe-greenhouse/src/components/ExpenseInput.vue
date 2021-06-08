@@ -179,6 +179,11 @@ input[type=checkbox] + label .eco-watch {
 button {
   margin-top: 20px;
   margin-bottom: 100px;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(77, 77, 77);
 }
 
 @media only screen and (max-width: 700px) {
