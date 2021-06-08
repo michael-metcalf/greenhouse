@@ -165,10 +165,10 @@ def service_create_expense(db, expense_object, user_id, new_expense):
 
     return json_data
 
-def service_get_expenses(expense_object, user_id):
+def service_get_expenses(expense_object, user_id, year, month):
     expenses = []
 
-    data = dao_get_expenses(expense_object, user_id)
+    data = dao_get_expenses(expense_object, user_id, year, month)
 
     if len(data) == 0:
         return "Budget doesn't exist"

@@ -1,3 +1,5 @@
+from sqlalchemy.sql import extract
+
 #########
 #
 # Users
@@ -48,8 +50,8 @@ def dao_create_expense(db, expense_object, user_id, category_id, expense_descrip
     db.session.add(new_expense)
     db.session.commit()
 
-def dao_get_expenses(expense_object, user_id):
-    result = expense_object.query.filter_by(user_id=user_id).all()
+def dao_get_expenses(expense_object, user_id, year, month):
+    result = expense_object.query.filter_by(user_id=user_id).filter(extract('year', expense_object.created_at) == year, extract('month', expense_object.created_at) == month).all()
     return result
 
 def dao_get_expense(expense_object, expense_id):
