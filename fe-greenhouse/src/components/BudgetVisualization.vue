@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <span class="env-fact-container">
+  <div id="homePanel">
     <EnvironmentalFact />
-    </span>
+
     <div class="budget-viz-container">
       <h1>Current Situation</h1>
       <div class="chart-align-container">
-        <div class="budget-progress"><p>{{ Math.floor(targetPercent*100) + "%" }}</p></div>
-        <progress-chart :savingsScore="targetPercent" :css-classes="'chartContainer'" />
+        <div class="budget-progress">
+          <p>{{ Math.floor(targetPercent * 100) + "%" }}</p>
+        </div>
+        <progress-chart
+          :savingsScore="targetPercent"
+          :css-classes="'chartContainer'"
+        />
       </div>
       <h2>Potential savings: {{ income - expenses }}</h2>
       <ul class="no-bullets">
@@ -15,16 +19,14 @@
         <li>Expenses: {{ expenses }}</li>
       </ul>
     </div>
-    <span>
-      <EcoGoalProgress :ecoScore="Math.max(0,10-this.missedEcoActions)" />
-    </span>
+    <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
   </div>
 </template>
 
 <script>
 import ProgressChart from "./progressChart.vue";
-import EnvironmentalFact from './EnvironmentalFact.vue';
-import EcoGoalProgress from './EcoGoalProgress';
+import EnvironmentalFact from "./EnvironmentalFact.vue";
+import EcoGoalProgress from "./EcoGoalProgress";
 
 export default {
   name: "BudgetVisualization",
@@ -45,33 +47,40 @@ export default {
     getSumOfExpenses() {
       this.expenses = this.$store.state.expensesList
         .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue,0);
+        .reduce((currentSum, currentValue) => currentSum + currentValue, 0);
     },
     getMonthlyBudget() {
-      console.log("I AM SETTING THE MONTHLY BUDGET NOW")
+      console.log("I AM SETTING THE MONTHLY BUDGET NOW");
       this.income = this.$store.state.monthlyBudget.monthly_income;
-      console.log("THIS IS INCOME", this.income)
+      console.log("THIS IS INCOME", this.income);
     },
     getNumberOfMissedEcoActions() {
       // TO DO -> remove the hard coded value
-      this.missedEcoActions = this.$store.state.ecoActionsList.filter(action => action.eco_goal_id === 4).length;
-    }
+      this.missedEcoActions = this.$store.state.ecoActionsList.filter(
+        (action) => action.eco_goal_id === 4
+      ).length;
+    },
   },
   beforeMount() {
-    console.log("THIS IS BEFORE MOUNTED")
+    console.log("THIS IS BEFORE MOUNTED");
     this.getMonthlyBudget();
     this.getSumOfExpenses();
     this.getNumberOfMissedEcoActions();
-    this.targetPercent = Math.floor(this.expenses/this.income*100)/100
+    this.targetPercent = Math.floor((this.expenses / this.income) * 100) / 100;
   },
 
   mounted() {
-    console.log("I AM MOUNTED")
-  }
+    console.log("I AM MOUNTED");
+  },
 };
 </script>
 
 <style>
+#homePanel {
+  display: flex;
+  flex-direction: column;
+}
+
 .budget-viz-container {
   display: flex;
   flex-direction: column;
