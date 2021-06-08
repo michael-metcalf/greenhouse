@@ -56,7 +56,7 @@ export default new Vuex.Store({
       state.showExpenseInput = false;
       state.showBarChart = false;
       state.showBudgetInput = false;
-      state.showSignUp = false
+      state.showSignUp = false;
     },
 
     setUser(state, payload) {

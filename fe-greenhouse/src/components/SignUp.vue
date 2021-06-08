@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "SignUp",
   props: {
     msg: String,
   },
