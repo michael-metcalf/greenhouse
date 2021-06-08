@@ -3,7 +3,7 @@
     <div class="header">
       <h1>MoneySprouts</h1>
     </div>
-    <div class="main-panel">
+    <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.userName === ''" />
@@ -28,6 +28,7 @@
         >
           <i id="home-icon" class="fas fa-home"></i>
         </button>
+
         <button
           v-on:click="component = 'ExpenseInput'"
           class="footer-button"
@@ -92,33 +93,25 @@ export default {
       component: "BudgetVisualization",
     };
   },
-  methods: {
-    // async receiveLoginSignal() {
-    //   // Need to download the data related to the current user
-    //   console.log(`Received login signal...${this.$store.state.userName}`);
-    //   this.$store.commit("setLoadingStatus", true);
-    //   try {
-    //     const api_address = "http://localhost:5000/api/";
-    //     const budget_response = await axios.get(`${api_address}user/${this.$store.state.userName}/user_budget`);
-    //     console.log(`Monthly budget : ${JSON.stringify(budget_response.data)}`);
-    //     this.$store.commit("setMonthlyBudget", { monthlyBudget: budget_response.data });
-    //     const expenses_response = await axios.get(`${api_address}user/${this.$store.state.userName}/expenses`);
-    //     console.log(`Expenses list: ${JSON.stringify(expenses_response.data)}`);
-    //     this.$store.commit("setExpensesList", { expensesList: expenses_response.data.expenses  });
-    //     const eco_goals_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_goals`);
-    //     console.log(`Eco Goals list: ${JSON.stringify(eco_goals_response.data)}`);
-    //     if (eco_goals_response.data.eco_goals) {
-    //       this.$store.commit("setEcoGoalsList", { ecoGoalsList: eco_goals_response.data.eco_goals });
-    //     }
-    //     const eco_actions_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_actions`);
-    //     if (eco_actions_response.data.eco_actions) {
-    //       this.$store.commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
-    //     }
-    //     this.$store.commit("setLoadingStatus", false);
-    //   } catch(err) {
-    //     console.error(`ERROR in the back-end API download! ${err}`);
-    //   }
+  computed: {
+    mainPanelClass: function () {
+      // Computed function to return the main Panel class dynamically
+      // https://vuejs.org/v2/guide/class-and-style.html
+
+      // Checking if the current component is included into the list of components
+      // requiring the main Panel to be centered vertically
+      let isCentered = ["BudgetInput", "BarChart"].includes(
+        this.$data.component
+      );
+      isCentered = isCentered || this.$store.state.userName === "";
+
+      return {
+        "main-panel": true,
+        contentCentered: isCentered,
+      };
+    },
   },
+  methods: {},
   mounted() {
     const externalScript = document.createElement("script");
     externalScript.setAttribute(
@@ -132,14 +125,18 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Carme&family=Lato&display=swap");
+
 #app {
   --app-max-width: 500px;
+  --header-color: #d7efbd;
 
   /* Variable calculation for positioning */
   --header-footer-height: max(10vh, 60px);
 
   max-width: var(--app-max-width);
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Lato", sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -156,16 +153,25 @@ export default {
   background-size: auto 100%;
 }
 
+h1 h2 {
+  font-family: "Carme", sans-serif;
+}
+
 .main-panel {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   /* Height of the panel is the whole size - footer height */
-  height: calc(100vh - 2 * var(--header-footer-height));
+  min-height: calc(100vh - 2 * var(--header-footer-height));
   /* The main panel has to be displayed from the bottom of the header, i.e
      header-content-height + 2* padding */
   margin-top: var(--header-footer-height);
+  margin-bottom: var(--header-footer-height);
+}
+
+.contentCentered {
+  justify-content: center;
 }
 
 .main-panel > * {
@@ -181,9 +187,14 @@ export default {
   max-width: var(--app-max-width);
   box-sizing: border-box;
   height: var(--header-footer-height);
-  background-color: rgba(197, 231, 226, 1);
+  background-color: var(--header-color);
   display: flex; /* header has a flex display in order to center the title vertically */
   flex-direction: column;
+  z-index: 5;
+}
+
+.header i {
+  color: green;
 }
 
 .nav-bar {
@@ -197,7 +208,7 @@ export default {
   width: 100%;
   max-width: var(--app-max-width);
   height: var(--header-footer-height);
-  background: rgba(255, 255, 255, 1);
+  background: var(--header-color);
 }
 
 #footer-button-container {
@@ -215,7 +226,8 @@ export default {
   padding: 5px;
   text-align: center;
   border-radius: 12%;
-  border: 2px solid red;
+  border: 3px solid #403d58;
+  background-color: #403d58;
 }
 
 #home-icon,
@@ -223,6 +235,6 @@ export default {
 #calendar-icon,
 #signout-icon,
 #chart-icon {
-  color: teal;
+  color: white;
 }
 </style>

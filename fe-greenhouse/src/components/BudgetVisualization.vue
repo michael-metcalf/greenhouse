@@ -3,13 +3,13 @@
     <EnvironmentalFact />
 
     <div class="budget-viz-container">
-      <h1>Current Situation</h1>
+      <h1>This month's savings</h1>
       <div class="chart-align-container">
         <div class="budget-progress">
           <p>{{ Math.floor(targetPercent * 100) + "%" }}</p>
         </div>
         <progress-chart
-          :savingsScore="targetPercent"
+          :savingsScore="Math.min(targetPercent, 1)"
           :css-classes="'chartContainer'"
         />
       </div>
@@ -79,6 +79,7 @@ export default {
 #homePanel {
   display: flex;
   flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .budget-viz-container {
