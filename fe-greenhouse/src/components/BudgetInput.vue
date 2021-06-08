@@ -143,7 +143,7 @@
           class="budget-submit-button"
           form="budget-input-form"
         >
-          Submit
+          Update Budget
         </button>
       </div>
     </form>
@@ -166,12 +166,12 @@ export default {
       allocatedTotal: "",
       monthlyBudget: "",
       form: {
-        allocatedGroceries: "",
-        allocatedBills: "",
-        allocatedTransport: "",
-        allocatedMisc: "",
-        savingsTarget: "",
-        monthlyIncome: "",
+        allocatedGroceries: this.$store.state.monthlyBudget.groceries_alloc,
+        allocatedBills: this.$store.state.monthlyBudget.bills_alloc,
+        allocatedTransport: this.$store.state.monthlyBudget.transport_alloc,
+        allocatedMisc: this.$store.state.monthlyBudget.misc_alloc,
+        savingsTarget: this.$store.state.monthlyBudget.savings_target,
+        monthlyIncome: this.$store.state.monthlyBudget.monthly_income,
       },
     };
   },
@@ -210,7 +210,12 @@ export default {
       );
     this.allocatedMisc = 0;
     this.savingsTarget = 0;
-    this.savingsLeeway = 0;
+    this.savingsLeeway = Number(this.form.monthlyIncome) -
+                         Number(this.form.savingsTarget) -
+                        (Number(this.form.allocatedGroceries) +
+                         Number(this.form.allocatedBills) +
+                         Number(this.form.allocatedTransport) +
+                         Number(this.form.allocatedMisc));
   },
   methods: {
     focusField(name) {
@@ -226,10 +231,10 @@ export default {
       return (
         Number(this.form.monthlyIncome) -
         Number(this.form.savingsTarget) -
-        (Number(this.form.allocatedGroceries) +
-          Number(this.form.allocatedBills) +
-          Number(this.form.allocatedTransport) +
-          Number(this.form.allocatedMisc))
+       (Number(this.form.allocatedGroceries) +
+        Number(this.form.allocatedBills) +
+        Number(this.form.allocatedTransport) +
+        Number(this.form.allocatedMisc))
       );
     },
     patchUserBudgetInput() {
