@@ -16,30 +16,6 @@
       placeholder="password..."
     />
     <button @click="validateUserInput">Login</button>
-    <div class="signup-container">
-    <input
-      type="text"
-      v-model="newUser.username"
-      id="new-username-input"
-      name="username-input"
-      placeholder="New username..."
-    />
-    <input
-      type="password"
-      v-model="newUser.password"
-      id="new-password-input"
-      name="password-input"
-      placeholder="New password..."
-    />
-    <input
-      type="email"
-      v-model="newUser.email"
-      id="new-email-input"
-      name="email-input"
-      placeholder="Enter Email..."
-    />
-    <button id="sign-up" @click="createUser">Sign Me Up!</button>
-    </div>
   </div>
 </template>
 
@@ -55,11 +31,6 @@ export default {
         userName: "",
         password: "",
       },
-      newUser: {
-        userName: "",
-        password: "",
-        email: "",
-      },
     };  
   },
   methods: {
@@ -68,14 +39,6 @@ export default {
         username: this.currentUser.userName,
         password: this.currentUser.password,
       });
-    },
-    createUser() {
-      const newUser = {
-        username: this.newUser.userName,
-        password: this.newUser.password,
-        email: this.newUser.email,
-      }
-      this.$store.dispatch("createUser", newUser);
     },
   }
 };
@@ -92,20 +55,6 @@ export default {
   padding: 40px;
   width: 280px;
   height: 280px;
-}
-
-.signup-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#new-username-input, #new-password-input, #new-email-input {
-  margin-top: 5px;
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 input {

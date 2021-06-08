@@ -6,14 +6,15 @@
     <div class="main-panel">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
-      <Login v-if="this.$store.state.userName === ''" />
+      <Login v-if="this.$store.state.showLogin" />
       <loading-message
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
       />
-      <component
-        v-if="this.$store.state.userName !== '' && !this.$store.state.isLoading"
-        :is="component"
-      ></component>
+      <BudgetVisualization v-if="this.$store.state.showBudgetVisualization" />
+      <BarChart v-if="this.$store.state.showBarChart" />
+      <ExpenseInput v-if="this.$store.state.showExpenseInput" />
+      <SignUp v-if="this.$store.state.showSignUp" />
+      <BudgetInput v-if="this.$store.state.showBudgetInput" />
     </div>
     <div class="nav-bar">
       <div
@@ -21,7 +22,7 @@
         id="footer-button-container"
       >
         <button
-          v-on:click="component = 'BudgetVisualization'"
+          v-on:click="showBudgetVisualization"
           class="footer-button"
           name="profile"
           value="profile"
@@ -29,7 +30,7 @@
           <i id="home-icon" class="fas fa-home"></i>
         </button>
         <button
-          v-on:click="component = 'ExpenseInput'"
+          v-on:click="showExpenseInput"
           class="footer-button"
           name="expense-input"
           value="expense-input"
@@ -37,7 +38,7 @@
           <i id="dollar-icon" class="fas fa-dollar-sign"></i>
         </button>
         <button
-          v-on:click="component = 'BudgetInput'"
+          v-on:click="showBudgetInput"
           class="footer-button"
           name="monthly-budget"
           value="monthly-budget"
@@ -45,7 +46,7 @@
           <i id="calendar-icon" class="far fa-calendar-alt"></i>
         </button>
         <button
-          v-on:click="component = 'BarChart'"
+          v-on:click="showBarChart"
           class="footer-button"
           name="eco-action-chart"
           value="eco-action-chart"
@@ -68,7 +69,7 @@
 <script>
 import Login from "./components/Login.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
-import EcoGoalProgress from "./components/EcoGoalProgress.vue";
+// import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 import LoadingMessage from "./components/LoadingMessage.vue";
@@ -81,7 +82,6 @@ export default {
   components: {
     Login,
     BudgetVisualization,
-    EcoGoalProgress,
     ExpenseInput,
     BudgetInput,
     LoadingMessage,
@@ -89,12 +89,32 @@ export default {
     BarChart,
     SignUp,
   },
-  data() {
-    return {
-      component: "BugetVisualization",
-    };
-  },
+  // data() {
+  //   return {
+  //     component: "BudgetVisualization",
+  //   };
+  // },
   methods: {
+    showBudgetVisualization() {
+      this.$store.commit("setShowsToFalse")
+      this.$store.commit("showBudgetVisualization")
+    },
+
+    showExpenseInput() {
+      this.$store.commit("setShowsToFalse")
+      this.$store.commit("showExpenseInput")
+    },
+
+    showBudgetInput() {
+      this.$store.commit("setShowsToFalse")
+      this.$store.commit("showBudgetInput")
+    },
+
+    showBarChart() {
+      this.$store.commit("setShowsToFalse")
+      this.$store.commit("showBarChart")
+    },
+
     // async receiveLoginSignal() {
     //   // Need to download the data related to the current user
     //   console.log(`Received login signal...${this.$store.state.userName}`);
