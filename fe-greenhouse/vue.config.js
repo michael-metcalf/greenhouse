@@ -1,6 +1,11 @@
 // vue.config.js
 
 module.exports = {
+  pwa: {
+    name: "MoneySprouts",
+    workboxPluginMode: "GenerateSW",
+    themeColor: "#6FB02A"
+  },
   outputDir: "../be-server/static/",
   devServer: {
     proxy: {

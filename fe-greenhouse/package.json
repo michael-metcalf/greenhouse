@@ -2,13 +2,6 @@
   "name": "MoneySprouts",
   "version": "0.1.0",
   "private": true,
-  "vue": {
-    "pwa": {
-      "name": "MoneySprouts",
-      "workboxPluginMode": "GenerateSW",
-      "themeColor": "#6FB02A"
-    }
-  },
     "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
