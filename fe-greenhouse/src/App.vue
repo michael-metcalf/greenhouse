@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <div class="header">
-      <button id="create-account" v-on:click="showSignUp">
-        Create Account
-      </button>
       <h1>MoneySprouts</h1>
     </div>
     <div v-bind:class="mainPanelClass">
@@ -273,8 +270,4 @@ h1 h2 {
   color: white;
 }
 
-#create-account {
-  width: 150px;
-  font-size: smaller;
-}
 </style>
