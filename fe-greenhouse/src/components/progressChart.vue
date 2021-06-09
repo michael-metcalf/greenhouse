@@ -58,7 +58,7 @@ export default {
 
 <style>
 .chartContainer {
-  width: 80%;
+  width: 50%;
   max-width: 350px;
 }
 </style>
