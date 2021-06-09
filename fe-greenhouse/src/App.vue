@@ -9,7 +9,7 @@
     <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
-      <Login v-if="this.$store.state.showLogin" />
+      <Login class="panel" v-if="this.$store.state.showLogin" />
       <!-- <loading-message
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
       /> -->
@@ -58,7 +58,7 @@
           <i id="chart-icon" class="fas fa-chart-bar"></i>
         </button>
         <button
-          v-on:click="$store.commit('clearUserName')"
+          v-on:click="logout"
           class="footer-button"
           name="logout"
           value="logout"
@@ -123,7 +123,11 @@ export default {
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showSignUp");
     },
-
+    logout() {
+      this.$store.commit('clearUserName');
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showLogin");
+    }
  
   },
   mounted() {

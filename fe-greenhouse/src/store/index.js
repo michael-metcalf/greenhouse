@@ -68,6 +68,7 @@ export default new Vuex.Store({
     clearUserName(state) {
       state.userName = "";
       state.isLoading = true;
+      state.user = {};
     },
     setLoadingStatus(state, payload) {
       if (typeof payload === "boolean") {
