@@ -19,6 +19,7 @@
           @focus="focusField('monthlyIncome')"
           @blur="blurField"
         />
+        <i class="fas fa-edit"></i>
       </p>
       <div id="budget-input-grid">
         <div></div>
@@ -43,6 +44,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Bills</div>
         <div class="grid-content">{{ runningBills }}</div>
@@ -63,6 +65,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Transport</div>
         <div class="grid-content">{{ runningTransport }}</div>
@@ -83,6 +86,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Misc</div>
         <div class="grid-content">{{ runningMisc }}</div>
@@ -103,6 +107,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header big-row two-columns">Savings Target</div>
         <div class="grid-content big-row">
@@ -122,6 +127,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
       </div>
 
