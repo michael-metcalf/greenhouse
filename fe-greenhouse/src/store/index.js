@@ -18,8 +18,47 @@ export default new Vuex.Store({
     categoriesList: [],
     monthlyBudget: {},
     userMessage: { message: "", msgType: "" },
+    showLogin: true,
+    showBudgetVisualization: false,
+    showExpenseInput: false,
+    showBarChart: false,
+    showBudgetInput: false,
+    showSignUp: false
   },
   mutations: {
+    showSignUp(state) {
+      state.showSignUp = true
+    },
+    
+    showBudgetInput(state) {
+      state.showBudgetInput = true
+    },
+
+    showBarChart(state) {
+      state.showBarChart = true
+    },
+
+    showExpenseInput(state) {
+      state.showExpenseInput = true
+    },
+    
+    showBudgetVisualization(state) {
+      state.showBudgetVisualization = true
+    },
+    
+    showLogin(state) {
+      state.showLogin = true
+    },
+    
+    setShowsToFalse(state) {
+      state.showLogin = false;
+      state.showBudgetVisualization = false;
+      state.showExpenseInput = false;
+      state.showBarChart = false;
+      state.showBudgetInput = false;
+      state.showSignUp = false;
+    },
+
     setUser(state, payload) {
       state.user = payload;
     },
@@ -72,6 +111,7 @@ export default new Vuex.Store({
             msgType: "error",
           });
         } else {
+          console.log("I HAVE LOGGED IN")
           commit("setUserName", res.data.username);
           commit("setUser", res.data);
           dispatch("receiveLoginSignal");
@@ -86,17 +126,33 @@ export default new Vuex.Store({
       console.log(`Received login signal...${state.userName}`);
       commit("setLoadingStatus", true);
       try {
+        const date = new Date()
         await dispatch("getBudgets");
-        await dispatch("getExpenses");
+        await dispatch("getExpenses", {year: date.getFullYear(), month: date.getMonth() + 1});
         await dispatch("getEcoGoals");
         await dispatch("getEcoActions");
         await dispatch("getCategories");
+
+        commit("setShowsToFalse")
+        commit("showBudgetVisualization")
 
         commit("setLoadingStatus", false);
         commit("setAuthenticated", true);
         console.log("setLoading and setAuthenticated is done");
       } catch (err) {
         console.error(`ERROR in the back-end API download! ${err}`);
+      }
+    },
+
+    async createUser(store, payload) {
+      try {
+        await axios.post(
+          "/api/user/create",
+          payload
+        );
+        console.log(store);
+      } catch (err) {
+        console.error(`ERROR in createUser! ${err}`);
       }
     },
 
@@ -122,11 +178,9 @@ export default new Vuex.Store({
       }
     },
 
-    async getExpenses({ commit, state }) {
+    async getExpenses({ commit, state }, payload) {
       try {
-        // Default -> Calling the get expenses for the current month
-        const currentDate = new Date();
-        const res = await axios.get(`/api/user/${state.user.user_id}/expenses/${currentDate.getFullYear()}/${currentDate.getMonth()+1}`);
+        const res = await axios.get(`/api/user/${state.user.user_id}/expenses/${payload.year}/${payload.month}`);
         commit("setExpensesList", { expensesList: res.data.expenses });
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);

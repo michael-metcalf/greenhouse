@@ -3,14 +3,14 @@
     <h2>Let's go <span class="green-emphasis">green</span>!</h2>
     <input
       type="text"
-      v-model="userName"
+      v-model="currentUser.userName"
       id="username-input"
       name="username-input"
       placeholder="username..."
     />
     <input
       type="password"
-      v-model="password"
+      v-model="currentUser.password"
       id="password-input"
       name="password-input"
       placeholder="password..."
@@ -25,20 +25,22 @@ export default {
   props: {
     msg: String,
   },
-  data: () => ({
-    userName: "",
-    password: "",
-  }),
+  data() {
+    return {
+      currentUser: {
+        userName: "",
+        password: "",
+      },
+    };  
+  },
   methods: {
     validateUserInput() {
       this.$store.dispatch("verifyLogin", {
-        username: this.userName,
-        password: this.password,
+        username: this.currentUser.userName,
+        password: this.currentUser.password,
       });
-      // this.$store.commit("setUserName", { userName: this.userName });
-      // this.$emit("login-success");
     },
-  },
+  }
 };
 </script>
 
@@ -77,5 +79,10 @@ button {
 
 h2 {
   margin-top: 0;
+}
+
+#sign-up {
+  font-size: smaller;
+  background-color: lightcyan;
 }
 </style>

@@ -146,13 +146,13 @@ export default {
   // components: {FontAwesomeIcon},
   props: {},
   mounted() {
-    const externalScript = document.createElement("script");
-    externalScript.setAttribute(
-      "src",
-      "https://kit.fontawesome.com/e3cbc00358.js"
-    );
-    externalScript.setAttribute("crossorigin", "anonymous");
-    document.head.appendChild(externalScript);
+    // const externalScript = document.createElement("script");
+    // externalScript.setAttribute(
+    //   "src",
+    //   "https://kit.fontawesome.com/e3cbc00358.js"
+    // );
+    // externalScript.setAttribute("crossorigin", "anonymous");
+    // document.head.appendChild(externalScript);
 
     // setup the default date
     const currentDate = new Date();
