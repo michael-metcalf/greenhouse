@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="header">
-      <h1>MoneySprouts</h1>
+      <h1 id="moneySproutsTitle">MoneySprouts</h1>
     </div>
     <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
@@ -171,7 +171,7 @@ export default {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  
   color: #2c3e50;
   min-height: 100vh;
 
@@ -184,9 +184,13 @@ export default {
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
 }
+#moneySproutsTitle {
+  float: left !important;
+}
 
 h1 h2 {
   font-family: "Carme", sans-serif;
+  color:#403d58;
 }
 
 .main-panel {
@@ -200,6 +204,7 @@ h1 h2 {
      header-content-height + 2* padding */
   margin-top: var(--header-footer-height);
   margin-bottom: var(--header-footer-height);
+  text-align: center;
 }
 
 .contentCentered {
@@ -210,6 +215,8 @@ h1 h2 {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 }
+
+
 
 .header {
   /* Header position: ABSOLUTE (to always stay on top) */
