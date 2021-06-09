@@ -2,6 +2,7 @@
   <div id="expense-input-container">
     <div id="expense-input-form">
       <div class="verticalContainer">
+        <h1>Add Expenses</h1>
         <p>Let's input an expense!</p>
         <div class="inputDiv">
           <input

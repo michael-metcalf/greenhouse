@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="header">
-      <h1>MoneySprouts</h1>
+      <h1 id="moneySproutsTitle">MoneySprouts</h1>
     </div>
     <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
@@ -11,7 +11,7 @@
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
       /> -->
       <BudgetVisualization class="panel" v-if="this.$store.state.showBudgetVisualization" />
-      <BarChart class="panel" v-if="this.$store.state.showBarChart" />
+      <BarChartScreen class="panel" v-if="this.$store.state.showBarChart" />
       <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
       <SignUp class="panel" v-if="this.$store.state.showSignUp" />
       <BudgetInput class="panel" v-if="this.$store.state.showBudgetInput" />
@@ -75,8 +75,9 @@ import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 // import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
-import BarChart from "./components/BarChart";
+import BarChartScreen from "./components/BarChartScreen.vue";
 import SignUp from "./components/SignUp.vue";
+
 
 export default {
   name: "App",
@@ -87,7 +88,7 @@ export default {
     BudgetInput,
     // LoadingMessage,
     UserMessageDisplay,
-    BarChart,
+    BarChartScreen,
     SignUp,
   },
   // data() {
@@ -171,7 +172,7 @@ export default {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  
   color: #2c3e50;
   min-height: 100vh;
 
@@ -184,9 +185,15 @@ export default {
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
 }
+#moneySproutsTitle {
+  float: left !important;
+  margin-left: 10px;
+  font-size: 35px;
+}
 
 h1 h2 {
   font-family: "Carme", sans-serif;
+  color:#403d58;
 }
 
 .main-panel {
@@ -200,6 +207,7 @@ h1 h2 {
      header-content-height + 2* padding */
   margin-top: var(--header-footer-height);
   margin-bottom: var(--header-footer-height);
+  text-align: center;
 }
 
 .contentCentered {
@@ -210,6 +218,8 @@ h1 h2 {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 }
+
+
 
 .header {
   /* Header position: ABSOLUTE (to always stay on top) */

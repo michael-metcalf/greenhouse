@@ -1,6 +1,7 @@
 <template>
   <div id="budget-input-container">
     <div id="budget-input-form">
+      <h1>Update Budget</h1>
       <p>
         Monthly Income:
         <span
