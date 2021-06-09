@@ -1,19 +1,20 @@
 <template>
   <div id="app">
     <div class="header">
-      <h1>MoneySprouts</h1>
+      <h1 id="moneySproutsTitle">MoneySprouts</h1>
     </div>
     <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
-      <Login v-if="this.$store.state.userName === ''" />
-      <loading-message
+      <Login class="panel" v-if="this.$store.state.showLogin" />
+      <!-- <loading-message
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
-      />
-      <component
-        v-if="this.$store.state.userName !== '' && !this.$store.state.isLoading"
-        :is="component"
-      ></component>
+      /> -->
+      <BudgetVisualization class="panel" v-if="this.$store.state.showBudgetVisualization" />
+      <BarChartScreen class="panel" v-if="this.$store.state.showBarChart" />
+      <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
+      <SignUp class="panel" v-if="this.$store.state.showSignUp" />
+      <BudgetInput class="panel" v-if="this.$store.state.showBudgetInput" />
     </div>
     <div class="nav-bar">
       <div
@@ -21,7 +22,7 @@
         id="footer-button-container"
       >
         <button
-          v-on:click="component = 'BudgetVisualization'"
+          v-on:click="showBudgetVisualization"
           class="footer-button"
           name="profile"
           value="profile"
@@ -30,7 +31,7 @@
         </button>
 
         <button
-          v-on:click="component = 'ExpenseInput'"
+          v-on:click="showExpenseInput"
           class="footer-button"
           name="expense-input"
           value="expense-input"
@@ -38,7 +39,7 @@
           <i id="dollar-icon" class="fas fa-dollar-sign"></i>
         </button>
         <button
-          v-on:click="component = 'BudgetInput'"
+          v-on:click="showBudgetInput"
           class="footer-button"
           name="monthly-budget"
           value="monthly-budget"
@@ -46,7 +47,7 @@
           <i id="calendar-icon" class="far fa-calendar-alt"></i>
         </button>
         <button
-          v-on:click="component = 'BarChart'"
+          v-on:click="showBarChart"
           class="footer-button"
           name="eco-action-chart"
           value="eco-action-chart"
@@ -54,7 +55,7 @@
           <i id="chart-icon" class="fas fa-chart-bar"></i>
         </button>
         <button
-          v-on:click="$store.commit('clearUserName')"
+          v-on:click="logout"
           class="footer-button"
           name="logout"
           value="logout"
@@ -69,12 +70,14 @@
 <script>
 import Login from "./components/Login.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
-import EcoGoalProgress from "./components/EcoGoalProgress.vue";
+// import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
-import LoadingMessage from "./components/LoadingMessage.vue";
+// import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
-import BarChart from "./components/BarChart";
+import BarChartScreen from "./components/BarChartScreen.vue";
+import SignUp from "./components/SignUp.vue";
+
 
 export default {
   name: "App",
@@ -96,37 +99,50 @@ export default {
   components: {
     Login,
     BudgetVisualization,
-    EcoGoalProgress,
     ExpenseInput,
     BudgetInput,
-    LoadingMessage,
+    // LoadingMessage,
     UserMessageDisplay,
-    BarChart,
+    BarChartScreen,
+    SignUp,
   },
-  data() {
-    return {
-      component: "BudgetVisualization",
-    };
-  },
-  computed: {
-    mainPanelClass: function () {
-      // Computed function to return the main Panel class dynamically
-      // https://vuejs.org/v2/guide/class-and-style.html
-
-      // Checking if the current component is included into the list of components
-      // requiring the main Panel to be centered vertically
-      let isCentered = ["BudgetInput", "BarChart"].includes(
-        this.$data.component
-      );
-      isCentered = isCentered || this.$store.state.userName === "";
-
-      return {
-        "main-panel": true,
-        contentCentered: isCentered,
-      };
+  // data() {
+  //   return {
+  //     component: "BudgetVisualization",
+  //   };
+  // },
+  methods: {
+    showBudgetVisualization() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showBudgetVisualization");
     },
+
+    showExpenseInput() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showExpenseInput");
+    },
+
+    showBudgetInput() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showBudgetInput");
+    },
+
+    showBarChart() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showBarChart");
+    },
+
+    showSignUp() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showSignUp");
+    },
+    logout() {
+      this.$store.commit('clearUserName');
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showLogin");
+    }
+ 
   },
-  methods: {},
   mounted() {
     const externalScript = document.createElement("script");
     externalScript.setAttribute(
@@ -135,6 +151,23 @@ export default {
     );
     externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
+  },
+  computed: {
+    mainPanelClass: function () {
+      // Computed function to return the main Panel class dynamically
+      // https://vuejs.org/v2/guide/class-and-style.html
+      // Checking if the current component is included into the list of components
+      // requiring the main Panel to be centered vertically
+      const isCentered = this.$store.state.showLogin || 
+                         this.$store.state.showBarChart ||
+                        this.$store.state.showBudgetInput;
+      console.log(`login: ${this.$store.state.showLogin}, bar: ${this.$store.state.showBarChart}, 
+      BI: ${this.$store.state.showBudgetInput}`);
+      return {
+        "main-panel": true,
+        contentCentered: isCentered,
+      };
+    },
   },
 };
 </script>
@@ -154,7 +187,7 @@ export default {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  
   color: #2c3e50;
   min-height: 100vh;
 
@@ -167,9 +200,15 @@ export default {
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
 }
+#moneySproutsTitle {
+  float: left !important;
+  margin-left: 10px;
+  font-size: 35px;
+}
 
 h1 h2 {
   font-family: "Carme", sans-serif;
+  color:#403d58;
 }
 
 .main-panel {
@@ -183,16 +222,19 @@ h1 h2 {
      header-content-height + 2* padding */
   margin-top: var(--header-footer-height);
   margin-bottom: var(--header-footer-height);
+  text-align: center;
 }
 
 .contentCentered {
   justify-content: center;
 }
 
-.main-panel > * {
+.panel {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 }
+
+
 
 .header {
   /* Header position: ABSOLUTE (to always stay on top) */
@@ -252,4 +294,5 @@ h1 h2 {
 #chart-icon {
   color: white;
 }
+
 </style>

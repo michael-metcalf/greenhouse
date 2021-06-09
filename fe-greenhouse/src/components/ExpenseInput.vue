@@ -2,6 +2,7 @@
   <div id="expense-input-container">
     <div id="expense-input-form">
       <div class="verticalContainer">
+        <h1>Add Expenses</h1>
         <p>Let's input an expense!</p>
         <div class="inputDiv">
           <input
@@ -146,13 +147,13 @@ export default {
   // components: {FontAwesomeIcon},
   props: {},
   mounted() {
-    const externalScript = document.createElement("script");
-    externalScript.setAttribute(
-      "src",
-      "https://kit.fontawesome.com/e3cbc00358.js"
-    );
-    externalScript.setAttribute("crossorigin", "anonymous");
-    document.head.appendChild(externalScript);
+    // const externalScript = document.createElement("script");
+    // externalScript.setAttribute(
+    //   "src",
+    //   "https://kit.fontawesome.com/e3cbc00358.js"
+    // );
+    // externalScript.setAttribute("crossorigin", "anonymous");
+    // document.head.appendChild(externalScript);
 
     // setup the default date
     const currentDate = new Date();

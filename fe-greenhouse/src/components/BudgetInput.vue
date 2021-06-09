@@ -1,6 +1,7 @@
 <template>
   <div id="budget-input-container">
     <div id="budget-input-form">
+      <h1>Update Budget</h1>
       <p>
         Monthly Income:
         <span
@@ -19,6 +20,7 @@
           @focus="focusField('monthlyIncome')"
           @blur="blurField"
         />
+        <i class="fas fa-edit"></i>
       </p>
       <div id="budget-input-grid">
         <div></div>
@@ -43,6 +45,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Bills</div>
         <div class="grid-content">{{ runningBills }}</div>
@@ -63,6 +66,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Transport</div>
         <div class="grid-content">{{ runningTransport }}</div>
@@ -83,6 +87,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Misc</div>
         <div class="grid-content">{{ runningMisc }}</div>
@@ -103,6 +108,7 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header big-row two-columns">Savings Target</div>
         <div class="grid-content big-row">
@@ -122,17 +128,18 @@
             @blur="blurField"
             maxlength="15"
           />
+          <i class="fas fa-edit"></i>
         </div>
       </div>
 
-      <p>
-        Savings Leeway: {{ savingsLeeway == null ? 0 : this.savingsLeeway }}
-      </p>
+      <p>Savings Leeway: {{ this.savingsLeeway }}</p>
       <div id="button-container">
-        <!-- <button class="budget-button" name="back" value="back">Back</button> -->
-        <!-- <button class="budget-button" name="edit" value="edit">Edit</button> -->
-        <button @click="patchUserBudgetInput" class="budget-submit-button">
-          Submit
+        <button
+          @click="patchUserBudgetInput"
+          class="budget-submit-button"
+          form="budget-input-form"
+        >
+          Update Budget
         </button>
       </div>
     </div>
@@ -155,12 +162,12 @@ export default {
       allocatedTotal: "",
       monthlyBudget: "",
       form: {
-        allocatedGroceries: "",
-        allocatedBills: "",
-        allocatedTransport: "",
-        allocatedMisc: "",
-        savingsTarget: "",
-        monthlyIncome: "",
+        allocatedGroceries: this.$store.state.monthlyBudget.groceries_alloc,
+        allocatedBills: this.$store.state.monthlyBudget.bills_alloc,
+        allocatedTransport: this.$store.state.monthlyBudget.transport_alloc,
+        allocatedMisc: this.$store.state.monthlyBudget.misc_alloc,
+        savingsTarget: this.$store.state.monthlyBudget.savings_target,
+        monthlyIncome: this.$store.state.monthlyBudget.monthly_income,
       },
     };
   },
@@ -199,7 +206,13 @@ export default {
       );
     this.allocatedMisc = 0;
     this.savingsTarget = 0;
-    this.savingsLeeway = 0;
+    this.savingsLeeway =
+      Number(this.form.monthlyIncome) -
+      Number(this.form.savingsTarget) -
+      (Number(this.form.allocatedGroceries) +
+        Number(this.form.allocatedBills) +
+        Number(this.form.allocatedTransport) +
+        Number(this.form.allocatedMisc));
   },
   methods: {
     focusField(name) {

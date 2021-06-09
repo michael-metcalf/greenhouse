@@ -3,19 +3,22 @@
     <h2>Let's go <span class="green-emphasis">green</span>!</h2>
     <input
       type="text"
-      v-model="userName"
+      v-model="currentUser.userName"
       id="username-input"
       name="username-input"
       placeholder="username..."
     />
     <input
       type="password"
-      v-model="password"
+      v-model="currentUser.password"
       id="password-input"
       name="password-input"
       placeholder="password..."
     />
-    <button @click="validateUserInput">Login</button>
+    <div class="button-row">
+      <button @click="validateUserInput">Login</button>
+      <button id="create-account" v-on:click="showSignUp">Sign Up</button>
+    </div>
   </div>
 </template>
 
@@ -25,18 +28,24 @@ export default {
   props: {
     msg: String,
   },
-  data: () => ({
-    userName: "",
-    password: "",
-  }),
+  data() {
+    return {
+      currentUser: {
+        userName: "",
+        password: "",
+      },
+    };
+  },
   methods: {
     validateUserInput() {
       this.$store.dispatch("verifyLogin", {
-        username: this.userName,
-        password: this.password,
+        username: this.currentUser.userName,
+        password: this.currentUser.password,
       });
-      // this.$store.commit("setUserName", { userName: this.userName });
-      // this.$emit("login-success");
+    },
+    showSignUp() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showSignUp");
     },
   },
 };
@@ -73,9 +82,28 @@ button {
   background-color: #403d58;
   color: white;
   width: 75%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 h2 {
   margin-top: 0;
 }
+
+#sign-up {
+  font-size: smaller;
+  background-color: lightcyan;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+/* #create-account {
+  width: 150px;
+  font-size: smaller;
+} */
+
 </style>
