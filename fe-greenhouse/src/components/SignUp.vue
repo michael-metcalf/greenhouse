@@ -41,7 +41,7 @@ export default {
         password: "",
         email: "",
       },
-    };  
+    };
   },
   methods: {
     createUser() {

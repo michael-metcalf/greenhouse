@@ -125,9 +125,7 @@
         </div>
       </div>
 
-      <p>
-        Savings Leeway: {{ this.savingsLeeway }}
-      </p>
+      <p>Savings Leeway: {{ this.savingsLeeway }}</p>
       <div id="button-container">
         <button
           @click="patchUserBudgetInput"
@@ -201,12 +199,13 @@ export default {
       );
     this.allocatedMisc = 0;
     this.savingsTarget = 0;
-    this.savingsLeeway = Number(this.form.monthlyIncome) -
-                         Number(this.form.savingsTarget) -
-                        (Number(this.form.allocatedGroceries) +
-                         Number(this.form.allocatedBills) +
-                         Number(this.form.allocatedTransport) +
-                         Number(this.form.allocatedMisc));
+    this.savingsLeeway =
+      Number(this.form.monthlyIncome) -
+      Number(this.form.savingsTarget) -
+      (Number(this.form.allocatedGroceries) +
+        Number(this.form.allocatedBills) +
+        Number(this.form.allocatedTransport) +
+        Number(this.form.allocatedMisc));
   },
   methods: {
     focusField(name) {
@@ -225,10 +224,10 @@ export default {
       return (
         Number(this.form.monthlyIncome) -
         Number(this.form.savingsTarget) -
-       (Number(this.form.allocatedGroceries) +
-        Number(this.form.allocatedBills) +
-        Number(this.form.allocatedTransport) +
-        Number(this.form.allocatedMisc))
+        (Number(this.form.allocatedGroceries) +
+          Number(this.form.allocatedBills) +
+          Number(this.form.allocatedTransport) +
+          Number(this.form.allocatedMisc))
       );
     },
     patchUserBudgetInput() {

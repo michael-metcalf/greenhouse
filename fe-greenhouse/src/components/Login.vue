@@ -15,7 +15,10 @@
       name="password-input"
       placeholder="password..."
     />
-    <button @click="validateUserInput">Login</button>
+    <div class="button-row">
+      <button @click="validateUserInput">Login</button>
+      <button id="create-account" v-on:click="showSignUp">Sign Up</button>
+    </div>
   </div>
 </template>
 
@@ -31,7 +34,7 @@ export default {
         userName: "",
         password: "",
       },
-    };  
+    };
   },
   methods: {
     validateUserInput() {
@@ -40,7 +43,11 @@ export default {
         password: this.currentUser.password,
       });
     },
-  }
+    showSignUp() {
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showSignUp");
+    },
+  },
 };
 </script>
 
@@ -75,6 +82,8 @@ button {
   background-color: #403d58;
   color: white;
   width: 75%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 h2 {
@@ -85,4 +94,16 @@ h2 {
   font-size: smaller;
   background-color: lightcyan;
 }
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+/* #create-account {
+  width: 150px;
+  font-size: smaller;
+} */
+
 </style>
