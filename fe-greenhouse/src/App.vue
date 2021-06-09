@@ -78,6 +78,21 @@ import BarChart from "./components/BarChart";
 
 export default {
   name: "App",
+  metaInfo: {
+    title: "MoneySprouts",
+    htmlAttrs: {
+      lang: "en-US",
+    },
+    meta: [
+      { charset: "utf-8" },
+      {
+        name: "description",
+        content:
+          "Expense tracking software which enables you to track your ecological footprint as well",
+      },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+    ],
+  },
   components: {
     Login,
     BudgetVisualization,
