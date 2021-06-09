@@ -31,7 +31,7 @@ export default {
         userName: "",
         password: "",
       },
-    };  
+    };
   },
   methods: {
     validateUserInput() {
@@ -40,7 +40,7 @@ export default {
         password: this.currentUser.password,
       });
     },
-  }
+  },
 };
 </script>
 
