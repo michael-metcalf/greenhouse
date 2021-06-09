@@ -1,21 +1,20 @@
 <template>
   <div id="app">
     <div class="header">
-      <button id="create-account" v-on:click="showSignUp">Create Account</button>
       <h1>MoneySprouts</h1>
     </div>
     <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
-      <Login v-if="this.$store.state.showLogin" />
+      <Login class="panel" v-if="this.$store.state.showLogin" />
       <!-- <loading-message
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
       /> -->
-      <BudgetVisualization v-if="this.$store.state.showBudgetVisualization" />
-      <BarChart v-if="this.$store.state.showBarChart" />
-      <ExpenseInput v-if="this.$store.state.showExpenseInput" />
-      <SignUp v-if="this.$store.state.showSignUp" />
-      <BudgetInput v-if="this.$store.state.showBudgetInput" />
+      <BudgetVisualization class="panel" v-if="this.$store.state.showBudgetVisualization" />
+      <BarChart class="panel" v-if="this.$store.state.showBarChart" />
+      <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
+      <SignUp class="panel" v-if="this.$store.state.showSignUp" />
+      <BudgetInput class="panel" v-if="this.$store.state.showBudgetInput" />
     </div>
     <div class="nav-bar">
       <div
@@ -56,7 +55,7 @@
           <i id="chart-icon" class="fas fa-chart-bar"></i>
         </button>
         <button
-          v-on:click="$store.commit('clearUserName')"
+          v-on:click="logout"
           class="footer-button"
           name="logout"
           value="logout"
@@ -98,55 +97,35 @@ export default {
   // },
   methods: {
     showBudgetVisualization() {
-      this.$store.commit("setShowsToFalse")
-      this.$store.commit("showBudgetVisualization")
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showBudgetVisualization");
     },
 
     showExpenseInput() {
-      this.$store.commit("setShowsToFalse")
-      this.$store.commit("showExpenseInput")
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showExpenseInput");
     },
 
     showBudgetInput() {
-      this.$store.commit("setShowsToFalse")
-      this.$store.commit("showBudgetInput")
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showBudgetInput");
     },
 
     showBarChart() {
-      this.$store.commit("setShowsToFalse")
-      this.$store.commit("showBarChart")
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showBarChart");
     },
 
     showSignUp() {
-      this.$store.commit("setShowsToFalse")
-      this.$store.commit("showSignUp")
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showSignUp");
+    },
+    logout() {
+      this.$store.commit('clearUserName');
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showLogin");
     }
-
-    // async receiveLoginSignal() {
-    //   // Need to download the data related to the current user
-    //   console.log(`Received login signal...${this.$store.state.userName}`);
-    //   this.$store.commit("setLoadingStatus", true);
-    //   try {
-    //     const api_address = "http://localhost:5000/api/";
-    //     const budget_response = await axios.get(`${api_address}user/${this.$store.state.userName}/user_budget`);
-    //     console.log(`Monthly budget : ${JSON.stringify(budget_response.data)}`);
-    //     this.$store.commit("setMonthlyBudget", { monthlyBudget: budget_response.data });
-    //     const expenses_response = await axios.get(`${api_address}user/${this.$store.state.userName}/expenses`);
-    //     console.log(`Expenses list: ${JSON.stringify(expenses_response.data)}`);
-    //     this.$store.commit("setExpensesList", { expensesList: expenses_response.data.expenses  });
-    //     const eco_goals_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_goals`);
-    //     console.log(`Eco Goals list: ${JSON.stringify(eco_goals_response.data)}`);
-    //     if (eco_goals_response.data.eco_goals) {
-    //       this.$store.commit("setEcoGoalsList", { ecoGoalsList: eco_goals_response.data.eco_goals });
-    //     }
-    //     const eco_actions_response = await axios.get(`${api_address}user/${this.$store.state.userName}/eco_actions`);
-    //     if (eco_actions_response.data.eco_actions) {
-    //       this.$store.commit("setEcoActionsList", { ecoActionsList: eco_actions_response.data.eco_actions} );
-    //     }
-    //     this.$store.commit("setLoadingStatus", false);
-    //   } catch(err) {
-    //     console.error(`ERROR in the back-end API download! ${err}`);
-    //   }
+ 
   },
   mounted() {
     const externalScript = document.createElement("script");
@@ -156,6 +135,23 @@ export default {
     );
     externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
+  },
+  computed: {
+    mainPanelClass: function () {
+      // Computed function to return the main Panel class dynamically
+      // https://vuejs.org/v2/guide/class-and-style.html
+      // Checking if the current component is included into the list of components
+      // requiring the main Panel to be centered vertically
+      const isCentered = this.$store.state.showLogin || 
+                         this.$store.state.showBarChart ||
+                        this.$store.state.showBudgetInput;
+      console.log(`login: ${this.$store.state.showLogin}, bar: ${this.$store.state.showBarChart}, 
+      BI: ${this.$store.state.showBudgetInput}`);
+      return {
+        "main-panel": true,
+        contentCentered: isCentered,
+      };
+    },
   },
 };
 </script>
@@ -210,7 +206,7 @@ h1 h2 {
   justify-content: center;
 }
 
-.main-panel > * {
+.panel {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 }
@@ -272,11 +268,6 @@ h1 h2 {
 #signout-icon,
 #chart-icon {
   color: white;
-}
-
-#create-account {
-  width: 150px;
-  font-size: smaller;
 }
 
 </style>

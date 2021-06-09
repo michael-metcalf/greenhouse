@@ -39,7 +39,7 @@ export default {
         password: "",
         email: "",
       },
-    };  
+    };
   },
   methods: {
     createUser() {
@@ -47,10 +47,10 @@ export default {
         username: this.newUser.userName,
         password: this.newUser.password,
         email: this.newUser.email,
-      }
+      };
       this.$store.dispatch("createUser", newUser);
     },
-  }
+  },
 };
 </script>
 
