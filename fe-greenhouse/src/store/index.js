@@ -98,7 +98,7 @@ export default new Vuex.Store({
       state.isAuthenticated = payload;
     },
     setCategoriesList(state, payload) {
-      state.categoriesList = payload;
+      state.categoriesList = payload.categoriesList;
     },
   }, // Use mutations to modify the state variables synchronously
   actions: {
@@ -246,6 +246,8 @@ export default new Vuex.Store({
           `/api/user/${state.user.user_id}/categories`
         );
         if (res.data.categories) {
+          console.log(`Received categories...`);
+          console.log(res.data.categories);
           commit("setCategoriesList", { categoriesList: res.data.categories });
         }
       } catch (err) {

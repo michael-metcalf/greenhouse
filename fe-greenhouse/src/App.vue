@@ -4,7 +4,7 @@
       <button id="create-account" v-on:click="showSignUp">Create Account</button>
       <h1>MoneySprouts</h1>
     </div>
-    <div class="main-panel">
+    <div v-bind:class="mainPanelClass">
       <!-- we display the LOGIN component if no user is currently active -->
       <user-message-display />
       <Login v-if="this.$store.state.showLogin" />
@@ -30,6 +30,7 @@
         >
           <i id="home-icon" class="fas fa-home"></i>
         </button>
+
         <button
           v-on:click="showExpenseInput"
           class="footer-button"
@@ -147,6 +148,7 @@ export default {
     //     console.error(`ERROR in the back-end API download! ${err}`);
     //   }
   },
+  methods: {},
   mounted() {
     const externalScript = document.createElement("script");
     externalScript.setAttribute(
@@ -160,14 +162,18 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Carme&family=Lato&display=swap");
+
 #app {
   --app-max-width: 500px;
+  --header-color: #d7efbd;
 
   /* Variable calculation for positioning */
   --header-footer-height: max(10vh, 60px);
 
   max-width: var(--app-max-width);
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Lato", sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -184,16 +190,25 @@ export default {
   background-size: auto 100%;
 }
 
+h1 h2 {
+  font-family: "Carme", sans-serif;
+}
+
 .main-panel {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   /* Height of the panel is the whole size - footer height */
-  height: calc(100vh - 2 * var(--header-footer-height));
+  min-height: calc(100vh - 2 * var(--header-footer-height));
   /* The main panel has to be displayed from the bottom of the header, i.e
      header-content-height + 2* padding */
   margin-top: var(--header-footer-height);
+  margin-bottom: var(--header-footer-height);
+}
+
+.contentCentered {
+  justify-content: center;
 }
 
 .main-panel > * {
@@ -209,9 +224,14 @@ export default {
   max-width: var(--app-max-width);
   box-sizing: border-box;
   height: var(--header-footer-height);
-  background-color: rgba(197, 231, 226, 1);
+  background-color: var(--header-color);
   display: flex; /* header has a flex display in order to center the title vertically */
   flex-direction: column;
+  z-index: 5;
+}
+
+.header i {
+  color: green;
 }
 
 .nav-bar {
@@ -225,7 +245,7 @@ export default {
   width: 100%;
   max-width: var(--app-max-width);
   height: var(--header-footer-height);
-  background: rgba(255, 255, 255, 1);
+  background: var(--header-color);
 }
 
 #footer-button-container {
@@ -243,7 +263,8 @@ export default {
   padding: 5px;
   text-align: center;
   border-radius: 12%;
-  border: 2px solid red;
+  border: 3px solid #403d58;
+  background-color: #403d58;
 }
 
 #home-icon,
@@ -251,7 +272,7 @@ export default {
 #calendar-icon,
 #signout-icon,
 #chart-icon {
-  color: teal;
+  color: white;
 }
 
 #create-account {
