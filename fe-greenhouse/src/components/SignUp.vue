@@ -23,6 +23,8 @@
       placeholder="Enter Email..."
     />
     <button id="sign-up" @click="createUser">Sign Me Up!</button>
+    <p id="created"></p>
+    <button id="login" v-on:click="showLogin">Return me to log in</button>
   </div>
 </template>
 
@@ -48,8 +50,14 @@ export default {
         password: this.newUser.password,
         email: this.newUser.email,
       }
+      const p = document.querySelector('#created');
+      p.innerHTML = 'Account created. Please return to Login.'
       this.$store.dispatch("createUser", newUser);
     },
+    showLogin() {
+      this.$store.commit("setShowsToFalse")
+      this.$store.commit("showLogin")
+    }
   }
 };
 </script>
@@ -92,5 +100,15 @@ button {
 #sign-up {
   font-size: smaller;
   background-color: lightcyan;
+}
+
+#login {
+  font-size: smaller;
+  background-color: lightslategrey;
+}
+
+#created {
+  background-color: white;
+  color: green;
 }
 </style>
