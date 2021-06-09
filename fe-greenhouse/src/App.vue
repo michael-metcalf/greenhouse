@@ -148,7 +148,6 @@ export default {
     //     console.error(`ERROR in the back-end API download! ${err}`);
     //   }
   },
-  methods: {},
   mounted() {
     const externalScript = document.createElement("script");
     externalScript.setAttribute(
