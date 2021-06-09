@@ -10,7 +10,10 @@
       <!-- <loading-message
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
       /> -->
-      <BudgetVisualization class="panel" v-if="this.$store.state.showBudgetVisualization" />
+      <BudgetVisualization
+        class="panel"
+        v-if="this.$store.state.showBudgetVisualization"
+      />
       <BarChartScreen class="panel" v-if="this.$store.state.showBarChart" />
       <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
       <SignUp class="panel" v-if="this.$store.state.showSignUp" />
@@ -78,7 +81,6 @@ import UserMessageDisplay from "./components/UserMessageDisplay";
 import BarChartScreen from "./components/BarChartScreen.vue";
 import SignUp from "./components/SignUp.vue";
 
-
 export default {
   name: "App",
   metaInfo: {
@@ -137,11 +139,10 @@ export default {
       this.$store.commit("showSignUp");
     },
     logout() {
-      this.$store.commit('clearUserName');
+      this.$store.commit("clearUserName");
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showLogin");
-    }
- 
+    },
   },
   mounted() {
     const externalScript = document.createElement("script");
@@ -158,9 +159,10 @@ export default {
       // https://vuejs.org/v2/guide/class-and-style.html
       // Checking if the current component is included into the list of components
       // requiring the main Panel to be centered vertically
-      const isCentered = this.$store.state.showLogin || 
-                         this.$store.state.showBarChart ||
-                        this.$store.state.showBudgetInput;
+      const isCentered =
+        this.$store.state.showLogin ||
+        this.$store.state.showBarChart ||
+        this.$store.state.showBudgetInput;
       console.log(`login: ${this.$store.state.showLogin}, bar: ${this.$store.state.showBarChart}, 
       BI: ${this.$store.state.showBudgetInput}`);
       return {
@@ -187,7 +189,7 @@ export default {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   color: #2c3e50;
   min-height: 100vh;
 
@@ -208,7 +210,7 @@ export default {
 
 h1 h2 {
   font-family: "Carme", sans-serif;
-  color:#403d58;
+  color: #403d58;
 }
 
 .main-panel {
@@ -233,8 +235,6 @@ h1 h2 {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 }
-
-
 
 .header {
   /* Header position: ABSOLUTE (to always stay on top) */
@@ -294,5 +294,4 @@ h1 h2 {
 #chart-icon {
   color: white;
 }
-
 </style>
