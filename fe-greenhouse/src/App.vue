@@ -11,7 +11,7 @@
         v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
       /> -->
       <BudgetVisualization class="panel" v-if="this.$store.state.showBudgetVisualization" />
-      <BarChart class="panel" v-if="this.$store.state.showBarChart" />
+      <BarChartScreen class="panel" v-if="this.$store.state.showBarChart" />
       <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
       <SignUp class="panel" v-if="this.$store.state.showSignUp" />
       <BudgetInput class="panel" v-if="this.$store.state.showBudgetInput" />
@@ -75,8 +75,9 @@ import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
 // import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
-import BarChart from "./components/BarChart";
+import BarChartScreen from "./components/BarChartScreen.vue";
 import SignUp from "./components/SignUp.vue";
+
 
 export default {
   name: "App",
@@ -87,7 +88,7 @@ export default {
     BudgetInput,
     // LoadingMessage,
     UserMessageDisplay,
-    BarChart,
+    BarChartScreen,
     SignUp,
   },
   // data() {
@@ -186,6 +187,8 @@ export default {
 }
 #moneySproutsTitle {
   float: left !important;
+  margin-left: 10px;
+  font-size: 35px;
 }
 
 h1 h2 {
