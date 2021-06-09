@@ -272,10 +272,14 @@ export default {
 .big-row {
   margin-top: 1.3em;
   margin-left: 22px;
-  width: 200px;
+  width: 100px;
+  font-weight: bold;
+  /* border: 1px solid black; */
 }
 
 .two-columns {
+  /* border: 1px solid black;
+  border-radius: 8px; */
   grid-column: span 2 / auto;
 }
 
