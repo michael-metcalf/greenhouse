@@ -2,7 +2,7 @@
   <div class="eco-goals-container">
     <p id="eco-goals">
       Eco Goals: <i id="sprout" class="fas fa-seedling"></i>
-      {{ ecoScoreString }}
+      x {{ ecoScoreString }}
     </p>
     <p>{{ customerMessage }}</p>
   </div>
@@ -29,33 +29,36 @@ export default {
     externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
     console.log(`Props - eco score ${this.ecoScore}`);
-    const numberOfSprouts = this.ecoScore;
+    // const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
-    for (let i = 0; i < numberOfSprouts; i++) {
-      this.ecoScoreString += 1;
-    }
-    switch (numberOfSprouts) {
-      case 0:
-        this.customerMessage = "Could do better?";
-        break;
-      case 1:
-        this.customerMessage = "Just one!";
-        break;
-      case 2:
-        this.customerMessage = "Just a little bit more";
-        break;
-      case 3:
-        this.customerMessage = "On track!";
-        break;
-      case 4:
-        this.customerMessage = "Thanks for the earth!";
-        break;
-      case 5:
-        this.customerMessage = "PERFECT!!!";
-        break;
-      default:
-        this.customerMessage = "You're on track!";
-    }
+    this.echoScoreString = this.$store.state.ecoActionsList
+      .filter((element) => element.eco_goal_id == 1)
+      .length;
+    // for (let i = 0; i < numberOfSprouts; i++) {
+    //   this.ecoScoreString += 1;
+    // }
+    // switch (numberOfSprouts) {
+    //   case 0:
+    //     this.customerMessage = "Could do better?";
+    //     break;
+    //   case 1:
+    //     this.customerMessage = "Just one!";
+    //     break;
+    //   case 2:
+    //     this.customerMessage = "Just a little bit more";
+    //     break;
+    //   case 3:
+    //     this.customerMessage = "On track!";
+    //     break;
+    //   case 4:
+    //     this.customerMessage = "Thanks for the earth!";
+    //     break;
+    //   case 5:
+    //     this.customerMessage = "PERFECT!!!";
+    //     break;
+    //   default:
+    //     this.customerMessage = "You're on track!";
+    // }
   },
 };
 </script>
