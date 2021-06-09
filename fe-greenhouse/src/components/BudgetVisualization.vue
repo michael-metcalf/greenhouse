@@ -1,5 +1,6 @@
 <template>
   <div id="homePanel">
+    <h1>Home</h1>
     <EnvironmentalFact />
 
     <div class="budget-viz-container">
