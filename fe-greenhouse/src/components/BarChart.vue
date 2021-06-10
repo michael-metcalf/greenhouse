@@ -27,9 +27,9 @@ export default {
               this.getTransportActionTotal(),
             ],
             backgroundColor: [
-              "rgb(111,176,42)",
-              "rgb(111,176,42)",
-              "rgb(111,176,42)",
+              "#004D48",
+              "#00716A",
+              "#00968C",
             ],
             borderColor: ["rgb(0, 0, 0)"],
           },
