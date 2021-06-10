@@ -1,8 +1,8 @@
 <template>
   <div id="homePanel">
     <h1>Home</h1>
-    <EnvironmentalFact />
-
+      <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
+      
     <div class="budget-viz-container">
       <h1>This month's savings</h1>
       <div class="chart-align-container">
@@ -20,7 +20,7 @@
         <li>Expenses: {{ expenses }}</li>
       </ul>
     </div>
-    <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
+      <EnvironmentalFact />
   </div>
 </template>
 
