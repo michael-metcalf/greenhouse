@@ -175,11 +175,11 @@ export default {
   methods: {
     postExpenseData(e) {
       const categoryFilter = this.$store.state.categoriesList.filter(
-        (category) => category.category_id === this.posts.category
+        (category) => category.category_name === this.posts.category
       );
       const expenseData = {
         user_id: this.$store.state.user.user_id,
-        category_id: categoryFilter,
+        category_id: categoryFilter[0].id,
         expense_description: this.posts.description,
         amount: this.posts.amount,
       };
