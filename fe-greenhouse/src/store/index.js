@@ -159,12 +159,13 @@ export default new Vuex.Store({
 
     async createExpense({ dispatch, state }, payload) {
       try {
-        const res = await axios.post(
-          `/api/user/${state.user.user_id}/expenses`,
-          payload
-        );
-        console.log(res.data);
-        dispatch("getExpenses");
+        await axios.post(`/api/user/${state.user.user_id}/expenses`, payload);
+        const date = new Date();
+        const newPayload = {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+        }
+        dispatch("getExpenses", newPayload);
       } catch (err) {
         console.error(`ERROR in createExpense! ${err}`);
       }
