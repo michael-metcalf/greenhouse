@@ -31,8 +31,8 @@ export default {
     console.log(`Props - eco score ${this.ecoScore}`);
     // const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
-    this.echoScoreString = this.$store.state.ecoActionsList
-      .filter((element) => element.eco_goal_id == 1)
+    this.ecoScoreString = this.$store.state.ecoActionsList
+      .filter((element) => (element.eco_goal_id == 1 || element.eco_goal_id == 2 || element.eco_goal_id == 3))
       .length;
     // for (let i = 0; i < numberOfSprouts; i++) {
     //   this.ecoScoreString += 1;
