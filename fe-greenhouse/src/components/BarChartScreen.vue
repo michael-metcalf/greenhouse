@@ -11,13 +11,11 @@
 import BarChart from "./BarChart.vue";
 
 export default {
-    name: "BarChartScreen",
-    components: {
-        BarChart 
-    }
-}
+  name: "BarChartScreen",
+  components: {
+    BarChart,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
