@@ -1,8 +1,9 @@
 <template>
   <div id="budget-input-container">
     <div id="budget-input-form">
+      <h1>Update Budget</h1>
       <p>
-        Monthly Income:
+        <span class="income">Monthly Income:</span>
         <span
           class="field-value"
           v-show="!showField('monthlyIncome')"
@@ -23,11 +24,11 @@
       </p>
       <div id="budget-input-grid">
         <div></div>
-        <div class="grid-col-header">Running Total</div>
+        <div class="grid-col-header" id="running">Running Total</div>
         <div class="grid-col-header">Amount Allocated</div>
         <div class="grid-row-header">Groceries</div>
         <div class="grid-content">{{ runningGroceries }}</div>
-        <div class="grid-content">
+        <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedGroceries')"
@@ -48,7 +49,7 @@
         </div>
         <div class="row-header">Bills</div>
         <div class="grid-content">{{ runningBills }}</div>
-        <div class="grid-content">
+        <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedBills')"
@@ -69,7 +70,7 @@
         </div>
         <div class="row-header">Transport</div>
         <div class="grid-content">{{ runningTransport }}</div>
-        <div class="grid-content">
+        <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedTransport')"
@@ -90,7 +91,7 @@
         </div>
         <div class="row-header">Misc</div>
         <div class="grid-content">{{ runningMisc }}</div>
-        <div class="grid-content">
+        <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedMisc')"
@@ -131,7 +132,7 @@
         </div>
       </div>
 
-      <p>Savings Leeway: {{ this.savingsLeeway }}</p>
+      <p><span class="savings">Savings Leeway:</span> {{ this.savingsLeeway }}</p>
       <div id="button-container">
         <button
           @click="patchUserBudgetInput"
@@ -265,15 +266,21 @@ export default {
 
 #budget-input-grid {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1.8fr;
   gap: 10px 0;
 }
 
 .big-row {
   margin-top: 1.3em;
+  margin-left: 22px;
+  width: 100px;
+  font-weight: bold;
+  /* border: 1px solid black; */
 }
 
 .two-columns {
+  /* border: 1px solid black;
+  border-radius: 8px; */
   grid-column: span 2 / auto;
 }
 
@@ -288,6 +295,39 @@ export default {
   border-radius: 5px;
   background-color: #403d58;
   color: white;
-  width: 100px;
+  width: 150px;
 }
+
+.grid-row-header, .row-header {
+  width: 100px;
+  text-align: left;
+  padding: 2px;
+  margin-left: 30px;
+  font-weight: bold;
+  /* border: 1px solid black; */
+}
+
+.grid-col-header, .income, .savings {
+  font-weight: bold;
+  padding: 10px;
+  width: 100;
+  /* border: 1px solid black; */
+}
+
+.grid-content {
+  width: 150px;
+  justify-content: center;
+}
+
+.fas {
+  padding-left: 20px;
+}
+
+/* .grid-content {
+  width: 50px;
+}
+
+.field-value {
+  width: 100px;
+} */
 </style>
