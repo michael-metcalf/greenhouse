@@ -69,60 +69,69 @@
         </div>
       </div>
       <div id="eco-action-container">
-        <p>Did you take an eco action?</p>
+        <!-- <p>Did you take an eco action?</p> -->
         <div class="icon-box">
+          <p class="icon-info">I used an eco bag/ I didn't use a bag:</p>
           <input
             id="eco-bag-no-bag"
-            class="eco-action-checkbox"
+            class="eco-action-checkbox toggle"
             type="checkbox"
             name="eco-bag-no-bag"
             value="eco-bag-no-bag"
           />
           <label for="eco-bag-no-bag">
-            <span class="eco-watch"></span>
-            <i class="fas fa-shopping-bag" title="Eco bag/ No bag used"></i>
+            <span class="eco-watch">
+              <i class="fas fa-shopping-bag" title="Eco bag/ No bag used"></i>
+            </span>
           </label>
         </div>
         <div class="icon-box">
+          <p class="icon-info">I didn't impulse purchase anything:</p>
           <input
             id="no-impulse-buy"
-            class="eco-action-checkbox"
+            class="eco-action-checkbox toggle"
             type="checkbox"
             name="no-impulse-buy"
             value="no-impulse-buy"
           />
           <label for="no-impulse-buy">
-            <span class="eco-watch"></span>
-            <i class="fas fa-tags" title="No impulse purchase made"></i>
+            <span class="eco-watch">
+              <i class="fas fa-tags" title="No impulse purchase made"></i>
+            </span>
           </label>
         </div>
         <div class="icon-box">
+          <p class="icon-info">I took eco-conscious transport:</p>
           <input
             title="Eco conscious transport"
             id="eco-conscious-transport"
-            class="eco-action-checkbox"
+            class="eco-action-checkbox toggle"
             type="checkbox"
             name="eco-conscious-transport"
             value="eco-conscious-transport"
           />
-          <label for="eco-conscious-transport"
-            ><span class="eco-watch"></span
-            ><i class="fas fa-biking" title="Eco conscious transport"></i
-          ></label>
+          <label for="eco-conscious-transport">
+            <span class="eco-watch">
+              <i class="fas fa-biking" title="Eco conscious transport"></i>
+            </span>
+          </label>
         </div>
         <div class="icon-box">
-          <p>I didn't take an eco action...</p>
+          <p class="icon-info">I didn't take an eco action...</p>
           <input
             id="failed-eco-warrior"
-            class="eco-action-checkbox"
+            class="eco-action-checkbox toggle"
             type="checkbox"
             name="failed-eco-warrior"
             value="failed-eco-warrior"
+            checked
           />
-          <label for="failed-eco-warrior"
-            ><span class="eco-watch"></span
-            ><i class="far fa-frown" title="No action taken"></i
-          ></label>
+          <label for="failed-eco-warrior">
+            <span class="eco-watch">
+              <i class="far fa-frown" title="No action taken"></i>
+            </span
+            >  
+          </label>
         </div>
       </div>
       <button form="expense-input-form" type="submit" @click="postExpenseData">
@@ -205,6 +214,10 @@ export default {
 p {
   font-weight: bold;
   color: var(--second-color);
+}
+
+.icon-info {
+    font-size: 10px;;
 }
 
 .verticalContainer {
@@ -290,7 +303,8 @@ input[type="checkbox"] + label .eco-watch {
   height: 50px;
   width: 50px;
   margin: 2px;
-  font-size: 40px;
+  margin-left: 20px;
+  font-size: 20px;
   display: inline-flex;
 }
 
@@ -304,6 +318,63 @@ button {
   background-color: #403d58;
   color: white;
   width: 100px;
+}
+
+input.eco-action-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+input.eco-action-checkbox + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  margin-left: 120px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input.toggle + label:before, input.toggle + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+
+input.toggle + label {
+  width: 50px;
+  height: 20px;
+  background-color: rgba(255, 0, 0, 0.38);
+  transition: background 0.5s;
+}
+
+input.toggle + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  transition: background 0.5s;
+}
+
+input.toggle + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 25px;
+  background-color: #fff;
+  transition: margin 0.5s, background 0.5s;
+}
+
+input.toggle:checked+label {
+  background-color: limegreen;
+}
+
+input.toggle:checked + label:after {
+  margin-left: 40px;
+  background-color: #fff;
 }
 
 @media only screen and (max-width: 700px) {
