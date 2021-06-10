@@ -313,8 +313,8 @@ input[type="checkbox"] + label .eco-watch {
 
 .fas,
 .far {
-  height: 50px;
-  width: 50px;
+  height: 20px;
+  width: 20px;
   margin: 2px;
   margin-left: 20px;
   font-size: 20px;
