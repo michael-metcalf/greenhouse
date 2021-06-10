@@ -14,7 +14,7 @@
           :css-classes="'chartContainer'"
         />
       </div>
-      <h2>Potential savings: {{ income - expenses }}</h2>
+      <h2>Potential savings: {{ !isNaN(income - expenses) ? income - expenses : 0 }}</h2>
       <ul class="no-bullets">
         <li>Income: {{ income }}</li>
         <li>Expenses: {{ expenses }}</li>
@@ -46,9 +46,11 @@ export default {
   },
   methods: {
     getSumOfExpenses() {
-      this.expenses = this.$store.state.expensesList
+      this.expenses = !isNaN(this.$store.state.expensesList
         .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue, 0);
+        .reduce((currentSum, currentValue) => currentSum + currentValue, 0)) ? this.$store.state.expensesList
+        .map((x) => x.amount)
+        .reduce((currentSum, currentValue) => currentSum + currentValue, 0) : 0;
     },
     getMonthlyBudget() {
       console.log("I AM SETTING THE MONTHLY BUDGET NOW");
@@ -66,8 +68,10 @@ export default {
     console.log("THIS IS BEFORE MOUNTED");
     this.getMonthlyBudget();
     this.getSumOfExpenses();
+    console.log(`This is before month expense ${this.expenses} and income ${this.income}`)
     this.getNumberOfMissedEcoActions();
-    this.targetPercent = Math.floor((this.expenses / this.income) * 100) / 100;
+    this.targetPercent = !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) ? Math.floor((this.expenses / this.income) * 100) / 100 : 0;
+    console.log()
   },
 
   mounted() {
