@@ -18,7 +18,6 @@ export default {
         ],
         datasets: [
           {
-            label: "My Eco Goal Progress (as a percentage of total expenses)",
             barPercentage: 1,
             barThickness: 50,
             data: [
@@ -61,6 +60,7 @@ export default {
       }),
       this.setChartData();
     this.chartOptions = {
+      legend: { display: false },
       scales: {
         yAxes: [
           {
