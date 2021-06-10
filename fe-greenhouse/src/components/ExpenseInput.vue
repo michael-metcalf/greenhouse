@@ -71,7 +71,7 @@
       <div id="eco-action-container">
         <!-- <p>Did you take an eco action?</p> -->
         <div class="icon-box">
-          <p class="icon-info">I used an eco bag/ I didn't use a bag.</p>
+          <p class="icon-info">I used an eco bag/ I didn't use a bag:</p>
           <input
             id="eco-bag-no-bag"
             class="eco-action-checkbox toggle"
@@ -86,7 +86,7 @@
           </label>
         </div>
         <div class="icon-box">
-          <p class="icon-info">I didn't impulse purchase anything.</p>
+          <p class="icon-info">I didn't impulse purchase anything:</p>
           <input
             id="no-impulse-buy"
             class="eco-action-checkbox toggle"
@@ -101,7 +101,7 @@
           </label>
         </div>
         <div class="icon-box">
-          <p class="icon-info">I took eco-conscious transport.</p>
+          <p class="icon-info">I took eco-conscious transport:</p>
           <input
             title="Eco conscious transport"
             id="eco-conscious-transport"
@@ -330,7 +330,7 @@ input.eco-action-checkbox + label {
   position: relative;
   cursor: pointer;
   outline: none;
-  margin-left: 100px;
+  margin-left: 120px;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
