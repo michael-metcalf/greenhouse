@@ -4,6 +4,7 @@
     <div>
       <BarChart />
     </div>
+    <p id="disclaimer">*Eco actions are shown as a percentage of expenses.</p>
   </div>
 </template>
 
@@ -18,4 +19,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#disclaimer {
+  font-size: 12px;
+}
+</style>

@@ -159,12 +159,13 @@ export default new Vuex.Store({
 
     async createExpense({ dispatch, state }, payload) {
       try {
-        const res = await axios.post(
-          `/api/user/${state.user.user_id}/expense`,
-          payload
-        );
-        console.log(res.data);
-        dispatch("getExpenses");
+        await axios.post(`/api/user/${state.user.user_id}/expenses`, payload);
+        const date = new Date();
+        const newPayload = {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+        }
+        dispatch("getExpenses", newPayload);
       } catch (err) {
         console.error(`ERROR in createExpense! ${err}`);
       }
@@ -184,7 +185,13 @@ export default new Vuex.Store({
         const res = await axios.get(
           `/api/user/${state.user.user_id}/expenses/${payload.year}/${payload.month}`
         );
-        commit("setExpensesList", { expensesList: res.data.expenses });
+
+        if (res === "Budget doesn't exist") {
+          commit("setExpenseList", { expensesList: []})
+        } else {
+          commit("setExpensesList", { expensesList: res.data.expenses });
+        }
+
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);
       }
