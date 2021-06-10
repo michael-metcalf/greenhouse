@@ -81,6 +81,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.5);
+  align-content: center;
 }
 
 .budget-viz-container {
