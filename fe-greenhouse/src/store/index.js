@@ -160,7 +160,7 @@ export default new Vuex.Store({
     async createExpense({ dispatch, state }, payload) {
       try {
         const res = await axios.post(
-          `/api/user/${state.user.user_id}/expense`,
+          `/api/user/${state.user.user_id}/expenses`,
           payload
         );
         console.log(res.data);
@@ -184,7 +184,13 @@ export default new Vuex.Store({
         const res = await axios.get(
           `/api/user/${state.user.user_id}/expenses/${payload.year}/${payload.month}`
         );
-        commit("setExpensesList", { expensesList: res.data.expenses });
+
+        if (res === "Budget doesn't exist") {
+          commit("setExpenseList", { expensesList: []})
+        } else {
+          commit("setExpensesList", { expensesList: res.data.expenses });
+        }
+
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);
       }

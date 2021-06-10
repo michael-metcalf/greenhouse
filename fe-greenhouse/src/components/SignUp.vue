@@ -49,16 +49,16 @@ export default {
         username: this.newUser.userName,
         password: this.newUser.password,
         email: this.newUser.email,
-      }
-      const p = document.querySelector('#created');
-      p.innerHTML = 'Account created. Please return to Login.'
+      };
+      const p = document.querySelector("#created");
+      p.innerHTML = "Account created. Please return to Login.";
       this.$store.dispatch("createUser", newUser);
     },
     showLogin() {
-      this.$store.commit("setShowsToFalse")
-      this.$store.commit("showLogin")
-    }
-  }
+      this.$store.commit("setShowsToFalse");
+      this.$store.commit("showLogin");
+    },
+  },
 };
 </script>
 
