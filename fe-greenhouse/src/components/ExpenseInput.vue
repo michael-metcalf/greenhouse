@@ -78,6 +78,7 @@
             type="checkbox"
             name="eco-bag-no-bag"
             value="eco-bag-no-bag"
+            @click="uncheck"
           />
           <label for="eco-bag-no-bag">
             <span class="eco-watch">
@@ -93,6 +94,7 @@
             type="checkbox"
             name="no-impulse-buy"
             value="no-impulse-buy"
+            @click="uncheck"
           />
           <label for="no-impulse-buy">
             <span class="eco-watch">
@@ -109,6 +111,7 @@
             type="checkbox"
             name="eco-conscious-transport"
             value="eco-conscious-transport"
+            @click="uncheck"
           />
           <label for="eco-conscious-transport">
             <span class="eco-watch">
@@ -201,6 +204,16 @@ export default {
     getCategory(category) {
       this.posts.category = category;
     },
+    uncheck() {
+      // const ecoBag = document.getElementById("eco-bag-no-bag");
+      // const ecoTransport = document.getElementById("eco-conscious-transport");
+      // const noImpulse = document.getElementById("no-impulse-buy");
+      const noActionCheck = document.getElementById("failed-eco-warrior");
+      // if(ecoBag.hasAttribute("checked", true)) {
+      // if (ecoBag.hasAttribute("checked", true) || ecoTransport.hasAttribute("checked") || noImpulse.hasAttribute("checked")) {
+        noActionCheck.removeAttribute("checked");
+      // }
+    }
   },
 };
 </script>
@@ -300,8 +313,8 @@ input[type="checkbox"] + label .eco-watch {
 
 .fas,
 .far {
-  height: 50px;
-  width: 50px;
+  height: 20px;
+  width: 20px;
   margin: 2px;
   margin-left: 20px;
   font-size: 20px;
