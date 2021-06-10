@@ -10,6 +10,7 @@
           @click="focusField('monthlyIncome')"
         >
           {{ form.monthlyIncome }}
+        <i class="fas fa-edit"></i>
         </span>
         <input
           v-model="form.monthlyIncome"
@@ -20,7 +21,6 @@
           @focus="focusField('monthlyIncome')"
           @blur="blurField"
         />
-        <i class="fas fa-edit"></i>
       </p>
       <div id="budget-input-grid">
         <div></div>
