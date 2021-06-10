@@ -53,9 +53,7 @@ export default {
         .reduce((currentSum, currentValue) => currentSum + currentValue, 0) : 0;
     },
     getMonthlyBudget() {
-      console.log("I AM SETTING THE MONTHLY BUDGET NOW");
       this.income = this.$store.state.monthlyBudget.monthly_income;
-      console.log("THIS IS INCOME", this.income);
     },
     getNumberOfMissedEcoActions() {
       // TO DO -> remove the hard coded value
@@ -65,17 +63,14 @@ export default {
     },
   },
   beforeMount() {
-    console.log("THIS IS BEFORE MOUNTED");
     this.getMonthlyBudget();
     this.getSumOfExpenses();
     console.log(`This is before month expense ${this.expenses} and income ${this.income}`)
     this.getNumberOfMissedEcoActions();
-    this.targetPercent = !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) ? Math.floor((this.expenses / this.income) * 100) / 100 : 0;
-    console.log()
+    this.targetPercent = !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) && ((this.expenses / this.income) * 100) / 100 !== Infinity ? Math.floor((this.expenses / this.income) * 100) / 100 : 0;
   },
 
   mounted() {
-    console.log("I AM MOUNTED");
   },
 };
 </script>

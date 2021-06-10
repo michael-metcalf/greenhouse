@@ -8,9 +8,9 @@ from services import *
 #
 #########
 
-def controller_create_user(db, user_object, budget_object, json_data):
+def controller_create_user(db, user_object, budget_object, category_object, json_data):
     try:
-        data = service_create_user(db, user_object, budget_object, json_data)
+        data = service_create_user(db, user_object, budget_object, category_object, json_data)
         return data
 
     except Exception as e:

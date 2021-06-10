@@ -9,9 +9,8 @@ from datetime import date
 #
 #########
 
-def service_create_user(db, user_object, budget_object, new_user): 
+def service_create_user(db, user_object, budget_object, category_object, new_user):
     user_exist = dao_get_username(user_object, new_user["username"])
-
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
     hashed_pwd = hashlib.pbkdf2_hmac("sha512", new_user["password"].encode("utf-8"), salt, 100000)
     hashed_pwd = binascii.hexlify(hashed_pwd)
@@ -21,7 +20,6 @@ def service_create_user(db, user_object, budget_object, new_user):
     if user_exist == None:
         dao_create_user(db, user_object, username=new_user["username"].lower(), email=new_user["email"], password=salt_hashedpwd)
         data = service_get_username(user_object, new_user["username"])        
-        
         json_body = {
             "monthly_budget": 0,
             "groceries_alloc": 0,
@@ -32,8 +30,9 @@ def service_create_user(db, user_object, budget_object, new_user):
             "monthly_income": 0,
             "created_at": 0
         }
-        
-        service_create_user_budget(db, budget_object, data.id, json_body)
+
+        service_create_user_budget(db, budget_object, data["id"], json_body)
+        service_create_category(db, category_object, data["id"])
         return data
     else:
         return "User Exists"
@@ -64,6 +63,23 @@ def service_login_user(user_object, login_details):
 def service_get_user(user_object, id):
 
     data = dao_get_user(user_object, id)
+
+    if data == None:
+        return "User doesn't exist"
+
+    json_data = {
+    'id': data.id,
+    'username': data.username,
+    'email': data.email,
+    'password': data.password,
+    'created_at': data.created_at,
+    'last_modified': data.last_modified
+    }
+
+    return json_data
+
+def service_get_username(user_object, username):
+    data = dao_get_username(user_object, username)
 
     if data == None:
         return "User doesn't exist"
@@ -140,7 +156,6 @@ def service_create_user_budget(db, budget_object, user_id, json_body):
         "monthly_income": data.monthly_income,
         "created_at": data.created_at
     }
-
     return json_data
 
 #########
@@ -285,3 +300,14 @@ def service_get_categories(category_object, user_id):
         categories.append(json_object)
 
     return {"categories": categories}
+
+def service_create_category(db, category_object, user_id):
+    category_name_description = {
+        "Groceries": "Food",
+        "Transport": "Transport",
+        "Misc": "Whatever",
+        "Bills": "Bills"
+    }
+
+    for category_name in category_name_description:
+        dao_create_category(db, category_object, user_id, category_name, category_name_description[category_name])
