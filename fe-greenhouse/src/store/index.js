@@ -14,12 +14,12 @@ export default new Vuex.Store({
     isAuthenticated: false,
     expensesList: [],
     ecoActionsList: [],
-    ecoGoalsList: [ 
+    ecoGoalsList: [
       {
         id: null,
         goal_name: null,
-        user_id: null
-      }
+        user_id: null,
+      },
     ],
     categoriesList: [],
     monthlyBudget: {},
@@ -93,7 +93,7 @@ export default new Vuex.Store({
       state.ecoActionsList = payload.ecoActionsList;
     },
     setEcoGoalsList(state, payload) {
-      state.ecoGoalsList = payload.ecoGoalsList;
+      state.ecoGoalsList = payload;
     },
     setMonthlyBudget(state, payload) {
       state.monthlyBudget = payload.monthlyBudget;
@@ -171,13 +171,23 @@ export default new Vuex.Store({
 
     async createExpense({ dispatch, state }, payload) {
       try {
-        await axios.post(`/api/user/${state.user.user_id}/expenses`, payload);
+        const res = await axios.post(
+          `/api/user/${state.user.user_id}/expenses`,
+          payload
+        );
         const date = new Date();
         const newPayload = {
           year: date.getFullYear(),
           month: date.getMonth() + 1,
         };
+
+        const EcoActionPayload = {
+          eco_goals: payload.eco_goal,
+          expense_id: res.data.id,
+        };
+
         dispatch("getExpenses", newPayload);
+        dispatch("createEcoActions", EcoActionPayload);
       } catch (err) {
         console.error(`ERROR in createExpense! ${err}`);
       }
@@ -198,8 +208,8 @@ export default new Vuex.Store({
           `/api/user/${state.user.user_id}/expenses/${payload.year}/${payload.month}`
         );
 
-        if (res === "Budget doesn't exist") {
-          commit("setExpenseList", { expensesList: [] });
+        if (res.data === "Budget doesn't exist") {
+          commit("setExpensesList", { expensesList: [] });
         } else {
           commit("setExpensesList", { expensesList: res.data.expenses });
         }
@@ -236,9 +246,7 @@ export default new Vuex.Store({
         const res = await axios.get(
           `/api/user/${state.user.user_id}/eco_goals`
         );
-        if (res.data.eco_goals) {
-          commit("setEcoGoalsList", res.data.eco_goals);
-        }
+        commit("setEcoGoalsList", res.data.eco_goals);
       } catch (err) {
         console.error(`ERROR in the getEcoGoals ${err}`);
       }
@@ -267,6 +275,18 @@ export default new Vuex.Store({
         }
       } catch (err) {
         console.error(`ERROR in the getCategories ${err}`);
+      }
+    },
+
+    async createEcoActions({ dispatch, state }, payload) {
+      try {
+        await axios.post(
+          `/api/user/${state.user.user_id}/eco_actions`,
+          payload
+        );
+        dispatch("getEcoActions");
+      } catch (err) {
+        console.error(`ERROR in the createEcoActions ${err}`);
       }
     },
   },
