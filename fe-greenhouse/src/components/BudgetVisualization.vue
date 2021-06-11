@@ -72,9 +72,6 @@ export default {
   beforeMount() {
     this.getMonthlyBudget();
     this.getSumOfExpenses();
-    console.log(
-      `This is before month expense ${this.expenses} and income ${this.income}`
-    );
     this.getNumberOfMissedEcoActions();
     this.targetPercent =
       !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) &&

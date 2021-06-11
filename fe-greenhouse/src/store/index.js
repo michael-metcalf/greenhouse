@@ -112,7 +112,6 @@ export default new Vuex.Store({
             msgType: "error",
           });
         } else {
-          console.log("I HAVE LOGGED IN");
           commit("setUserName", res.data.username);
           commit("setUser", res.data);
           dispatch("receiveLoginSignal");
@@ -127,9 +126,8 @@ export default new Vuex.Store({
       }
     },
 
-    async receiveLoginSignal({ commit, dispatch, state }) {
+    async receiveLoginSignal({ commit, dispatch }) {
       // Need to download the data related to the current user
-      console.log(`Received login signal...${state.userName}`);
       commit("setLoadingStatus", true);
       try {
         const date = new Date();
@@ -147,7 +145,6 @@ export default new Vuex.Store({
 
         commit("setLoadingStatus", false);
         commit("setAuthenticated", true);
-        console.log("setLoading and setAuthenticated is done");
       } catch (err) {
         console.error(`ERROR in the back-end API download! ${err}`);
       }
@@ -156,10 +153,7 @@ export default new Vuex.Store({
     async createUser(store, payload) {
       try {
         await axios.post("/api/user/create", payload);
-        store.commit("setUserMessage", {
-          message: "User creation successful! \n Please log in",
-          msgType: "info",
-        });
+        store;
       } catch (err) {
         console.error(`ERROR in createUser! ${err}`);
         store.commit("setUserMessage", {
@@ -226,10 +220,6 @@ export default new Vuex.Store({
           `/api/user/${state.user.user_id}/user_budget`
         );
         commit("setMonthlyBudget", { monthlyBudget: res.data });
-        console.log(
-          "THIS IS WHEN THE API CALL IS SETTING MONTHLY INCOME",
-          state.monthlyBudget.monthly_income
-        );
       } catch (err) {
         console.error(`ERROR in the getBudgets ${err}`);
       }
@@ -267,8 +257,6 @@ export default new Vuex.Store({
           `/api/user/${state.user.user_id}/categories`
         );
         if (res.data.categories) {
-          console.log(`Received categories...`);
-          console.log(res.data.categories);
           commit("setCategoriesList", { categoriesList: res.data.categories });
         }
       } catch (err) {
