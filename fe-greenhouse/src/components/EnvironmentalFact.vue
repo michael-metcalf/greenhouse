@@ -148,6 +148,7 @@ export default {
 
 #did-you-know-text {
   font-size: large;
+  font-weight: bold;
 }
 
 .env-fact {
@@ -158,7 +159,6 @@ export default {
   background-color: rgba(255, 255, 255, 0.5);
   padding-left: 5px;
   padding-right: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px 10px;
 }
 </style>
