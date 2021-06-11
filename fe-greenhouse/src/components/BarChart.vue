@@ -76,8 +76,9 @@ export default {
   },
   watch: {
     savingsScore: function (newVal, oldVal) {
-      console.log(`Props changed! Old val = ${oldVal}, newVal = ${newVal}`);
       this.setChartData(this.$props.savingsScore);
+      newVal;
+      oldVal;
       if (this.$data._chart) {
         this.$data._chart.destroy();
       }
