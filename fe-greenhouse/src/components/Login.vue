@@ -69,6 +69,7 @@ input {
   margin-bottom: 1.5em;
   height: 2em;
   font-size: large;
+  filter: none;
 }
 
 .green-emphasis {

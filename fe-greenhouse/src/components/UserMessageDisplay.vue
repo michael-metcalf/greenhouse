@@ -16,6 +16,9 @@ export default {
         error:
           this.$store.state.userMessage.msgType === "error" &&
           this.$store.state.userMessage !== "",
+        info: 
+          this.$store.state.userMessage.msgType === "info" &&
+            this.$store.state.userMessage !== "",
       };
     },
   },
@@ -27,6 +30,13 @@ div.userMessage {
   margin-top: 1em;
   margin-bottom: 1em;
   padding: 0.5em;
+  width: 90%;
+}
+
+p {
+  margin: 0px; /* No need margin as we have padding in the parent component */
+  padding: 1em;
+  border-radius: 10px;
 }
 
 p.error {
@@ -36,5 +46,9 @@ p.error {
 
 p.warning {
   background-color: lightyellow;
+}
+
+p.info {
+  background-color: #d7efbd;
 }
 </style>
