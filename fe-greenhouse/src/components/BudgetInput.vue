@@ -33,8 +33,10 @@
             class="field-value"
             v-show="!showField('allocatedGroceries')"
             @click="focusField('allocatedGroceries')"
-            >{{ form.allocatedGroceries }}</span
-          >
+            >
+            {{ form.allocatedGroceries }}
+            <i class="fas fa-edit"></i>
+            </span>
           <input
             v-model="form.allocatedGroceries"
             v-show="showField('allocatedGroceries')"
@@ -45,7 +47,6 @@
             @blur="blurField"
             maxlength="15"
           />
-          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Bills</div>
         <div class="grid-content">{{ runningBills }}</div>
@@ -54,8 +55,9 @@
             class="field-value"
             v-show="!showField('allocatedBills')"
             @click="focusField('allocatedBills')"
-            >{{ form.allocatedBills }}</span
-          >
+            >{{ form.allocatedBills }}
+          <i class="fas fa-edit"></i>
+          </span>
           <input
             v-model="form.allocatedBills"
             v-show="showField('allocatedBills')"
@@ -66,7 +68,6 @@
             @blur="blurField"
             maxlength="15"
           />
-          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Transport</div>
         <div class="grid-content">{{ runningTransport }}</div>
@@ -75,8 +76,9 @@
             class="field-value"
             v-show="!showField('allocatedTransport')"
             @click="focusField('allocatedTransport')"
-            >{{ form.allocatedTransport }}</span
-          >
+            >{{ form.allocatedTransport }}
+          <i class="fas fa-edit"></i>
+          </span>
           <input
             v-model="form.allocatedTransport"
             v-show="showField('allocatedTransport')"
@@ -87,7 +89,6 @@
             @blur="blurField"
             maxlength="15"
           />
-          <i class="fas fa-edit"></i>
         </div>
         <div class="row-header">Misc</div>
         <div class="grid-content">{{ runningMisc }}</div>
@@ -96,8 +97,9 @@
             class="field-value"
             v-show="!showField('allocatedMisc')"
             @click="focusField('allocatedMisc')"
-            >{{ form.allocatedMisc }}</span
-          >
+            >{{ form.allocatedMisc }}
+          <i class="fas fa-edit"></i>
+          </span>
           <input
             v-model="form.allocatedMisc"
             v-show="showField('allocatedMisc')"
@@ -108,7 +110,7 @@
             @blur="blurField"
             maxlength="15"
           />
-          <i class="fas fa-edit"></i>
+          
         </div>
         <div class="row-header big-row two-columns">Savings Target</div>
         <div class="grid-content big-row">
@@ -116,8 +118,9 @@
             class="field-value"
             v-show="!showField('savingsTarget')"
             @click="focusField('savingsTarget')"
-            >{{ form.savingsTarget }}</span
-          >
+            >{{ form.savingsTarget }}
+            <i class="fas fa-edit"></i>
+            </span>
           <input
             v-model="form.savingsTarget"
             v-show="showField('savingsTarget')"
@@ -128,7 +131,7 @@
             @blur="blurField"
             maxlength="15"
           />
-          <i class="fas fa-edit"></i>
+          
         </div>
       </div>
 
@@ -302,7 +305,8 @@ export default {
   border-radius: 5px;
   background-color: #403d58;
   color: white;
-  width: 150px;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .grid-row-header,
