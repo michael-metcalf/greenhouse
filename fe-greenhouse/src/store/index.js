@@ -108,7 +108,7 @@ export default new Vuex.Store({
         const res = await axios.post("/api/user/login", payload);
         if (res.data.error === -1) {
           commit("setUserMessage", {
-            message: "Could not login",
+            message: "Login error. Please check your credentials!",
             msgType: "error",
           });
         } else {
@@ -116,6 +116,11 @@ export default new Vuex.Store({
           commit("setUserName", res.data.username);
           commit("setUser", res.data);
           dispatch("receiveLoginSignal");
+          // Login successful -> we erase the "login error" message
+          commit("setUserMessage", {
+            message: "",
+            msgType: "",
+          });
         }
       } catch (err) {
         console.error(err);
@@ -151,9 +156,16 @@ export default new Vuex.Store({
     async createUser(store, payload) {
       try {
         await axios.post("/api/user/create", payload);
-        console.log(store);
+        store.commit("setUserMessage", {
+          message: "User creation successful! \n Please log in",
+          msgType: "info",
+        });
       } catch (err) {
         console.error(`ERROR in createUser! ${err}`);
+        store.commit("setUserMessage", {
+          message: "Error in user creation! \n Please retry",
+          msgType: "error",
+        });
       }
     },
 
@@ -164,7 +176,7 @@ export default new Vuex.Store({
         const newPayload = {
           year: date.getFullYear(),
           month: date.getMonth() + 1,
-        }
+        };
         dispatch("getExpenses", newPayload);
       } catch (err) {
         console.error(`ERROR in createExpense! ${err}`);
@@ -187,11 +199,10 @@ export default new Vuex.Store({
         );
 
         if (res === "Budget doesn't exist") {
-          commit("setExpenseList", { expensesList: []})
+          commit("setExpenseList", { expensesList: [] });
         } else {
           commit("setExpensesList", { expensesList: res.data.expenses });
         }
-
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);
       }

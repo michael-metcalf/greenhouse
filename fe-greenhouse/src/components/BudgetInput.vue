@@ -132,7 +132,10 @@
         </div>
       </div>
 
-      <p><span class="savings">Savings Leeway:</span> {{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}</p>
+      <p>
+        <span class="savings">Savings Leeway:</span>
+        {{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}
+      </p>
       <div id="button-container">
         <button
           @click="patchUserBudgetInput"
@@ -177,13 +180,21 @@ export default {
     const misc_id = 3;
     const bills_id = 4;
     this.monthlyIncome = 0;
-    this.runningGroceries = !isNaN(this.getExpenseTotals(groceries_id)) ? this.getExpenseTotals(groceries_id) : 0
+    this.runningGroceries = !isNaN(this.getExpenseTotals(groceries_id))
+      ? this.getExpenseTotals(groceries_id)
+      : 0;
     this.allocatedGroceries = 0;
-    this.runningBills = !isNaN(this.getExpenseTotals(bills_id)) ? this.getExpenseTotals(bills_id) : 0
+    this.runningBills = !isNaN(this.getExpenseTotals(bills_id))
+      ? this.getExpenseTotals(bills_id)
+      : 0;
     this.allocatedBills = 0;
-    this.runningTransport = !isNaN(this.getExpenseTotals(transport_id)) ? this.getExpenseTotals(transport_id) : 0
+    this.runningTransport = !isNaN(this.getExpenseTotals(transport_id))
+      ? this.getExpenseTotals(transport_id)
+      : 0;
     this.allocatedTransport = 0;
-    this.runningMisc = !isNaN(this.getExpenseTotals(misc_id)) ? this.getExpenseTotals(misc_id) : 0
+    this.runningMisc = !isNaN(this.getExpenseTotals(misc_id))
+      ? this.getExpenseTotals(misc_id)
+      : 0;
     this.allocatedMisc = 0;
     this.savingsTarget = 0;
     this.savingsLeeway =
@@ -196,9 +207,12 @@ export default {
   },
   methods: {
     getExpenseTotals(categoryID) {
-      return this.$store.state.expensesList.filter((element) => element.category_id == categoryID)
-      .reduce((accumulator, currentElement) => accumulator + currentElement.amount, 0)
-
+      return this.$store.state.expensesList
+        .filter((element) => element.category_id == categoryID)
+        .reduce(
+          (accumulator, currentElement) => accumulator + currentElement.amount,
+          0
+        );
     },
     focusField(name) {
       this.editField = name;
@@ -283,7 +297,8 @@ export default {
   width: 150px;
 }
 
-.grid-row-header, .row-header {
+.grid-row-header,
+.row-header {
   width: 100px;
   text-align: left;
   padding: 2px;
@@ -292,7 +307,9 @@ export default {
   /* border: 1px solid black; */
 }
 
-.grid-col-header, .income, .savings {
+.grid-col-header,
+.income,
+.savings {
   font-weight: bold;
   padding: 10px;
   width: 100;
