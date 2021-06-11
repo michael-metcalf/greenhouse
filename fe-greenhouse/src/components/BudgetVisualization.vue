@@ -1,8 +1,8 @@
 <template>
   <div id="homePanel">
-    <h1>Welcome, {{ this.$store.state.userName }} </h1>
-      <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
-      
+    <h1>Welcome, {{ this.$store.state.userName }}</h1>
+    <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
+
     <div class="budget-viz-container">
       <h1>This month's savings</h1>
       <div class="chart-align-container">
@@ -19,11 +19,11 @@
         {{ !isNaN(income - expenses) ? income - expenses : 0 }}
       </h2>
       <ul class="no-bullets">
-        <li>Income: {{ income }}</li>
+        <li id="income">Income: {{ income }}</li>
         <li>Expenses: {{ expenses }}</li>
       </ul>
     </div>
-      <EnvironmentalFact />
+    <EnvironmentalFact />
   </div>
 </template>
 
@@ -31,7 +31,6 @@
 import ProgressChart from "./progressChart.vue";
 import EnvironmentalFact from "./EnvironmentalFact.vue";
 import EcoGoalProgress from "./EcoGoalProgress";
-
 
 export default {
   name: "BudgetVisualization",
@@ -126,5 +125,11 @@ ul.no-bullets {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-weight: bolder;
+}
+#income {
+  margin-bottom: 10px;
 }
 </style>
