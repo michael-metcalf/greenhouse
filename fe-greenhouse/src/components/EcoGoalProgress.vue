@@ -4,7 +4,7 @@
       Your Eco Actions: <i id="sprout" class="fas fa-seedling"></i>
          {{ ecoScoreString }}
     </p>
-    <p>{{ customerMessage }}</p>
+    <p id="customerMessage">{{ customerMessage }}</p>
   </div>
 </template>
 
@@ -59,7 +59,11 @@ export default {
 
 #eco-goals {
   font-size: larger;
-  font-weight: bold;
+  font-weight: bolder;
+}
+#customerMessage {
+  font-weight: bolder;
+  font-size: smaller;
 }
 
 #sprout {
