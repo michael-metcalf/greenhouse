@@ -175,10 +175,18 @@ export default {
     };
   },
   mounted() {
-    const groceries_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Groceries")[0].id;
-    const transport_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Transport")[0].id;
-    const misc_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Misc")[0].id;
-    const bills_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Bills")[0].id;
+    const groceries_id = this.$store.state.categoriesList.filter(
+      (categoryObj) => categoryObj.category_name === "Groceries"
+    )[0].id;
+    const transport_id = this.$store.state.categoriesList.filter(
+      (categoryObj) => categoryObj.category_name === "Transport"
+    )[0].id;
+    const misc_id = this.$store.state.categoriesList.filter(
+      (categoryObj) => categoryObj.category_name === "Misc"
+    )[0].id;
+    const bills_id = this.$store.state.categoriesList.filter(
+      (categoryObj) => categoryObj.category_name === "Bills"
+    )[0].id;
     this.monthlyIncome = 0;
     this.runningGroceries = !isNaN(this.getExpenseTotals(groceries_id))
       ? this.getExpenseTotals(groceries_id)
