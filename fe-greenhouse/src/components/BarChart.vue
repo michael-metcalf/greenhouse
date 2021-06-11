@@ -25,11 +25,7 @@ export default {
               this.getNoImpulseBuyActionTotal(),
               this.getTransportActionTotal(),
             ],
-            backgroundColor: [
-              "#004D48",
-              "#00716A",
-              "#00968C",
-            ],
+            backgroundColor: ["#004D48", "#00716A", "#00968C"],
             borderColor: ["rgb(0, 0, 0)"],
           },
         ],

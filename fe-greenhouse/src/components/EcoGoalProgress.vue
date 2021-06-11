@@ -1,8 +1,8 @@
 <template>
   <div class="eco-goals-container">
     <p id="eco-goals">
-      Eco Goals: <i id="sprout" class="fas fa-seedling"></i>
-      x {{ ecoScoreString }}
+      Eco Goals: <i id="sprout" class="fas fa-seedling"></i> x
+      {{ ecoScoreString }}
     </p>
     <p>{{ customerMessage }}</p>
   </div>
@@ -31,9 +31,12 @@ export default {
     console.log(`Props - eco score ${this.ecoScore}`);
     // const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
-    this.ecoScoreString = this.$store.state.ecoActionsList
-      .filter((element) => (element.eco_goal_id == 1 || element.eco_goal_id == 2 || element.eco_goal_id == 3))
-      .length;
+    this.ecoScoreString = this.$store.state.ecoActionsList.filter(
+      (element) =>
+        element.eco_goal_id == 1 ||
+        element.eco_goal_id == 2 ||
+        element.eco_goal_id == 3
+    ).length;
     // for (let i = 0; i < numberOfSprouts; i++) {
     //   this.ecoScoreString += 1;
     // }

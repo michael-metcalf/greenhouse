@@ -108,7 +108,7 @@ export default new Vuex.Store({
         const res = await axios.post("/api/user/login", payload);
         if (res.data.error === -1) {
           commit("setUserMessage", {
-            message: "Could not login",
+            message: "Login error. Please check your credentials!",
             msgType: "error",
           });
         } else {
@@ -116,6 +116,11 @@ export default new Vuex.Store({
           commit("setUserName", res.data.username);
           commit("setUser", res.data);
           dispatch("receiveLoginSignal");
+          // Login successful -> we erase the "login error" message
+          commit("setUserMessage", {
+            message: "",
+            msgType: "",
+          });
         }
       } catch (err) {
         console.error(err);
@@ -151,20 +156,28 @@ export default new Vuex.Store({
     async createUser(store, payload) {
       try {
         await axios.post("/api/user/create", payload);
-        console.log(store);
+        store.commit("setUserMessage", {
+          message: "User creation successful! \n Please log in",
+          msgType: "info",
+        });
       } catch (err) {
         console.error(`ERROR in createUser! ${err}`);
+        store.commit("setUserMessage", {
+          message: "Error in user creation! \n Please retry",
+          msgType: "error",
+        });
       }
     },
 
     async createExpense({ dispatch, state }, payload) {
       try {
-        const res = await axios.post(
-          `/api/user/${state.user.user_id}/expense`,
-          payload
-        );
-        console.log(res.data);
-        dispatch("getExpenses");
+        await axios.post(`/api/user/${state.user.user_id}/expenses`, payload);
+        const date = new Date();
+        const newPayload = {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+        };
+        dispatch("getExpenses", newPayload);
       } catch (err) {
         console.error(`ERROR in createExpense! ${err}`);
       }
@@ -184,7 +197,12 @@ export default new Vuex.Store({
         const res = await axios.get(
           `/api/user/${state.user.user_id}/expenses/${payload.year}/${payload.month}`
         );
-        commit("setExpensesList", { expensesList: res.data.expenses });
+
+        if (res === "Budget doesn't exist") {
+          commit("setExpenseList", { expensesList: [] });
+        } else {
+          commit("setExpensesList", { expensesList: res.data.expenses });
+        }
       } catch (err) {
         console.error(`ERROR in getExpenses ${err}`);
       }
