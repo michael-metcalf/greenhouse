@@ -111,6 +111,13 @@ def controller_get_eco_actions(eco_action_object, id):
     except Exception as e:
         return str(e)
 
+def controller_create_eco_actions(db, eco_action_object, id, json_body):
+    try:
+        data = service_create_eco_actions(db, eco_action_object, id, json_body)
+        return data
+    except Exception as e:
+        return str(e)
+
 #########
 #
 # Categories

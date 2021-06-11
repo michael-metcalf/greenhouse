@@ -86,6 +86,11 @@ def dao_create_eco_goal(db, eco_goal_object, user_id, goal_name):
     db.session.add(new_eco_goal)
     db.session.commit()
 
+def dao_create_eco_action(db, eco_action_object, user_id, eco_goal_id, expense_id):
+    new_eco_action = eco_action_object(user_id=user_id, eco_goal_id=eco_goal_id, expense_id=expense_id)
+    db.session.add(new_eco_action)
+    db.session.commit()
+
 #########
 #
 # Category
