@@ -8,7 +8,7 @@
       name="username-input"
       placeholder="username..."
     />
-    <input
+    <input v-on:keyup.enter="validateUserInput"
       type="password"
       v-model="currentUser.password"
       id="password-input"
