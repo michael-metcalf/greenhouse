@@ -1,8 +1,8 @@
 <template>
   <div id="homePanel">
-    <h1>Welcome, {{ this.$store.state.userName }} </h1>
-      <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
-      
+    <h1>Welcome, {{ this.$store.state.userName }}</h1>
+    <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
+
     <div class="budget-viz-container">
       <h1>This month's savings</h1>
       <div class="chart-align-container">
@@ -23,7 +23,7 @@
         <li>Expenses: {{ expenses }}</li>
       </ul>
     </div>
-      <EnvironmentalFact />
+    <EnvironmentalFact />
   </div>
 </template>
 
@@ -31,7 +31,6 @@
 import ProgressChart from "./progressChart.vue";
 import EnvironmentalFact from "./EnvironmentalFact.vue";
 import EcoGoalProgress from "./EcoGoalProgress";
-
 
 export default {
   name: "BudgetVisualization",
