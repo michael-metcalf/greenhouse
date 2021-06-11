@@ -251,6 +251,7 @@ def service_get_eco_goals(eco_goal_object, user_id):
     
     for eco_goal in data:
         json_object = {
+            "id": eco_goal.id,
             "goal_name": eco_goal.goal_name,
             "user_id": eco_goal.user_id,
         }
