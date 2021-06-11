@@ -156,7 +156,7 @@ export default {
 .env-fact-container {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.5);
-  margin: 5px 10px 200px 10px;
-  height: 100px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 </style>

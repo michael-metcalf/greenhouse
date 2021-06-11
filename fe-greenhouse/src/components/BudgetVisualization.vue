@@ -14,7 +14,10 @@
           :css-classes="'chartContainer'"
         />
       </div>
-      <h2>Potential savings: {{ !isNaN(income - expenses) ? income - expenses : 0 }}</h2>
+      <h2>
+        Potential savings:
+        {{ !isNaN(income - expenses) ? income - expenses : 0 }}
+      </h2>
       <ul class="no-bullets">
         <li>Income: {{ income }}</li>
         <li>Expenses: {{ expenses }}</li>
@@ -47,11 +50,15 @@ export default {
   },
   methods: {
     getSumOfExpenses() {
-      this.expenses = !isNaN(this.$store.state.expensesList
-        .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue, 0)) ? this.$store.state.expensesList
-        .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue, 0) : 0;
+      this.expenses = !isNaN(
+        this.$store.state.expensesList
+          .map((x) => x.amount)
+          .reduce((currentSum, currentValue) => currentSum + currentValue, 0)
+      )
+        ? this.$store.state.expensesList
+            .map((x) => x.amount)
+            .reduce((currentSum, currentValue) => currentSum + currentValue, 0)
+        : 0;
     },
     getMonthlyBudget() {
       this.income = this.$store.state.monthlyBudget.monthly_income;
@@ -66,13 +73,18 @@ export default {
   beforeMount() {
     this.getMonthlyBudget();
     this.getSumOfExpenses();
-    console.log(`This is before month expense ${this.expenses} and income ${this.income}`)
+    console.log(
+      `This is before month expense ${this.expenses} and income ${this.income}`
+    );
     this.getNumberOfMissedEcoActions();
-    this.targetPercent = !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) && ((this.expenses / this.income) * 100) / 100 !== Infinity ? Math.floor((this.expenses / this.income) * 100) / 100 : 0;
+    this.targetPercent =
+      !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) &&
+      ((this.expenses / this.income) * 100) / 100 !== Infinity
+        ? Math.floor((this.expenses / this.income) * 100) / 100
+        : 0;
   },
 
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 
