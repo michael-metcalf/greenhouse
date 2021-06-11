@@ -9,9 +9,6 @@
       <!-- we display the LOGIN component if no user is currently active -->
         <user-message-display />
         <Login class="panel" v-if="this.$store.state.showLogin" />
-        <!-- <loading-message
-          v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
-        /> -->
         <BudgetVisualization
           class="panel"
           v-if="this.$store.state.showBudgetVisualization"
@@ -76,10 +73,8 @@
 <script>
 import Login from "./components/Login.vue";
 import BudgetVisualization from "./components/BudgetVisualization.vue";
-// import EcoGoalProgress from "./components/EcoGoalProgress.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import BudgetInput from "./components/BudgetInput.vue";
-// import LoadingMessage from "./components/LoadingMessage.vue";
 import UserMessageDisplay from "./components/UserMessageDisplay";
 import BarChartScreen from "./components/BarChartScreen.vue";
 import SignUp from "./components/SignUp.vue";
@@ -111,11 +106,6 @@ export default {
     BarChartScreen,
     SignUp,
   },
-  // data() {
-  //   return {
-  //     component: "BudgetVisualization",
-  //   };
-  // },
   methods: {
     showBudgetVisualization() {
       this.$store.commit("setShowsToFalse");
