@@ -60,7 +60,7 @@ export default {
       }),
       this.setChartData();
     this.chartOptions = {
-      legend: { display: false },
+      legend: {display: false},
       scales: {
         yAxes: [
           {
@@ -74,6 +74,13 @@ export default {
             },
           },
         ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'black',
+            }
+          }
+        ]
       },
     };
     this.renderChart(this.setChartData, this.chartOptions);
