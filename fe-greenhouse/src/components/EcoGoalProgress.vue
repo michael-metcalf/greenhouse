@@ -2,7 +2,7 @@
   <div class="eco-goals-container">
     <p id="eco-goals">
       Eco Goals: <i id="sprout" class="fas fa-seedling"></i>
-      x {{ ecoScoreString }}
+         {{ ecoScoreString }}
     </p>
     <p>{{ customerMessage }}</p>
   </div>
