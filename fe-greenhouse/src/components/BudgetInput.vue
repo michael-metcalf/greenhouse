@@ -136,8 +136,8 @@
       </div>
 
       <p>
-        <span class="savings">Savings Leeway:</span>
-        {{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}
+        <span class="savings">Savings Leeway: {{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}</span>
+        
       </p>
       <div id="button-container">
         <button
@@ -258,6 +258,9 @@ export default {
 </script>
 
 <style scoped>
+.field-value {
+  font-weight: bold;
+}
 #monthly-income {
   font-weight: bold;
 }
@@ -300,7 +303,9 @@ export default {
   padding-left: 2em;
   padding-right: 2em;
 }
-
+.row-header{
+  font-weight: bolder;
+}
 .grid-row-header,
 .row-header {
   width: 100px;
@@ -323,12 +328,18 @@ export default {
 .grid-content {
   width: 150px;
   justify-content: center;
+  font-weight: bold;
+}
+.grid-content-2 {
+  font-weight: bold;
 }
 
 .fas {
   padding-left: 20px;
 }
-
+.savings {
+  font-weight: bold;
+}
 /* .grid-content {
   width: 50px;
 }

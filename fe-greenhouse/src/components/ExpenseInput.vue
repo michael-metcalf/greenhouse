@@ -280,17 +280,20 @@ export default {
 
 <style scoped>
 #expense-input-container {
+   --button-color: #403d58;
   --second-color: #368f8b;
-  --button-color: #403d58;
+ 
 }
 
 p {
+  font-size: large;
   font-weight: bold;
-  color: var(--second-color);
+  color: var(--button-color);
 }
 
 .icon-info {
-  font-size: 10px;
+  font-size: smaller;
+
 }
 
 .verticalContainer {
@@ -334,6 +337,7 @@ input[type="radio"]:disabled ~ label {
   box-shadow: 0px 3px 10px -2px rgba(161, 170, 166, 0.5);
   position: relative;
   z-index: 0;
+  font-weight: bold;
 }
 
 input[type="radio"]:checked + label {
