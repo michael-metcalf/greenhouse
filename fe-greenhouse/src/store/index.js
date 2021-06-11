@@ -14,7 +14,13 @@ export default new Vuex.Store({
     isAuthenticated: false,
     expensesList: [],
     ecoActionsList: [],
-    ecoGoalsList: [],
+    ecoGoalsList: [ 
+      {
+        id: null,
+        goal_name: null,
+        user_id: null
+      }
+    ],
     categoriesList: [],
     monthlyBudget: {},
     userMessage: { message: "", msgType: "" },
@@ -231,7 +237,7 @@ export default new Vuex.Store({
           `/api/user/${state.user.user_id}/eco_goals`
         );
         if (res.data.eco_goals) {
-          commit("setEcoGoalsList", { ecoGoalsList: res.data.eco_goals });
+          commit("setEcoGoalsList", res.data.eco_goals);
         }
       } catch (err) {
         console.error(`ERROR in the getEcoGoals ${err}`);

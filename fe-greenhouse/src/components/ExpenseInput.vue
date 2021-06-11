@@ -78,7 +78,8 @@
             type="checkbox"
             name="eco-bag-no-bag"
             value="eco-bag-no-bag"
-            @click="uncheck"
+            v-model="posts.ecoGoal.ecoBag"
+            @click="ecoGoalValidatorSetter('ecoBag')"
           />
           <label for="eco-bag-no-bag">
             <span class="eco-watch">
@@ -94,7 +95,8 @@
             type="checkbox"
             name="no-impulse-buy"
             value="no-impulse-buy"
-            @click="uncheck"
+            v-model="posts.ecoGoal.noImpulse"
+            @click="ecoGoalValidatorSetter('noImpulse')"
           />
           <label for="no-impulse-buy">
             <span class="eco-watch">
@@ -111,7 +113,8 @@
             type="checkbox"
             name="eco-conscious-transport"
             value="eco-conscious-transport"
-            @click="uncheck"
+            v-model="posts.ecoGoal.ecoConsciousTransport"
+            @click="ecoGoalValidatorSetter('ecoConsciousTransport')"
           />
           <label for="eco-conscious-transport">
             <span class="eco-watch">
@@ -127,7 +130,8 @@
             type="checkbox"
             name="failed-eco-warrior"
             value="failed-eco-warrior"
-            checked
+            v-model="posts.ecoGoal.noEcoAction"
+            @click="ecoGoalValidatorSetter('noEcoAction')"
           />
           <label for="failed-eco-warrior">
             <span class="eco-watch">
@@ -179,6 +183,12 @@ export default {
         amount: null,
         description: null,
         category: null,
+        ecoGoal: {
+          ecoBag: false,
+          noImpulse: false,
+          ecoConsciousTransport: false,
+          noEcoAction: true
+        }
       },
     };
   },
@@ -187,11 +197,19 @@ export default {
       const categoryFilter = this.$store.state.categoriesList.filter(
         (category) => category.category_name === this.posts.category
       );
+
+      // const ecoGoalFilter = this.$store.state.ecoGoalsList.filter(
+      //   (ecoGoal) => ecoGoal.goal_name ==
+      // )
+
       const expenseData = {
         user_id: this.$store.state.user.user_id,
         category_id: categoryFilter[0].id,
         expense_description: this.posts.description,
         amount: this.posts.amount,
+        eco_goal: {
+
+        }
       };
 
       this.$store.dispatch("createExpense", expenseData);
@@ -202,16 +220,38 @@ export default {
     getCategory(category) {
       this.posts.category = category;
     },
-    uncheck() {
-      // const ecoBag = document.getElementById("eco-bag-no-bag");
-      // const ecoTransport = document.getElementById("eco-conscious-transport");
-      // const noImpulse = document.getElementById("no-impulse-buy");
-      const noActionCheck = document.getElementById("failed-eco-warrior");
-      // if(ecoBag.hasAttribute("checked", true)) {
-      // if (ecoBag.hasAttribute("checked", true) || ecoTransport.hasAttribute("checked") || noImpulse.hasAttribute("checked")) {
-      noActionCheck.removeAttribute("checked");
-      // }
+    getEcoGoal(ecoGoal) {
+      this.posts.ecoGoal = ecoGoal;
     },
+    // uncheck() {
+    //   // const ecoBag = document.getElementById("eco-bag-no-bag");
+    //   // const ecoTransport = document.getElementById("eco-conscious-transport");
+    //   // const noImpulse = document.getElementById("no-impulse-buy");
+    //   const noActionCheck = document.getElementById("failed-eco-warrior");
+    //   // if(ecoBag.hasAttribute("checked", true)) {
+    //   // if (ecoBag.hasAttribute("checked", true) || ecoTransport.hasAttribute("checked") || noImpulse.hasAttribute("checked")) {
+    //   noActionCheck.removeAttribute("checked");
+    //   // }
+    // },
+    ecoGoalValidatorSetter(ecoGoalButtonValue) {
+      console.log(`This is BEFORE the function is run: Eco Bag: ${this.posts.ecoGoal.ecoBag}, No Impulse: ${this.posts.ecoGoal.noImpulse}, Eco Transport: ${this.posts.ecoGoal.ecoConsciousTransport}, No Action: ${this.posts.ecoGoal.noEcoAction}`)
+      if (ecoGoalButtonValue === "noEcoAction") {
+        this.posts.ecoGoal.ecoBag = false;
+        this.posts.ecoGoal.noImpulse = false;
+        this.posts.ecoGoal.ecoConsciousTransport = false;
+      } else {
+        this.posts.ecoGoal.noEcoAction = false;
+      }
+
+      if (!ecoGoalButtonValue == "noEcoAction") {
+        if (this.post.ecoGoal.ecoBag == false && this.posts.ecoGoal.noImpulse == false && this.posts.ecoGoal.ecoConsciousTransport == false) {
+          this.posts.ecoGoal.noEcoAction = true;
+        }
+      }
+
+      console.log(`This is AFTER the function is run: Eco Bag: ${this.posts.ecoGoal.ecoBag}, No Impulse: ${this.posts.ecoGoal.noImpulse}, Eco Transport: ${this.posts.ecoGoal.ecoConsciousTransport}, No Action: ${this.posts.ecoGoal.noEcoAction}`)
+
+    }
   },
 };
 </script>
