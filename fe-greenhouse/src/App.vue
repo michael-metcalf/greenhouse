@@ -163,7 +163,6 @@ export default {
         this.$store.state.showLogin ||
         this.$store.state.showBarChart ||
         this.$store.state.showBudgetInput;
-      console.log(`login: ${this.$store.state.showLogin}, bar: ${this.$store.state.showBarChart}, 
       BI: ${this.$store.state.showBudgetInput}`);
       return {
         "main-panel": true,

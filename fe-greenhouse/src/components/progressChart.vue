@@ -45,7 +45,6 @@ export default {
   // (otherwise a change in props do not trigger a chart refresh)
   watch: {
     savingsScore: function (newVal, oldVal) {
-      console.log(`Props changed! Old val = ${oldVal}, newVal = ${newVal}`);
       this.setChartData(this.$props.savingsScore);
       if (this.$data._chart) {
         this.$data._chart.destroy();

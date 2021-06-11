@@ -28,7 +28,6 @@ export default {
     );
     externalScript.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(externalScript);
-    console.log(`Props - eco score ${this.ecoScore}`);
     // const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
     this.ecoScoreString = this.$store.state.ecoActionsList
