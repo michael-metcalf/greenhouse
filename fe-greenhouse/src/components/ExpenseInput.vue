@@ -206,8 +206,7 @@ export default {
   },
   methods: {
     expenseValidator() {
-
-      const isNumber = parseInt(this.posts.amount)
+      const isNumber = parseInt(this.posts.amount);
 
       if (isNaN(isNumber)) {
         return false;
