@@ -65,15 +65,15 @@ export default {
 
 <style scoped>
 .eco-goals-container {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 5px 10px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+  height: 100px;
+ 
 }
 
 #eco-goals {
+  font-size: larger;
   font-weight: bold;
 }
 
