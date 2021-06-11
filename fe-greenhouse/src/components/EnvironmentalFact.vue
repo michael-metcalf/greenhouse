@@ -148,6 +148,7 @@ export default {
 
 #did-you-know-text {
   font-size: large;
+  font-weight: bold;
 }
 
 .env-fact {

@@ -19,7 +19,7 @@
         {{ !isNaN(income - expenses) ? income - expenses : 0 }}
       </h2>
       <ul class="no-bullets">
-        <li>Income: {{ income }}</li>
+        <li id="income">Income: {{ income }}</li>
         <li>Expenses: {{ expenses }}</li>
       </ul>
     </div>
@@ -126,5 +126,11 @@ ul.no-bullets {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-weight: bolder;
+}
+#income {
+  margin-bottom: 10px;
 }
 </style>
