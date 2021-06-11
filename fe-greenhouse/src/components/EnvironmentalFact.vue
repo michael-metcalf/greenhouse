@@ -1,7 +1,7 @@
 <template>
   <div class="env-fact-container">
     <h2 class="did-you-know-header">Did you know?</h2>
-    <p>
+    <p id="did-you-know-text">
       <span class="env-fact">{{ displayFact() }}</span>
     </p>
   </div>
@@ -145,11 +145,18 @@ export default {
   font-size: larger;
   font-weight: strong;
 }
+
+#did-you-know-text {
+  font-size: large;
+}
+
 .env-fact {
   font-size: smaller;
 }
 .env-fact-container {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.5);
+  margin: 5px 10px 200px 10px;
+  height: 100px;
 }
 </style>
