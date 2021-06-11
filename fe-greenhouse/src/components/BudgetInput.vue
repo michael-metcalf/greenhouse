@@ -10,6 +10,7 @@
           @click="focusField('monthlyIncome')"
         >
           {{ form.monthlyIncome }}
+          <i class="fas fa-edit"></i>
         </span>
         <input
           v-model="form.monthlyIncome"
@@ -20,7 +21,6 @@
           @focus="focusField('monthlyIncome')"
           @blur="blurField"
         />
-        <i class="fas fa-edit"></i>
       </p>
       <div id="budget-input-grid">
         <div></div>
@@ -175,10 +175,10 @@ export default {
     };
   },
   mounted() {
-    const groceries_id = 1;
-    const transport_id = 2;
-    const misc_id = 3;
-    const bills_id = 4;
+    const groceries_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Groceries")[0].id;
+    const transport_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Transport")[0].id;
+    const misc_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Misc")[0].id;
+    const bills_id = this.$store.state.categoriesList.filter((categoryObj) => categoryObj.category_name === "Bills")[0].id;
     this.monthlyIncome = 0;
     this.runningGroceries = !isNaN(this.getExpenseTotals(groceries_id))
       ? this.getExpenseTotals(groceries_id)

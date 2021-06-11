@@ -289,7 +289,11 @@ def service_create_eco_goals(db, eco_goal_object, user_id, eco_goal=["Eco bag/no
         dao_create_eco_goal(db, eco_goal_object, user_id, eco_goal)
 
 
+def service_create_eco_actions(db, eco_action_object, user_id, json_body):
+    for eco_goal_id in json_body["eco_goals"]:
+        dao_create_eco_action(db, eco_action_object, user_id, json_body['eco_goals'][eco_goal_id], json_body["expense_id"])
 
+    return "Successful"
 
         
 
