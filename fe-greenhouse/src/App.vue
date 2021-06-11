@@ -5,8 +5,7 @@
     </div>
     <div class="glass">
       <div v-bind:class="mainPanelClass">
-
-      <!-- we display the LOGIN component if no user is currently active -->
+        <!-- we display the LOGIN component if no user is currently active -->
         <user-message-display />
         <Login class="panel" v-if="this.$store.state.showLogin" />
         <BudgetVisualization
@@ -184,13 +183,8 @@ export default {
 
   color: #2c3e50;
   min-height: 100vh;
+  width: 100%;
 
-  /* Background features */
-  /* 
-  background: url("assets/blurred-bg-green.jpg") top repeat-y;
-  background: url("assets/green-palmtree.jpg") top repeat-y;
-  background: url("assets/green-surfer.jpg") top no-repeat;
-  background: url("assets/grass-background.jpg") top repeat-y; */
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
 }
@@ -227,6 +221,7 @@ h1 h2 {
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(2px);
+  min-width: 90%;
 }
 
 .header {

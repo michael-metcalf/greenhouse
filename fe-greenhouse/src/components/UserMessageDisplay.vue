@@ -16,9 +16,9 @@ export default {
         error:
           this.$store.state.userMessage.msgType === "error" &&
           this.$store.state.userMessage !== "",
-        info: 
+        info:
           this.$store.state.userMessage.msgType === "info" &&
-            this.$store.state.userMessage !== "",
+          this.$store.state.userMessage !== "",
       };
     },
   },
