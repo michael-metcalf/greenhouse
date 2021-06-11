@@ -158,5 +158,6 @@ export default {
   background-color: rgba(255, 255, 255, 0.5);
   padding-left: 5px;
   padding-right: 5px;
+  margin: 5px 10px;
 }
 </style>
