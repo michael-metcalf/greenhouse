@@ -145,14 +145,9 @@ export default {
   font-size: larger;
   font-weight: strong;
 }
-
-#did-you-know-text {
-  font-size: large;
-  font-weight: bold;
-}
-
 .env-fact {
-  font-size: smaller;
+  font-weight: bolder;
+  font-size: smaller !important;
 }
 .env-fact-container {
   border-radius: 5px;
