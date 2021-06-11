@@ -5,9 +5,9 @@
       <BarChart />
     </div>
     <p id="disclaimer">*Eco actions are shown as a percentage of expenses.</p>
-    <p>I have used my own bag or not used a bag {{ ecoBagActionTotal }}% of the time this month.</p>
-    <p>I did not impulse shop {{ noImpulseBuyActionTotal }}% of the time this month.</p>
-    <p>I took eco conscious transport or walked {{ transportActionTotal }}% of the time month.</p>
+    <p>I have used my own bag or not used a bag <span class="percent">{{ ecoBagActionTotal }}%</span> of the time this month.</p>
+    <p>I did not impulse shop <span class="percent">{{ noImpulseBuyActionTotal }}%</span> of the time this month.</p>
+    <p>I took eco conscious transport or walked <span class="percent">{{ transportActionTotal }}%</span> of the time month.</p>
   </div>
 </template>
 
@@ -59,5 +59,9 @@ export default {
 <style scoped>
 #disclaimer {
   font-size: 12px;
+}
+.percent {
+  font-weight: bold;
+  color: teal;
 }
 </style>
