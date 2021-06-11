@@ -24,7 +24,7 @@
     />
     <button id="sign-up" @click="createUser">Sign Me Up!</button>
     <p id="created"></p>
-    <button id="login" v-on:click="showLogin">Return to log in</button>
+    <button id="login" v-on:click="showLogin">Return To Login</button>
   </div>
 </template>
 
@@ -66,15 +66,15 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .signup-container {
-  border-radius: 30%;
+  border-radius: 50%;
   border: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 40px;
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
 }
 
 /* #new-username-input, #new-password-input, #new-email-input {
@@ -86,8 +86,8 @@ export default {
 } */
 
 input {
-  margin-bottom: 1.5em;
-  height: 1.2em;
+  margin-bottom: 1em;
+  height: 2em;
   font-size: large;
 }
 
