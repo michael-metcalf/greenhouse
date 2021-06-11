@@ -1,8 +1,8 @@
 <template>
   <div class="eco-goals-container">
     <p id="eco-goals">
-      Eco Goals: <i id="sprout" class="fas fa-seedling"></i>
-      x {{ ecoScoreString }}
+      Eco Goals: <i id="sprout" class="fas fa-seedling"></i> x
+      {{ ecoScoreString }}
     </p>
     <p>{{ customerMessage }}</p>
   </div>
@@ -30,9 +30,12 @@ export default {
     document.head.appendChild(externalScript);
     // const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
-    this.ecoScoreString = this.$store.state.ecoActionsList
-      .filter((element) => (element.eco_goal_id == 1 || element.eco_goal_id == 2 || element.eco_goal_id == 3))
-      .length;
+    this.ecoScoreString = this.$store.state.ecoActionsList.filter(
+      (element) =>
+        element.eco_goal_id == 1 ||
+        element.eco_goal_id == 2 ||
+        element.eco_goal_id == 3
+    ).length;
     // for (let i = 0; i < numberOfSprouts; i++) {
     //   this.ecoScoreString += 1;
     // }
@@ -64,15 +67,15 @@ export default {
 
 <style scoped>
 .eco-goals-container {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 5px 10px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+  height: 100px;
+ 
 }
 
 #eco-goals {
+  font-size: larger;
   font-weight: bold;
 }
 

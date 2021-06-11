@@ -132,8 +132,7 @@
           <label for="failed-eco-warrior">
             <span class="eco-watch">
               <i class="far fa-frown" title="No action taken"></i>
-            </span
-            >  
+            </span>
           </label>
         </div>
       </div>
@@ -210,9 +209,9 @@ export default {
       const noActionCheck = document.getElementById("failed-eco-warrior");
       // if(ecoBag.hasAttribute("checked", true)) {
       // if (ecoBag.hasAttribute("checked", true) || ecoTransport.hasAttribute("checked") || noImpulse.hasAttribute("checked")) {
-        noActionCheck.removeAttribute("checked");
+      noActionCheck.removeAttribute("checked");
       // }
-    }
+    },
   },
 };
 </script>
@@ -229,7 +228,7 @@ p {
 }
 
 .icon-info {
-    font-size: 10px;;
+  font-size: 10px;
 }
 
 .verticalContainer {
@@ -350,7 +349,8 @@ input.eco-action-checkbox + label {
   user-select: none;
 }
 
-input.toggle + label:before, input.toggle + label:after {
+input.toggle + label:before,
+input.toggle + label:after {
   display: block;
   position: absolute;
   content: "";
@@ -380,7 +380,7 @@ input.toggle + label:after {
   transition: margin 0.5s, background 0.5s;
 }
 
-input.toggle:checked+label {
+input.toggle:checked + label {
   background-color: limegreen;
 }
 

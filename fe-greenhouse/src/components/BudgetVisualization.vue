@@ -1,8 +1,8 @@
 <template>
   <div id="homePanel">
     <h1>Home</h1>
-    <EnvironmentalFact />
-
+      <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
+      
     <div class="budget-viz-container">
       <h1>This month's savings</h1>
       <div class="chart-align-container">
@@ -14,13 +14,16 @@
           :css-classes="'chartContainer'"
         />
       </div>
-      <h2>Potential savings: {{ !isNaN(income - expenses) ? income - expenses : 0 }}</h2>
+      <h2>
+        Potential savings:
+        {{ !isNaN(income - expenses) ? income - expenses : 0 }}
+      </h2>
       <ul class="no-bullets">
         <li>Income: {{ income }}</li>
         <li>Expenses: {{ expenses }}</li>
       </ul>
     </div>
-    <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
+      <EnvironmentalFact />
   </div>
 </template>
 
@@ -46,11 +49,15 @@ export default {
   },
   methods: {
     getSumOfExpenses() {
-      this.expenses = !isNaN(this.$store.state.expensesList
-        .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue, 0)) ? this.$store.state.expensesList
-        .map((x) => x.amount)
-        .reduce((currentSum, currentValue) => currentSum + currentValue, 0) : 0;
+      this.expenses = !isNaN(
+        this.$store.state.expensesList
+          .map((x) => x.amount)
+          .reduce((currentSum, currentValue) => currentSum + currentValue, 0)
+      )
+        ? this.$store.state.expensesList
+            .map((x) => x.amount)
+            .reduce((currentSum, currentValue) => currentSum + currentValue, 0)
+        : 0;
     },
     getMonthlyBudget() {
       this.income = this.$store.state.monthlyBudget.monthly_income;
@@ -66,11 +73,14 @@ export default {
     this.getMonthlyBudget();
     this.getSumOfExpenses();
     this.getNumberOfMissedEcoActions();
-    this.targetPercent = !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) && ((this.expenses / this.income) * 100) / 100 !== Infinity ? Math.floor((this.expenses / this.income) * 100) / 100 : 0;
+    this.targetPercent =
+      !isNaN(Math.floor((this.expenses / this.income) * 100) / 100) &&
+      ((this.expenses / this.income) * 100) / 100 !== Infinity
+        ? Math.floor((this.expenses / this.income) * 100) / 100
+        : 0;
   },
 
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 
@@ -79,6 +89,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.5);
+  align-content: center;
 }
 
 .budget-viz-container {

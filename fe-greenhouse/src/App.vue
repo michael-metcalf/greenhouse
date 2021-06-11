@@ -164,6 +164,7 @@ export default {
       // requiring the main Panel to be centered vertically
       const isCentered =
         this.$store.state.showLogin ||
+        this.$store.state.showSignUp ||
         this.$store.state.showBarChart ||
         this.$store.state.showBudgetInput;
       return {
