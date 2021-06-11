@@ -121,7 +121,7 @@ export default new Vuex.Store({
       }
     },
 
-    async receiveLoginSignal({ commit, dispatch, state }) {
+    async receiveLoginSignal({ commit, dispatch }) {
       // Need to download the data related to the current user
       commit("setLoadingStatus", true);
       try {

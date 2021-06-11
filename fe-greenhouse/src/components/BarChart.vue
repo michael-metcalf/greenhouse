@@ -81,6 +81,8 @@ export default {
   watch: {
     savingsScore: function (newVal, oldVal) {
       this.setChartData(this.$props.savingsScore);
+      newVal;
+      oldVal;
       if (this.$data._chart) {
         this.$data._chart.destroy();
       }

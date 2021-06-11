@@ -163,7 +163,6 @@ export default {
         this.$store.state.showLogin ||
         this.$store.state.showBarChart ||
         this.$store.state.showBudgetInput;
-      BI: ${this.$store.state.showBudgetInput}`);
       return {
         "main-panel": true,
         contentCentered: isCentered,
