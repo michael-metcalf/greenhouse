@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>Eco Progress</h1>
+    <h1>Your Eco Progress</h1>
     <div>
       <BarChart />
     </div>
-    <p id="disclaimer">*Eco actions are shown as a percentage of expenses.</p>
+    <p id="disclaimer">*Eco actions are shown as a percentage of monthly expenses.</p>
     <p>I have used my own bag or not used a bag <span class="percent">{{ ecoBagActionTotal }}%</span> of the time this month.</p>
     <p>I did not impulse shop <span class="percent">{{ noImpulseBuyActionTotal }}%</span> of the time this month.</p>
     <p>I took eco conscious transport or walked <span class="percent">{{ transportActionTotal }}%</span> of the time month.</p>
@@ -60,8 +60,10 @@ export default {
 #disclaimer {
   font-size: 12px;
 }
-.percent {
+p {
   font-weight: bold;
+}
+.percent {
   color: teal;
 }
 </style>
