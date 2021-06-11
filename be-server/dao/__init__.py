@@ -81,6 +81,11 @@ def dao_get_eco_actions(eco_action_object, user_id):
     result = eco_action_object.query.filter_by(user_id=user_id).all()
     return result
 
+def dao_create_eco_goal(db, eco_goal_object, user_id, goal_name):
+    new_eco_goal = eco_goal_object(user_id=user_id, goal_name=goal_name)
+    db.session.add(new_eco_goal)
+    db.session.commit()
+
 #########
 #
 # Category

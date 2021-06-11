@@ -9,7 +9,7 @@ from datetime import date
 #
 #########
 
-def service_create_user(db, user_object, budget_object, category_object, new_user):
+def service_create_user(db, user_object, budget_object, category_object, eco_goal_object, new_user):
     user_exist = dao_get_username(user_object, new_user["username"])
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode("ascii")
     hashed_pwd = hashlib.pbkdf2_hmac("sha512", new_user["password"].encode("utf-8"), salt, 100000)
@@ -33,6 +33,7 @@ def service_create_user(db, user_object, budget_object, category_object, new_use
 
         service_create_user_budget(db, budget_object, data["id"], json_body)
         service_create_category(db, category_object, data["id"])
+        service_create_eco_goals(db, eco_goal_object, data["id"])
         return data
     else:
         return "User Exists"
@@ -275,6 +276,21 @@ def service_get_eco_actions(eco_action_object, user_id):
         eco_actions.append(json_object)
 
     return { "eco_actions": eco_actions}
+
+def service_create_eco_goals(db, eco_goal_object, user_id, eco_goal=["Eco bag/no bag", "No impulse purchase", "Eco conscious tranport", "No action"]):
+
+    data = dao_get_eco_goals(eco_goal_object, user_id)
+
+    if len(data) == 0:
+        for i in range(len(eco_goal)):
+            dao_create_eco_goal(db, eco_goal_object, user_id, eco_goal[i])
+    else:
+        dao_create_eco_goal(db, eco_goal_object, user_id, eco_goal)
+
+
+
+
+        
 
 #########
 #

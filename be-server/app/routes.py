@@ -22,7 +22,7 @@ def root():
 
 @app.route("/api/user/create", methods=["POST"])
 def createuser():
-    data = controller_create_user(db, Users, Budget, Category, request.json)
+    data = controller_create_user(db, Users, Budget, Category, Eco_Goal, request.json)
     return data
 
 @app.route("/api/user/login", methods=["POST"])
