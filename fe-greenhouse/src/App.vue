@@ -3,21 +3,24 @@
     <div class="header">
       <h1 id="moneySproutsTitle">MoneySprouts</h1>
     </div>
-    <div v-bind:class="mainPanelClass">
+    <div class="glass">
+      <div v-bind:class="mainPanelClass">
+
       <!-- we display the LOGIN component if no user is currently active -->
-      <user-message-display />
-      <Login class="panel" v-if="this.$store.state.showLogin" />
-      <!-- <loading-message
-        v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
-      /> -->
-      <BudgetVisualization
-        class="panel"
-        v-if="this.$store.state.showBudgetVisualization"
-      />
-      <BarChartScreen class="panel" v-if="this.$store.state.showBarChart" />
-      <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
-      <SignUp class="panel" v-if="this.$store.state.showSignUp" />
-      <BudgetInput class="panel" v-if="this.$store.state.showBudgetInput" />
+        <user-message-display />
+        <Login class="panel" v-if="this.$store.state.showLogin" />
+        <!-- <loading-message
+          v-if="this.$store.state.userName !== '' && this.$store.state.isLoading"
+        /> -->
+        <BudgetVisualization
+          class="panel"
+          v-if="this.$store.state.showBudgetVisualization"
+        />
+        <BarChartScreen class="panel" v-if="this.$store.state.showBarChart" />
+        <ExpenseInput class="panel" v-if="this.$store.state.showExpenseInput" />
+        <SignUp class="panel" v-if="this.$store.state.showSignUp" />
+        <BudgetInput class="panel" v-if="this.$store.state.showBudgetInput" />
+      </div>
     </div>
     <div class="nav-bar">
       <div
@@ -231,7 +234,8 @@ h1 h2 {
 
 .panel {
   padding: 5px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2px);
 }
 
 .header {
