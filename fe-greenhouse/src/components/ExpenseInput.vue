@@ -78,7 +78,8 @@
             type="checkbox"
             name="eco-bag-no-bag"
             value="eco-bag-no-bag"
-            @click="uncheck"
+            @change="ecoGoalValidatorSetter('ecoBag')"
+            v-model="posts.ecoGoal.eco_bag.boolean"
           />
           <label for="eco-bag-no-bag">
             <span class="eco-watch">
@@ -94,7 +95,8 @@
             type="checkbox"
             name="no-impulse-buy"
             value="no-impulse-buy"
-            @click="uncheck"
+            v-model="posts.ecoGoal.no_impulse.boolean"
+            @change="ecoGoalValidatorSetter('noImpulse')"
           />
           <label for="no-impulse-buy">
             <span class="eco-watch">
@@ -111,7 +113,8 @@
             type="checkbox"
             name="eco-conscious-transport"
             value="eco-conscious-transport"
-            @click="uncheck"
+            v-model="posts.ecoGoal.eco_conscious_transport.boolean"
+            @change="ecoGoalValidatorSetter('ecoConsciousTransport')"
           />
           <label for="eco-conscious-transport">
             <span class="eco-watch">
@@ -127,7 +130,8 @@
             type="checkbox"
             name="failed-eco-warrior"
             value="failed-eco-warrior"
-            checked
+            v-model="posts.ecoGoal.no_eco_action.boolean"
+            @change="ecoGoalValidatorSetter('noEcoAction')"
           />
           <label for="failed-eco-warrior">
             <span class="eco-watch">
@@ -179,38 +183,96 @@ export default {
         amount: null,
         description: null,
         category: null,
+        ecoGoal: {
+          eco_bag: {
+            name: "Eco bag/no bag",
+            boolean: false,
+          },
+          no_impulse: {
+            name: "No impulse purchase",
+            boolean: false,
+          },
+          eco_conscious_transport: {
+            name: "Eco conscious tranport",
+            boolean: false,
+          },
+          no_eco_action: {
+            name: "No action",
+            boolean: true,
+          },
+        },
       },
     };
   },
   methods: {
+    expenseValidator() {
+
+      const isNumber = parseInt(this.posts.amount)
+
+      if (isNaN(isNumber)) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+
     postExpenseData(e) {
-      const categoryFilter = this.$store.state.categoriesList.filter(
-        (category) => category.category_name === this.posts.category
-      );
-      const expenseData = {
-        user_id: this.$store.state.user.user_id,
-        category_id: categoryFilter[0].id,
-        expense_description: this.posts.description,
-        amount: this.posts.amount,
-      };
+      if (this.expenseValidator()) {
+        const categoryFilter = this.$store.state.categoriesList.filter(
+          (category) => category.category_name === this.posts.category
+        );
 
-      this.$store.dispatch("createExpense", expenseData);
+        const expenseData = {
+          user_id: this.$store.state.user.user_id,
+          category_id: categoryFilter[0].id,
+          expense_description: this.posts.description,
+          amount: parseInt(this.posts.amount),
+          eco_goal: {},
+        };
 
-      console.warn(this.posts);
-      e.preventDefault();
+        for (let ecoGoal in this.posts.ecoGoal) {
+          if (this.posts.ecoGoal[ecoGoal].boolean) {
+            const ecoGoalObj = this.$store.state.ecoGoalsList.filter(
+              (ecoGoalObj) =>
+                ecoGoalObj.goal_name === this.posts.ecoGoal[ecoGoal].name
+            );
+            expenseData.eco_goal[this.posts.ecoGoal[ecoGoal].name] =
+              ecoGoalObj[0].id;
+          }
+        }
+
+        this.$store.dispatch("createExpense", expenseData);
+
+        console.warn(this.posts);
+        e.preventDefault();
+      } else {
+        this.posts.amount = null;
+      }
     },
     getCategory(category) {
       this.posts.category = category;
     },
-    uncheck() {
-      // const ecoBag = document.getElementById("eco-bag-no-bag");
-      // const ecoTransport = document.getElementById("eco-conscious-transport");
-      // const noImpulse = document.getElementById("no-impulse-buy");
-      const noActionCheck = document.getElementById("failed-eco-warrior");
-      // if(ecoBag.hasAttribute("checked", true)) {
-      // if (ecoBag.hasAttribute("checked", true) || ecoTransport.hasAttribute("checked") || noImpulse.hasAttribute("checked")) {
-      noActionCheck.removeAttribute("checked");
-      // }
+    getEcoGoal(ecoGoal) {
+      this.posts.ecoGoal = ecoGoal;
+    },
+    ecoGoalValidatorSetter(ecoGoalButtonValue) {
+      if (ecoGoalButtonValue === "noEcoAction") {
+        this.posts.ecoGoal.eco_bag.boolean = false;
+        this.posts.ecoGoal.no_impulse.boolean = false;
+        this.posts.ecoGoal.eco_conscious_transport.boolean = false;
+      } else {
+        this.posts.ecoGoal.no_eco_action.boolean = false;
+      }
+
+      if (ecoGoalButtonValue !== "noEcoAction") {
+        if (
+          this.posts.ecoGoal.eco_bag.boolean == false &&
+          this.posts.ecoGoal.no_impulse.boolean == false &&
+          this.posts.ecoGoal.eco_conscious_transport.boolean == false
+        ) {
+          this.posts.ecoGoal.no_eco_action.boolean = true;
+        }
+      }
     },
   },
 };

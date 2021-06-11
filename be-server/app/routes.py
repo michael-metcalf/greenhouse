@@ -98,6 +98,11 @@ def get_eco_actions(id):
     data = controller_get_eco_actions(Eco_Action, id)
     return data
 
+@app.route("/api/user/<id>/eco_actions", methods=["POST"])
+def create_eco_actions(id):
+    data = controller_create_eco_actions(db, Eco_Action, id, request.json)
+    return data
+
 #########
 #
 # Categories

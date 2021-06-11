@@ -36,13 +36,13 @@ export default {
     this.ecoActionsList = this.$store.state.ecoActionsList;
     (this.getEcoBagActionTotal = () => {
       let bagActionArray = this.ecoActionsList.filter(
-        (element) => element.eco_goal_id == 1
+        (element) => element.eco_goal_id == this.$store.state.ecoGoalsList.filter( (ecoGoalObj) => ecoGoalObj.goal_name === "Eco bag/no bag")[0].id
       );
       return (bagActionArray.length / this.ecoActionsList.length) * 100;
     }),
       (this.getNoImpulseBuyActionTotal = () => {
         let noImpulseBuyActionArray = this.ecoActionsList.filter(
-          (element) => element.eco_goal_id == 2
+          (element) => element.eco_goal_id == this.$store.state.ecoGoalsList.filter( (ecoGoalObj) => ecoGoalObj.goal_name === "No impulse purchase")[0].id
         );
         return (
           (noImpulseBuyActionArray.length / this.ecoActionsList.length) * 100
@@ -50,7 +50,7 @@ export default {
       }),
       (this.getTransportActionTotal = () => {
         let transportActionArray = this.ecoActionsList.filter(
-          (element) => element.eco_goal_id == 3
+          (element) => element.eco_goal_id == this.$store.state.ecoGoalsList.filter( (ecoGoalObj) => ecoGoalObj.goal_name === "Eco conscious tranport")[0].id
         );
         return (transportActionArray.length / this.ecoActionsList.length) * 100;
       }),
