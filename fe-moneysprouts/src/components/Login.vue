@@ -102,9 +102,4 @@ h2 {
   justify-content: space-between;
   width: 90%;
 }
-
-/* #create-account {
-  width: 150px;
-  font-size: smaller;
-} */
 </style>

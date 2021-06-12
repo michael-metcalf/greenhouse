@@ -4,7 +4,7 @@
     <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
 
     <div class="budget-viz-container">
-      <h1>This month's savings</h1>
+      <h1>Your current spending</h1>
       <div class="chart-align-container">
         <div class="budget-progress">
           <p>{{ Math.floor(targetPercent * 100) + "%" }}</p>
@@ -16,11 +16,11 @@
       </div>
       <h2>
         Potential savings:
-        {{ !isNaN(income - expenses) ? income - expenses : 0 }}
+        ¥{{ !isNaN(income - expenses) ? income - expenses : 0 }}
       </h2>
       <ul class="no-bullets">
-        <li id="income">Income: {{ income }}</li>
-        <li>Expenses: {{ expenses }}</li>
+        <li id="income">Income: ¥{{ income }}</li>
+        <li id="expenses">Expenses: ¥{{ expenses }}</li>
       </ul>
     </div>
     <EnvironmentalFact />
@@ -129,7 +129,9 @@ ul.no-bullets {
   margin-bottom: 30px;
   font-weight: bolder;
 }
-#income {
+
+#income, #expenses {
+  font-size: 20px;
   margin-bottom: 10px;
 }
 </style>
