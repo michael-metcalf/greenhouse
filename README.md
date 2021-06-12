@@ -132,5 +132,5 @@ See Vue CLI [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Credits
 
-* Icons were created using [font aweome](https://fontawesome.com/)
+* Icons were created using [font awesome](https://fontawesome.com/)
 * Image credit goes to [link]()
