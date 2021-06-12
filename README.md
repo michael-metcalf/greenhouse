@@ -32,9 +32,11 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 1. Start the virtual environment
 
     <details><summary><b>For Mac Users</b></summary>
+    
     `
     source /<VENV FOLDER>/bin/activate
     `
+
     If you are using the M1 chip, you may need to use python 3.7 to be able to run the environment.
     </details>
 
