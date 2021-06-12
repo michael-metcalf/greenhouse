@@ -140,7 +140,9 @@
           </label>
         </div>
       </div>
-      <button form="expense-input-form" type="submit" @click="postExpenseData">
+    </div>
+    <div>
+      <button form="expense-input-form" @click="postExpenseData">
         Submit
       </button>
     </div>
@@ -424,7 +426,7 @@ input.toggle + label:after {
 input.toggle + label {
   width: 50px;
   height: 20px;
-  background-color: rgba(255, 0, 0, 0.38);
+  background-color: rgb(245,133,63);
   transition: background 0.5s;
 }
 
@@ -446,7 +448,7 @@ input.toggle + label:after {
 }
 
 input.toggle:checked + label {
-  background-color: limegreen;
+  background-color: rgb(111,176,42);
 }
 
 input.toggle:checked + label:after {

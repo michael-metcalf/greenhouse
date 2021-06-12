@@ -9,7 +9,7 @@
           v-show="!showField('monthlyIncome')"
           @click="focusField('monthlyIncome')"
         >
-          {{ form.monthlyIncome }}
+          ¥{{ form.monthlyIncome }}
           <i class="fas fa-edit"></i>
         </span>
         <input
@@ -27,14 +27,14 @@
         <div class="grid-col-header" id="running">Running Total</div>
         <div class="grid-col-header">Amount Allocated</div>
         <div class="grid-row-header">Groceries</div>
-        <div class="grid-content">{{ runningGroceries }}</div>
+        <div class="grid-content">¥{{ runningGroceries }}</div>
         <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedGroceries')"
             @click="focusField('allocatedGroceries')"
             >
-            {{ form.allocatedGroceries }}
+            ¥{{ form.allocatedGroceries }}
             <i class="fas fa-edit"></i>
             </span>
           <input
@@ -49,13 +49,13 @@
           />
         </div>
         <div class="row-header">Bills</div>
-        <div class="grid-content">{{ runningBills }}</div>
+        <div class="grid-content">¥{{ runningBills }}</div>
         <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedBills')"
             @click="focusField('allocatedBills')"
-            >{{ form.allocatedBills }}
+            >¥{{ form.allocatedBills }}
           <i class="fas fa-edit"></i>
           </span>
           <input
@@ -70,13 +70,13 @@
           />
         </div>
         <div class="row-header">Transport</div>
-        <div class="grid-content">{{ runningTransport }}</div>
+        <div class="grid-content">¥{{ runningTransport }}</div>
         <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedTransport')"
             @click="focusField('allocatedTransport')"
-            >{{ form.allocatedTransport }}
+            >¥{{ form.allocatedTransport }}
           <i class="fas fa-edit"></i>
           </span>
           <input
@@ -91,13 +91,13 @@
           />
         </div>
         <div class="row-header">Misc</div>
-        <div class="grid-content">{{ runningMisc }}</div>
+        <div class="grid-content">¥{{ runningMisc }}</div>
         <div class="grid-content-2">
           <span
             class="field-value"
             v-show="!showField('allocatedMisc')"
             @click="focusField('allocatedMisc')"
-            >{{ form.allocatedMisc }}
+            >¥{{ form.allocatedMisc }}
           <i class="fas fa-edit"></i>
           </span>
           <input
@@ -118,7 +118,7 @@
             class="field-value"
             v-show="!showField('savingsTarget')"
             @click="focusField('savingsTarget')"
-            >{{ form.savingsTarget }}
+            >¥{{ form.savingsTarget }}
             <i class="fas fa-edit"></i>
             </span>
           <input
@@ -136,7 +136,7 @@
       </div>
 
       <p>
-        <span class="savings">Savings Leeway: {{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}</span>
+        <span class="savings">Savings Leeway: ¥{{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}</span>
         
       </p>
       <div id="button-container">
@@ -277,6 +277,13 @@ export default {
   font-weight: bold;
 }
 
+#budget-input-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.5);
+  align-content: center;
+}
+
 #budget-input-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1.8fr;
@@ -348,11 +355,9 @@ export default {
 .savings {
   font-weight: bold;
 }
-/* .grid-content {
-  width: 50px;
-}
 
-.field-value {
-  width: 100px;
-} */
+button:active {
+  background-color: rgb(111,176,42);
+  transform: translateY(2px);
+}
 </style>
