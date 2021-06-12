@@ -62,8 +62,8 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 40px;
-  width: 280px;
-  height: 280px;
+  width: 400px;
+  height: 400px;
 }
 
 input {
