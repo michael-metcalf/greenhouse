@@ -1,6 +1,6 @@
 # MoneySprouts
 
-**Getting in the black, by going green!**
+**Get in the black, by going green!**
 MoneySprouts is a progressive web app that helps its users to save money and accomplish their personal environmental goals at the same time.
 
 ### Current Features Include:
@@ -13,8 +13,8 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 ## Team members
 
 * [Alix](https://github.com/AlixFachin)
-* [Julie](https://github.com/dawndarkness)
 * [David](https://github.com/DavidofOrange)
+* [Julie](https://github.com/dawndarkness)
 * [Michael](https://github.com/michael-metcalf)
 * [Russell](https://github.com/RussellPacheco)
 
@@ -61,7 +61,7 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
     ```
     Run \<VENV FOLDER>\Scripts\Activate.ps1
     ```
-    </details>
+    </details><br>
 
 1. Install all dependencies
 
