@@ -282,4 +282,9 @@ h1 h2 {
 #chart-icon {
   color: white;
 }
+
+button:active {
+  background-color: rgb(111,176,42);
+  transform: translateY(2px);
+}
 </style>

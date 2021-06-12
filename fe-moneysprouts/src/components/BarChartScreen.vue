@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="bar-chart-screen-container">
     <h1>Your Eco Progress</h1>
     <div>
       <BarChart />
@@ -88,6 +88,14 @@ export default {
 </script>
 
 <style scoped>
+#bar-chart-screen-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.5);
+  align-content: center;
+  /* margin-bottom: 30px; */
+}
+
 #disclaimer {
   font-size: 12px;
 }
