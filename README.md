@@ -63,7 +63,6 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 
     `
     pip install -r requirements.txt
-
     `
 
 1. Ensure that your IDE's Python Interpretor is set to the interpretor located in your virtual environment folder. This 
@@ -77,7 +76,6 @@ Create a '.flaskenv' file in the be-server folder and set it's environment varia
 `
 FLASK_APP=main.py
 FLASK_ENV=development
-
 `
 
 1. Start Flask
@@ -85,7 +83,6 @@ Make sure you are in the be-server directory!!!
 
 `
 flask run
-
 `
 
 
