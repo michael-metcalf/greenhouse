@@ -61,7 +61,7 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
     ```
     Run \<VENV FOLDER>\Scripts\Activate.ps1
     ```
-    </details><br>
+    </details>
 
 1. Install all dependencies
 
