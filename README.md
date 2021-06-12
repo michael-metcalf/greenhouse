@@ -26,16 +26,18 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 1. Clone Repo
 
 1. Create a virtual environment
-    `
+
+    ```
     python3 -m venv <FOLDERNAME>
-    `
+    ```
+
 1. Start the virtual environment
 
     <details><summary><b>For Mac Users</b></summary>
 
-    `
+    ```
     source /<VENV FOLDER>/bin/activate
-    `
+    ```
 
     If you are using the M1 chip, you may need to use python 3.7 to be able to run the environment.
     </details>
@@ -48,24 +50,24 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 
     if using command prompt:
 
-    `
+    ```
     \<VENV FOLDER>\Scripts\activate.bat
-    `
+    ```
 
     or 
 
     if using powershell:
 
-    `
+    ```
     Run \<VENV FOLDER>\Scripts\Activate.ps1
-    `
+    ```
     </details>
 
 1. Install all dependencies
 
-    `
+    ```
     pip install -r requirements.txt
-    `
+    ```
 
 1. Ensure that your IDE's Python Interpretor is set to the interpretor located in your virtual environment folder. This 
 would be either in the `Scripts` folder if you are a Windows user, or in the `bin` folder for Linux and Mac users. The interpretor
@@ -75,17 +77,17 @@ would be the `python.exe` file. Have this set with your IDE.
 1. Create config for the flask development server
 Create a '.flaskenv' file in the be-server folder and set it's environment variables. 
 
-    `
+    ```
     FLASK_APP=main.py
     FLASK_ENV=development
-    `
+    ```
 
 1. Start Flask
 Make sure you are in the be-server directory!!! 
 
-    `
+    ```
     flask run
-    `
+    ```
 
 
 1. Create Initial Migration File
@@ -126,7 +128,7 @@ npm run build
 npm run lint
 ```
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See Vue CLI [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Credits
 
