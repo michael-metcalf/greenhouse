@@ -32,7 +32,7 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 1. Start the virtual environment
 
     <details><summary><b>For Mac Users</b></summary>
-    
+
     `
     source /<VENV FOLDER>/bin/activate
     `
@@ -75,36 +75,36 @@ would be the `python.exe` file. Have this set with your IDE.
 1. Create config for the flask development server
 Create a '.flaskenv' file in the be-server folder and set it's environment variables. 
 
-`
-FLASK_APP=main.py
-FLASK_ENV=development
-`
+    `
+    FLASK_APP=main.py
+    FLASK_ENV=development
+    `
 
 1. Start Flask
 Make sure you are in the be-server directory!!! 
 
-`
-flask run
-`
+    `
+    flask run
+    `
 
 
-Create Initial Migration File
+1. Create Initial Migration File
 
-`
-alembic revision --autogenerate -m "initial"
-`
+    `
+    alembic revision --autogenerate -m "initial"
+    `
 
-Seed
+1. Seed
 
-`
-alembic upgrade head
-`
+    `
+    alembic upgrade head
+    `
 
 ## The Frontend Environment
 
-# fe-greenhouse
+### fe-moneysprouts
 
-The frontend environment must be set up from within the fe-greenhouse folder.
+The frontend environment must be set up from within the fe-moneysprouts folder.
 
 ### Project setup
 ```
@@ -131,3 +131,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Credits
 
 * Icons were created using [font aweome](https://fontawesome.com/)
+* Image credit goes to [link]()
