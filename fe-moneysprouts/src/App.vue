@@ -222,6 +222,9 @@ h1 h2 {
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(2px);
   min-width: 90%;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 40px;
 }
 
 .header {

@@ -306,7 +306,6 @@ p {
 
 .icon-info {
   font-size: smaller;
-
 }
 
 .verticalContainer {
@@ -403,7 +402,7 @@ input[type="checkbox"] + label .eco-watch {
 
 button {
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
   height: 2em;
   font-size: large;
   border-radius: 5px;
@@ -485,6 +484,3 @@ input.toggle:checked + label:after {
 }
 
 </style>
-
-//border radius of the blurred field
-//padding consistency to the blurred panel
