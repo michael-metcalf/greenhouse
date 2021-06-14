@@ -92,15 +92,15 @@ Make sure you are in the be-server directory!!!
 
 1. Create Initial Migration File
 
-    `
+    ```
     alembic revision --autogenerate -m "initial"
-    `
+    ```
 
 1. Seed
 
-    `
+    ```
     alembic upgrade head
-    `
+    ```
 
 ## The Frontend Environment
 
