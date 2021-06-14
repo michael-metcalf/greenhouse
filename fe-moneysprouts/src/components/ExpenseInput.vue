@@ -142,9 +142,7 @@
       </div>
     </div>
     <div>
-      <button form="expense-input-form" @click="postExpenseData">
-        Submit
-      </button>
+      <button form="expense-input-form" @click="postExpenseData">Submit</button>
     </div>
   </div>
 </template>
@@ -281,9 +279,8 @@ export default {
 
 <style scoped>
 #expense-input-container {
-   --button-color: #403d58;
+  --button-color: #403d58;
   --second-color: #368f8b;
- 
 }
 
 h1 {
@@ -440,7 +437,7 @@ input.toggle + label:after {
 input.toggle + label {
   width: 50px;
   height: 20px;
-  background-color: rgb(245,133,63);
+  background-color: rgb(245, 133, 63);
   transition: background 0.1s;
 }
 
@@ -462,7 +459,7 @@ input.toggle + label:after {
 }
 
 input.toggle:checked + label {
-  background-color: rgb(111,176,42);
+  background-color: rgb(111, 176, 42);
 }
 
 input.toggle:checked + label:after {
@@ -474,13 +471,11 @@ input.toggle:checked + label:after {
   section {
     flex-direction: column;
   }
-
 }
 
 @media (min-width: 768px) and (max-width: 2000px) {
   input.eco-action-checkbox + label {
     margin-left: 300px;
-  }  
+  }
 }
-
 </style>

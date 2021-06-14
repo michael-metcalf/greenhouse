@@ -33,10 +33,10 @@
             class="field-value"
             v-show="!showField('allocatedGroceries')"
             @click="focusField('allocatedGroceries')"
-            >
+          >
             ¥{{ form.allocatedGroceries }}
             <i class="fas fa-edit"></i>
-            </span>
+          </span>
           <input
             v-model="form.allocatedGroceries"
             v-show="showField('allocatedGroceries')"
@@ -56,7 +56,7 @@
             v-show="!showField('allocatedBills')"
             @click="focusField('allocatedBills')"
             >¥{{ form.allocatedBills }}
-          <i class="fas fa-edit"></i>
+            <i class="fas fa-edit"></i>
           </span>
           <input
             v-model="form.allocatedBills"
@@ -77,7 +77,7 @@
             v-show="!showField('allocatedTransport')"
             @click="focusField('allocatedTransport')"
             >¥{{ form.allocatedTransport }}
-          <i class="fas fa-edit"></i>
+            <i class="fas fa-edit"></i>
           </span>
           <input
             v-model="form.allocatedTransport"
@@ -98,7 +98,7 @@
             v-show="!showField('allocatedMisc')"
             @click="focusField('allocatedMisc')"
             >¥{{ form.allocatedMisc }}
-          <i class="fas fa-edit"></i>
+            <i class="fas fa-edit"></i>
           </span>
           <input
             v-model="form.allocatedMisc"
@@ -110,7 +110,6 @@
             @blur="blurField"
             maxlength="15"
           />
-          
         </div>
         <div class="row-header big-row two-columns">Savings Target</div>
         <div class="grid-content big-row">
@@ -120,7 +119,7 @@
             @click="focusField('savingsTarget')"
             >¥{{ form.savingsTarget }}
             <i class="fas fa-edit"></i>
-            </span>
+          </span>
           <input
             v-model="form.savingsTarget"
             v-show="showField('savingsTarget')"
@@ -131,13 +130,15 @@
             @blur="blurField"
             maxlength="15"
           />
-          
         </div>
       </div>
 
       <p>
-        <span class="savings">Savings Leeway: ¥{{ !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0 }}</span>
-        
+        <span class="savings"
+          >Savings Leeway: ¥{{
+            !isNaN(this.savingsLeeway) ? this.savingsLeeway : 0
+          }}</span
+        >
       </p>
       <div id="button-container">
         <button
@@ -321,7 +322,7 @@ h1 {
   padding-left: 2em;
   padding-right: 2em;
 }
-.row-header{
+.row-header {
   font-weight: bolder;
 }
 .grid-row-header,
@@ -360,7 +361,7 @@ h1 {
 }
 
 button:active {
-  background-color: rgb(111,176,42);
+  background-color: rgb(111, 176, 42);
   transform: translateY(2px);
 }
 </style>
