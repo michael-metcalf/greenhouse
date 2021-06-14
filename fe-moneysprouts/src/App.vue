@@ -172,7 +172,7 @@ body {
   padding: 0;
 }
 #app {
-  --app-max-width: 500px;
+  --app-max-width: 800px;
   --header-color: #d7efbd;
 
   /* Variable calculation for positioning */
@@ -186,7 +186,7 @@ body {
 
   color: #2c3e50;
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
 
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
@@ -225,13 +225,16 @@ h1 h2 {
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(2px);
   min-width: 90%;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 40px;
 }
 
 .header {
   /* Header position: ABSOLUTE (to always stay on top) */
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   max-width: var(--app-max-width);
   box-sizing: border-box;
   height: var(--header-footer-height);
@@ -253,7 +256,7 @@ h1 h2 {
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   max-width: var(--app-max-width);
   height: var(--header-footer-height);
   background: var(--header-color);
@@ -287,7 +290,7 @@ h1 h2 {
 }
 
 button:active {
-  background-color: rgb(111,176,42);
+  background-color: rgb(111, 176, 42);
   transform: translateY(2px);
 }
 </style>
