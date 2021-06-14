@@ -15,8 +15,9 @@
         />
       </div>
       <h2>
-        Potential savings:
-        ¥{{ !isNaN(income - expenses) ? income - expenses : 0 }}
+        Potential savings: ¥{{
+          !isNaN(income - expenses) ? income - expenses : 0
+        }}
       </h2>
       <ul class="no-bullets">
         <li id="income">Income: ¥{{ income }}</li>
@@ -130,7 +131,8 @@ ul.no-bullets {
   font-weight: bolder;
 }
 
-#income, #expenses {
+#income,
+#expenses {
   font-size: 20px;
   margin-bottom: 10px;
 }

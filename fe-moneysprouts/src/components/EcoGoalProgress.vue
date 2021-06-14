@@ -33,13 +33,32 @@ export default {
     document.head.appendChild(externalScript);
     // const numberOfSprouts = this.ecoScore;
     this.ecoScoreString = 0;
-    this.noBagActionTotal = (this.$store.state.ecoActionsList.filter(
-        (element) => element.eco_goal_id == this.$store.state.ecoGoalsList.filter((ecoGoalObj) => ecoGoalObj.goal_name === "Eco bag/no bag")[0].id)).length;
-    this.noImpulseActionTotal = (this.$store.state.ecoActionsList.filter(
-        (element) => element.eco_goal_id == this.$store.state.ecoGoalsList.filter((ecoGoalObj) => ecoGoalObj.goal_name === "No impulse purchase")[0].id)).length;
-    this.ecoConsciousTransportActionTotal = (this.$store.state.ecoActionsList.filter(
-        (element) => element.eco_goal_id == this.$store.state.ecoGoalsList.filter((ecoGoalObj) => ecoGoalObj.goal_name === "Eco conscious tranport")[0].id)).length;
-    this.ecoScoreString = this.noBagActionTotal + this.noImpulseActionTotal + this.ecoConsciousTransportActionTotal;
+    this.noBagActionTotal = this.$store.state.ecoActionsList.filter(
+      (element) =>
+        element.eco_goal_id ==
+        this.$store.state.ecoGoalsList.filter(
+          (ecoGoalObj) => ecoGoalObj.goal_name === "Eco bag/no bag"
+        )[0].id
+    ).length;
+    this.noImpulseActionTotal = this.$store.state.ecoActionsList.filter(
+      (element) =>
+        element.eco_goal_id ==
+        this.$store.state.ecoGoalsList.filter(
+          (ecoGoalObj) => ecoGoalObj.goal_name === "No impulse purchase"
+        )[0].id
+    ).length;
+    this.ecoConsciousTransportActionTotal =
+      this.$store.state.ecoActionsList.filter(
+        (element) =>
+          element.eco_goal_id ==
+          this.$store.state.ecoGoalsList.filter(
+            (ecoGoalObj) => ecoGoalObj.goal_name === "Eco conscious tranport"
+          )[0].id
+      ).length;
+    this.ecoScoreString =
+      this.noBagActionTotal +
+      this.noImpulseActionTotal +
+      this.ecoConsciousTransportActionTotal;
 
     const allMessages = [
       "You are doing great!",

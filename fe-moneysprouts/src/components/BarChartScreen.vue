@@ -9,18 +9,26 @@
     </p>
     <p>
       I have used my own bag or not used a bag
-      <span class="percent-1">{{ ecoBagActionTotal }}%</span> of the time this
-      month.
+      <span class="percent-1"
+        >{{ isNaN(ecoBagActionTotal) ? 0 : ecoBagActionTotal }}%</span
+      >
+      of the time this month.
     </p>
     <p>
       I did not impulse shop
-      <span class="percent-2">{{ noImpulseBuyActionTotal }}%</span> of the time
-      this month.
+      <span class="percent-2"
+        >{{
+          isNaN(noImpulseBuyActionTotal) ? 0 : noImpulseBuyActionTotal
+        }}%</span
+      >
+      of the time this month.
     </p>
     <p>
       I took eco-conscious transport or walked
-      <span class="percent-3">{{ transportActionTotal }}%</span> of the time
-      month.
+      <span class="percent-3"
+        >{{ isNaN(transportActionTotal) ? 0 : transportActionTotal }}%</span
+      >
+      of the time month.
     </p>
   </div>
 </template>

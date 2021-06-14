@@ -2,7 +2,7 @@
   <div id="expense-input-container">
     <div id="expense-input-form">
       <div class="verticalContainer">
-        <h1>Add Expenses</h1>
+        <h1>Expenses</h1>
         <p>Let's input an expense!</p>
         <div class="inputDiv">
           <input
@@ -142,9 +142,7 @@
       </div>
     </div>
     <div>
-      <button form="expense-input-form" @click="postExpenseData">
-        Submit
-      </button>
+      <button form="expense-input-form" @click="postExpenseData">Submit</button>
     </div>
   </div>
 </template>
@@ -180,6 +178,7 @@ export default {
   },
   data() {
     return {
+      warningNotice: null,
       posts: {
         date: null,
         amount: null,
@@ -208,13 +207,30 @@ export default {
   },
   methods: {
     expenseValidator() {
+      // Checking to make sure expense has a valid amount i.e is a number
+
       const isNumber = parseInt(this.posts.amount);
 
       if (isNaN(isNumber)) {
-        return false;
-      } else {
-        return true;
+        this.warningNotice = "Not a valid amount"
+        return false
       }
+
+      // Description is filled in
+
+      if (!this.posts.description) {
+        this.warningNotice = "Please add a description"
+        return false
+      }
+
+      // Category button is pressed
+
+      if (!this.posts.category) {
+        this.warningNotice = "Please click a button"
+        return false
+      }
+
+      return true
     },
 
     postExpenseData(e) {
@@ -247,7 +263,7 @@ export default {
         console.warn(this.posts);
         e.preventDefault();
       } else {
-        this.posts.amount = null;
+        alert(`${this.warningNotice}`);
       }
     },
     getCategory(category) {
@@ -281,10 +297,13 @@ export default {
 
 <style scoped>
 #expense-input-container {
-   --button-color: #403d58;
+  --button-color: #403d58;
   --second-color: #368f8b;
- 
 }
+
+h1 {
+  padding-top: 20px;
+  margin-bottom: 0px;
 
 p {
   font-size: large;
@@ -292,9 +311,15 @@ p {
   color: var(--button-color);
 }
 
+.expense-input-button {
+  margin-bottom: 1px;
+  height: 1.5em;
+  font-size: large;
+  filter: none;
+}
+
 .icon-info {
   font-size: smaller;
-
 }
 
 .verticalContainer {
@@ -316,6 +341,7 @@ input[type="radio"] {
 }
 input[type="radio"]:not(:disabled) ~ label {
   cursor: pointer;
+  border-radius: 5px;
 }
 input[type="radio"]:disabled ~ label {
   color: #bcc2bf;
@@ -346,6 +372,7 @@ input[type="radio"]:checked + label {
   border: 1px solid var(--second-color);
   color: white;
   border: 0px;
+  border-radius: 5px;
 }
 input[type="radio"]:checked + label::after {
   color: #3d3f43;
@@ -364,6 +391,7 @@ input[type="radio"]:checked + label::after {
   border-radius: 20%;
   background: white;
   box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 input[type="checkbox"] + label {
@@ -388,7 +416,7 @@ input[type="checkbox"] + label .eco-watch {
 
 button {
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
   height: 2em;
   font-size: large;
   border-radius: 5px;
@@ -426,8 +454,8 @@ input.toggle + label:after {
 input.toggle + label {
   width: 50px;
   height: 20px;
-  background-color: rgb(245,133,63);
-  transition: background 0.5s;
+  background-color: rgb(245, 133, 63);
+  transition: background 0.1s;
 }
 
 input.toggle + label:before {
@@ -435,7 +463,7 @@ input.toggle + label:before {
   left: 2px;
   bottom: 2px;
   right: 2px;
-  transition: background 0.5s;
+  transition: background 0.1s;
 }
 
 input.toggle + label:after {
@@ -444,11 +472,11 @@ input.toggle + label:after {
   bottom: 4px;
   width: 25px;
   background-color: #fff;
-  transition: margin 0.5s, background 0.5s;
+  transition: margin 0.5s, background 0.1s;
 }
 
 input.toggle:checked + label {
-  background-color: rgb(111,176,42);
+  background-color: rgb(111, 176, 42);
 }
 
 input.toggle:checked + label:after {
@@ -456,9 +484,15 @@ input.toggle:checked + label:after {
   background-color: #fff;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   section {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 2000px) {
+  input.eco-action-checkbox + label {
+    margin-left: 300px;
   }
 }
 </style>
