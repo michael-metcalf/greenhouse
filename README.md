@@ -133,4 +133,4 @@ See Vue CLI [Configuration Reference](https://cli.vuejs.org/config/).
 ## Credits
 
 * Icons were created using [font awesome](https://fontawesome.com/)
-* Image credit goes to [link]()
+* Image credit goes to [Leo Wieling](https://unsplash.com/photos/gaP0QDorAj8)
