@@ -159,6 +159,7 @@ export default {
   props: {},
   data() {
     return {
+      warningNotice: null,
       userBudget: {},
       runningGroceries: "",
       runningBills: "",
@@ -238,6 +239,7 @@ export default {
     blurField() {
       this.editField = "";
     },
+
     getSavingsLeeway() {
       return (
         Number(this.form.monthlyIncome) -
@@ -248,10 +250,27 @@ export default {
           Number(this.form.allocatedMisc))
       );
     },
-    patchUserBudgetInput() {
-      this.savingsLeeway = this.getSavingsLeeway();
 
-      this.$store.dispatch("updateBudget", {
+    budgetValidator() {
+
+      const budgetWarnings = {"monthlyIncome": "Monthly Income", "savingsTarget": "Savings Target", "allocatedGroceries": "Groceries Allocation", "allocatedBills": "Bills Allocation", "allocatedTransport": "Transport Allocation", "allocatedMisc": "Misc Allocation"};
+
+      for (let budget in budgetWarnings) {
+        if (isNaN(this.form[budget]) || this.form[budget] == "") {
+          this.warningNotice = `Please input a valid amount at ${budgetWarnings[budget]}`
+          return false
+        }
+      }
+
+      return true
+    },
+
+    patchUserBudgetInput() {
+
+      if (this.budgetValidator()) {
+        this.savingsLeeway = this.getSavingsLeeway();
+
+        this.$store.dispatch("updateBudget", {
         user_id: this.$store.state.user.user_id,
         monthly_budget: this.form.monthlyIncome,
         groceries_alloc: this.form.allocatedGroceries,
@@ -261,6 +280,11 @@ export default {
         savings_target: this.form.savingsTarget,
         monthly_income: this.form.monthlyIncome,
       });
+      } else {
+        alert(this.warningNotice)
+      }
+
+
     },
   },
 };

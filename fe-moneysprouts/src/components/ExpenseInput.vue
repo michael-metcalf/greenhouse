@@ -178,6 +178,7 @@ export default {
   },
   data() {
     return {
+      warningNotice: null,
       posts: {
         date: null,
         amount: null,
@@ -206,13 +207,30 @@ export default {
   },
   methods: {
     expenseValidator() {
+      // Checking to make sure expense has a valid amount i.e is a number
+
       const isNumber = parseInt(this.posts.amount);
 
       if (isNaN(isNumber)) {
-        return false;
-      } else {
-        return true;
+        this.warningNotice = "Not a valid amount"
+        return false
       }
+
+      // Description is filled in
+
+      if (!this.posts.description) {
+        this.warningNotice = "Please add a description"
+        return false
+      }
+
+      // Category button is pressed
+
+      if (!this.posts.category) {
+        this.warningNotice = "Please click a button"
+        return false
+      }
+
+      return true
     },
 
     postExpenseData(e) {
@@ -245,7 +263,7 @@ export default {
         console.warn(this.posts);
         e.preventDefault();
       } else {
-        this.posts.amount = null;
+        alert(`${this.warningNotice}`);
       }
     },
     getCategory(category) {
@@ -286,7 +304,6 @@ export default {
 h1 {
   padding-top: 20px;
   margin-bottom: 0px;
-}
 
 p {
   font-size: large;

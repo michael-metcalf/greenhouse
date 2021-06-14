@@ -36,24 +36,41 @@ export default {
   },
   data() {
     return {
+      warningNotice: null,
       newUser: {
-        userName: "",
-        password: "",
-        email: "",
+        userName: null,
+        password: null,
+        email: null,
       },
     };
   },
   methods: {
-    createUser() {
-      const newUser = {
-        username: this.newUser.userName,
-        password: this.newUser.password,
-        email: this.newUser.email,
-      };
+    dataValidator() {
+      // check if the input fields are blank
+      const signUpWarnings = {"userName": "username", "password": "password", "email": "email"};
 
-      // const p = document.querySelector("#created");
-      // p.innerHTML = "Account created. Please return to Login.";
-      this.$store.dispatch("createUser", newUser);
+      for (let signup in signUpWarnings) {
+        if (!this.newUser[signup]) {
+          this.warningNotice = `Please enter a valid ${signUpWarnings[signup]}`;
+          return false;
+        }
+      }
+      return true;
+    },
+    createUser() {
+      if(this.dataValidator()) {
+        const newUser = {
+          username: this.newUser.userName,
+          password: this.newUser.password,
+          email: this.newUser.email,
+        };
+  
+        // const p = document.querySelector("#created");
+        // p.innerHTML = "Account created. Please return to Login.";
+        this.$store.dispatch("createUser", newUser);
+      } else {
+        alert(this.warningNotice);
+      }      
     },
     showLogin() {
       this.$store.commit("setShowsToFalse");
