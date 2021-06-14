@@ -142,9 +142,7 @@
       </div>
     </div>
     <div>
-      <button form="expense-input-form" @click="postExpenseData">
-        Submit
-      </button>
+      <button form="expense-input-form" @click="postExpenseData">Submit</button>
     </div>
   </div>
 </template>
@@ -180,6 +178,7 @@ export default {
   },
   data() {
     return {
+      warningNotice: null,
       posts: {
         date: null,
         amount: null,
@@ -208,13 +207,30 @@ export default {
   },
   methods: {
     expenseValidator() {
+      // Checking to make sure expense has a valid amount i.e is a number
+
       const isNumber = parseInt(this.posts.amount);
 
       if (isNaN(isNumber)) {
-        return false;
-      } else {
-        return true;
+        this.warningNotice = "Not a valid amount"
+        return false
       }
+
+      // Description is filled in
+
+      if (!this.posts.description) {
+        this.warningNotice = "Please add a description"
+        return false
+      }
+
+      // Category button is pressed
+
+      if (!this.posts.category) {
+        this.warningNotice = "Please click a button"
+        return false
+      }
+
+      return true
     },
 
     postExpenseData(e) {
@@ -247,7 +263,7 @@ export default {
         console.warn(this.posts);
         e.preventDefault();
       } else {
-        this.posts.amount = null;
+        alert(`${this.warningNotice}`);
       }
     },
     getCategory(category) {
@@ -281,9 +297,8 @@ export default {
 
 <style scoped>
 #expense-input-container {
-   --button-color: #403d58;
+  --button-color: #403d58;
   --second-color: #368f8b;
- 
 }
 
 p {
@@ -294,7 +309,6 @@ p {
 
 .icon-info {
   font-size: smaller;
-
 }
 
 .verticalContainer {
@@ -426,7 +440,7 @@ input.toggle + label:after {
 input.toggle + label {
   width: 50px;
   height: 20px;
-  background-color: rgb(245,133,63);
+  background-color: rgb(245, 133, 63);
   transition: background 0.5s;
 }
 
@@ -448,7 +462,7 @@ input.toggle + label:after {
 }
 
 input.toggle:checked + label {
-  background-color: rgb(111,176,42);
+  background-color: rgb(111, 176, 42);
 }
 
 input.toggle:checked + label:after {

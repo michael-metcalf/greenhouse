@@ -287,7 +287,7 @@ h1 h2 {
 }
 
 button:active {
-  background-color: rgb(111,176,42);
+  background-color: rgb(111, 176, 42);
   transform: translateY(2px);
 }
 </style>
