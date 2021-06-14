@@ -2,7 +2,7 @@
   <div id="expense-input-container">
     <div id="expense-input-form">
       <div class="verticalContainer">
-        <h1>Add Expenses</h1>
+        <h1>Expenses</h1>
         <p>Let's input an expense!</p>
         <div class="inputDiv">
           <input
@@ -286,15 +286,26 @@ export default {
  
 }
 
+h1 {
+  padding-top: 20px;
+  margin-bottom: 0px;
+}
+
 p {
   font-size: large;
   font-weight: bold;
   color: var(--button-color);
 }
 
+.expense-input-button {
+  margin-bottom: 1px;
+  height: 1.5em;
+  font-size: large;
+  filter: none;
+}
+
 .icon-info {
   font-size: smaller;
-
 }
 
 .verticalContainer {
@@ -316,6 +327,7 @@ input[type="radio"] {
 }
 input[type="radio"]:not(:disabled) ~ label {
   cursor: pointer;
+  border-radius: 5px;
 }
 input[type="radio"]:disabled ~ label {
   color: #bcc2bf;
@@ -346,6 +358,7 @@ input[type="radio"]:checked + label {
   border: 1px solid var(--second-color);
   color: white;
   border: 0px;
+  border-radius: 5px;
 }
 input[type="radio"]:checked + label::after {
   color: #3d3f43;
@@ -364,6 +377,7 @@ input[type="radio"]:checked + label::after {
   border-radius: 20%;
   background: white;
   box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 input[type="checkbox"] + label {
@@ -388,7 +402,7 @@ input[type="checkbox"] + label .eco-watch {
 
 button {
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
   height: 2em;
   font-size: large;
   border-radius: 5px;
@@ -427,7 +441,7 @@ input.toggle + label {
   width: 50px;
   height: 20px;
   background-color: rgb(245,133,63);
-  transition: background 0.5s;
+  transition: background 0.1s;
 }
 
 input.toggle + label:before {
@@ -435,7 +449,7 @@ input.toggle + label:before {
   left: 2px;
   bottom: 2px;
   right: 2px;
-  transition: background 0.5s;
+  transition: background 0.1s;
 }
 
 input.toggle + label:after {
@@ -444,7 +458,7 @@ input.toggle + label:after {
   bottom: 4px;
   width: 25px;
   background-color: #fff;
-  transition: margin 0.5s, background 0.5s;
+  transition: margin 0.5s, background 0.1s;
 }
 
 input.toggle:checked + label {
@@ -456,9 +470,17 @@ input.toggle:checked + label:after {
   background-color: #fff;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   section {
     flex-direction: column;
   }
+
 }
+
+@media (min-width: 768px) and (max-width: 2000px) {
+  input.eco-action-checkbox + label {
+    margin-left: 300px;
+  }  
+}
+
 </style>

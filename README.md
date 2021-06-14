@@ -1,6 +1,6 @@
 # MoneySprouts
 
-**Getting in the black, by going green!**
+**Get in the black, by going green!**
 MoneySprouts is a progressive web app that helps its users to save money and accomplish their personal environmental goals at the same time.
 
 ### Current Features Include:
@@ -13,8 +13,8 @@ MoneySprouts is a progressive web app that helps its users to save money and acc
 ## Team members
 
 * [Alix](https://github.com/AlixFachin)
-* [Julie](https://github.com/dawndarkness)
 * [David](https://github.com/DavidofOrange)
+* [Julie](https://github.com/dawndarkness)
 * [Michael](https://github.com/michael-metcalf)
 * [Russell](https://github.com/RussellPacheco)
 
@@ -92,15 +92,15 @@ Make sure you are in the be-server directory!!!
 
 1. Create Initial Migration File
 
-    `
+    ```
     alembic revision --autogenerate -m "initial"
-    `
+    ```
 
 1. Seed
 
-    `
+    ```
     alembic upgrade head
-    `
+    ```
 
 ## The Frontend Environment
 
@@ -133,4 +133,4 @@ See Vue CLI [Configuration Reference](https://cli.vuejs.org/config/).
 ## Credits
 
 * Icons were created using [font awesome](https://fontawesome.com/)
-* Image credit goes to [link]()
+* Image credit goes to [Leo Wieling](https://unsplash.com/photos/gaP0QDorAj8)

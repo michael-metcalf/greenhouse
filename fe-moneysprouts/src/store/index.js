@@ -159,7 +159,10 @@ export default new Vuex.Store({
     async createUser(store, payload) {
       try {
         await axios.post("/api/user/create", payload);
-        store;
+        store.commit("setUserMessage", {
+          message: "User creation successful! \n Please log in",
+          msgType: "info",
+        });
       } catch (err) {
         console.error(`ERROR in createUser! ${err}`);
         store.commit("setUserMessage", {
