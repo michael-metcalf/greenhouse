@@ -167,7 +167,10 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Carme&family=Lato&display=swap");
-
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
   --app-max-width: 800px;
   --header-color: #d7efbd;
