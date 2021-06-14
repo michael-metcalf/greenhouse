@@ -24,11 +24,11 @@
       </p>
       <div id="budget-input-grid">
         <div></div>
-        <div class="grid-col-header" id="running">Running Total</div>
-        <div class="grid-col-header">Amount Allocated</div>
-        <div class="grid-row-header">Groceries</div>
-        <div class="grid-content">¥{{ runningGroceries }}</div>
-        <div class="grid-content-2">
+        <div class="grid-col-header" id="currentHeader">Running Total</div>
+        <div class="grid-col-header" id="allocHeader">Amount Allocated</div>
+        <div class="grid-row-header" id="groceriesLbl">Groceries</div>
+        <div class="grid-content" id="groceriesCurrent">¥{{ runningGroceries }}</div>
+        <div class="grid-content-2" id="groceriesAlloc">
           <span
             class="field-value"
             v-show="!showField('allocatedGroceries')"
@@ -48,9 +48,9 @@
             maxlength="15"
           />
         </div>
-        <div class="row-header">Bills</div>
-        <div class="grid-content">¥{{ runningBills }}</div>
-        <div class="grid-content-2">
+        <div class="row-header" id="billsLbl">Bills</div>
+        <div class="grid-content" id="billsCurrent">¥{{ runningBills }}</div>
+        <div class="grid-content-2" id="billsAlloc">
           <span
             class="field-value"
             v-show="!showField('allocatedBills')"
@@ -69,9 +69,9 @@
             maxlength="15"
           />
         </div>
-        <div class="row-header">Transport</div>
-        <div class="grid-content">¥{{ runningTransport }}</div>
-        <div class="grid-content-2">
+        <div class="row-header" id="transportLbl">Transport</div>
+        <div class="grid-content" id="transportCurrent">¥{{ runningTransport }}</div>
+        <div class="grid-content-2" id="transportAlloc">
           <span
             class="field-value"
             v-show="!showField('allocatedTransport')"
@@ -90,9 +90,9 @@
             maxlength="15"
           />
         </div>
-        <div class="row-header">Misc</div>
-        <div class="grid-content">¥{{ runningMisc }}</div>
-        <div class="grid-content-2">
+        <div class="row-header" id="miscLbl">Misc</div>
+        <div class="grid-content" id="miscCurrent">¥{{ runningMisc }}</div>
+        <div class="grid-content-2" id="miscAlloc">
           <span
             class="field-value"
             v-show="!showField('allocatedMisc')"
@@ -111,8 +111,8 @@
             maxlength="15"
           />
         </div>
-        <div class="row-header big-row two-columns">Savings Target</div>
-        <div class="grid-content big-row">
+        <div class="row-header" id="savingsLabel">Savings Target</div>
+        <div class="grid-content" id="savingsAlloc">
           <span
             class="field-value"
             v-show="!showField('savingsTarget')"
@@ -291,12 +291,10 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  padding-top: 20px;
-}
-.field-value {
-  font-weight: bold;
-}
+/* .field-value {
+  font-weight: bold; 
+} */
+
 #monthly-income {
   font-weight: bold;
 }
@@ -314,14 +312,125 @@ h1 {
 
 #budget-input-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.8fr;
+  /* grid-template-columns: 1fr 1fr 1.8fr; */
   gap: 10px 0;
+  grid-template-areas: 
+  ". currentHeader allocHeader"
+  "groceriesLbl groceriesCurrent groceriesAlloc"
+  "billsLbl billsCurrent billsAlloc"
+  "transportLbl transportCurrent transportAlloc"
+  "miscLbl miscCurrent miscAlloc"
+  "savingsLabel savingsLabel savingsAlloc"
+  ;
+}
+
+@media (min-width: 501px) {
+.grid-row-header,
+.row-header {
+  width: 100px;
+  text-align: left;
+  padding: 2px;
+  margin-left: 30px;
+  font-weight: bold;
+  /* border: 1px solid black; */
+}
+}
+
+@media (max-width: 500px) {
+  #budget-input-grid {
+    justify-items: center;
+    align-items: center;
+    grid-template-areas: 
+      "currentHeader allocHeader"
+      "groceriesLbl groceriesLbl"
+      "groceriesCurrent groceriesAlloc"
+      "billsLbl billsLbl"
+      "billsCurrent billsAlloc"
+      "transportLbl transportLbl"
+      "transportCurrent transportAlloc"
+      "miscLbl miscLbl"
+      "miscCurrent miscAlloc"
+      "savingsLabel     savingsAlloc";
+  }
+
+  .two-columns {
+    grid-column: 1fr;
+  }
+
+  .big-row {
+  margin-top: auto;
+  margin-left: auto;
+  font-weight: bold;
+  /* border: 1px solid black; */
+  }
+
+  .grid-row-header,
+  .row-header {
+
+    /* width: initial;
+    text-align: initial;
+    padding: initial;
+    margin-left: initial; */
+    
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}
+
+#currentHeader {
+  grid-area: currentHeader;
+}
+#allocHeader {
+  grid-area: allocHeader;
+}
+#groceriesLbl {
+  grid-area: groceriesLbl;
+}
+#groceriesCurrent {
+  grid-area: groceriesCurrent;
+}
+#groceriesAlloc {
+  grid-area: groceriesAlloc;
+}
+#billsLbl {
+  grid-area: billsLbl;
+}
+#billsCurrent {
+  grid-area: billsCurrent;
+}
+#billsAlloc {
+  grid-area: billsAlloc;
+}
+#transportLbl {
+  grid-area: transportLbl;
+}
+#transportCurrent {
+  grid-area: transportCurrent;
+}
+#transportAlloc {
+  grid-area: transportAlloc;
+}
+#miscLbl {
+  grid-area: miscLbl;
+}
+#miscCurrent {
+  grid-area: miscCurrent;
+}
+#miscAlloc {
+  grid-area: miscAlloc;
+}
+#savingsLabel {
+  grid-area: savingsLabel;
+  margin-top: 35px;
+  font-weight: bold;
+}
+#savingsAlloc {
+  grid-area: savingsAlloc;
+  margin-top: 35px;
+  font-weight: bold;
 }
 
 .big-row {
-  margin-top: 1.3em;
-  margin-left: 22px;
-  width: 100px;
   font-weight: bold;
   /* border: 1px solid black; */
 }
@@ -349,15 +458,7 @@ h1 {
 .row-header {
   font-weight: bolder;
 }
-.grid-row-header,
-.row-header {
-  width: 100px;
-  text-align: left;
-  padding: 2px;
-  margin-left: 30px;
-  font-weight: bold;
-  /* border: 1px solid black; */
-}
+
 
 .grid-col-header,
 .income,
@@ -371,10 +472,7 @@ h1 {
 .grid-content {
   width: 150px;
   justify-content: center;
-  font-weight: bold;
-}
-.grid-content-2 {
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .fas {

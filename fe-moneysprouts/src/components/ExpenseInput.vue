@@ -304,6 +304,7 @@ export default {
 h1 {
   padding-top: 20px;
   margin-bottom: 0px;
+}
 
 p {
   font-size: large;
