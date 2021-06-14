@@ -256,7 +256,7 @@ export default {
       const budgetWarnings = {"monthlyIncome": "Monthly Income", "savingsTarget": "Savings Target", "allocatedGroceries": "Groceries Allocation", "allocatedBills": "Bills Allocation", "allocatedTransport": "Transport Allocation", "allocatedMisc": "Misc Allocation"};
 
       for (let budget in budgetWarnings) {
-        if (isNaN(this.form[budget])) {
+        if (isNaN(this.form[budget]) || this.form[budget] == "") {
           this.warningNotice = `Please input a valid amount at ${budgetWarnings[budget]}`
           return false
         }
@@ -280,6 +280,8 @@ export default {
         savings_target: this.form.savingsTarget,
         monthly_income: this.form.monthlyIncome,
       });
+      } else {
+        alert(this.warningNotice)
       }
 
 
