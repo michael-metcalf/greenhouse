@@ -92,15 +92,15 @@ Make sure you are in the be-server directory!!!
 
 1. Create Initial Migration File
 
-    `
+    ```
     alembic revision --autogenerate -m "initial"
-    `
+    ```
 
 1. Seed
 
-    `
+    ```
     alembic upgrade head
-    `
+    ```
 
 ## The Frontend Environment
 
@@ -133,4 +133,4 @@ See Vue CLI [Configuration Reference](https://cli.vuejs.org/config/).
 ## Credits
 
 * Icons were created using [font awesome](https://fontawesome.com/)
-* Image credit goes to [link]()
+* Image credit goes to [Leo Wieling](https://unsplash.com/photos/gaP0QDorAj8)

@@ -291,6 +291,9 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  padding-top: 20px;
+}
 .field-value {
   font-weight: bold;
 }
