@@ -34,7 +34,7 @@ div.userMessage {
 }
 
 p {
-  margin: 0px; /* No need margin as we have padding in the parent component */
+  margin: 0px; /* No need for margin as we have padding in the parent component */
   padding: 1em;
   border-radius: 10px;
 }

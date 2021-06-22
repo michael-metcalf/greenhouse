@@ -101,7 +101,6 @@ export default {
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.5);
   align-content: center;
-  /* margin-bottom: 30px; */
 }
 
 #disclaimer {

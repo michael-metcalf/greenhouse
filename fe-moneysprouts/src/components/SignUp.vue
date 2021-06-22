@@ -47,7 +47,11 @@ export default {
   methods: {
     dataValidator() {
       // check if the input fields are blank
-      const signUpWarnings = {"userName": "username", "password": "password", "email": "email"};
+      const signUpWarnings = {
+        userName: "username",
+        password: "password",
+        email: "email",
+      };
 
       for (let signup in signUpWarnings) {
         if (!this.newUser[signup]) {
@@ -58,19 +62,16 @@ export default {
       return true;
     },
     createUser() {
-      if(this.dataValidator()) {
+      if (this.dataValidator()) {
         const newUser = {
           username: this.newUser.userName,
           password: this.newUser.password,
           email: this.newUser.email,
         };
-  
-        // const p = document.querySelector("#created");
-        // p.innerHTML = "Account created. Please return to Login.";
         this.$store.dispatch("createUser", newUser);
       } else {
         alert(this.warningNotice);
-      }      
+      }
     },
     showLogin() {
       this.$store.commit("setShowsToFalse");
@@ -80,8 +81,24 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  input {
+    margin-bottom: 1em;
+    height: 2em;
+    font-size: large;
+  }
+
+  button {
+    height: 2em;
+    font-size: large;
+    border-radius: 5px;
+    background-color: #403d58;
+    color: white;
+    width: 75%;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
 .signup-container {
   border-radius: 50%;
   border: none;
@@ -94,33 +111,8 @@ export default {
   height: 400px;
 }
 
-/* #new-username-input, #new-password-input, #new-email-input {
-  margin-top: 5px;
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
-input {
-  margin-bottom: 1em;
-  height: 2em;
-  font-size: large;
-}
-
 .green-emphasis {
   color: rgb(40, 87, 76);
-}
-
-button {
-  height: 2em;
-  font-size: large;
-  border-radius: 5px;
-  background-color: #403d58;
-  color: white;
-  width: 75%;
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 #created {

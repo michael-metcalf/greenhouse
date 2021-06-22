@@ -31,7 +31,6 @@
         >
           <i id="home-icon" class="fas fa-home"></i>
         </button>
-
         <button
           v-on:click="showExpenseInput"
           class="footer-button"
@@ -100,7 +99,6 @@ export default {
     BudgetVisualization,
     ExpenseInput,
     BudgetInput,
-    // LoadingMessage,
     UserMessageDisplay,
     BarChartScreen,
     SignUp,
@@ -110,22 +108,18 @@ export default {
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showBudgetVisualization");
     },
-
     showExpenseInput() {
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showExpenseInput");
     },
-
     showBudgetInput() {
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showBudgetInput");
     },
-
     showBarChart() {
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showBarChart");
     },
-
     showSignUp() {
       this.$store.commit("setShowsToFalse");
       this.$store.commit("showSignUp");
@@ -171,6 +165,17 @@ body {
   margin: 0;
   padding: 0;
 }
+
+h1 h2 {
+  font-family: "Carme", sans-serif;
+  color: #403d58;
+}
+
+button:active {
+  background-color: rgb(111, 176, 42);
+  transform: translateY(2px);
+}
+
 #app {
   --app-max-width: 800px;
   --header-color: #d7efbd;
@@ -191,15 +196,11 @@ body {
   background: url("assets/green-palmtree.jpg") top repeat-y;
   background-size: auto 100%;
 }
+
 #moneySproutsTitle {
   float: left !important;
   margin-left: 10px;
   font-size: 35px;
-}
-
-h1 h2 {
-  font-family: "Carme", sans-serif;
-  color: #403d58;
 }
 
 .main-panel {
@@ -287,10 +288,5 @@ h1 h2 {
 #signout-icon,
 #chart-icon {
   color: white;
-}
-
-button:active {
-  background-color: rgb(111, 176, 42);
-  transform: translateY(2px);
 }
 </style>

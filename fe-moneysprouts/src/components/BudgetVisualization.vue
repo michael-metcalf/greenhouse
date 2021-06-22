@@ -2,7 +2,6 @@
   <div id="homePanel">
     <h1>Welcome, {{ this.$store.state.userName }}</h1>
     <EcoGoalProgress :ecoScore="Math.max(0, 10 - this.missedEcoActions)" />
-
     <div class="budget-viz-container">
       <h1>Your current spending</h1>
       <div class="chart-align-container">
@@ -64,7 +63,6 @@ export default {
       this.income = this.$store.state.monthlyBudget.monthly_income;
     },
     getNumberOfMissedEcoActions() {
-      // TO DO -> remove the hard coded value
       this.missedEcoActions = this.$store.state.ecoActionsList.filter(
         (action) => action.eco_goal_id === 4
       ).length;
@@ -80,7 +78,6 @@ export default {
         ? Math.floor((this.expenses / this.income) * 100) / 100
         : 0;
   },
-
   mounted() {},
 };
 </script>
@@ -97,7 +94,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* position: relative; */
 }
 
 .chart-align-container {

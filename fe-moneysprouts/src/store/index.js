@@ -35,27 +35,21 @@ export default new Vuex.Store({
     showSignUp(state) {
       state.showSignUp = true;
     },
-
     showBudgetInput(state) {
       state.showBudgetInput = true;
     },
-
     showBarChart(state) {
       state.showBarChart = true;
     },
-
     showExpenseInput(state) {
       state.showExpenseInput = true;
     },
-
     showBudgetVisualization(state) {
       state.showBudgetVisualization = true;
     },
-
     showLogin(state) {
       state.showLogin = true;
     },
-
     setShowsToFalse(state) {
       state.showLogin = false;
       state.showBudgetVisualization = false;
@@ -64,7 +58,6 @@ export default new Vuex.Store({
       state.showBudgetInput = false;
       state.showSignUp = false;
     },
-
     setUser(state, payload) {
       state.user = payload;
     },
@@ -107,7 +100,7 @@ export default new Vuex.Store({
     setCategoriesList(state, payload) {
       state.categoriesList = payload.categoriesList;
     },
-  }, // Use mutations to modify the state variables synchronously
+  }, 
   actions: {
     async verifyLogin({ commit, dispatch }, payload) {
       try {

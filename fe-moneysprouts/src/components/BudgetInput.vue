@@ -27,7 +27,9 @@
         <div class="grid-col-header" id="currentHeader">Running Total</div>
         <div class="grid-col-header" id="allocHeader">Amount Allocated</div>
         <div class="grid-row-header" id="groceriesLbl">Groceries</div>
-        <div class="grid-content" id="groceriesCurrent">¥{{ runningGroceries }}</div>
+        <div class="grid-content" id="groceriesCurrent">
+          ¥{{ runningGroceries }}
+        </div>
         <div class="grid-content-2" id="groceriesAlloc">
           <span
             class="field-value"
@@ -70,7 +72,9 @@
           />
         </div>
         <div class="row-header" id="transportLbl">Transport</div>
-        <div class="grid-content" id="transportCurrent">¥{{ runningTransport }}</div>
+        <div class="grid-content" id="transportCurrent">
+          ¥{{ runningTransport }}
+        </div>
         <div class="grid-content-2" id="transportAlloc">
           <span
             class="field-value"
@@ -239,7 +243,6 @@ export default {
     blurField() {
       this.editField = "";
     },
-
     getSavingsLeeway() {
       return (
         Number(this.form.monthlyIncome) -
@@ -250,50 +253,48 @@ export default {
           Number(this.form.allocatedMisc))
       );
     },
-
     budgetValidator() {
-
-      const budgetWarnings = {"monthlyIncome": "Monthly Income", "savingsTarget": "Savings Target", "allocatedGroceries": "Groceries Allocation", "allocatedBills": "Bills Allocation", "allocatedTransport": "Transport Allocation", "allocatedMisc": "Misc Allocation"};
+      const budgetWarnings = {
+        monthlyIncome: "Monthly Income",
+        savingsTarget: "Savings Target",
+        allocatedGroceries: "Groceries Allocation",
+        allocatedBills: "Bills Allocation",
+        allocatedTransport: "Transport Allocation",
+        allocatedMisc: "Misc Allocation",
+      };
 
       for (let budget in budgetWarnings) {
         if (isNaN(this.form[budget]) || this.form[budget] == "") {
-          this.warningNotice = `Please input a valid amount at ${budgetWarnings[budget]}`
-          return false
+          this.warningNotice = `Please input a valid amount at ${budgetWarnings[budget]}`;
+          return false;
         }
       }
 
-      return true
+      return true;
     },
-
     patchUserBudgetInput() {
-
       if (this.budgetValidator()) {
         this.savingsLeeway = this.getSavingsLeeway();
 
         this.$store.dispatch("updateBudget", {
-        user_id: this.$store.state.user.user_id,
-        monthly_budget: this.form.monthlyIncome,
-        groceries_alloc: this.form.allocatedGroceries,
-        bills_alloc: this.form.allocatedBills,
-        transport_alloc: this.form.allocatedTransport,
-        misc_alloc: this.form.allocatedMisc,
-        savings_target: this.form.savingsTarget,
-        monthly_income: this.form.monthlyIncome,
-      });
+          user_id: this.$store.state.user.user_id,
+          monthly_budget: this.form.monthlyIncome,
+          groceries_alloc: this.form.allocatedGroceries,
+          bills_alloc: this.form.allocatedBills,
+          transport_alloc: this.form.allocatedTransport,
+          misc_alloc: this.form.allocatedMisc,
+          savings_target: this.form.savingsTarget,
+          monthly_income: this.form.monthlyIncome,
+        });
       } else {
-        alert(this.warningNotice)
+        alert(this.warningNotice);
       }
-
-
     },
   },
 };
 </script>
 
 <style scoped>
-/* .field-value {
-  font-weight: bold; 
-} */
 
 #monthly-income {
   font-weight: bold;
@@ -312,35 +313,32 @@ export default {
 
 #budget-input-grid {
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1.8fr; */
   gap: 10px 0;
-  grid-template-areas: 
-  ". currentHeader allocHeader"
-  "groceriesLbl groceriesCurrent groceriesAlloc"
-  "billsLbl billsCurrent billsAlloc"
-  "transportLbl transportCurrent transportAlloc"
-  "miscLbl miscCurrent miscAlloc"
-  "savingsLabel savingsLabel savingsAlloc"
-  ;
+  grid-template-areas:
+    ". currentHeader allocHeader"
+    "groceriesLbl groceriesCurrent groceriesAlloc"
+    "billsLbl billsCurrent billsAlloc"
+    "transportLbl transportCurrent transportAlloc"
+    "miscLbl miscCurrent miscAlloc"
+    "savingsLabel savingsLabel savingsAlloc";
 }
 
 @media (min-width: 501px) {
-.grid-row-header,
-.row-header {
-  width: 100px;
-  text-align: left;
-  padding: 2px;
-  margin-left: 30px;
-  font-weight: bold;
-  /* border: 1px solid black; */
-}
+  .grid-row-header,
+  .row-header {
+    width: 100px;
+    text-align: left;
+    padding: 2px;
+    margin-left: 30px;
+    font-weight: bold;
+  }
 }
 
 @media (max-width: 500px) {
   #budget-input-grid {
     justify-items: center;
     align-items: center;
-    grid-template-areas: 
+    grid-template-areas:
       "currentHeader allocHeader"
       "groceriesLbl groceriesLbl"
       "groceriesCurrent groceriesAlloc"
@@ -358,20 +356,13 @@ export default {
   }
 
   .big-row {
-  margin-top: auto;
-  margin-left: auto;
-  font-weight: bold;
-  /* border: 1px solid black; */
+    margin-top: auto;
+    margin-left: auto;
+    font-weight: bold;
   }
 
   .grid-row-header,
   .row-header {
-
-    /* width: initial;
-    text-align: initial;
-    padding: initial;
-    margin-left: initial; */
-    
     font-weight: bold;
     margin-top: 10px;
   }
@@ -432,12 +423,9 @@ export default {
 
 .big-row {
   font-weight: bold;
-  /* border: 1px solid black; */
 }
 
 .two-columns {
-  /* border: 1px solid black;
-  border-radius: 8px; */
   grid-column: span 2 / auto;
 }
 
@@ -459,20 +447,17 @@ export default {
   font-weight: bolder;
 }
 
-
 .grid-col-header,
 .income,
 .savings {
   font-weight: bold;
   padding: 10px;
   width: 100;
-  /* border: 1px solid black; */
 }
 
 .grid-content {
   width: 150px;
   justify-content: center;
-  /* font-weight: bold; */
 }
 
 .fas {

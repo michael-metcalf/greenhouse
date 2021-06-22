@@ -41,8 +41,6 @@ export default {
     };
     this.renderChart(this.chartData, this.chartOptions);
   },
-  // watch: Vue.js function which forces the refresh when props value changes
-  // (otherwise a change in props do not trigger a chart refresh)
   watch: {
     savingsScore: function (newVal, oldVal) {
       this.setChartData(this.$props.savingsScore);

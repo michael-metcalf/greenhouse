@@ -69,7 +69,6 @@
         </div>
       </div>
       <div id="eco-action-container">
-        <!-- <p>Did you take an eco action?</p> -->
         <div class="icon-box">
           <p class="icon-info">I used an eco bag/ I didn't use a bag:</p>
           <input
@@ -159,18 +158,9 @@ function display2Digits(number) {
 
 export default {
   name: "ExpenseInput",
-  // components: {FontAwesomeIcon},
   props: {},
   mounted() {
-    // const externalScript = document.createElement("script");
-    // externalScript.setAttribute(
-    //   "src",
-    //   "https://kit.fontawesome.com/e3cbc00358.js"
-    // );
-    // externalScript.setAttribute("crossorigin", "anonymous");
-    // document.head.appendChild(externalScript);
-
-    // setup the default date
+    // Setup the default date
     const currentDate = new Date();
     this.$data.posts.date = `${currentDate.getFullYear()}-${display2Digits(
       currentDate.getMonth() + 1
@@ -212,27 +202,26 @@ export default {
       const isNumber = parseInt(this.posts.amount);
 
       if (isNaN(isNumber)) {
-        this.warningNotice = "Not a valid amount"
-        return false
+        this.warningNotice = "Not a valid amount";
+        return false;
       }
 
       // Description is filled in
 
       if (!this.posts.description) {
-        this.warningNotice = "Please add a description"
-        return false
+        this.warningNotice = "Please add a description";
+        return false;
       }
 
       // Category button is pressed
 
       if (!this.posts.category) {
-        this.warningNotice = "Please click a button"
-        return false
+        this.warningNotice = "Please click a button";
+        return false;
       }
 
-      return true
+      return true;
     },
-
     postExpenseData(e) {
       if (this.expenseValidator()) {
         const categoryFilter = this.$store.state.categoriesList.filter(
@@ -379,7 +368,6 @@ input[type="radio"]:checked + label::after {
   color: #3d3f43;
   font-family: FontAwesome;
   border: 1px solid var(--second-color);
-  /* content: ""; */
   font-size: 22px;
   position: relative;
   top: -25px;
