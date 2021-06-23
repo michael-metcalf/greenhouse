@@ -3,6 +3,8 @@
 **Get in the black, by going green!**
 MoneySprouts is a progressive web app that helps its users to save money and accomplish their personal environmental goals at the same time.
 
+![moneysproutslogin](https://user-images.githubusercontent.com/22274994/123038338-2555e300-d42b-11eb-88ed-d46bd99825de.PNG)
+
 ### Current Features Include:
 * Environmental facts
 * Monthly budget setting
